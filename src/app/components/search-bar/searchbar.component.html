@@ -1,0 +1,24 @@
+<div class="div-itens">
+
+    <img class="img-icon-lupa {{b_Show_Input? 'img-position':''}}" src="{{nm_Src_Icon}}" (click)="Show_Search()">
+
+
+    <div class="hidden h-8 border-0 absolute top-6 border-l-2 border-gray-600 lg:flex"></div>
+
+
+    <input #search type="text" [formControl]="control" class="input-placeholder {{b_Show_Input? 'relative': 'hidden'}}"
+        placeholder="pesquise...">
+
+</div>
+<!-- <div class="flex flex-row p-4 pl-10 gap-4">
+
+    <img class="w-8 h-8 {{b_Show_Input? 'img-position':''}}" src="{{nm_Src_Icon}}" (click)="Show_Search()">
+
+
+    <div class="hidden h-8 border-0 border-l-2 border-gray-600 lg:flex"></div>
+
+
+    <input #search type="text" [formControl]="control" class="bg-transparent border-none h-8 {{b_Show_Input? 'flex': 'hidden'}}"
+        placeholder="pesquise...">
+
+</div> -->

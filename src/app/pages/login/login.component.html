@@ -1,0 +1,44 @@
+<main class="container-login">
+    <form method="POST" (ngSubmit)="Logar()">
+        <div class="content">
+            <header class="header-login">
+                <div class="logo">
+                    <img src="./assets/images/logo.png" alt="">
+                </div>
+                <div class="title">
+                    <p>Portal</p>
+                    <h1>Gestão do conhecimento</h1>
+                </div>
+            </header>
+
+            <section class="box-login">
+                <div class="input-login">
+                    <input type="text" placeholder="Digite o seu login " name="usuario"
+                        [formControl]="$any(formGroup).get('ds_Login')" autocomplete="off" required (paste)="Remover_Mascara($event)" (focusout)="Remover_Mascara()">
+                    <i>
+                        <img src="assets/icons/unimed-card.svg">
+                    </i>
+                </div>
+                <div class="input-login input-password">
+                    <input [type]="b_Exibir_Password ? 'text' : 'password'" id="password" placeholder="Senha"
+                        name="senha" [formControl]="$any(formGroup).get('ds_Senha')" autocomplete="off">
+                    <i>
+                        <img src="assets/icons/key.svg">
+                    </i>
+
+                    <button class="btn-action" type="button" (click)="this.b_Exibir_Password = !this.b_Exibir_Password">
+                        <img *ngIf="b_Exibir_Password" src="assets/icons/close-eye.svg">
+                        <img *ngIf="!b_Exibir_Password" src="assets/icons/eye.svg">
+                    </button>
+                </div>
+
+            </section>
+
+            <footer class="footer-login">
+                <uni-button type="submit" (click)="Logar()" [disabled]="formGroup.invalid" buttonClass="btn-primary">
+                    Acessar
+                </uni-button>
+            </footer>
+        </div>
+    </form>
+</main>

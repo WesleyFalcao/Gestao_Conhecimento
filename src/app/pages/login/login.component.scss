@@ -1,0 +1,128 @@
+.header-login {
+    margin-bottom: 3.5rem;
+
+    .logo img {
+        width: 95px;
+    } 
+}
+
+.title {
+    margin-top: 16px;
+    position: relative;
+
+    p,
+    h1 {
+        margin: 0;
+    }
+
+    p {
+        color: var(--laranja-unimed);
+        font-size: 1.5rem;
+    }
+
+    h1 {
+        color: var(--verde-unimed);
+        font-size: 1.9rem;
+    }
+
+    &:after {
+        content: '';
+        position: absolute;
+        width: 25px;
+        height: 4px;
+        border-radius: 15px;
+        background: var(--rosa-unimed);
+        bottom: -12px;
+        left: 2px;
+    }
+}
+
+.container-login {
+    display: flex;
+    height: 100vh;
+    flex-flow: column;
+    @media screen and (min-width: 720px) {
+        justify-content: center;
+        align-items: center;
+    }
+
+    .content {
+        padding: 28px;
+
+        @media screen and (min-width: 720px) {
+            width: 420px;
+        }
+    }
+}
+
+.box-login {
+    @media screen and (min-width: 768px) {
+        margin-bottom: 3.5rem;
+    }
+}
+
+input {
+    font-family: "Montserrat", sans-serif;
+}
+
+.input-login {
+    position: relative;
+
+    i {
+        position: absolute;
+        top: 50%;
+        left: .5rem;
+        transform: translateY(-70%);
+        transform-origin: center center;
+    }
+
+    input {
+        width: 100%;
+        background: none;
+        border: none;
+        padding: 1rem 1rem 1rem 3.5rem;
+        outline: none;
+        border-bottom: 1px #ccc solid;
+        margin-bottom: 1rem;
+        font-size: var(--font-size-normal);
+
+        &:hover,
+        &:focus {
+            border-color: var(--laranja-unimed);
+        }
+    }
+
+    input:focus~i {
+        transition-duration: 280ms;
+        transform: translateY(-70%) rotate(20deg);
+    }
+}
+
+.input-password {
+    .btn-action {
+        position: absolute;
+        right: 0;
+        top: 50%;
+        transform: translateY(-70%);
+        outline: none;
+        background: none;
+        border: none;
+        cursor: pointer;
+
+        &:hover,
+        &:focus {
+            cursor: pointer;
+            opacity: 0.76;
+        }
+
+        &:active {
+            transform: translateY(-70%) scale(0.92);
+        }
+    }
+}
+
+.footer-login {
+    button:first-child {
+        margin-bottom: 1rem;
+    }
+}

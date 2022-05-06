@@ -1,0 +1,72 @@
+/* You can add global styles to this file, and also import other style files */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+:root {
+
+    --padding-small: 18px;
+    --padding-default: 25px;
+
+    /*
+    Fonts
+    */
+    --font-size-tiny: 0.6875rem;
+    --font-size-smaller: 0.78rem;
+    --font-size-small-light: 0.8438rem;
+    --font-size-small: 0.9rem;
+    --font-size-normal: 1rem;
+    --font-size-medium: 1.2rem;
+    --font-size-large: 1.4688rem;
+
+    /*
+    Cores da paleta unimed
+    */
+    --laranja-unimed: #F47920;
+    --laranja-claro-unimed: #FAB683;
+    --verde-claro-unimed: #B1D34B;
+    --verde-unimed: #00995D;
+    --verde-escuro-unimed: #0A5F55;
+    --marrom-unimed: #682D00;
+    --rosa-unimed: #ED1651;
+    --cinza-escuro-unimed: #5B5C65;
+    --cinza-claro-unimed: #C4CBCF;
+    --amarelo-unimed: #FFCB08;
+}
+
+body{
+    background-image: url(assets/images/background.svg);
+    @apply bg-no-repeat bg-cover bg-bottom bg-fixed;
+}
+
+*,
+*:before,
+*:after {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+html,
+body,
+input {
+    font-family: "Montserrat", sans-serif;
+}
+
+*,
+*:focus,
+*:hover {
+    outline: none;
+    font-variant: normal;
+    font-feature-settings: normal;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-weight: bold;
+}
