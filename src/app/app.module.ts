@@ -7,11 +7,20 @@ import { SearchBarModule } from './components/search-bar/searchbar.module';
 import { LoginModule } from './pages/login/login.module';
 import { GraphQLModule } from './graphql.module';
 import { HomeComponent } from './pages/home/home.component';
+import { HeaderComponent } from './components/header/header.component';
+import { ConteudoComponent } from './pages/conteudo/conteudo.component';
+import { ConteudoEditarComponent } from './pages/conteudo-editar/conteudo-editar.component';
+import { InputComponent } from './components/input/input.component';
+
 
 @NgModule({
   declarations: [
     AppComponent,
-    HomeComponent
+    HomeComponent,
+    ConteudoComponent,
+    HeaderComponent,
+    ConteudoEditarComponent,
+    InputComponent
   ],
   imports: [
     BrowserModule,

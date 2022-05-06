@@ -1,21 +1,13 @@
-/* Corrige problemas com tamanho do input */
-input[type='date'],
-input[type='time'] {
-    -webkit-appearance: none;
-}
-
-.pointer{
-    cursor: text;
-}
-
 .input {
     position: relative;
     background-color: white;
     border-radius: 3px;
-    padding-top: 15px;
+    margin-left: 10px;
+    margin-right: 10px;
+    margin-bottom: 16px;
 
     @media (min-width: 1200px) {
-        padding-top: 1.25rem;
+        
     }
 
     label {
@@ -147,9 +139,9 @@ input[type='time'] {
         background: white;
         width: 100%;
         outline: none;
-        border-bottom: 1px #E9E9E9 solid;
-        border-left: 1px #E9E9E9 solid;
-        border-right: 1px #E9E9E9 solid;
+        border-bottom: 1px #5B5858 solid;
+        border-left: 1px #5B5858 solid;
+        border-right: 1px #5B5858 solid;
         border-top: none;
         transition-duration: 0.28s;
         border-radius: 3px;
@@ -292,36 +284,11 @@ input[type='time'] {
     }
 }
 
-.div-input-component {
-    position: relative;
+// .input-borda{
+//     @apply border-r-2 border-l-2 border-b-2 border-l-verde-escuro border-r-verde-escuro border-b-verde-escuro;
 
-    .div-icon-copy {
-        display: none;
-        transition: .280s;
-        cursor: pointer;
-        background: white;
-        padding: 2px;
-        border-radius: 50%;
-    }
-
-    &:hover {
-        .div-icon-copy {
-            position: absolute;
-            right: 5px;
-            top: 15px;
-            display: block;
-            transition: .280s;
-        }
-    }
-
-    input[type="date"]::-webkit-calendar-picker-indicator {
-        position: absolute;
-        top: calc(50%);
-        right: 14px;
-        cursor: pointer;
-
-        @media (min-width: 1200px) {
-            top: calc(50% - 8px);
-        }
-    }
+// }
+.input-borda:hover{
+    // @apply border-b-red-600;
+    transition: .280s; 
 }

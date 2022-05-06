@@ -1,26 +1,4 @@
-<div class="div-input-component">
-    <ng-container *ngIf="!['porcentagem', 'dinheiro', 'inteiro'].includes(tp_Mask); else inputNumero">
-
-        <div class='input'>
-            <input class="pointer" [type]="type" [readonly]="readonly" [required]="b_Requerido" [formControl]="control"
-                [min]="options?.ds_Minimo" [max]="options?.ds_Maximo" [textMask]="$any(mask)"
-                (keydown)="Keydown($event)" autocomplete="new-password">
-            <label>{{label}}{{b_Requerido ? "*" : ""}}</label>
-        </div>
-
-    </ng-container>
-
-    <ng-template #inputNumero>
-
-        <div class='input'>
-            <input [type]="type" [readonly]="readonly" [required]="b_Requerido" [formControl]="control"
-                autocomplete="new-password" [imask]="$any(mask)" [unmask]="'typed'">
-            <label>{{label}}{{b_Requerido ? "*" : ""}}</label>
-        </div>
-
-    </ng-template>
-
-    <div class="div-icon-copy" *ngIf="readonly">
-        <img src="assets/icons/copy.svg" (click)="Copiar_Clipboard(control.value)">
-    </div>
+<div class="input">
+    <input class="input-borda" type="text">
+    <label>teste</label>
 </div>

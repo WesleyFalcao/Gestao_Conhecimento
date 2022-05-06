@@ -40,6 +40,13 @@
     }
 }
 
+.div-comportamento-voltar{
+    &:active {
+        transform: scale(0.92);
+        transition-duration: 280ms;
+    }
+}
+
 .card:hover, .card:focus, .card:active {
     -webkit-transform: scale(1.1);
     transform: scale(1.1);
@@ -49,7 +56,7 @@
     @apply w-full flex h-20 shadow-lg ;
 
     @media screen and (min-width: 768px) {
-       @apply h-32 shadow-none ;
+       @apply h-32 shadow-none;
     }
 }
 

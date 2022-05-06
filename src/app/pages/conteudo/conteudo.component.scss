@@ -1,0 +1,51 @@
+.icon-card{
+    @apply mx-auto mt-8;
+}
+
+.container{
+    max-width: 1300px;
+    margin: 0 auto;
+    @apply pb-10;
+
+    @media (min-width: 1200px) {
+        max-width: 1100px;
+    }
+    @media (min-width: 1536px) {
+        max-width: 1300px;
+    }
+    @media (min-width: 1636px) {
+        max-width: 1540px;
+    }
+
+    .calc-width{
+        width: calc(100% - 40px);
+
+        @media (min-width: 720px) {
+            width: calc(100% - 10rem);
+        }
+    }
+}
+
+.div-aling-item-card{
+    display: grid;
+    grid-template-columns: 5fr 1fr;
+}
+
+.p-rows{
+    width: calc(100% - 30px);
+    overflow: hidden; 
+    text-overflow: ellipsis; 
+    display: -webkit-box;
+    -webkit-line-clamp: 3; 
+    -webkit-box-orient: vertical;
+    @media (min-width: 1636px) {
+        -webkit-line-clamp: 5;
+    }
+}
+
+.button-comportamento{
+    &:active {
+        transform: scale(0.92);
+        transition-duration: 280ms;
+    }
+}

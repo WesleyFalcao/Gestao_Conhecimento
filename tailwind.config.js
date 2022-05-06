@@ -8,6 +8,9 @@ module.exports = {
     },
     extend: {
       screens: {
+        '2xl': '1536px',
+
+        '3xl': '1736px',
       },
       colors: {
         laranja: {
