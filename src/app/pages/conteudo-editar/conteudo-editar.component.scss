@@ -17,7 +17,7 @@
         width: calc(100% - 40px);
 
         @media (min-width: 720px) {
-            width: calc(100% - 10rem);
+            width: calc(100% - 9rem);
         }
 
         @media (min-width: 1200px) {
@@ -26,5 +26,27 @@
         @media (min-width: 1636px) {
             width: calc(100% - 40rem);
         }
+    }
+}
+
+.div-grid-group{
+    grid-template-columns: 1.3fr 1fr;
+    @media (min-width: 720px) {
+        grid-template-columns: 2fr 1fr;
+    }
+}
+
+.behavior-button{
+    &:active {
+        transform: scale(0.92);
+        transition-duration: 280ms;
+    }
+}
+
+.div-calc-itens{
+    left: calc(100% - 23.4rem);
+
+    @media (min-width: 720px) {
+        left: calc(50% - 43rem);
     }
 }

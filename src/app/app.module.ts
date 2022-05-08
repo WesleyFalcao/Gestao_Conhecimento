@@ -11,6 +11,7 @@ import { HeaderComponent } from './components/header/header.component';
 import { ConteudoComponent } from './pages/conteudo/conteudo.component';
 import { ConteudoEditarComponent } from './pages/conteudo-editar/conteudo-editar.component';
 import { InputComponent } from './components/input/input.component';
+import { Header2Component } from './components/header2/header2.component';
 
 
 @NgModule({
@@ -20,7 +21,8 @@ import { InputComponent } from './components/input/input.component';
     ConteudoComponent,
     HeaderComponent,
     ConteudoEditarComponent,
-    InputComponent
+    InputComponent,
+    Header2Component,
   ],
   imports: [
     BrowserModule,

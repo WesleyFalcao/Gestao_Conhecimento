@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, HostListener, OnDestroy, OnInit } from '@angular/core';
 import { Subject, takeUntil } from 'rxjs';
 import { SubjectService } from 'src/app/services/subject.service';
 
@@ -21,18 +21,29 @@ export class HomeComponent implements OnInit, OnDestroy {
   /** @description Subject para destruir os subscribers */
   subject_unsub = new Subject()
 
-/** @description Boolean para exibir ou não a logo  */
-  b_Show_Itens: boolean
+  /** @description Subject para destruir os subscribers */
+  b_Show_Modal: boolean = false
 
   constructor(
     private subjectService: SubjectService
   ) { }
 
   ngOnInit(): void {
-    this.subjectService.subject_Click_Search.pipe(takeUntil(this.subject_unsub)).subscribe(
-      (b_Show_Soon) => this.b_Show_Itens = b_Show_Soon
+    this.subjectService.subject_Modal.pipe(takeUntil(this.subject_unsub)).subscribe(
+      (b_Show_Modal) => this.b_Show_Modal = b_Show_Modal
     )
   }
+
+  // @HostListener('window:resize')
+  // onResize() {
+  //     this.nr_Width = window.innerWidth
+  //     this.subjectService.subject_Width.next(this.nr_Width)
+  //     if(this.nr_Width >= 768){
+  //         this.b_Show_Input = true
+  //     }else{
+  //         this.b_Show_Input = false
+  //     }
+  // }
 
   ngOnDestroy() {
     this.subject_unsub.next(true)

@@ -39,13 +39,13 @@ module.exports = {
 
           green: '#00995D',
 
-          pink: '#ED1651',
+          pink: '#F0666F',
 
           purpe: '#A3238E',
 
           gray: '#5B5858',
 
-          darkgray: '#5B5C65',
+          darkgray: '#3C3B3B',
 
           brown: '#682D00',
 

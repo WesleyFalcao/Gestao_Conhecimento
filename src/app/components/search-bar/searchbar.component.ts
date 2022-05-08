@@ -27,18 +27,7 @@ export class SearchBarComponent implements OnInit {
     ) { }
     
     ngOnInit() {
-        this.onResize()    
-    }
-
-    @HostListener('window:resize')
-    onResize() {
-        this.nr_Width = window.innerWidth
-        this.subjectService.subject_Width.next(this.nr_Width)
-        if(this.nr_Width >= 768){
-            this.b_Show_Input = true
-        }else{
-            this.b_Show_Input = false
-        }
+        
     }
 
     Show_Search() {

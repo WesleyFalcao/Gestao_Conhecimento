@@ -21,4 +21,7 @@ export class SubjectService {
 
     /**@description Subject para alteração na largura da tela */
     subject_Width = new BehaviorSubject(0);
+
+    /**@description Subject para monitorar quando o modal foi aberto */
+    subject_Modal = new BehaviorSubject(false);
 }

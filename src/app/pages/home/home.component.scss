@@ -1,9 +1,39 @@
-.body-width{
-    @apply w-4/5 relative -translate-x-1/2 left-1/2 top-8
+
+.container{
+    
+    max-width: 1300px;
+    margin: 0 auto;
+    @media (min-width: 720px) {
+        max-width: 700px;
+    }
+    @media (min-width: 1200px) {
+        max-width: 1100px;
+    }
+    @media (min-width: 1536px) {
+        max-width: 1300px;
+    }
+    @media (min-width: 1636px) {
+        max-width: 1400px;
+    }
+
+    .div-calc-width{
+        width: calc(100% - 40px);
+
+        @media (min-width: 720px) {
+            width: calc(100% - 9rem);
+        }
+
+        @media (min-width: 1200px) {
+            width: calc(100% - 30rem);
+        }
+        @media (min-width: 1636px) {
+            width: calc(100% - 40rem);
+        }
+    }
 }
 
 .cards-itens{
-    @apply grid items-center grid-cols-2 m-10 gap-x-14 mx-10 lg:gap-x-6 gap-y-4;
+    @apply items-center grid grid-cols-2 mx-auto gap-y-2 md:gap-y-0;
 
     @media screen and (min-width: 600px) {
         @apply grid grid-cols-3;
@@ -15,13 +45,11 @@
         @apply grid grid-cols-5;
     }
     @media screen and (min-width: 1400px) {
-        @apply xl:mx-40 grid-cols-6;
+        @apply grid-cols-6;
     }
 }
 
 .card{
-    display: inline-block;
-    vertical-align: middle;
     -webkit-transform: perspective(1px) translateZ(0);
     transform: perspective(1px) translateZ(0);
     box-shadow: 0 0 1px rgba(0, 0, 0, 0);
@@ -29,7 +57,7 @@
     transition-duration: 0.3s;
     -webkit-transition-property: transform;
     transition-property: transform;
-    @apply w-40 h-40 bg-unimed-background relative rounded-xl cursor-pointer shadow-lg;
+    @apply w-40 h-40 3xl:w-44 3xl:h-44 mx-auto bg-unimed-background my-1 rounded-xl cursor-pointer shadow-lg;
 
     .icon-card{
         @apply mx-auto mt-8;
@@ -98,13 +126,5 @@
             transform: scale(0.92);
             transition-duration: 280ms;
         }
-    }
-}
-
-.teste{
-    @apply mx-2;
-
-    @media screen and (min-width: 1400px) {
-        @apply mx-32;
     }
 }
