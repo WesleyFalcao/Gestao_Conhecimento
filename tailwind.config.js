@@ -45,6 +45,8 @@ module.exports = {
 
           gray: '#5B5858',
 
+          lightgray: '#F0F0F0',
+
           darkgray: '#3C3B3B',
 
           brown: '#682D00',

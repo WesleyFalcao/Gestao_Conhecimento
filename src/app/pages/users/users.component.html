@@ -1,0 +1,105 @@
+<app-header2></app-header2>
+
+<div class="container relative top-12 lg:top-24 px-10">
+    <div class="grid grid-cols-2">
+        <div class="flex flex-col relative left-2 lg:left-2 lg:ml-2.5">
+            <p class="relative text-base lg:text-lg font-semibold text-unimed-darkgray md:text-base">
+                Usuários</p>
+            <div class="w-5 h-1 bg-unimed-pink rounded-full relative"></div>
+        </div>
+        <div class="flex flex-row gap-6 lg:gap-10 justify-end relative right-1 mr-4 cursor-pointer">
+            <img class="behavior-button w-5 h-5 md:w-7 md:h-7" src="assets/icons/more-options-user.svg">
+            <img class="behavior-button w-5 h-5 md:w-7 md:h-7" src="assets/icons/filter.svg"
+                (click)="b_Show_Modal = true">
+            <img class="behavior-button w-6 h-6 md:w-8 md:h-8" src="assets/icons/refresh.svg">
+        </div>
+    </div>
+    <div class="hidden div-grid-title mt-14 lg:grid grid-cols-6">
+        <p class="font-semibold lg:grid ml-5">Nome</p>
+        <p class="lg:text-center font-semibold">ID</p>
+        <p class="lg:text-center font-semibold">Usuário</p>
+        <p class="lg:text-center font-semibold">Perfil</p>
+        <p class="lg:text-center font-semibold">Status</p>
+        <p></p>
+    </div>
+    <div class="top-5 relative flex flex-col gap-y-4" *ngFor="let iten of objArrayTeste">
+        <div *ngIf="b_Width == false">
+            <div
+                class="rounded-lg div-grid-title mb-2 shadow-xl lg:h-14 w-full lg:grid lg:grid-cols-6 bg-unimed-background">
+
+                <div class="div-grid-name-arrow grid grid-cols-2 xl:grid-cols-1">
+                    <p class="my-3 lg:my-auto ml-5 text-ellipsis overflow-hidden whitespace-nowrap"
+                        (click)="Show_Itens()">
+                        {{iten.nome}}</p>
+                    <img class="my-auto xl:hidden {{b_Show_Itens? 'img-rotation-arrow-down':''}}"
+                        src="assets/icons/arrow-up.svg">
+                </div>
+
+                <div class="pb-4" *ngIf="b_Show_Itens && b_Width == false">
+
+                    <div class="flex flex-row gap-x-3">
+                        <p class="ml-5 lg:text-center lg:relative font-semibold">ID:</p>
+                        <p class="text-center my-auto text-ellipsis overflow-hidden whitespace-nowrap">{{iten.id}}</p>
+                    </div>
+                    <div class="flex flex-row gap-x-3">
+                        <p class="ml-5 lg:text-center font-semibold">Usuário:</p>
+                        <p class="text-center my-auto text-ellipsis overflow-hidden whitespace-nowrap">{{iten.usuario}}
+                        </p>
+                    </div>
+                    <div class="flex flex-row gap-x-3">
+                        <p class="ml-5 lg:text-center font-semibold">Perfil:</p>
+                        <p class="text-center my-auto text-ellipsis overflow-hidden whitespace-nowrap">{{iten.perfil}}
+                        </p>
+                    </div>
+                    <div class="lg:mb-0 grid grid-cols-3 div-grid-itens">
+                        <p class="ml-5 lg:text-center font-semibold">Status:</p>
+                        <p
+                            class="absolute left-20 ml-2 lg:text-center lg:left-0 lg:my-auto lg:relative text-ellipsis overflow-hidden whitespace-nowrap">
+                            {{iten.status}}</p>
+                        <img class="absolute right-5 behavior-button lg:w-7 lg:h-7 my-auto lg:mx-auto"
+                            src="assets/icons/engine-config.svg">
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <div *ngIf="b_Width">
+            <div
+                class="rounded-lg div-grid-title shadow-xl mb-2 lg:h-14 w-full lg:grid lg:grid-cols-6 bg-unimed-background">
+                <p class="my-3 lg:my-auto ml-5 text-ellipsis overflow-hidden whitespace-nowrap">
+                    {{iten.nome}}</p>
+                <p class="text-center my-auto text-ellipsis overflow-hidden whitespace-nowrap">{{iten.id}}</p>
+                <p class="text-center my-auto text-ellipsis overflow-hidden whitespace-nowrap">{{iten.usuario}}</p>
+                <p class="text-center my-auto text-ellipsis overflow-hidden whitespace-nowrap">{{iten.perfil}}</p>
+                <p class="text-center my-auto text-ellipsis overflow-hidden whitespace-nowrap">{{iten.status}}</p>
+                <img class="behavior-button w-5 h-5 my-auto mx-auto" src="assets/icons/engine-config.svg">
+            </div>
+        </div>
+    </div>
+</div>
+
+<div *ngIf="b_Show_Modal">
+    <div class="div-modal-sobreposicao" (click)="b_Show_Modal = false">
+    </div>
+    <div class="div-modal-filter p-4">
+        <div class="grid grid-cols-2">
+            <div class="flex flex-col relative left-2 lg:left-2 pb-8 lg:ml-2.5">
+                <p class="relative text-base lg:text-lg font-semibold text-unimed-darkgray md:text-base">
+                    Filtro</p>
+                <div class="w-5 h-1 bg-unimed-pink rounded-full relative"></div>
+            </div>
+            <img class="w-7 h-7 mt-1 absolute right-5 cursor-pointer" src="assets/icons/X.svg"
+                (click)="b_Show_Modal = false">
+        </div>
+        <app-input></app-input>
+        <app-input></app-input>
+        <button
+            class="w-32 h-10 md:w-44 md:h-12 relative transform -translate-x-1/2 left-1/2 mx-auto rounded-xl bg-unimed-green text-unimed-background text-lg">
+            Filtrar
+        </button>
+    </div>
+</div>
+<!-- <div class="fixed bottom-0">
+    <uni-paginator></uni-paginator>
+</div> -->

@@ -147,7 +147,7 @@
 .modal-sobreposicao{
     @apply fixed inset-0 z-20 bg-black opacity-70 cursor-pointer;
 
-    @screen lg{
+    @media (min-width: 1280px) {
         @apply hidden; 
     }
 }
@@ -158,11 +158,11 @@
     @screen md{
         @apply w-96;
     }
-    @screen lg{
+    @media (min-width: 1280px) {
         @apply relative h-auto w-full bg-transparent;
     }
 }
 
 .div-itens-modal{
-    @apply absolute flex flex-col z-40 left-0;
+    @apply fixed flex flex-col z-40 left-0;
 }

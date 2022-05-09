@@ -1,0 +1,59 @@
+<app-header2></app-header2>
+
+<body class="w-full relative">
+
+    <div class="container">
+        <div class="flex flex-col mt-10 text-sm xl:mb-14 ml-12 lg:left-2 lg:ml-2.5 lg:mb-10">
+            <p class=" text-lg font-semibold text-unimed-darkgray md:text-base">
+                Sugestões</p>
+            <div class="w-5 h-1 bg-unimed-pink rounded-full relative"></div>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-2 relative top-24 md:top-12 3xl:top-20 flex-wrap gap-y-8 w-full pb-10 px-7">
+            <div
+                class="calc-width h-52 3xl:h-64 inline-block  relative rounded-lg bg-unimed-background shadow-lg mx-auto border-l-8 border-l-unimed-green {{b_Okay? 'div-hidden-card':''}}">
+                <div class="div-aling-item-card h-12">
+                    <p
+                        class="my-auto font-medium text-lg md:font-semibold pl-4 text-ellipsis w-60 whitespace-nowrap overflow-hidden">
+                        O mundo é lindo
+                    </p>
+                    <div class="w-6 h-6 rounded-full border-2 absolute right-5 mt-3 xl:mt-3 bg-transparent border-unimed-green"
+                        (click)="b_Okay = !b_Okay">
+                        <img class="my-auto {{b_Okay? '':'hidden'}}" src="assets/icons/okay.svg">
+                    </div>
+                </div>
+                <p class="p-rows pt-2 my-auto font-medium pl-4 text-ellipsis whitespace-normal overflow-hidden">
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Eum dolorum nostrum aperiam ea repellat error
+                    rem vel iure et eos maiores adipisci officiis autem repellendus esse, corporis cumque! Aut, unde.Lorem
+                    ipsum dolor sit amet consectetur adipisicing elit. Eum dolorum nostrum aperiam ea repellat error
+                    rem vel iure et eos maiores adipisci officiis autem repellendus esse, corporis cumque! Aut, unde.Lorem
+                    ipsum dolor sit amet consectetur adipisicing elit. Eum dolorum nostrum aperiam ea repellat error
+                    rem vel iure et eos maiores adipisci officiis autem repellendus esse, corporis cumque! Aut, unde.
+                </p>
+            </div>
+            <div
+                class="calc-width h-52 3xl:h-64 inline-block  relative rounded-lg bg-unimed-background shadow-lg mx-auto border-l-8 border-l-unimed-green {{b_Okay? 'div-hidden-card':''}}">
+                <div class="div-aling-item-card h-12">
+                    <p
+                        class="my-auto font-medium text-lg md:font-semibold pl-4 text-ellipsis w-60 whitespace-nowrap overflow-hidden">
+                        O mundo é lindo
+                    </p>
+                    <div class="w-6 h-6 rounded-full border-2 absolute right-5 mt-3 xl:mt-3 bg-transparent border-unimed-green"
+                        (click)="b_Okay = !b_Okay">
+                        <img class="my-auto {{b_Okay? '':'hidden'}}" src="assets/icons/okay.svg">
+                    </div>
+                </div>
+                <p class="p-rows pt-2 my-auto font-medium pl-4 text-ellipsis whitespace-normal overflow-hidden">
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Eum dolorum nostrum aperiam ea repellat error
+                    rem vel iure et eos maiores adipisci officiis autem repellendus esse, corporis cumque! Aut, unde.Lorem
+                    ipsum dolor sit amet consectetur adipisicing elit. Eum dolorum nostrum aperiam ea repellat error
+                    rem vel iure et eos maiores adipisci officiis autem repellendus esse, corporis cumque! Aut, unde.Lorem
+                    ipsum dolor sit amet consectetur adipisicing elit. Eum dolorum nostrum aperiam ea repellat error
+                    rem vel iure et eos maiores adipisci officiis autem repellendus esse, corporis cumque! Aut, unde.
+                </p>
+            </div>
+            
+        </div>
+
+    </div>
+</body>

@@ -35,7 +35,6 @@ export class Header2Component implements OnInit {
   @Input() control = new FormControl()
 
   constructor(
-    private subjectService: SubjectService
   ) { }
 
   ngOnInit() {
@@ -45,7 +44,6 @@ export class Header2Component implements OnInit {
   @HostListener('window:resize')
   onResize() {
     this.nr_Width = window.innerWidth
-    this.subjectService.subject_Width.next(this.nr_Width)
     if (this.nr_Width >= 1280) {
       this.b_Show_Input_Desktop = true
     } else {
@@ -67,12 +65,10 @@ export class Header2Component implements OnInit {
 
   Show_Modal(){
     this.b_Show_Modal = true
-    this.subjectService.subject_Modal.next(this.b_Show_Modal)
   }
 
   ngOnDestroy() {
     this.subject_unsub.next(true)
     this.subject_unsub.complete()
   }
-
 }

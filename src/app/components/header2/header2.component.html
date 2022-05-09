@@ -6,9 +6,9 @@
                 src="assets/icons/filter-three-lines.svg">
         </div>
 
-        <div class="area-back hidden relative mx-auto my-7 xl:flex w-11 h-11 cursor-pointer iten-behavior">
-            <img class="w-6" src="assets/icons/arrow-left.svg">
-            <p class="text-unimed-gray pl-3 my-auto">Voltar</p>
+        <div class="area-back hidden relative mx-auto my-7 xl:flex w-11 h-11 xl:mt-9 cursor-pointer iten-behavior">
+            <img class="w-4 mt-1" src="assets/icons/arrow-left.svg">
+            <p class="text-unimed-gray pl-3 my-auto">voltar</p>
         </div>
 
         <div class="area-logo w-16 h-8 md:w-20 md:h-10 mx-auto relative my-5 md:mt-8 cursor-pointer">
@@ -20,12 +20,12 @@
 
             <div class="hidden xl:flex h-8 border-0 relative top-9 border-l-2 border-gray-600 "></div>
 
-            <input #search type="text" class="my-6 {{b_Show_Input_Desktop? 'relative': 'hidden'}}"
+            <input #search type="text" class="my-6 bg-transparent {{b_Show_Input_Desktop? 'relative': 'hidden'}}"
                 placeholder="pesquise...">
 
         </div>
         <div class="area-itens xl:grid xl:grid-cols-5 xl:w-11/12 3xl:w-8/12 {{b_Show_Modal?'div-itens-modal': 'hidden'}}">
-            <div class="flex flex-row xl:flex-col text-center justify-center 3xl:mt-1 cursor-pointer iten-behavior {{b_Show_Modal?'flex flex-row': ''}}">
+            <div class="flex flex-row xl:flex-col text-center justify-center 3xl:mt-1 cursor-pointer iten-behavior {{b_Show_Input_Desktop?'flex flex-row': ''}}">
                 <img class="img-width-users 3xl:w-7 3xl:h-7 mx-auto" src="assets/icons/icon-users.svg">
                 <p class="text-xs">Usuários</p>
             </div>
