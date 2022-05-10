@@ -1,0 +1,58 @@
+<div *ngIf="!b_Show_Input, else inputshow">
+    <header class="header-container-grid container">
+
+        <div class="xl:hidden area-menu" (click)="Show_Modal()">
+            <img class="w-6 h-6 md:w-8 md:h-8 relative mx-auto my-6 md:my-0 md:mt-10 iten-behavior cursor-pointer"
+                src="assets/icons/filter-three-lines.svg">
+        </div>
+
+        <div class="area-logo w-16 h-8 md:w-20 md:h-10 mx-auto relative my-5 md:mt-8 cursor-pointer">
+            <img src="assets/images/logo.png">
+        </div>
+        <div class="area-search xl:flex xl:gap-4 xl:relative xl:w-1/2 xl:mx-auto">
+
+            <img class="w-6 h-6 mx-auto md:w-7 md:h-7 relative my-6 md:mt-10 cursor-pointer" src="assets/icons/search-glass-black.svg"
+                (click)="Show_Input()">
+
+            <div class="hidden xl:flex h-8 border-0 relative top-9 border-l-2 border-gray-600 "></div>
+
+            <input #search type="text" class="my-6 bg-transparent xl:mt-9 {{b_Show_Input_Desktop? 'relative': 'hidden'}}"
+                placeholder="pesquise...">
+
+        </div>
+        <div
+            class="area-itens hidden gap-y-4 xl:gap-y-0 pl-4 pt-5 xl:pl-0 xl:mt-3 xl:pt-0 xl:grid xl:grid-cols-4 xl:w-11/12 3xl:w-10/12 {{b_Show_Modal?'div-itens-modal': 'hidden'}}">
+            <div
+                class="flex flex-row xl:flex-col xl:text-center xl:justify-center 3xl:mt-1 cursor-pointer iten-behavior {{b_Show_Input_Desktop?'flex flex-row': ''}}">
+                <img class="img-width-users my-1 xl:my-0 3xl:w-7 3xl:h-7 xl:mx-auto" src="assets/icons/icon-users.svg">
+                <p class="text-xs my-auto pl-0.5 xl:my-0 xl:pl-0">Usuários</p>
+            </div>
+            <div class="pl-1 flex flex-row xl:flex-col text-center xl:justify-center cursor-pointer iten-behavior">
+                <img class="img-width-add my-1 xl:my-0 3xl:w-7 3xl:h-7 xl:mx-auto" src="assets/icons/more-options.svg">
+                <p class="text-xs my-auto xl:my-0 pl-1.5 xl:pl-0">Adicionar</p>
+            </div>
+            <div class="flex flex-row xl:flex-col text-center xl:justify-center cursor-pointer iten-behavior">
+                <img class="img-width-sugere my-1 xl:my-0 3xl:w-7 3xl:h-7 xl:mx-auto" src="assets/icons/light-bulb.svg">
+                <p class="text-xs my-auto xl:my-0">Sugestões</p>
+            </div>
+            <div class="flex flex-row xl:flex-col mt-1 ml-1.5 text-center xl:justify-center xl:-ml-6 cursor-pointer iten-behavior">
+                <img class="img-width-exit my-1 xl:my-0 3xl:w-7 3xl:h-7 xl:mx-auto" src="assets/icons/exit.svg">
+                <p class="text-xs my-auto xl:my-0 pl-1.5 xl:pl-0">Sair</p>
+            </div>
+        </div>
+    </header>
+</div>
+
+<ng-template #inputshow>
+    <header class="header-input header-container-input">
+        <img class="cursor-pointer area-back w-6 h-6 md:w-8 md:h-8 relative mx-auto my-6 md:mt-10" src="assets/icons/arrow-left.svg"
+            (click)="Show_Input()">
+        <input #search type="text" class="bg-transparent area-input my-6 md:mt-10 md:text-lg {{b_Show_Input_Desktop? 'relative': ''}}" placeholder="pesquise...">
+    </header>
+</ng-template>
+
+<div *ngIf="b_Show_Modal">
+    <div class="modal-sobreposicao" (click)="b_Show_Modal = false">
+    </div>
+    <div class="modal-icones"></div>
+</div>

@@ -7,11 +7,10 @@ import { SearchBarModule } from './components/search-bar/searchbar.module';
 import { LoginModule } from './pages/login/login.module';
 import { GraphQLModule } from './graphql.module';
 import { HomeComponent } from './pages/home/home.component';
-import { HeaderComponent } from './components/header/header.component';
 import { ConteudoComponent } from './pages/conteudo/conteudo.component';
 import { ConteudoEditarComponent } from './pages/conteudo-editar/conteudo-editar.component';
 import { InputComponent } from './components/input/input.component';
-import { Header2Component } from './components/header2/header2.component';
+import { Header2Component } from './components/headers/header2/header2.component';
 import { UsersComponent } from './pages/users/users.component';
 import { PaginatorModule } from './components/paginator/paginator.module';
 import { VersionComponent } from './components/version/version.component';
@@ -21,9 +20,9 @@ import { SugestoesComponent } from './pages/sugestoes/sugestoes.component';
 import { ConteudoAdicionarComponent } from './pages/conteudo-adicionar/conteudo-adicionar.component';
 import { InputConteudoComponent } from './components/input-conteudo/input-conteudo.component';
 import { MeusEstudosComponent } from './pages/meus-estudos/meus-estudos.component';
-import { NzPopoverModule } from 'ng-zorro-antd/popover';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { PopoverComponent } from './components/popover/popover.component';
+import { HeaderModule } from './components/headers/header.module';
 
 
 @NgModule({
@@ -31,10 +30,8 @@ import { PopoverComponent } from './components/popover/popover.component';
     AppComponent,
     HomeComponent,
     ConteudoComponent,
-    HeaderComponent,
     ConteudoEditarComponent,
     InputComponent,
-    Header2Component,
     UsersComponent,
     VersionComponent,
     AdicionarUsersComponent,
@@ -46,6 +43,7 @@ import { PopoverComponent } from './components/popover/popover.component';
     PopoverComponent
   ],
   imports: [
+    HeaderModule,
     BrowserAnimationsModule,
     PaginatorModule,
     BrowserModule,
