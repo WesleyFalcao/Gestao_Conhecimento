@@ -1,0 +1,49 @@
+<app-header2></app-header2>
+
+<div class="container">
+    <div class="grid grid-cols-2 pl-12 xl:mt-8 md:pl-28">
+        <div class="calc-width relative flex flex-col mt-10 text-sm">
+            <p class="text-lg font-semibold text-unimed-darkgray md:text-base xl:font-semibold xl:text-lg">
+                Meus estudos</p>
+            <div class="w-5 h-1 bg-unimed-pink rounded-full relative"></div>
+        </div>
+    </div>
+    <div class="grid grid-cols-1 lg:grid-cols-2 relative top-8 md:top-12 gap-y-8 w-full pb-10 px-7">
+        <div
+            class="calc-width h-52 relative rounded-lg bg-unimed-background shadow-lg mx-auto border-l-8 border-l-unimed-green">
+            <div class="absolute div-aling-popover">
+                <app-popover [b_Show_Popover]="b_Show_Popover"></app-popover>
+            </div>
+            <div class="div-aling-item-card h-12">
+                <p
+                    class="my-auto font-semibold text-lg md:font-semibold pl-4 text-ellipsis w-60 whitespace-nowrap overflow-hidden text-unimed-darkgray">
+                    O mundo é lindo
+                </p>
+                <div class="grid grid-cols-2 absolute mt-4 gap-x-5 md:gap-x-8 right-3 md:right-6 lg:right-8"
+                    *ngIf="b_User_Admin, else svgiten">
+                    <img class="w-5 h-5 behavior-button cursor-pointer -mt-1" src="{{nm_Start}}" (click)="Start_Svg()">
+                    <div class="relative mx-auto" (click)="b_Show_Popover = !b_Show_Popover">
+                        <img class="behavior-button cursor-pointer mx-auto" src="assets/icons/filter-three-points.svg">
+                    </div>
+                </div>
+                <ng-template #svgiten>
+                    <img class="w-5 h-5 behavior-button cursor-pointer absolute right-6 lg:right-10 mt-4"
+                        src="{{nm_Start}}" (click)="Start_Svg()">
+                </ng-template>
+            </div>
+            <p
+                class="p-rows pt-2 my-auto font-medium xl:text-base pl-4 text-ellipsis whitespace-normal overflow-hidden">
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Eum dolorum nostrum aperiam ea repellat error
+                rem vel iure et eos maiores adipisci officiis autem repellendus esse, corporis cumque! Aut, unde.Lorem
+                ipsum dolor sit amet consectetur adipisicing elit. Eum dolorum nostrum aperiam ea repellat error
+                rem vel iure et eos maiores adipisci officiis autem repellendus esse, corporis cumque! Aut, unde.Lorem
+                ipsum dolor sit amet consectetur adipisicing elit. Eum dolorum nostrum aperiam ea repellat error
+                rem vel iure et eos maiores adipisci officiis autem repellendus esse, corporis cumque! Aut, unde.
+            </p>
+            <button class="behavior-button w-32 h-10 absolute right-6 bottom-4 text-left pl-5 rounded-2xl bg-unimed-green text-unimed-background text-lg">
+                Acessar
+                <img class="absolute right-4 bottom-3" src="assets/icons/arrow-right.svg">
+            </button>
+        </div>
+    </div>
+</div>

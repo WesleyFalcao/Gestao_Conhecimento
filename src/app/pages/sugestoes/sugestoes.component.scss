@@ -3,7 +3,6 @@
 }
 
 .container{
-    max-width: 1300px;
     margin: 0 auto;
 
     @media (min-width: 1200px) {
@@ -19,7 +18,7 @@
     .calc-width{
         width: calc(100% - 40px);
 
-        @media (min-width: 720px) {
+        @media (min-width: 768px) {
             width: calc(100% - 10rem);
         }
     }

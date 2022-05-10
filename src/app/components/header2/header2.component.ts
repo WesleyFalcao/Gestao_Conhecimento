@@ -46,6 +46,7 @@ export class Header2Component implements OnInit {
     this.nr_Width = window.innerWidth
     if (this.nr_Width >= 1280) {
       this.b_Show_Input_Desktop = true
+      this.b_Show_Modal = false
     } else {
       this.b_Show_Input_Desktop = false
     }

@@ -2,10 +2,18 @@
     @apply mx-auto mt-8;
 }
 
+.acao {
+    min-width: 200px;
+    color: black;
+    height: 40px;
+    border-bottom: 1px solid #dedede;
+    line-height: 40px;
+    cursor: pointer
+}
+
+
 .container{
-    max-width: 1300px;
     margin: 0 auto;
-    @apply pb-10;
 
     @media (min-width: 1200px) {
         max-width: 1100px;
@@ -26,9 +34,34 @@
     }
 }
 
+.div-aling-popover{
+    left: calc(100% - 4.4rem);
+    @media (min-width: 768px) {
+        left: calc(100% - 5rem);
+    }
+    @media (min-width: 1024px) {
+        left: calc(100% - 5.5rem);
+    }
+    top: calc(100% - 18rem);
+}
+
+.div-hidden-card{
+    animation: hidden-card 2s ease-in-out;
+
+    @keyframes hidden-card {
+        to{
+            opacity: 0;
+        }
+        from{
+            opacity: 1;
+            display: hidden;
+        }
+    }
+}
+
 .div-aling-item-card{
     display: grid;
-    grid-template-columns: 5fr 1fr;
+    grid-template-columns: 1fr 1fr;
 }
 
 .p-rows{
@@ -38,12 +71,9 @@
     display: -webkit-box;
     -webkit-line-clamp: 3; 
     -webkit-box-orient: vertical;
-    @media (min-width: 1636px) {
-        -webkit-line-clamp: 5;
-    }
 }
 
-.button-comportamento{
+.behavior-button{
     &:active {
         transform: scale(0.92);
         transition-duration: 280ms;

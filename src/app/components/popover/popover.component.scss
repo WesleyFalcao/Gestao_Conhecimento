@@ -1,0 +1,15 @@
+.div-triangulo {
+    width: 0; 
+    height: 0;
+    border-left: 15px solid transparent;
+    border-right: 15px solid transparent;
+    border-top: 15px solid #B1D34B;
+    border-top-color: rgb(241 245 249);
+}
+
+.behavior-button{
+    &:active {
+        transform: scale(0.92);
+        transition-duration: 280ms;
+    }
+}

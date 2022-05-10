@@ -18,6 +18,12 @@ import { VersionComponent } from './components/version/version.component';
 import { AdicionarUsersComponent } from './pages/adicionar-users/adicionar-users.component';
 import { EditarUserComponent } from './pages/editar-user/editar-user.component';
 import { SugestoesComponent } from './pages/sugestoes/sugestoes.component';
+import { ConteudoAdicionarComponent } from './pages/conteudo-adicionar/conteudo-adicionar.component';
+import { InputConteudoComponent } from './components/input-conteudo/input-conteudo.component';
+import { MeusEstudosComponent } from './pages/meus-estudos/meus-estudos.component';
+import { NzPopoverModule } from 'ng-zorro-antd/popover';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { PopoverComponent } from './components/popover/popover.component';
 
 
 @NgModule({
@@ -34,8 +40,13 @@ import { SugestoesComponent } from './pages/sugestoes/sugestoes.component';
     AdicionarUsersComponent,
     EditarUserComponent,
     SugestoesComponent,
+    ConteudoAdicionarComponent,
+    InputConteudoComponent,
+    MeusEstudosComponent,
+    PopoverComponent
   ],
   imports: [
+    BrowserAnimationsModule,
     PaginatorModule,
     BrowserModule,
     AppRoutingModule,
