@@ -7,15 +7,15 @@
                 Categorias</p>
             <div class="w-5 h-1 bg-unimed-pink rounded-full relative"></div>
         </div>
-        <div class="flex flex-row gap-2 xl:gap-4 items-center lg:gap-10 justify-end relative right-1 mr-4 cursor-pointer">
+        <div class="flex flex-row gap-2 items-center justify-end relative right-1 mr-4 cursor-pointer">
             <img class="behavior-button w-4 h-4 md:w-5 md:h-5" src="assets/icons/more-options-user.svg"
                 routerLink="/adicionar-usuario">
                 <span class="text-sm">{{nr_Width>=768?'Adicionar conteudo':'Adicionar'}}</span>
         </div>
     </div>
-    <div class="hidden mt-14 lg:grid grid-cols-3">
+    <div class="hidden div-grid-itens mt-14 lg:grid grid-cols-3">
         <p class="lg:text-center font-semibold">ID</p>
-        <p class="font-semibold lg:grid ml-5">Nome</p>
+        <p class="font-semibold text-center lg:grid">Nome</p>
         <p class="lg:text-center font-semibold">Editar</p>
         <p></p>
     </div>
@@ -24,9 +24,9 @@
         <div class="rounded-lg mb-2 shadow-xl lg:h-14 w-full bg-unimed-background">
 
             <div class="lg:mb-0 grid grid-cols-3 div-grid-itens">
-                <p class="text-center my-auto truncate">{{iten.id}}</p>
-                <p class="my-3 mx-auto text-center lg:my-auto w-10/12 truncate ">{{iten.nome}}</p>
-                <img class="relative mx-auto behavior-button lg:w-7 lg:h-7 my-auto cursor-pointer lg:mx-auto"
+                <p class="text-center my-auto lg:my-5">{{iten.id}}</p>
+                <p class="my-3 mx-auto text-center w-10/12 truncate lg:my-5">{{iten.nome}}</p>
+                <img class="relative mx-auto behavior-button lg:w-5 lg:h-5 lg:my-5 my-auto cursor-pointer"
                     src="assets/icons/engine-config.svg" routerLink="/editar-usuario">
             </div>
         </div>

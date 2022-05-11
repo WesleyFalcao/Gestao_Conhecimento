@@ -24,7 +24,6 @@ const routes: Routes = [
   { path: 'sugestoes', component: SugestoesComponent },
   { path: 'meus-estudos', component: MeusEstudosComponent },
   { path: 'categorias', component: CategoriaComponent },
-  
 ];
 
 @NgModule({

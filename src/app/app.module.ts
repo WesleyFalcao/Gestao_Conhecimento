@@ -12,7 +12,6 @@ import { ConteudoEditarComponent } from './pages/conteudo-editar/conteudo-editar
 import { InputComponent } from './components/input/input.component';
 import { Header2Component } from './components/headers/header2/header2.component';
 import { UsersComponent } from './pages/users/users.component';
-import { PaginatorModule } from './components/paginator/paginator.module';
 import { VersionComponent } from './components/version/version.component';
 import { AdicionarUsersComponent } from './pages/adicionar-users/adicionar-users.component';
 import { EditarUserComponent } from './pages/editar-user/editar-user.component';
@@ -51,7 +50,6 @@ import { CategoriaComponent } from './pages/categoria/categoria.component';
   imports: [
     HeaderModule,
     BrowserAnimationsModule,
-    PaginatorModule,
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
