@@ -1,13 +1,12 @@
 import { Component, HostListener, OnInit } from '@angular/core';
-import { Subject, takeUntil } from 'rxjs';
-import { SubjectService } from 'src/app/services/subject.service';
+import { Subject } from 'rxjs';
 
 @Component({
-  selector: 'app-users',
-  templateUrl: './users.component.html',
-  styleUrls: ['./users.component.scss']
+  selector: 'app-adicionar-categoria',
+  templateUrl: './categoria.component.html',
+  styleUrls: ['./categoria.component.scss']
 })
-export class UsersComponent implements OnInit {
+export class CategoriaComponent implements OnInit {
 
   nm_Svg_Top: string = "assets/icons/filter.svg"
 
@@ -24,9 +23,7 @@ export class UsersComponent implements OnInit {
   nr_Width: number
 
   b_Width: boolean
-
-  b_Show_Itens: boolean = false
-  
+ 
   b_Show_Modal: boolean = false
 
   onClick_Top: boolean
@@ -70,10 +67,6 @@ export class UsersComponent implements OnInit {
     }
   }
 
-  Show_Itens(){
-    this.b_Show_Itens = !this.b_Show_Itens
-  }
-
   onFilter_Popover(event){
     this.onClick_Top = event
     if(this.onClick_Top){
@@ -82,4 +75,5 @@ export class UsersComponent implements OnInit {
       this.b_Show_Modal = false
     }
   }
+
 }

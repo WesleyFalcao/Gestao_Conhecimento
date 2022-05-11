@@ -1,11 +1,15 @@
-<app-header2></app-header2>
+<header-sugestoes></header-sugestoes>
 
 <div class="container">
-    <div class="grid grid-cols-2 pl-14 xl:mt-8 md:pl-28">
+    <div class="grid grid-cols-2 pl-14 xl:mt-8 md:pl-28 items-end">
         <div class="calc-width relative flex flex-col mt-10 text-sm">
             <p class="text-lg font-semibold text-unimed-darkgray md:text-base xl:font-semibold xl:text-lg">
                 Sugestões</p>
             <div class="w-5 h-1 bg-unimed-pink rounded-full relative"></div>
+        </div>
+        <div class="relative mx-auto flex flex-row gap-x-10">
+            <span class="relative text-sm">Minhas sugestões:&nbsp;{{nr_Minhas_Sugestoes}}</span>
+            <span class="relative text-sm">Total:&nbsp;{{nr_Total_Sugestoes}}</span>
         </div>
     </div>
 

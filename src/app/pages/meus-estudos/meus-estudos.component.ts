@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { SubjectService } from 'src/app/services/subject.service';
 
 @Component({
   selector: 'app-meus-estudos',
@@ -19,7 +20,9 @@ export class MeusEstudosComponent implements OnInit {
   /**@description Boolean para exibir popover */
   b_Show_Popover: boolean = false
 
-  constructor() { }
+  constructor(
+    private subject_service: SubjectService
+  ) { }
 
   ngOnInit(): void {
   }
@@ -28,8 +31,10 @@ export class MeusEstudosComponent implements OnInit {
     this.b_Start = !this.b_Start
     if(this.b_Start){
       this.nm_Start = "assets/icons/start-yellow.svg"
+      this.subject_service.subject_Exibindo_Snackbar.next({ message: 'Para listar os planos selecione um subcontrato ao lado.'})
     }else{
       this.nm_Start = "assets/icons/star-with-no-background.svg"
+      this.subject_service.subject_Exibindo_Snackbar.next({ message: 'Para listar os planos selecione um subcontrato ao lado.'})
     }
   }
 

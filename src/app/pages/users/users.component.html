@@ -7,10 +7,13 @@
                 Usuários</p>
             <div class="w-5 h-1 bg-unimed-pink rounded-full relative"></div>
         </div>
+        <div class="absolute div-aling-popover z-20">
+            <app-popover [nm_Svg_Top]="nm_Svg_Top" [nm_Svg_Bottom]="nm_Svg_Bottom" [nm_Opcao_top]="nm_Opcao_top"
+                [nm_Opcao_bottom]="nm_Opcao_bottom" [b_User_Page_Popover]="b_User_Page_Popover" [b_Show_Popover]="b_Show_Popover" (onClick_Option_Top)="onFilter_Popover($event)"></app-popover>
+        </div>
         <div class="flex flex-row gap-6 lg:gap-10 justify-end relative right-1 mr-4 cursor-pointer">
-            <img class="behavior-button w-5 h-5 md:w-7 md:h-7" src="assets/icons/more-options-user.svg">
-            <img class="behavior-button w-5 h-5 md:w-7 md:h-7" src="assets/icons/filter.svg"
-                (click)="b_Show_Modal = true">
+            <img class="behavior-button w-5 h-5 md:w-7 md:h-7" src="assets/icons/more-options-user.svg" routerLink="/adicionar-usuario">
+            <img class="behavior-button w-5 h-5 md:w-7 md:h-7" src="assets/icons/filter.svg" (click)="b_Show_Popover = !b_Show_Popover">
             <img class="behavior-button w-6 h-6 md:w-8 md:h-8" src="assets/icons/refresh.svg">
         </div>
     </div>
@@ -27,9 +30,8 @@
             <div
                 class="rounded-lg div-grid-title mb-2 shadow-xl lg:h-14 w-full lg:grid lg:grid-cols-6 bg-unimed-background">
 
-                <div class="div-grid-name-arrow grid grid-cols-2 xl:grid-cols-1">
-                    <p class="my-3 lg:my-auto ml-5 text-ellipsis overflow-hidden whitespace-nowrap"
-                        (click)="Show_Itens()">
+                <div class="div-grid-name-arrow grid grid-cols-2 xl:grid-cols-1" (click)="Show_Itens()">
+                    <p class="my-3 lg:my-auto ml-5 w-10/12 truncate">
                         {{iten.nome}}</p>
                     <img class="my-auto xl:hidden {{b_Show_Itens? 'img-rotation-arrow-down':''}}"
                         src="assets/icons/arrow-up.svg">
@@ -39,27 +41,25 @@
 
                     <div class="flex flex-row gap-x-3">
                         <p class="ml-5 lg:text-center lg:relative font-semibold">ID:</p>
-                        <p class="text-center my-auto text-ellipsis overflow-hidden whitespace-nowrap">{{iten.id}}</p>
+                        <p class="text-center my-auto truncate">{{iten.id}}</p>
                     </div>
                     <div class="flex flex-row gap-x-3">
                         <p class="ml-5 lg:text-center font-semibold">Usuário:</p>
-                        <p class="text-center my-auto text-ellipsis overflow-hidden whitespace-nowrap">{{iten.usuario}}
+                        <p class="text-center my-auto truncate">{{iten.usuario}}
                         </p>
                     </div>
                     <div class="flex flex-row gap-x-3">
                         <p class="ml-5 lg:text-center font-semibold">Perfil:</p>
-                        <p class="text-center my-auto text-ellipsis overflow-hidden whitespace-nowrap">{{iten.perfil}}
+                        <p class="text-center my-auto truncate">{{iten.perfil}}
                         </p>
                     </div>
                     <div class="lg:mb-0 grid grid-cols-3 div-grid-itens">
                         <p class="ml-5 lg:text-center font-semibold">Status:</p>
-                        <p
-                            class="absolute left-20 ml-2 lg:text-center lg:left-0 lg:my-auto lg:relative text-ellipsis overflow-hidden whitespace-nowrap">
+                        <p class="absolute left-20 ml-2 lg:text-center lg:left-0 lg:my-auto lg:relative truncate">
                             {{iten.status}}</p>
-                        <img class="absolute right-5 behavior-button lg:w-7 lg:h-7 my-auto lg:mx-auto"
-                            src="assets/icons/engine-config.svg">
+                        <img class="absolute right-5 behavior-button lg:w-7 lg:h-7 my-auto cursor-pointer lg:mx-auto"
+                            src="assets/icons/engine-config.svg" routerLink="/editar-usuario">
                     </div>
-
                 </div>
             </div>
         </div>
@@ -73,14 +73,14 @@
                 <p class="text-center my-auto text-ellipsis overflow-hidden whitespace-nowrap">{{iten.usuario}}</p>
                 <p class="text-center my-auto text-ellipsis overflow-hidden whitespace-nowrap">{{iten.perfil}}</p>
                 <p class="text-center my-auto text-ellipsis overflow-hidden whitespace-nowrap">{{iten.status}}</p>
-                <img class="behavior-button w-5 h-5 my-auto mx-auto" src="assets/icons/engine-config.svg">
+                <img class="behavior-button w-5 h-5 my-auto mx-auto cursor-pointer" src="assets/icons/engine-config.svg" routerLink="/editar-usuario">
             </div>
         </div>
     </div>
 </div>
 
 <div *ngIf="b_Show_Modal">
-    <div class="div-modal-sobreposicao" (click)="b_Show_Modal = false">
+    <div class="div-modal-sobreposicao" (click)="b_Show_Modal = false; b_Show_Popover = !b_Show_Popover">
     </div>
     <div class="div-modal-filter p-4">
         <div class="grid grid-cols-2">
@@ -90,8 +90,9 @@
                 <div class="w-5 h-1 bg-unimed-pink rounded-full relative"></div>
             </div>
             <img class="w-7 h-7 mt-1 absolute right-5 cursor-pointer" src="assets/icons/X.svg"
-                (click)="b_Show_Modal = false">
+                (click)="b_Show_Modal = false; b_Show_Popover = !b_Show_Popover">
         </div>
+        <app-input></app-input>
         <app-input></app-input>
         <app-input></app-input>
         <button

@@ -12,7 +12,7 @@
         </div>
 
         <div class="area-logo w-16 h-8 md:w-20 md:h-10 mx-auto relative my-5 md:mt-8 cursor-pointer">
-            <img src="assets/images/logo.png">
+            <img src="assets/images/logo.png" routerLink="/home">
         </div>
         <div class="area-search xl:flex xl:gap-4 xl:relative xl:w-1/2 xl:mx-auto">
 
@@ -28,24 +28,24 @@
         <div
             class="area-itens hidden gap-y-4 xl:gap-y-0 pl-4 pt-5 xl:pl-0 xl:pt-0 xl:grid xl:grid-cols-5 xl:w-11/12 3xl:w-8/12 {{b_Show_Modal?'div-itens-modal': 'hidden'}}">
             <div
-                class="flex flex-row xl:flex-col xl:text-center xl:justify-center 3xl:mt-1 cursor-pointer iten-behavior {{b_Show_Input_Desktop?'flex flex-row': ''}}">
+                class="flex flex-row xl:flex-col xl:text-center xl:justify-center 3xl:mt-1 cursor-pointer iten-behavior {{b_Show_Input_Desktop?'flex flex-row': ''}}" routerLink="/usuarios">
                 <img class="img-width-users my-1 xl:my-0 3xl:w-7 3xl:h-7 xl:mx-auto" src="assets/icons/icon-users.svg">
                 <p class="text-xs my-auto pl-0.5 xl:my-0 xl:pl-0">Usuários</p>
             </div>
-            <div class="flex flex-row xl:flex-col text-center xl:justify-center cursor-pointer iten-behavior">
+            <div class="flex flex-row xl:flex-col text-center xl:justify-center cursor-pointer iten-behavior" routerLink="/meus-estudos">
                 <img class="img-width-my-study my-1 xl:my-0 3xl:w-7 3xl:h-7 xl:mx-auto" src="assets/icons/my-studies.svg">
                 <p class="text-xs my-auto xl:my-0 pl-1 xl:pl-0">Meus estudos</p>
             </div>
-            <div class="pl-1 flex flex-row xl:flex-col text-center xl:justify-center cursor-pointer iten-behavior">
+            <div class="pl-1 flex flex-row xl:flex-col text-center xl:justify-center cursor-pointer iten-behavior" routerLink="/conteudo-adicionar">
                 <img class="img-width-add my-1 xl:my-0 3xl:w-7 3xl:h-7 xl:mx-auto" src="assets/icons/more-options.svg">
                 <p class="text-xs my-auto xl:my-0 pl-1.5 xl:pl-0">Adicionar</p>
             </div>
-            <div class="flex flex-row xl:flex-col xl:-ml-5 text-center xl:justify-center cursor-pointer iten-behavior">
+            <div class="flex flex-row xl:flex-col xl:-ml-5 text-center xl:justify-center cursor-pointer iten-behavior" routerLink="/sugestoes">
                 <img class="img-width-sugere my-1 xl:my-0 3xl:w-7 3xl:h-7 xl:mx-auto" src="assets/icons/light-bulb.svg">
                 <p class="text-xs my-auto xl:my-0">Sugestões</p>
             </div>
             <div class="flex flex-row xl:flex-col mt-1 ml-1.5 text-center xl:justify-center xl:-ml-16 cursor-pointer iten-behavior">
-                <img class="img-width-exit my-1 xl:my-0 3xl:w-7 3xl:h-7 xl:mx-auto" src="assets/icons/exit.svg">
+                <img class="img-width-exit my-1 xl:my-0 3xl:w-7 3xl:h-7 xl:mx-auto" src="assets/icons/exit.svg" routerLink="/login">
                 <p class="text-xs my-auto xl:my-0 pl-1.5 xl:pl-0">Sair</p>
             </div>
         </div>

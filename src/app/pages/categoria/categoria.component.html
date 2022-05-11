@@ -1,0 +1,34 @@
+<app-header2></app-header2>
+
+<div class="container relative top-12 lg:top-24 px-10">
+    <div class="grid grid-cols-2">
+        <div class="flex flex-col relative left-2 lg:left-2 lg:ml-2.5">
+            <p class="relative text-base lg:text-lg font-semibold text-unimed-darkgray md:text-base">
+                Categorias</p>
+            <div class="w-5 h-1 bg-unimed-pink rounded-full relative"></div>
+        </div>
+        <div class="flex flex-row gap-2 xl:gap-4 items-center lg:gap-10 justify-end relative right-1 mr-4 cursor-pointer">
+            <img class="behavior-button w-4 h-4 md:w-5 md:h-5" src="assets/icons/more-options-user.svg"
+                routerLink="/adicionar-usuario">
+                <span class="text-sm">{{nr_Width>=768?'Adicionar conteudo':'Adicionar'}}</span>
+        </div>
+    </div>
+    <div class="hidden mt-14 lg:grid grid-cols-3">
+        <p class="lg:text-center font-semibold">ID</p>
+        <p class="font-semibold lg:grid ml-5">Nome</p>
+        <p class="lg:text-center font-semibold">Editar</p>
+        <p></p>
+    </div>
+    <div class="top-8 relative flex flex-col gap-y-4" *ngFor="let iten of objArrayTeste">
+
+        <div class="rounded-lg mb-2 shadow-xl lg:h-14 w-full bg-unimed-background">
+
+            <div class="lg:mb-0 grid grid-cols-3 div-grid-itens">
+                <p class="text-center my-auto truncate">{{iten.id}}</p>
+                <p class="my-3 mx-auto text-center lg:my-auto w-10/12 truncate ">{{iten.nome}}</p>
+                <img class="relative mx-auto behavior-button lg:w-7 lg:h-7 my-auto cursor-pointer lg:mx-auto"
+                    src="assets/icons/engine-config.svg" routerLink="/editar-usuario">
+            </div>
+        </div>
+    </div>
+</div>

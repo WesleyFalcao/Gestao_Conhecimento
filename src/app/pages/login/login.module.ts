@@ -15,6 +15,9 @@ import { LoginComponent } from './login.component';
         ReactiveFormsModule,
         ButtonModule
     ],
+    exports: [
+        LoginComponent
+    ],
     providers: [],
 })
 export class LoginModule { }

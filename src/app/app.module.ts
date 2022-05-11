@@ -23,10 +23,15 @@ import { MeusEstudosComponent } from './pages/meus-estudos/meus-estudos.componen
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { PopoverComponent } from './components/popover/popover.component';
 import { HeaderModule } from './components/headers/header.module';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { LoginComponent } from './pages/login/login.component';
+import { RouterModule } from '@angular/router';
+import { CategoriaComponent } from './pages/categoria/categoria.component';
 
 
 @NgModule({
   declarations: [
+    
     AppComponent,
     HomeComponent,
     ConteudoComponent,
@@ -40,7 +45,8 @@ import { HeaderModule } from './components/headers/header.module';
     ConteudoAdicionarComponent,
     InputConteudoComponent,
     MeusEstudosComponent,
-    PopoverComponent
+    PopoverComponent,
+    CategoriaComponent,
   ],
   imports: [
     HeaderModule,
@@ -48,10 +54,12 @@ import { HeaderModule } from './components/headers/header.module';
     PaginatorModule,
     BrowserModule,
     AppRoutingModule,
-    LoginModule,
     HttpClientModule,
     SearchBarModule,
     GraphQLModule,
+    FormsModule,
+    RouterModule,
+    ReactiveFormsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

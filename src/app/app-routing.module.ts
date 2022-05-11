@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AdicionarUsersComponent } from './pages/adicionar-users/adicionar-users.component';
+import { CategoriaComponent } from './pages/categoria/categoria.component';
 import { ConteudoAdicionarComponent } from './pages/conteudo-adicionar/conteudo-adicionar.component';
 import { ConteudoEditarComponent } from './pages/conteudo-editar/conteudo-editar.component';
 import { ConteudoComponent } from './pages/conteudo/conteudo.component';
@@ -18,10 +19,11 @@ const routes: Routes = [
   { path: 'conteudo-editar', component: ConteudoEditarComponent },
   { path: 'conteudo-adicionar', component: ConteudoAdicionarComponent },
   { path: 'usuarios', component: UsersComponent },
-  { path: 'adicionar-user', component: AdicionarUsersComponent },
-  { path: 'editar-user', component: EditarUserComponent },
+  { path: 'adicionar-usuario', component: AdicionarUsersComponent },
+  { path: 'editar-usuario', component: EditarUserComponent },
   { path: 'sugestoes', component: SugestoesComponent },
   { path: 'meus-estudos', component: MeusEstudosComponent },
+  { path: 'categorias', component: CategoriaComponent },
   
 ];
 
