@@ -1,0 +1,37 @@
+<header>
+    <uni-button buttonClass="btn-close" (click)="Fechar()">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24">
+            <path fill="none" d="M0 0h24v24H0V0z" />
+            <path
+                d="M18.3 5.7a1 1 0 00-1.4 0L12 10.6 7.1 5.7a1 1 0 10-1.4 1.4l4.9 4.9-4.9 4.9a1 1 0 101.4 1.4l4.9-4.9 4.9 4.9a1 1 0 101.4-1.4L13.4 12l4.9-4.9c.4-.4.4-1 0-1.4z" />
+        </svg>
+    </uni-button>
+    <label for="">{{label}}</label>
+    <div class="input-search">
+        <input #inputFiltro type="text" [(ngModel)]="value" placeholder="Digite para filtrar">
+        <button type="button" (click)="Limpar()">Limpar</button>
+    </div>
+</header>
+
+<ul [ngClass]="b_Multiselect ? 'lista-itens multiple' : 'lista-itens'">
+    <li *ngFor="let item of objArrayItens | filter: value:nm_Descricao" (click)="Selecionar(item)">
+        <div *ngIf="b_Multiselect">
+            <label class="checkbox">
+                <input type="checkbox" [(ngModel)]="item._checkbox" (ngModelChange)="Selecionar(item)"
+                    name="flag_alteracao">
+                <div></div>
+            </label>
+        </div>
+        <div>
+            <p class="title">{{ item[nm_Descricao]}}</p>
+            <p class="title">{{ item[nm_Subtitulo] }}</p>
+        </div>
+    </li>
+</ul>
+
+<div class="row buttons-form center-lg" *ngIf="b_Multiselect">
+    <div style="padding: 8px;">
+        <uni-button buttonClass="btn-modal" (click)="Confirmar()">Confirmar
+        </uni-button>
+    </div>
+</div>

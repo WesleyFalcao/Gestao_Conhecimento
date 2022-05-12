@@ -1,33 +1,32 @@
-<app-header2></app-header2>
+<app-header></app-header>
 
 <div class="container relative top-12 lg:top-24 px-10">
-    <div class="grid grid-cols-2">
-        <div class="flex flex-col relative left-2 lg:left-2 lg:ml-2.5">
-            <p class="relative text-base lg:text-lg font-semibold text-unimed-darkgray md:text-base">
+    <div class="div-grid-title-add">
+        <div class="div-title flex flex-col relative left-2 lg:left-2 lg:ml-2.5">
+            <p class="relative text-base lg:text-xl font-semibold text-unimed-darkgray md:text-base">
                 Categorias</p>
             <div class="w-5 h-1 bg-unimed-pink rounded-full relative"></div>
         </div>
-        <div class="flex flex-row gap-2 items-center justify-end relative right-1 mr-4 cursor-pointer">
-            <img class="behavior-button w-4 h-4 md:w-5 md:h-5" src="assets/icons/more-options-user.svg"
-                routerLink="/adicionar-usuario">
-                <span class="text-sm">{{nr_Width>=768?'Adicionar conteudo':'Adicionar'}}</span>
+        <div class="behavior-button div-add flex flex-col gap-2 items-end relative lg:mr-20 right-1 mr-4 cursor-pointer" routerLink="/categoria-adicionar">
+            <img class="w-4 h-4 mr-6 md:mr-14 md:w-5 md:h-5" src="assets/icons/more-options-user.svg">
+                <span class="text-sm">{{nr_Width>=768?'Adicionar categoria':'Adicionar'}}</span>
         </div>
     </div>
     <div class="hidden div-grid-itens mt-14 lg:grid grid-cols-3">
-        <p class="lg:text-center font-semibold">ID</p>
-        <p class="font-semibold text-center lg:grid">Nome</p>
+        <p class="lg:text-left font-semibold lg:ml-10">ID</p>
+        <p class="font-semibold text-center lg:text-left lg:ml-12 lg:grid">Nome</p>
         <p class="lg:text-center font-semibold">Editar</p>
         <p></p>
     </div>
     <div class="top-8 relative flex flex-col gap-y-4" *ngFor="let iten of objArrayTeste">
 
-        <div class="rounded-lg mb-2 shadow-xl lg:h-14 w-full bg-unimed-background">
+        <div class="rounded-lg mb-2 shadow-xl lg:h-14 w-full bg-unimed-background hover:bg-slate-200">
 
             <div class="lg:mb-0 grid grid-cols-3 div-grid-itens">
-                <p class="text-center my-auto lg:my-5">{{iten.id}}</p>
-                <p class="my-3 mx-auto text-center w-10/12 truncate lg:my-5">{{iten.nome}}</p>
+                <p class="text-center my-auto lg:text-left lg:ml-10 lg:my-5">{{iten.id}}</p>
+                <p class="my-3 mx-auto text-center lg:text-left w-10/12 truncate lg:my-5">{{iten.nome}}</p>
                 <img class="relative mx-auto behavior-button lg:w-5 lg:h-5 lg:my-5 my-auto cursor-pointer"
-                    src="assets/icons/engine-config.svg" routerLink="/editar-usuario">
+                    src="assets/icons/edit.svg" routerLink="/categoria-editar">
             </div>
         </div>
     </div>

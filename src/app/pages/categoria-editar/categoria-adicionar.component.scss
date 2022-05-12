@@ -1,0 +1,22 @@
+.container{
+    margin: 0 auto;
+    @media (min-width: 720px) {
+        max-width: 600px;
+    }
+    @media (min-width: 1024px) {
+        max-width: 800px;
+    }
+    @media (min-width: 1200px) {
+        max-width: 1000px;
+    }
+    @media (min-width: 1636px) {
+        max-width: 1200px;
+    }
+
+    .behavior-button{
+        &:active {
+            transform: scale(0.92);
+            transition-duration: 280ms;
+        }
+    }
+}

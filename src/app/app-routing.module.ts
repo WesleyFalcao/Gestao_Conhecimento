@@ -1,6 +1,9 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { AdicionarGrupoComponent } from './pages/adicionar-grupo/adicionar-grupo.component';
 import { AdicionarUsersComponent } from './pages/adicionar-users/adicionar-users.component';
+import { CategoriaAdicionarComponent } from './pages/categoria-adicionar/categoria-adicionar.component';
+import { CategoriaEditarComponent } from './pages/categoria-editar/categoria-editar.component';
 import { CategoriaComponent } from './pages/categoria/categoria.component';
 import { ConteudoAdicionarComponent } from './pages/conteudo-adicionar/conteudo-adicionar.component';
 import { ConteudoEditarComponent } from './pages/conteudo-editar/conteudo-editar.component';
@@ -24,6 +27,9 @@ const routes: Routes = [
   { path: 'sugestoes', component: SugestoesComponent },
   { path: 'meus-estudos', component: MeusEstudosComponent },
   { path: 'categorias', component: CategoriaComponent },
+  { path: 'categoria-adicionar', component: CategoriaAdicionarComponent },
+  { path: 'grupo-adicionar', component: AdicionarGrupoComponent },
+  { path: 'categoria-editar', component: CategoriaEditarComponent },
 ];
 
 @NgModule({

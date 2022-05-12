@@ -1,0 +1,120 @@
+<div *ngIf="!b_Show_Input, else inputshow">
+    <header class="header-container-grid container">
+
+        <div class="xl:hidden area-menu" (click)="Show_Modal()">
+            <img class="w-6 h-6 md:w-8 md:h-8 relative mx-auto my-6 md:my-0 md:mt-10 iten-behavior cursor-pointer"
+                src="assets/icons/filter-three-lines.svg">
+        </div>
+
+        <div
+            class="div-left-calc-back area-back hidden relative transform -translate-x-1/2 left-1/2 my-7 xl:flex w-11 h-11 xl:mt-9 cursor-pointer iten-behavior" (click)="Back()">
+            <img class="w-4 lg:w-6 mt-1" src="assets/icons/arrow-left.svg">
+            <p class="text-unimed-gray pl-3 my-auto lg:text-lg">voltar</p>
+        </div>
+        <div class="area-logo w-16 h-8 md:w-20 md:h-10 mx-auto my-5 md:mt-8 cursor-pointer">
+            <img src="assets/images/logo.png" routerLink="/home">
+        </div>
+        <div class="area-search xl:flex xl:gap-4 xl:w-1/2 xl:mx-auto">
+            <img class="w-6 h-6 mx-auto md:w-7 md:h-7 relative my-6 md:mt-10" src="{{nm_Src_Icon}}"
+                (click)="Show_Input()">
+
+            <div class="hidden xl:flex h-8 border-0 relative top-9 border-l-2 border-gray-600"></div>
+
+            <input #search type="text" class="my-6 bg-transparent {{b_Show_Input_Desktop? 'relative': 'hidden'}}"
+                placeholder="pesquise...">
+        </div>
+
+        <div
+            class="area-itens hidden gap-y-4 md:gap-y-7 xl:gap-y-0 pl-4 md:pl-5 pt-5 md:pt-10 xl:pl-0 xl:pt-0 xl:grid xl:w-11/12 3xl:w-8/12 {{b_User_Admin?'xl:grid-cols-5 ':'grid-cols-3'}} {{b_Show_Modal?'div-itens-modal': 'hidden'}}">
+
+            <div class=" mt-20 div-aling-popover z-20 -ml-4 {{b_Show_Popover && b_Show_Input_Desktop? 'absolute':'hidden'}}">
+                <div class="div-triangulo mx-auto rotate-180">
+                </div>
+                <div class="shadow-lg p-3 lg:flex w-max box-border flex-col bg-white rounded-lg" routerLink="/usuarios">
+                    <div class="relative mt-1 flex flex-row gap-x-3 cursor-pointer behavior-button">
+                        <img class="w-4 h-4" src="assets/icons/user-black.svg">
+                        <span class="text-sm">Usuários</span>
+                    </div>
+                    <div class="relative mt-3 flex flex-row gap-x-3 cursor-pointer behavior-button"
+                        routerLink="/conteudo-adicionar">
+                        <img class="w-4 h-4" src="assets/icons/more.svg">
+                        <span class="text-sm">Conteúdo</span>
+                    </div>
+                    <div class="relative mt-3 flex flex-row gap-x-3 cursor-pointer behavior-button"
+                        routerLink="/categorias">
+                        <img class="w-4 h-4" src="assets/icons/category.svg">
+                        <span class="text-sm">Categorias</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="{{b_Show_Modal && b_User_Admin?'flex':'hidden'}}">
+                <div class="flex flex-row xl:flex-col xl:text-center xl:justify-center 3xl:mt-1 cursor-pointer iten-behavior {{b_Show_Input_Desktop?'flex flex-row': ''}}"
+                    routerLink="/meus-estudos">
+                    <img class="img-width-users my-1 xl:my-0 3xl:w-7 3xl:h-7 xl:mx-auto"
+                        src="assets/icons/icon-users.svg">
+                    <p class="text-xs md:text-lg xl:text-xs my-auto pl-0.5 xl:my-0 xl:pl-0">Usuários</p>
+                </div>
+            </div>
+            <div class="{{b_Show_Modal && b_User_Admin?'flex':'hidden'}}">
+                <div class="flex flex-row xl:flex-col xl:text-center xl:justify-center 3xl:mt-1 cursor-pointer iten-behavior {{b_Show_Input_Desktop?'flex flex-row': ''}}"
+                    routerLink="/meus-estudos">
+                    <img class="img-width-contents my-1 xl:my-0 3xl:w-7 3xl:h-7 xl:mx-auto"
+                        src="assets/icons/more-green.svg">
+                    <p class="text-xs md:text-lg xl:text-xs my-auto pl-0.5 xl:my-0 xl:pl-0">Conteúdo</p>
+                </div>
+            </div>
+            <div class="{{b_Show_Modal && b_User_Admin?'flex':'hidden'}}">
+                <div class="flex flex-row xl:flex-col xl:text-center xl:justify-center 3xl:mt-1 cursor-pointer iten-behavior {{b_Show_Input_Desktop?'flex flex-row': ''}}"
+                    routerLink="/meus-estudos">
+                    <img class="img-width-category my-1 xl:my-0 3xl:w-7 3xl:h-7 xl:mx-auto"
+                        src="assets/icons/category-green.svg">
+                    <p class="text-xs md:text-lg xl:text-xs my-auto pl-0.5 xl:my-0 xl:pl-0">Categorias</p>
+                </div>
+            </div>
+
+            <div
+                class="{{b_User_Admin == false && b_Show_Modal == false? 'position-itens-no-adm flex gap-x-16':''}} {{b_Show_Modal == true?'grid gap-y-4 md:gap-y-7':''}} {{b_User_Admin == true && b_Show_Modal == false? 'position-itens-adm flex gap-x-16':''}}">
+                <div class="flex flex-row xl:flex-col xl:text-center xl:justify-center 3xl:mt-1 cursor-pointer iten-behavior {{b_User_Admin?'':'hidden'}} {{b_Show_Input_Desktop?'flex flex-row': 'hidden'}}"
+                    (click)="b_Show_Popover = !b_Show_Popover">
+                    <img class="img-width-users my-1 xl:my-0 3xl:w-9 3xl:h-9 xl:mx-auto"
+                        src="assets/icons/register.svg">
+                    <p class="text-xs my-auto pl-0.5 xl:my-0 xl:pl-0">Cadastros</p>
+                </div>
+                <div class="flex flex-row xl:flex-col xl:text-center xl:justify-center 3xl:mt-1 cursor-pointer iten-behavior {{b_Show_Input_Desktop?'flex flex-row': ''}}"
+                    routerLink="/meus-estudos">
+                    <img class="img-width-my-study my-1 xl:my-0 3xl:w-7 3xl:h-7 xl:mx-auto"
+                        src="assets/icons/my-studies.svg">
+                    <p class="text-xs md:text-lg xl:text-xs my-auto pl-0.5 xl:my-0 xl:pl-0 whitespace-nowrap">Meus
+                        estudos</p>
+                </div>
+                <div class="flex flex-row xl:flex-col xl:text-center xl:justify-center 3xl:mt-1 cursor-pointer iten-behavior {{b_Show_Input_Desktop?'flex flex-row': ''}}"
+                    routerLink="/sugestoes">
+                    <img class="img-width-sugere my-1 xl:my-0 3xl:w-7 3xl:h-7 xl:mx-auto"
+                        src="assets/icons/light-bulb.svg">
+                    <p class="text-xs md:text-lg xl:text-xs my-auto pl-0.5 xl:my-0 xl:pl-0">Sugestões</p>
+                </div>
+                <div class="flex flex-row xl:flex-col xl:text-center xl:justify-center 3xl:mt-1 cursor-pointer iten-behavior {{b_Show_Input_Desktop?'flex flex-row': ''}}"
+                    routerLink="/login">
+                    <img class="img-width-exit my-1 xl:my-0 3xl:w-7 3xl:h-7 xl:mx-auto" src="assets/icons/exit.svg">
+                    <p class="text-xs md:text-lg xl:text-xs my-auto pl-0.5 xl:my-0 xl:pl-0">Sair</p>
+                </div>
+            </div>
+
+        </div>
+    </header>
+</div>
+
+<ng-template #inputshow>
+    <header class="header-input">
+        <img class="area-back w-6 h-6 md:w-8 md:h-8 relative mx-auto my-6 md:mt-10" src="{{nm_Src_Icon}}"
+            (click)="Show_Input()">
+        <input #search type="text" class="area-input my-6 md:mt-10 md:text-lg" placeholder="pesquise...">
+    </header>
+</ng-template>
+
+<div *ngIf="b_Show_Modal">
+    <div class="modal-sobreposicao" (click)="b_Show_Modal = false">
+    </div>
+    <div class="modal-icones"></div>
+</div>

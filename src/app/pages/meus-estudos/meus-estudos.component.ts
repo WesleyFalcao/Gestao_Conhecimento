@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { SubjectService } from 'src/app/services/subject.service';
 
 @Component({
@@ -18,10 +19,32 @@ export class MeusEstudosComponent implements OnInit {
   b_User_Admin: boolean = true
 
   /**@description Boolean para exibir popover */
-  b_Show_Popover: boolean = false
+  b_Show_Popover: boolean = true
+
+  /**@description caminho com o svg do topo */
+  nm_Svg_Top: string = "assets/icons/edit.svg"
+
+ /**@description caminho com o svg de baixo */
+  nm_Svg_Bottom: string = "assets/icons/lixeira.svg"
+
+  /**@description como o nome da opção que aparece por cima no popover */
+  nm_Opcao_top: string = "Editar"
+
+  /**@description como o nome da opção que aparece por baixo no popover */
+  nm_Opcao_bottom: string = "Excluir"
+
+  /**@description define um comportamento diferente para o popover quando esta na tela de usuários */
+  b_User_Page_Popover: boolean = false
+
+  /**@description recebe true quando o usuário clica no primeiro item do popover */
+  onClick_Top: boolean
+
+  /** @description Subject para destruir os subscribers */
+  b_Show_Modal: boolean
 
   constructor(
-    private subject_service: SubjectService
+    private subject_service: SubjectService,
+    private router: Router,
   ) { }
 
   ngOnInit(): void {
@@ -46,5 +69,14 @@ export class MeusEstudosComponent implements OnInit {
 
   change(value: boolean): void {
     console.log(value);
+  }
+
+  onClick_Option_Top(){
+    this.router.navigate(['/conteudo-editar'])
+  }
+
+  onClick_Option_Bottom(event){
+    console.log(this.b_Show_Modal)
+    this.b_Show_Modal = event
   }
 }

@@ -12,6 +12,24 @@
     }
   
 }
+
+.div-grid-title-add{
+    @apply grid grid-cols-4;
+    grid-template-areas: 
+        "title space space add"
+    ;
+}
+
+.div-title{
+    grid-area: title;
+}
+.div-add{
+    grid-area: add;
+}
+div-space{
+    grid-area: space;
+}
+
 .div-card{
     -webkit-transform: perspective(1px) translateZ(0);
     transform: perspective(1px) translateZ(0);

@@ -1,9 +1,9 @@
-<app-header2></app-header2>
+<app-header></app-header>
 
-<div class="container relative top-12 lg:top-24 px-10">
+<div class="container bg-white relative top-12 md:top-16 lg:top-24 px-10">
     <div class="grid grid-cols-2">
         <div class="flex flex-col relative left-2 lg:left-2 lg:ml-2.5">
-            <p class="relative text-base lg:text-lg font-semibold text-unimed-darkgray md:text-base">
+            <p class="relative text-base lg:text-xl font-semibold text-unimed-darkgray md:text-base">
                 Usuários</p>
             <div class="w-5 h-1 bg-unimed-pink rounded-full relative"></div>
         </div>
@@ -58,7 +58,7 @@
                         <p class="absolute left-20 ml-2 lg:text-center lg:left-0 lg:my-auto lg:relative truncate">
                             {{iten.status}}</p>
                         <img class="absolute right-5 behavior-button lg:w-7 lg:h-7 my-auto cursor-pointer lg:mx-auto"
-                            src="assets/icons/engine-config.svg" routerLink="/editar-usuario">
+                            src="assets/icons/edit.svg" routerLink="/editar-usuario">
                     </div>
                 </div>
             </div>
@@ -73,7 +73,7 @@
                 <p class="text-center my-auto text-ellipsis overflow-hidden whitespace-nowrap">{{iten.usuario}}</p>
                 <p class="text-center my-auto text-ellipsis overflow-hidden whitespace-nowrap">{{iten.perfil}}</p>
                 <p class="text-center my-auto text-ellipsis overflow-hidden whitespace-nowrap">{{iten.status}}</p>
-                <img class="behavior-button w-5 h-5 my-auto mx-auto cursor-pointer" src="assets/icons/engine-config.svg" routerLink="/editar-usuario">
+                <img class="behavior-button w-5 h-5 my-auto mx-auto cursor-pointer" src="assets/icons/edit.svg" routerLink="/editar-usuario">
             </div>
         </div>
     </div>
@@ -101,6 +101,3 @@
         </button>
     </div>
 </div>
-<!-- <div class="fixed bottom-0">
-    <uni-paginator></uni-paginator>
-</div> -->

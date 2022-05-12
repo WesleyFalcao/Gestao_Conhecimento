@@ -82,6 +82,50 @@
     }
 }
 
+.div-aling-popover{
+    margin-left: 0.8rem;
+    @media (min-width: 1536px) {
+        margin-left: -0.3rem;
+    }
+    @media (min-width: 1636px) {
+       
+    }
+}
+
+.position-itens-no-adm{
+    position: relative;
+    right: calc(80% - 16rem);
+
+    @media (min-width: 1536px) {
+       right: calc(80% - 19rem);
+    }
+}
+.position-itens-adm{
+    position: relative;
+    right: calc(80% - 7rem);
+
+    @media (min-width: 1536px) {
+       right: calc(80% - 7rem);
+    }
+}
+
+.div-triangulo {
+    width: 0; 
+    height: 0;
+    border-left: 15px solid transparent;
+    border-right: 15px solid transparent;
+    border-top: 15px solid #B1D34B;
+    border-top-color: rgb(191, 18, 18);
+}
+
+.behavior-button{
+    &:active {
+        transform: scale(0.92);
+        transition-duration: 280ms;
+    }
+}
+
+
 .header-input{
     @apply grid grid-cols-2;
     grid-template-columns: 0.7fr 2fr;
@@ -105,6 +149,10 @@
     width: 33px;
     height: 20px;
     margin-bottom: 4px;
+    @media (min-width: 768px) {
+        width: 53px;
+        height: 30px;
+    }
     @media (min-width: 1200px) {
         width: 35px;
         height: 25px;
@@ -112,10 +160,14 @@
     }
 }
 
-.img-width-my-study{
-    width: 32px;
-    height: 18px;
-    margin-bottom: 4px;
+.img-width-contents{
+    width: 33px;
+    height: 20px;
+    margin-bottom: 3px;
+    @media (min-width: 768px) {
+        width: 52px;
+        height: 29px;
+    }
     @media (min-width: 1200px) {
         width: 35px;
         height: 26px;
@@ -126,10 +178,32 @@
     }
 }
 
-.img-width-add{
+.img-width-category{
     width: 33px;
     height: 20px;
     margin-bottom: 3px;
+    @media (min-width: 768px) {
+        width: 52px;
+        height: 29px;
+    }
+    @media (min-width: 1200px) {
+        width: 35px;
+        height: 26px;
+        margin-bottom: 4px;
+    }
+    @media (min-width: 1736px) {
+        margin-bottom: 5px;
+    }
+}
+
+.img-width-my-study{
+    width: 32px;
+    height: 18px;
+    margin-bottom: 4px;
+    @media (min-width: 768px) {
+        width: 52px;
+        height: 29px;
+    }
     @media (min-width: 1200px) {
         width: 35px;
         height: 26px;
@@ -144,7 +218,10 @@
     width: 31px;
     height: 23px;
     margin-bottom: 3px;
-
+    @media (min-width: 768px) {
+        width: 51px;
+        height: 35px;
+    }
     @media (min-width: 1200px) {
         width: 35px;
         height: 27px;
@@ -159,9 +236,13 @@
     width: 33px;
     height: 21px;
     margin-bottom: 4px;
+    @media (min-width: 768px) {
+        width: 53px;
+        height: 31px;
+    }
     @media (min-width: 1200px) {
-        width: 26px;
-        height: 23px;
+        width: 47px;
+        height: 25px;
         margin-bottom: 4px;
     }
     @media (min-width: 1736px) {
@@ -170,7 +251,6 @@
 }
 
 .container{
-    max-width: 1300px;
     margin: 0 auto;
     @media (min-width: 720px) {
         max-width: 1100px;
@@ -181,7 +261,6 @@
     @media (min-width: 1636px) {
         max-width: 1840px;
     }
-
 }
 
 .div-left-calc-back{

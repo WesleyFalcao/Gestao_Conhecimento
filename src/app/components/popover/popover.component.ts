@@ -15,19 +15,23 @@ b_Popover: boolean = false
   /** @description Input com o src do icon desejado na parte de cime */
   @Input() nm_Svg_Top: string = ""
 
-  /** @description Input com o src do icon desejado na parte de baixo*/
+  /** @description Input com o src do icon desejado na parte de baixo */
   @Input() nm_Svg_Bottom: string
 
-  /** @description Input que recebe o nome da opcao de cima*/
+  /** @description Input que recebe o nome da opcao de cima */
   @Input() nm_Opcao_top: string
 
-  /** @description Input que recebe o nome da opcao de baixo*/
+  /** @description Input que recebe o nome da opcao de baixo */
   @Input() nm_Opcao_bottom: string
 
+  /** @description Aplica css específico se for na pagina de usuarios */
   @Input() b_User_Page_Popover: boolean
 
   /** @description Output que emite true quando é clicado na opção do topo*/
   @Output() onClick_Option_Top = new EventEmitter<boolean>()
+  
+  /** @description Output que emite true quando é clicado na opção do topo*/
+  @Output() onClick_Option_Bottom = new EventEmitter<boolean>()
 
   constructor() { }
 
@@ -36,5 +40,9 @@ b_Popover: boolean = false
 
   Click_Top_Option(){
     this.onClick_Option_Top.emit(true)
+  }
+
+  Click_Bottom_Option(){
+    this.onClick_Option_Bottom.emit(true)
   }
 }

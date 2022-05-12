@@ -1,0 +1,8 @@
+<div class="input input-select" (click)="Carregar()">
+    <input type="text" [ngClass]="control.touched ? 'ng-touched' : ''" readonly [formControl]="control_Aux">
+    <label>{{label}}{{b_Requerido ? "*" : ""}}</label>
+
+    <div *ngIf="control_Aux.value && control.enabled" class="div-close" (click)="Remover_Valor($event)">
+        <img src="assets/icons/close.svg">
+    </div>
+</div>

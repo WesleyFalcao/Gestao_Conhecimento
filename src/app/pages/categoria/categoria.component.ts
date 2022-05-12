@@ -1,5 +1,4 @@
 import { Component, HostListener, OnInit } from '@angular/core';
-import { Subject } from 'rxjs';
 
 @Component({
   selector: 'app-adicionar-categoria',
@@ -8,29 +7,8 @@ import { Subject } from 'rxjs';
 })
 export class CategoriaComponent implements OnInit {
 
-  nm_Svg_Top: string = "assets/icons/filter.svg"
-
-  nm_Svg_Bottom: string = "assets/icons/lixeira.svg"
-
-  nm_Opcao_top: string = "Filtrar"
-
-  nm_Opcao_bottom: string = "Limpar filtros"
-
-  b_Show_Popover: boolean = false
-
-  subject_unsub = new Subject()
-
+  /**@description recebe a largura atual da tela */
   nr_Width: number
-
-  b_Width: boolean
- 
-  b_Show_Modal: boolean = false
-
-  onClick_Top: boolean
-
-  b_User_Page_Popover: boolean = true
-
-  nm_Label_Input: string = "Nome"
 
   constructor() { }
 
@@ -40,7 +18,7 @@ export class CategoriaComponent implements OnInit {
 
   objArrayTeste = [
     {
-      nome: "Wesley",
+      nome: "CEDUSC",
       id: 1,
       usuario: "wesleyfa",
       perfil: "wesleyfa",
@@ -48,7 +26,7 @@ export class CategoriaComponent implements OnInit {
       b_iten: true
     },
     {
-      nome: "Bruno",
+      nome: "COMPLICE",
       id: 2,
       usuario: "brunop",
       perfil: "brunop",
@@ -60,20 +38,5 @@ export class CategoriaComponent implements OnInit {
   @HostListener('window:resize')
   onResize() {
     this.nr_Width = window.innerWidth
-    if (this.nr_Width >= 1023) {
-      this.b_Width = true
-    } else{
-      this.b_Width = false
-    }
   }
-
-  onFilter_Popover(event){
-    this.onClick_Top = event
-    if(this.onClick_Top){
-      this.b_Show_Modal = true
-    }else{
-      this.b_Show_Modal = false
-    }
-  }
-
 }

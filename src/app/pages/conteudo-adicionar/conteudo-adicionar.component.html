@@ -1,9 +1,9 @@
-<app-header2></app-header2>
+<app-header></app-header>
 
 <div class="container px-7 xl:px-0">
     <div class="grid grid-cols-2 mt-12 lg:mt-20">
         <div class="relative flex flex-col text-sm left-4 md:left-5">
-            <p class="relative text-base font-semibold text-unimed-darkgray md:text-base 3xl:text-lg">
+            <p class="relative text-base font-semibold text-unimed-darkgray md:text-base xl:text-lg 3xl:text-lg">
                 Adicionar conteúdo</p>
             <div class="w-5 h-1 bg-unimed-pink rounded-full relative">
             </div>
@@ -12,12 +12,12 @@
 
     <div class="mt-10">
         <div class="mx-auto">
-            <app-input></app-input>
-            <app-input></app-input>
-            <app-input></app-input>
+            <app-input [nm_Label_Input]="nm_Titulo_Input"></app-input>
+            <app-input [nm_Label_Input]="nm_Subtitulo_Input"></app-input>
+            <app-input [nm_Label_Input]="nm_Link_Input"></app-input>
             <div class="div-grid-group grid grid-cols-2">
-                <app-input></app-input>
-                <div class="behavior-button flex flex-row mx-auto cursor-pointer">
+                <app-input [nm_Label_Input]="nm_Grupo_Input"></app-input>
+                <div class="behavior-button flex flex-row mx-auto cursor-pointer" routerLink="/grupo-adicionar">
                     <img class="relative w-5 h-5 lg:w-6 lg:h-6 my-4 md:my-5" src="assets/icons/add-group.svg">
                     <div class="text-sm relative lg:text-base my-4 pl-2 md:my-5">
                         Adicionar grupo

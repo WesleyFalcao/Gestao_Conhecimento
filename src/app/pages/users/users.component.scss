@@ -4,7 +4,10 @@
         max-width: 1300px;
     }
     @media (min-width: 1636px) {
-        max-width: 1400px;
+        max-width: 1300px;
+    }
+    @media (min-width: 1820px) {
+        max-width: 1420px;
     }
 
     .div-grid-title{
@@ -22,13 +25,13 @@
     transition-property: transform;
 }
 
-.div-aling-popover{
-    left: calc(100% - 11.4rem);
+.div-aling-popover {
+    left: calc(100% - 12rem);
     @media (min-width: 768px) {
-        left: calc(100% - 12.2rem);
+        left: calc(100% - 12.8rem);
     }
     @media (min-width: 1024px) {
-        left: calc(100% - 13.2rem);
+        left: calc(100% - 13.8rem);
     }
     top: calc(100% - 7rem);
     @media (min-width: 1024px) {

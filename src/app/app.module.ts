@@ -26,11 +26,13 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { LoginComponent } from './pages/login/login.component';
 import { RouterModule } from '@angular/router';
 import { CategoriaComponent } from './pages/categoria/categoria.component';
-
+import { PopoverModule } from './components/popover/popover.module';
+import { CategoriaAdicionarComponent } from './pages/categoria-adicionar/categoria-adicionar.component';
+import { AdicionarGrupoComponent } from './pages/adicionar-grupo/adicionar-grupo.component';
+import { CategoriaEditarComponent } from './pages/categoria-editar/categoria-editar.component';
 
 @NgModule({
   declarations: [
-    
     AppComponent,
     HomeComponent,
     ConteudoComponent,
@@ -44,8 +46,10 @@ import { CategoriaComponent } from './pages/categoria/categoria.component';
     ConteudoAdicionarComponent,
     InputConteudoComponent,
     MeusEstudosComponent,
-    PopoverComponent,
     CategoriaComponent,
+    CategoriaAdicionarComponent,
+    AdicionarGrupoComponent,
+    CategoriaEditarComponent
   ],
   imports: [
     HeaderModule,
@@ -54,6 +58,7 @@ import { CategoriaComponent } from './pages/categoria/categoria.component';
     AppRoutingModule,
     HttpClientModule,
     SearchBarModule,
+    PopoverModule,
     GraphQLModule,
     FormsModule,
     RouterModule,
