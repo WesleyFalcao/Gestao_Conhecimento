@@ -3,11 +3,10 @@ import { LoginParams } from "../models/auth/login-params.model";
 import { RegistrarParams } from "../models/auth/registrar-params.model";
 import { AuthRepository } from "../repositories/auth.repository";
 
-
 @Injectable({
     providedIn: "root"
 })
-export class EmpresaFacade {
+export class ConhecimentoFacade {
 
     constructor(
         private authRepository: AuthRepository

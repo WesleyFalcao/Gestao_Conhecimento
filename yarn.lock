@@ -4537,10 +4537,10 @@
   "resolved" "https://registry.npmjs.org/neo-async/-/neo-async-2.6.2.tgz"
   "version" "2.6.2"
 
-"ng-zorro-antd@^13.2.1":
-  "integrity" "sha512-E4yIAie68a/lEVF8313FygJpcnAyZla3AJex6Tnf6geBKJ8z6h5psBgWL2U9IeKnnDGQPvtto2ckAZf0ZUvmaA=="
-  "resolved" "https://registry.npmjs.org/ng-zorro-antd/-/ng-zorro-antd-13.2.1.tgz"
-  "version" "13.2.1"
+"ng-zorro-antd@^13.2.2":
+  "integrity" "sha512-77M8o3fsCIZPmEqUicwa6N3RGq5oAppLhCAbyINGaqnkVvEa4Rf8ys4JkC6n8tWzpHNxj37dBO19mXaO7S8jLQ=="
+  "resolved" "https://registry.npmjs.org/ng-zorro-antd/-/ng-zorro-antd-13.2.2.tgz"
+  "version" "13.2.2"
   dependencies:
     "@angular/cdk" "^13.0.1"
     "@ant-design/icons-angular" "^13.0.1"

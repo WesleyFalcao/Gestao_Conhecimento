@@ -10,9 +10,8 @@
     </div>
     <div class="grid grid-cols-1 lg:grid-cols-2 relative top-8 md:top-12 gap-y-8 w-full pb-10 px-7">
         <div
-            class="calc-width h-52 relative rounded-lg bg-unimed-background shadow-lg mx-auto border-l-8 border-l-unimed-green">
+            class="calc-width h-52 relative rounded-lg bg-unimed-white shadow-lg mx-auto border-l-8 border-l-unimed-green">
             <div class="absolute div-aling-popover">
-                <!-- <app-popover [b_Show_Popover]="b_Show_Popover"></app-popover> -->
                 <app-popover [nm_Svg_Top]="nm_Svg_Top" [nm_Svg_Bottom]="nm_Svg_Bottom" [nm_Opcao_top]="nm_Opcao_top"
                     [nm_Opcao_bottom]="nm_Opcao_bottom" [b_User_Page_Popover]="b_User_Page_Popover"
                     [b_Show_Popover]="b_Show_Popover" (onClick_Option_Top)="onClick_Option_Top()" (onClick_Option_Bottom)="onClick_Option_Bottom($event)"></app-popover>
@@ -43,8 +42,9 @@
                 ipsum dolor sit amet consectetur adipisicing elit. Eum dolorum nostrum aperiam ea repellat error
                 rem vel iure et eos maiores adipisci officiis autem repellendus esse, corporis cumque! Aut, unde.
             </p>
+            
             <button
-                class="behavior-button w-32 h-10 absolute right-6 bottom-4 text-left pl-5 rounded-2xl bg-unimed-green text-unimed-background text-lg">
+                class="behavior-button w-32 h-10 absolute right-6 bottom-4 text-left pl-5 rounded-full bg-unimed-green text-unimed-white text-lg">
                 Acessar
                 <img class="w-4 h-4 absolute right-4 bottom-3" src="assets/icons/arrow-right-white.svg">
             </button>
@@ -65,6 +65,8 @@
             </div>
             <div class="flex flex-col">
                 <span class="">Tem certeza que deseja excluir esse conteúdo?</span>
+
+                <uni-button buttonClass="btn-primary">Salvar</uni-button>
                 <button
                     class="w-32 h-10 md:w-44 mt-4 md:h-12 relative mx-auto rounded-xl bg-unimed-pink text-unimed-background text-lg">
                     Excluir

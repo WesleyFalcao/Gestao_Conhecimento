@@ -1,8 +1,3 @@
-.acao {
-    width: 200px;
-    color: black;
-}
-
 .div-close {
     position: absolute;
     right: 45px;
@@ -13,12 +8,6 @@
     img {
         width: 25px;
     }
-}
-
-/* Corrige problemas com tamanho do input */
-input[type='date'],
-input[type='time'] {
-    -webkit-appearance: none;
 }
 
 .input {
@@ -300,3 +289,26 @@ input[type='time'] {
         }
     }
 }
+
+.div-modal-sobreposicao{
+    @apply fixed inset-0 z-20 bg-black opacity-70 cursor-pointer;
+
+}
+
+.div-modal-filter{
+    width: calc(100% - 40px);
+    top: calc(50% - 12rem);
+    @apply fixed bg-white my-auto z-30 rounded-lg transform -translate-x-1/2 left-1/2;
+
+    @media (min-width: 720px) {
+        width: calc(100% - 9rem);
+    }
+
+    @media (min-width: 1200px) {
+        width: calc(100% - 50rem);
+    }
+    @media (min-width: 1636px) {
+        width: calc(100% - 60rem);
+    }
+}
+

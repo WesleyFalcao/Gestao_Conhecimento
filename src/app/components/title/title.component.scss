@@ -1,0 +1,19 @@
+.h2-titulo {
+    color: var(--laranja-unimed);
+    font-weight: 500;
+    margin-bottom: 8px;
+    line-height: var(--font-size-large);
+    font-size: 19px;
+
+    @media (min-width: 720px) {
+        font-size: var(--font-size-large);
+    }
+}
+
+.div-separator {
+    width: 30px;
+    height: 3px;
+    border: 3px solid var(--rosa-unimed);
+    border-radius: 5px;
+    margin-bottom: 24px;
+}

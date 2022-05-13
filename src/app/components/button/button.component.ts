@@ -19,6 +19,7 @@ export class ButtonComponent implements OnInit {
 
     /** @description Caso o botão esteja desativado, a variavel será true */
     @HostBinding('class.disabled')
+    
     @Input() disabled: boolean = false;
 
     /** @description Retorna o evento de Click para o componente pai */

@@ -11,7 +11,7 @@ export class VersionComponent implements OnInit {
   /**@description Pega a versão do Package Json */
   version = packageInfo.version
 
-   /**@description Pega a largura atual da tela */
+  /**@description Pega a largura atual da tela */
   nr_Width: number
 
   constructor(private subjectService: SubjectService) {}

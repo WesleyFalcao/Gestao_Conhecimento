@@ -1,0 +1,18 @@
+<header class="confirmation-header">
+    <div *ngIf="nm_Caminho_Icone">
+        <img style="width: 80px" [src]="nm_Caminho_Icone" alt="Icone do Modal">
+    </div>
+    <h2 class="title-confirmation">{{ds_Titulo}}</h2>
+    <h4>{{ds_Descricao}}</h4>
+</header>
+
+<div class="flex flex-row gap-2" class="footer">
+    <div class="grid- grid-cols-2">
+        <uni-button buttonClass="btn-primary" (click)="Continuar()">Continuar
+        </uni-button>
+    </div>
+    <div class="grid- grid-cols-2">
+        <uni-button buttonClass="btn-outline" (click)="Voltar()">Voltar
+        </uni-button>
+    </div>
+</div>

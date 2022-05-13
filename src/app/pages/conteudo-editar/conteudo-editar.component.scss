@@ -1,15 +1,19 @@
 .container{
-    max-width: 1300px;
     margin: 0 auto;
-    @apply pb-10;
-
-    @media (min-width: 780px) {
+    @media (min-width: 720px) {
+        max-width: 650px;
+    }
+    @media (min-width: 1024px) {
         max-width: 800px;
     }
-    @media (min-width: 1200px) {
-        max-width: 1000px;
+    @media (min-width: 1536px) {
+        max-width: 1120px;
+    }
+    @media (min-width: 1636px) {
+        max-width: 1280px;
     }
 }
+
 
 .div-grid-group{
     grid-template-columns: 1.3fr 1fr;

@@ -1,8 +1,12 @@
-<div class="input input-select" (click)="Carregar()">
-    <input type="text" [ngClass]="control.touched ? 'ng-touched' : ''" readonly [formControl]="control_Aux">
-    <label>{{label}}{{b_Requerido ? "*" : ""}}</label>
+<div class="input input-select" (click)="b_Show_Modal = true">
+    <input type="text" [ngClass]="control.touched ? 'ng-touched' : ''" readonly [ngModel]="value?.nm_Nome" [formControl]="control_Aux">
+    <label>grupo</label>
 
     <div *ngIf="control_Aux.value && control.enabled" class="div-close" (click)="Remover_Valor($event)">
-        <img src="assets/icons/close.svg">
+        <img src="assets/icons/X.svg">
     </div>
+</div>
+
+<div *ngIf="b_Show_Modal">
+    <app-selection-modal (b_Closed_Modal)="Closed_Modal($event)" (nm_Iten_Select)="Iten_Select_Modal($event)"></app-selection-modal>
 </div>

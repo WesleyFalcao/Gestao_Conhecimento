@@ -9,7 +9,7 @@ module.exports = {
     extend: {
       screens: {
         '2xl': '1536px',
-
+        '1xl': '1636px',
         '3xl': '1736px',
       },
       colors: {

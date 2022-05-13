@@ -30,6 +30,10 @@ import { PopoverModule } from './components/popover/popover.module';
 import { CategoriaAdicionarComponent } from './pages/categoria-adicionar/categoria-adicionar.component';
 import { AdicionarGrupoComponent } from './pages/adicionar-grupo/adicionar-grupo.component';
 import { CategoriaEditarComponent } from './pages/categoria-editar/categoria-editar.component';
+import { ButtonModule } from './components/button/button.module';
+import { FilterModule } from './pipes/filter/filter.module';
+import { TitleModule } from './components/title/title.module';
+import { SelectionInputModule } from './components/selection-input/selection-input.module';
 
 @NgModule({
   declarations: [
@@ -49,20 +53,26 @@ import { CategoriaEditarComponent } from './pages/categoria-editar/categoria-edi
     CategoriaComponent,
     CategoriaAdicionarComponent,
     AdicionarGrupoComponent,
-    CategoriaEditarComponent
+    CategoriaEditarComponent,
   ],
   imports: [
     HeaderModule,
     BrowserAnimationsModule,
     BrowserModule,
+    TitleModule,
+    SelectionInputModule,
     AppRoutingModule,
     HttpClientModule,
     SearchBarModule,
     PopoverModule,
+    LoginModule,
     GraphQLModule,
+    ButtonModule,
     FormsModule,
     RouterModule,
+    ButtonModule,
     ReactiveFormsModule,
+    FilterModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

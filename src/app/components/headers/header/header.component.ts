@@ -33,7 +33,7 @@ export class HeaderComponent implements OnInit {
   nr_Width: number
 
   /**@description True quando o usuário logado for adimin */
-  b_User_Admin: boolean = true
+  b_User_Admin: boolean = false
 
   /** @description Subject para destruir os subscribers */
   subject_unsub = new Subject()
