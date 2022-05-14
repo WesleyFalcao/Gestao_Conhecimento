@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-categoria-editar',
+  selector: 'app-categoriaeditar',
   templateUrl: './categoria-editar.component.html',
   styleUrls: ['./categoria-editar.component.scss']
 })

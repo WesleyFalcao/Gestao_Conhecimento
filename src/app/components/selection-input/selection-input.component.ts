@@ -19,7 +19,7 @@ export class SelectionInputComponent implements OnInit {
   control_Aux = new FormControl()
 
   /** @description Boolean para abrir o modal */
-  b_Show_Modal: boolean = true
+  b_Show_Modal: boolean = false
 
   /** @description Recebe o evento de fechar modal */
   b_Closed_Modal: boolean
