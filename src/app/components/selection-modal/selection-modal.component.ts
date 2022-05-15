@@ -11,62 +11,8 @@ import { SubjectService } from 'src/app/services/subject.service';
 export class SelectionModalComponent implements OnInit {
 
   /** @description Array de Itens para listar */
-  objArrayItens: any[] = [
-    {
-      nm_Nome: "descricao",
-      nm_Subtitulo: "subtitulos"
-    },
-    {
-      nm_Nome: "descricao",
-      nm_Subtitulo: "subtitulos"
-    },
-    {
-      nm_Nome: "descricao",
-      nm_Subtitulo: "subtitulos"
-    },
-    {
-      nm_Nome: "descricao",
-      nm_Subtitulo: "subtitulos"
-    },
-    {
-      nm_Nome: "wesley",
-      nm_Subtitulo: "subtitulos"
-    },
-    {
-      nm_Nome: "descricao",
-      nm_Subtitulo: "subtitulos"
-    },
-    {
-      nm_Nome: "descricao",
-      nm_Subtitulo: "subtitulos"
-    },
-    {
-      nm_Nome: "descricao",
-      nm_Subtitulo: "subtitulos"
-    },
-    {
-      nm_Nome: "descricao",
-      nm_Subtitulo: "subtitulos"
-    },
-    {
-      nm_Nome: "descricao",
-      nm_Subtitulo: "subtitulos"
-    },
-    {
-      nm_Nome: "descricao",
-      nm_Subtitulo: "subtitulos"
-    },
-    {
-      nm_Nome: "descricao",
-      nm_Subtitulo: "subtitulos"
-    },
-    {
-      nm_Nome: "descricao",
-      nm_Subtitulo: "subtitulos"
-    },
-   
-  ]
-
+  @Input() objArrayItens
+    
   /** @description Campo que será usado como Descrição */
   nm_Descricao = "nm_Nome"
 

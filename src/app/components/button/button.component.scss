@@ -6,10 +6,15 @@
     width: 100%;
 
     button {
-        height: 58px;
+        @media (min-width: 768px) {
+            height: 58px;
+            font-size: larger;
+        }
+        height: 45px;
         font-family: "Montserrat", sans-serif;
         cursor: pointer;
         line-height: 0;
+        font-size: medium;
     }
 }
 
@@ -18,7 +23,7 @@
     border-radius: 30px;
     outline: none;
     padding: 1rem;
-    width: 100%;
+    width: 85%;
     border: 2px var(--verde-unimed) solid;
     font-style: normal;
     font-weight: normal;
@@ -26,6 +31,10 @@
     color: #FFFFFF;
     cursor: pointer;
     transition: opacity 280ms;
+
+    @media (min-width: 768px) {
+        max-width: 70%;
+    }
 
     &:hover,
     &:focus {
@@ -102,7 +111,7 @@
     border-radius: 30px;
     outline: none;
     padding: 1rem;
-    width: 100%;
+    width: 85%;
     border: 2px var(--laranja-unimed) solid;
     font-style: normal;
     font-weight: normal;
@@ -111,7 +120,7 @@
     cursor: pointer;
 
     @media (min-width: 768px) {
-        width: 100%;
+        width: 70%;
     }
 
     &.btn-outline-small {

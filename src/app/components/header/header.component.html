@@ -54,7 +54,7 @@
 
             <div class="{{b_Show_Modal && b_User_Admin?'flex':'hidden'}}">
                 <div class="flex flex-row xl:flex-col xl:text-center xl:justify-center 3xl:mt-1 cursor-pointer iten-behavior {{b_Show_Input_Desktop?'flex flex-row': ''}}"
-                    routerLink="/meus-estudos">
+                    routerLink="/usuarios">
                     <img class="img-width-users my-1 xl:my-0 3xl:w-7 3xl:h-7 xl:mx-auto"
                         src="assets/icons/icon-users.svg">
                     <p class="text-xs md:text-lg xl:text-xs my-auto pl-0.5 xl:my-0 xl:pl-0">Usuários</p>
@@ -62,7 +62,7 @@
             </div>
             <div class="{{b_Show_Modal && b_User_Admin?'flex':'hidden'}}">
                 <div class="flex flex-row xl:flex-col xl:text-center xl:justify-center 3xl:mt-1 cursor-pointer iten-behavior {{b_Show_Input_Desktop?'flex flex-row': ''}}"
-                    routerLink="/meus-estudos">
+                    routerLink="/conteudo-adicionar">
                     <img class="img-width-contents my-1 xl:my-0 3xl:w-7 3xl:h-7 xl:mx-auto"
                         src="assets/icons/more-green.svg">
                     <p class="text-xs md:text-lg xl:text-xs my-auto pl-0.5 xl:my-0 xl:pl-0">Conteúdo</p>
@@ -70,7 +70,7 @@
             </div>
             <div class="{{b_Show_Modal && b_User_Admin?'flex':'hidden'}}">
                 <div class="flex flex-row xl:flex-col xl:text-center xl:justify-center 3xl:mt-1 cursor-pointer iten-behavior {{b_Show_Input_Desktop?'flex flex-row': ''}}"
-                    routerLink="/meus-estudos">
+                    routerLink="/categorias">
                     <img class="img-width-category my-1 xl:my-0 3xl:w-7 3xl:h-7 xl:mx-auto"
                         src="assets/icons/category-green.svg">
                     <p class="text-xs md:text-lg xl:text-xs my-auto pl-0.5 xl:my-0 xl:pl-0">Categorias</p>
@@ -113,7 +113,7 @@
     <header class="header-input">
         <img class="area-back w-6 h-6 md:w-8 md:h-8 relative mx-auto my-6 md:mt-10" src="{{nm_Src_Icon}}"
             (click)="Show_Input()">
-        <input #search type="text" class="area-input my-6 md:mt-10 md:text-lg" placeholder="pesquise...">
+        <input #search type="text" class="area-input my-6 md:mt-10 md:text-lg bg-transparent" placeholder="Pesquise...">
     </header>
 </ng-template>
 

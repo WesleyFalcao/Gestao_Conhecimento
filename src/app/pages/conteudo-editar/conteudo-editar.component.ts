@@ -7,6 +7,62 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ConteudoEditarComponent implements OnInit {
 
+  /** @description Array de grupos */
+  objArrayGroups: any[] = [
+    {
+      nm_Nome: "Ana",
+      nm_Subtitulo: "subtitulos"
+    },
+    {
+      nm_Nome: "descricao",
+      nm_Subtitulo: "subtitulos"
+    },
+    {
+      nm_Nome: "descricao",
+      nm_Subtitulo: "subtitulos"
+    },
+    {
+      nm_Nome: "descricao",
+      nm_Subtitulo: "subtitulos"
+    },
+    {
+      nm_Nome: "wesley",
+      nm_Subtitulo: "subtitulos"
+    },
+    {
+      nm_Nome: "descricao",
+      nm_Subtitulo: "subtitulos"
+    },
+    {
+      nm_Nome: "descricao",
+      nm_Subtitulo: "subtitulos"
+    },
+    {
+      nm_Nome: "descricao",
+      nm_Subtitulo: "subtitulos"
+    },
+    {
+      nm_Nome: "descricao",
+      nm_Subtitulo: "subtitulos"
+    },
+    {
+      nm_Nome: "descricao",
+      nm_Subtitulo: "subtitulos"
+    },
+    {
+      nm_Nome: "descricao",
+      nm_Subtitulo: "subtitulos"
+    },
+    {
+      nm_Nome: "descricao",
+      nm_Subtitulo: "subtitulos"
+    },
+    {
+      nm_Nome: "descricao",
+      nm_Subtitulo: "subtitulos"
+    },
+  ]
+  
   constructor() { }
 
   ngOnInit(): void {

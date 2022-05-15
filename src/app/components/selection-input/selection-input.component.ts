@@ -15,6 +15,8 @@ export class SelectionInputComponent implements OnInit {
   /** @description FormControl do Campo */
   @Input() control = new FormControl()
 
+  @Input() objArrayList
+
   /** @description FormControl auxiliar */
   control_Aux = new FormControl()
 

@@ -25,7 +25,7 @@ b_Popover: boolean = false
   @Input() nm_Opcao_bottom: string
 
   /** @description Aplica css específico se for na pagina de usuarios */
-  @Input() b_User_Page_Popover: boolean
+  @Input() b_Rotate_Triangle: boolean
 
   /** @description Output que emite true quando é clicado na opção do topo*/
   @Output() onClick_Option_Top = new EventEmitter<boolean>()

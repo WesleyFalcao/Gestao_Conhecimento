@@ -34,7 +34,7 @@ export class MeusEstudosComponent implements OnInit {
   nm_Opcao_bottom: string = "Excluir"
 
   /**@description define um comportamento diferente para o popover quando esta na tela de usuários */
-  b_User_Page_Popover: boolean = false
+  b_Rotate_Triangle: boolean = false
 
   /**@description recebe true quando o usuário clica no primeiro item do popover */
   onClick_Top: boolean

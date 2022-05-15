@@ -1,7 +1,7 @@
 <app-header></app-header>
 
-<div class="container px-7 xl:px-0">
-    <div class="grid grid-cols-2 mt-12 lg:mt-20">
+<div class="container px-7 lg:px-12">
+    <div class="mt-12 lg:mt-20">
         <div class="relative flex flex-col text-sm left-4 md:left-5">
             <p class="relative text-base font-semibold text-unimed-darkgray md:text-base xl:text-lg 3xl:text-lg">
                 Adicionar conteúdo</p>
@@ -16,22 +16,20 @@
             <app-input [nm_Label_Input]="nm_Subtitulo_Input"></app-input>
             <app-input [nm_Label_Input]="nm_Link_Input"></app-input>
             <div class="div-grid-group grid grid-cols-2">
-                <div class="behavior-button flex flex-row mx-auto cursor-pointer" routerLink="/grupo-adicionar">
-                    <img class="relative w-5 h-5 lg:w-6 lg:h-6 my-4 md:my-5" src="assets/icons/add-group.svg">
-                    <div class="text-sm relative lg:text-base my-4 pl-2 md:my-5">
+                <selection-input [objArrayList]="objArrayGroups"></selection-input>
+                <div class="behavior-button mt-3 lg:mt-0 lg:flex-row mx-auto cursor-pointer">
+                    <img class="relative mb-1 mx-auto w-5 h-5 lg:w-6 lg:h-6 lg:mt-5 lg:my-auto"
+                        src="assets/icons/add-group.svg">
+                    <div class="text-xs relative lg:text-sm xl:text-base pl-2">
                         Adicionar grupo
                     </div>
                 </div>
             </div>
-            <div class="grid grid-cols-2 gap-4 md:gap-0 w-full relative top-6">
-                <button
-                    class="behavior-button w-32 h-10 md:w-44 md:h-12 mx-auto rounded-2xl bg-unimed-pink text-unimed-background text-lg">
-                    Cancelar
-                </button>
-                <button
-                    class="behavior-button w-32 h-10 md:w-44 md:h-12 mx-auto rounded-2xl bg-unimed-green text-unimed-background text-lg">
-                    Salvar
-                </button>
+            <div class="grid grid-cols-2 gap-x-4 xl:gap-x-20 w-full relative top-6 md:top-12 xl:top-14">
+                <div class="mx-auto w-full relative justify-center justify-self-center">
+                    <uni-button buttonClass="btn-outline">Voltar</uni-button>
+                </div>
+                <uni-button buttonClass="btn-primary">Salvar</uni-button>
             </div>
         </div>
     </div>

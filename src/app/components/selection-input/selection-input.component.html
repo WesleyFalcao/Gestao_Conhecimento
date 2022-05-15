@@ -8,5 +8,5 @@
 </div>
 
 <div *ngIf="b_Show_Modal">
-    <app-selection-modal (b_Closed_Modal)="Closed_Modal($event)" (nm_Iten_Select)="Iten_Select_Modal($event)"></app-selection-modal>
+    <app-selection-modal [objArrayItens]="objArrayList" (b_Closed_Modal)="Closed_Modal($event)" (nm_Iten_Select)="Iten_Select_Modal($event)"></app-selection-modal>
 </div>

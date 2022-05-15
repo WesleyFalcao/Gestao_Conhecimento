@@ -23,8 +23,8 @@
     padding-top: 15px;
     margin-left: 10px;
 
-    @media (min-width: 1200px) {
-        padding-top: 10px;
+    @media (min-width: 1024px) {
+        padding-top: 5px;
     }
 
     label {
@@ -158,7 +158,7 @@
         border-top: none;
         transition-duration: 280ms;
         border-radius: 3px;
-        height: 35px;
+        height: 40px;
         margin-top: 8px;
 
         @media (min-width: 1200px) {

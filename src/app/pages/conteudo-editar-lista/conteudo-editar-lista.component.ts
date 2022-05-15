@@ -1,12 +1,11 @@
 import { Component, HostListener, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-users',
-  templateUrl: './users.component.html',
-  styleUrls: ['./users.component.scss']
+  selector: 'app-conteudo-editar-lista',
+  templateUrl: './conteudo-editar-lista.component.html',
+  styleUrls: ['./conteudo-editar-lista.component.scss']
 })
-
-export class UsersComponent implements OnInit {
+export class ConteudoEditarListaComponent implements OnInit {
 
   /**@description caminho com o svg do topo */
   nm_Svg_Top: string = "assets/icons/filter.svg"

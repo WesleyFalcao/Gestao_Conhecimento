@@ -7,6 +7,18 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SugestoesComponent implements OnInit {
 
+  /**@description como o nome da opção que aparece por cima no popover */
+  nm_Opcao_top: string = "Minhas sugestões: 2"
+
+  /**@description como o nome da opção que aparece por baixo no popover */
+  nm_Opcao_bottom: string = "Total: 2"
+
+  /**@description define um comportamento diferente para o popover quando esta na tela de usuários */
+  b_Rotate_Triangle: boolean = true
+
+ /**@description boolean para abrir ou fechar o popover */
+  b_Show_Popover: boolean = false
+
   /**@description Bolean para exibir svg de okay no check-box */
   b_Okay: boolean = false
 

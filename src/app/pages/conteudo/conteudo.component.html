@@ -1,104 +1,85 @@
 <app-header></app-header>
 
-<body class="container">
-    <div class="grid grid-cols-2 mt-10 xl:mt-12 3xl:mt-14">
-        <div class="relative left-4 md:left-20 flex flex-row text-sm">
-            <img class="relative w-9 h-9 lg:w-12 lg:h-12"
-                src="assets/icons/person-study.svg">
-            <p
-                class="relative text-base md:text-base 3xl:text-lg my-auto">
+<body class="container px-10">
+    <div class="grid grid-cols-2 mt-10 lg:mt-20 xl:mt-16 3xl:mt-20">
+        <div class="relative flex flex-row text-sm">
+            <img class="relative w-9 h-9 lg:w-10 lg:h-10" src="assets/icons/person-study.svg">
+            <p class="relative text-base md:text-base 3xl:text-lg my-auto">
                 Complice</p>
         </div>
     </div>
 
-    <div class=" grid grid-cols-1 lg:grid-cols-2 relative top-7 md:top-12 3xl:top-14 flex-wrap gap-y-8 w-full pb-10">
-        <div class="calc-width h-52 3xl:h-64 inline-block  relative rounded-lg bg-unimed-background shadow-lg mx-auto border-l-8 border-l-unimed-green">
-            <div class="div-aling-item-card h-12">
-                <p class="my-auto font-medium text-lg md:font-semibold pl-4 text-ellipsis w-60 whitespace-nowrap overflow-hidden">
+    <div class="grid grid-cols-1 lg:grid-cols-2 lg:gap-x-12 relative top-7 md:top-12 flex-wrap gap-y-8 w-full pb-10">
+        <div
+            class="h-52 inline-block relative rounded-lg bg-white shadow-lg mx-auto border-l-8 border-l-unimed-green">
+            <div class="absolute div-aling-popover z-10 {{b_User_Admin?'':'hidden'}}">
+                <app-popover [nm_Svg_Top]="nm_Svg_Top" [nm_Svg_Bottom]="nm_Svg_Bottom" [nm_Opcao_top]="nm_Opcao_top"
+                    [nm_Opcao_bottom]="nm_Opcao_bottom" [b_Rotate_Triangle]="b_Rotate_Triangle"
+                    [b_Show_Popover]="b_Show_Popover" (onClick_Option_Top)="onClick_Option_Top()"
+                    (onClick_Option_Bottom)="onClick_Option_Bottom($event)">
+                </app-popover>
+            </div>
+            <div class="flex flex-row h-12">
+                <p
+                    class="my-auto font-medium text-lg md:font-semibold pl-4 text-ellipsis w-48 lg:w-60 whitespace-nowrap overflow-hidden">
                     O mundo é lindo
                 </p>
-                <div class="w-6 h-10 bg-slate-600">
 
+                <div class="my-4 first-letter {{b_User_Admin?'':'hidden'}}" (click)="b_Show_Popover = !b_Show_Popover">
+                    <img class="behavior-button cursor-pointer absolute right-7"
+                        src="assets/icons/filter-three-points.svg">
                 </div>
             </div>
             <p class="p-rows pt-2 my-auto font-medium pl-4 text-ellipsis whitespace-normal overflow-hidden">
                 Lorem ipsum dolor sit amet consectetur adipisicing elit. Eum dolorum nostrum aperiam ea repellat error
-                rem vel iure et eos maiores adipisci officiis autem repellendus esse, corporis cumque! Aut, unde.Lorem ipsum dolor sit amet consectetur adipisicing elit. Eum dolorum nostrum aperiam ea repellat error
-                rem vel iure et eos maiores adipisci officiis autem repellendus esse, corporis cumque! Aut, unde.Lorem ipsum dolor sit amet consectetur adipisicing elit. Eum dolorum nostrum aperiam ea repellat error
+                rem vel iure et eos maiores adipisci officiis autem repellendus esse, corporis cumque! Aut, unde.Lorem
+                ipsum dolor sit amet consectetur adipisicing elit. Eum dolorum nostrum aperiam ea repellat error
+                rem vel iure et eos maiores adipisci officiis autem repellendus esse, corporis cumque! Aut, unde.Lorem
+                ipsum dolor sit amet consectetur adipisicing elit. Eum dolorum nostrum aperiam ea repellat error
                 rem vel iure et eos maiores adipisci officiis autem repellendus esse, corporis cumque! Aut, unde.
             </p>
 
-            <button class="button-comportamento w-32 h-10 absolute right-6 bottom-4 text-left pl-5 rounded-2xl bg-unimed-green text-unimed-background text-lg">
+            <button
+                class="button-comportamento w-32 h-10 absolute right-6 bottom-4 text-left pl-5 rounded-2xl bg-unimed-green text-unimed-background text-lg">
                 Acessar
                 <img class="absolute right-4 bottom-3" src="assets/icons/arrow-right.svg">
             </button>
-
         </div>
-        <div class="calc-width h-52 3xl:h-64 inline-block  relative rounded-lg bg-unimed-background shadow-lg mx-auto border-l-8 border-l-unimed-green">
-            <div class="div-aling-item-card h-12">
-                <p class="my-auto font-medium text-lg md:font-semibold pl-4 text-ellipsis w-60 whitespace-nowrap overflow-hidden">
+        <div
+            class="h-52 inline-block relative rounded-lg bg-white shadow-lg mx-auto border-l-8 border-l-unimed-green">
+            <div class="absolute div-aling-popover z-10 {{b_User_Admin?'':'hidden'}}">
+                <app-popover [nm_Svg_Top]="nm_Svg_Top" [nm_Svg_Bottom]="nm_Svg_Bottom" [nm_Opcao_top]="nm_Opcao_top"
+                    [nm_Opcao_bottom]="nm_Opcao_bottom" [b_Rotate_Triangle]="b_Rotate_Triangle"
+                    [b_Show_Popover]="b_Show_Popover" (onClick_Option_Top)="onClick_Option_Top()"
+                    (onClick_Option_Bottom)="onClick_Option_Bottom($event)">
+                </app-popover>
+            </div>
+            <div class="flex flex-row h-12">
+                <p
+                    class="my-auto font-medium text-lg md:font-semibold pl-4 text-ellipsis w-48 lg:w-60 whitespace-nowrap overflow-hidden">
                     O mundo é lindo
                 </p>
-                <div class="w-6 h-10 bg-slate-600">
 
+                <div class="my-4 first-letter {{b_User_Admin?'':'hidden'}}" (click)="b_Show_Popover = !b_Show_Popover">
+                    <img class="behavior-button cursor-pointer absolute right-7"
+                        src="assets/icons/filter-three-points.svg">
                 </div>
             </div>
             <p class="p-rows pt-2 my-auto font-medium pl-4 text-ellipsis whitespace-normal overflow-hidden">
                 Lorem ipsum dolor sit amet consectetur adipisicing elit. Eum dolorum nostrum aperiam ea repellat error
-                rem vel iure et eos maiores adipisci officiis autem repellendus esse, corporis cumque! Aut, unde.Lorem ipsum dolor sit amet consectetur adipisicing elit. Eum dolorum nostrum aperiam ea repellat error
-                rem vel iure et eos maiores adipisci officiis autem repellendus esse, corporis cumque! Aut, unde.Lorem ipsum dolor sit amet consectetur adipisicing elit. Eum dolorum nostrum aperiam ea repellat error
+                rem vel iure et eos maiores adipisci officiis autem repellendus esse, corporis cumque! Aut, unde.Lorem
+                ipsum dolor sit amet consectetur adipisicing elit. Eum dolorum nostrum aperiam ea repellat error
+                rem vel iure et eos maiores adipisci officiis autem repellendus esse, corporis cumque! Aut, unde.Lorem
+                ipsum dolor sit amet consectetur adipisicing elit. Eum dolorum nostrum aperiam ea repellat error
                 rem vel iure et eos maiores adipisci officiis autem repellendus esse, corporis cumque! Aut, unde.
             </p>
 
-            <button class="button-comportamento w-32 h-10 absolute right-6 bottom-4 text-left pl-5 rounded-2xl bg-unimed-green text-unimed-background text-lg">
+            <button
+                class="button-comportamento w-32 h-10 absolute right-6 bottom-4 text-left pl-5 rounded-2xl bg-unimed-green text-unimed-background text-lg">
                 Acessar
                 <img class="absolute right-4 bottom-3" src="assets/icons/arrow-right.svg">
             </button>
-
         </div>
-        <div class="calc-width h-52 3xl:h-64 inline-block  relative rounded-lg bg-unimed-background shadow-lg mx-auto border-l-8 border-l-unimed-green">
-            <div class="div-aling-item-card h-12">
-                <p class="my-auto font-medium text-lg md:font-semibold pl-4 text-ellipsis w-60 whitespace-nowrap overflow-hidden">
-                    O mundo é lindo
-                </p>
-                <div class="w-6 h-10 bg-slate-600">
-
-                </div>
-            </div>
-            <p class="p-rows pt-2 my-auto font-medium pl-4 text-ellipsis whitespace-normal overflow-hidden">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Eum dolorum nostrum aperiam ea repellat error
-                rem vel iure et eos maiores adipisci officiis autem repellendus esse, corporis cumque! Aut, unde.Lorem ipsum dolor sit amet consectetur adipisicing elit. Eum dolorum nostrum aperiam ea repellat error
-                rem vel iure et eos maiores adipisci officiis autem repellendus esse, corporis cumque! Aut, unde.Lorem ipsum dolor sit amet consectetur adipisicing elit. Eum dolorum nostrum aperiam ea repellat error
-                rem vel iure et eos maiores adipisci officiis autem repellendus esse, corporis cumque! Aut, unde.
-            </p>
-
-            <button class="button-comportamento w-32 h-10 absolute right-6 bottom-4 text-left pl-5 rounded-2xl bg-unimed-green text-unimed-background text-lg">
-                Acessar
-                <img class="absolute right-4 bottom-3" src="assets/icons/arrow-right.svg">
-            </button>
-
-        </div>
-        <div class="calc-width h-52 3xl:h-64 inline-block  relative rounded-lg bg-unimed-background shadow-lg mx-auto border-l-8 border-l-unimed-green">
-            <div class="div-aling-item-card h-12">
-                <p class="my-auto font-medium text-lg md:font-semibold pl-4 text-ellipsis w-60 whitespace-nowrap overflow-hidden">
-                    O mundo é lindo
-                </p>
-                <div class="w-6 h-10 bg-slate-600">
-
-                </div>
-            </div>
-            <p class="p-rows pt-2 my-auto font-medium pl-4 text-ellipsis whitespace-normal overflow-hidden">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Eum dolorum nostrum aperiam ea repellat error
-                rem vel iure et eos maiores adipisci officiis autem repellendus esse, corporis cumque! Aut, unde.Lorem ipsum dolor sit amet consectetur adipisicing elit. Eum dolorum nostrum aperiam ea repellat error
-                rem vel iure et eos maiores adipisci officiis autem repellendus esse, corporis cumque! Aut, unde.Lorem ipsum dolor sit amet consectetur adipisicing elit. Eum dolorum nostrum aperiam ea repellat error
-                rem vel iure et eos maiores adipisci officiis autem repellendus esse, corporis cumque! Aut, unde.
-            </p>
-
-            <button class="button-comportamento w-32 h-10 absolute right-6 bottom-4 text-left pl-5 rounded-2xl bg-unimed-green text-unimed-background text-lg">
-                Acessar
-                <img class="absolute right-4 bottom-3" src="assets/icons/arrow-right.svg">
-            </button>
-
-        </div>
+        
     </div>
 </body>

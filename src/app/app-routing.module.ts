@@ -6,6 +6,7 @@ import { CategoriaAdicionarComponent } from './pages/categoria-adicionar/categor
 import { CategoriaEditarComponent } from './pages/categoria-editar/categoria-editar.component';
 import { CategoriaComponent } from './pages/categoria/categoria.component';
 import { ConteudoAdicionarComponent } from './pages/conteudo-adicionar/conteudo-adicionar.component';
+import { ConteudoEditarListaComponent } from './pages/conteudo-editar-lista/conteudo-editar-lista.component';
 import { ConteudoEditarComponent } from './pages/conteudo-editar/conteudo-editar.component';
 import { ConteudoComponent } from './pages/conteudo/conteudo.component';
 import { EditarUserComponent } from './pages/editar-user/editar-user.component';
@@ -20,6 +21,7 @@ const routes: Routes = [
   { path: 'home', component: HomeComponent },
   { path: 'conteudo', component: ConteudoComponent },
   { path: 'conteudo-editar', component: ConteudoEditarComponent },
+  { path: 'conteudo-editar-lista', component: ConteudoEditarListaComponent },
   { path: 'conteudo-adicionar', component: ConteudoAdicionarComponent },
   { path: 'usuarios', component: UsersComponent },
   { path: 'adicionar-usuario', component: AdicionarUsersComponent },
@@ -30,6 +32,7 @@ const routes: Routes = [
   { path: 'categoria-adicionar', component: CategoriaAdicionarComponent },
   { path: 'grupo-adicionar', component: AdicionarGrupoComponent },
   { path: 'categoria-editar', component: CategoriaEditarComponent },
+  
 ];
 
 @NgModule({
