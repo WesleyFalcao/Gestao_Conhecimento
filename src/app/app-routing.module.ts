@@ -13,12 +13,19 @@ import { EditarUserComponent } from './pages/editar-user/editar-user.component';
 import { HomeComponent } from './pages/home/home.component';
 import { LoginComponent } from './pages/login/login.component';
 import { MeusEstudosComponent } from './pages/meus-estudos/meus-estudos.component';
+import { SugestoesListaComponent } from './pages/sugestoes-lista/sugestoes-lista.component';
 import { SugestoesComponent } from './pages/sugestoes/sugestoes.component';
 import { UsersComponent } from './pages/users/users.component';
 
 const routes: Routes = [
-  { path: 'login', component: LoginComponent },
-  { path: 'home', component: HomeComponent },
+  { 
+    path: '', component: LoginComponent,
+    data: { animation: "LoginPage" },
+  },
+  { 
+    path: 'home', component: HomeComponent,
+    data: { animation: "HomePage" },
+  },
   { path: 'conteudo', component: ConteudoComponent },
   { path: 'conteudo-editar', component: ConteudoEditarComponent },
   { path: 'conteudo-editar-lista', component: ConteudoEditarListaComponent },
@@ -27,12 +34,12 @@ const routes: Routes = [
   { path: 'adicionar-usuario', component: AdicionarUsersComponent },
   { path: 'editar-usuario', component: EditarUserComponent },
   { path: 'sugestoes', component: SugestoesComponent },
+  { path: 'sugestoes-lista', component: SugestoesListaComponent },
   { path: 'meus-estudos', component: MeusEstudosComponent },
   { path: 'categorias', component: CategoriaComponent },
   { path: 'categoria-adicionar', component: CategoriaAdicionarComponent },
   { path: 'grupo-adicionar', component: AdicionarGrupoComponent },
   { path: 'categoria-editar', component: CategoriaEditarComponent },
-  
 ];
 
 @NgModule({

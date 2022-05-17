@@ -18,6 +18,7 @@ import { LoginComponent } from './login/login.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { ConteudoEditarListaComponent } from './conteudo-editar-lista/conteudo-editar-lista.component';
+import { SugestoesListaComponent } from './sugestoes-lista/sugestoes-lista.component';
 
 @NgModule({
   declarations: [
@@ -35,7 +36,8 @@ import { ConteudoEditarListaComponent } from './conteudo-editar-lista/conteudo-e
     SugestoesComponent,
     UsersComponent,
     LoginComponent,
-    ConteudoEditarListaComponent
+    ConteudoEditarListaComponent,
+    SugestoesListaComponent
   ],
   imports: [
     CommonModule,

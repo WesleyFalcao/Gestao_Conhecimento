@@ -3,18 +3,17 @@
 }
 
 .container{
-    max-width: 700px;
+    max-width: 670px;
     margin: 0 auto;
-
+    
     @media (min-width: 1024px) {
-        margin-top: 2.5rem;
-        max-width: 835px;
+        max-width: 850px;
     }
     @media (min-width: 1280px) {
         max-width: 1250px;
     }
     @media (min-width: 1536px) {
-        max-width: 1300px;
+        max-width: 1322px;
     }
     @media (min-width: 1636px) {
         max-width: 1300px;
@@ -22,14 +21,15 @@
     @media (min-width: 1780px) {
         max-width: 1400px;
     }
+}
 
-    .calc-width{
-        width: calc(100% - 40px);
-
-        @media (min-width: 768px) {
-            width: calc(100% - 10rem);
-        }
-    }
+.div-triangulo {
+    width: 0; 
+    height: 0;
+    border-left: 15px solid transparent;
+    border-right: 15px solid transparent;
+    border-top: 15px solid #B1D34B;
+    border-top-color: rgb(207, 207, 207);
 }
 
 .div-hidden-card{
@@ -48,8 +48,8 @@
 
 .img-width-information{
     @media (min-width: 1280px) {
-        width: 28px;
-        height: 35px;
+        width: 24px;
+        height: 26px;
     }
 }
 
@@ -76,6 +76,43 @@
     }
 }
 
+.div-aling-popover_filter{
+
+    left: calc(100% - 9.6rem);
+    top: calc(50% - 13rem);
+
+    @media (min-width: 768px) {
+        left: calc(100% - 14rem);
+        top: calc(50% - 26rem);
+    }
+    @media (min-width: 1024px) {
+        left: calc(100% - 15rem);
+        top: calc(50% - 8.3rem);
+    }
+    @media (min-width: 1200px) {
+        left: calc(100% - 17.3rem);
+        top: calc(50% - 11.3rem);
+    }
+}
+
+.div-aling-popover_sugestoes{
+    
+    left: calc(100% - 13.1rem);
+    top: calc(50% - 18rem);
+
+    @media (min-width: 768px) {
+        left: calc(100% - 21.5rem);
+        top: calc(50% - 31rem);
+    }
+    @media (min-width: 1024px) {
+        left: calc(100% - 24.3rem);
+        top: calc(50% - 13.3rem);
+    }
+    @media (min-width: 1200px) {
+        left: calc(100% - 26.6rem);
+        top: calc(50% - 16.3rem);
+    } 
+}
 
 .div-aling-item-card{
     display: grid;
@@ -89,8 +126,8 @@
     display: -webkit-box;
     -webkit-line-clamp: 5; 
     -webkit-box-orient: vertical;
-    @media (min-width: 1636px) {
-        -webkit-line-clamp: 6;
+    @media (min-width: 1536px) {
+        -webkit-line-clamp: 4;
     }
 }
 

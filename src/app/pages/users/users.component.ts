@@ -1,4 +1,4 @@
-import { Component, HostListener, OnInit } from '@angular/core';
+import { Component, ElementRef, HostListener, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-users',
@@ -62,7 +62,9 @@ export class UsersComponent implements OnInit {
   /**@description Boolean que recebe o evento de fechamento de modal */
   b_Closed_Modal: boolean
 
-  constructor() { }
+  constructor(
+    private eRef: ElementRef
+    ) { }
 
   ngOnInit(): void {
     this.onResize()
@@ -94,6 +96,15 @@ export class UsersComponent implements OnInit {
       this.b_Width = true
     } else {
       this.b_Width = false
+    }
+  }
+
+  @HostListener('document:click', ['$event'])
+  clickout(event) {
+    if (this.eRef.nativeElement.contains(event.target)) {
+      
+    } else {
+      this.b_Show_Popover = false
     }
   }
 

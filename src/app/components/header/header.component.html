@@ -1,7 +1,6 @@
 <div *ngIf="!b_Show_Input, else inputshow">
 
     <header class="header-container-grid container">
-
         <div class="xl:hidden area-menu" (click)="Show_Modal()">
             <img class="w-6 h-6 md:w-8 md:h-8 relative mx-auto my-6 md:my-0 md:mt-10 iten-behavior cursor-pointer"
                 src="assets/icons/filter-three-lines.svg">
@@ -34,18 +33,18 @@
                 class=" mt-20 div-aling-popover z-20 -ml-4 {{b_Show_Popover && b_Show_Input_Desktop? 'absolute':'hidden'}}">
                 <div class="div-triangulo mx-auto rotate-180">
                 </div>
-                <div class="shadow-lg p-3 lg:flex w-max box-border flex-col bg-white rounded-lg" routerLink="/usuarios">
-                    <div class="relative mt-1 flex flex-row gap-x-3 cursor-pointer behavior-button">
+                <div class="shadow-lg p-3 lg:flex w-max box-border flex-col bg-white rounded-lg" >
+                    <div class="relative mt-1 flex flex-row gap-x-3 cursor-pointer behavior-button" (click)="onClick_Usuario()">
                         <img class="w-4 h-4" src="assets/icons/user-black.svg">
                         <span class="text-sm">Usuários</span>
                     </div>
                     <div class="relative mt-3 flex flex-row gap-x-3 cursor-pointer behavior-button"
-                        routerLink="/conteudo-editar-lista">
+                        (click)="onClick_Conteudos()">
                         <img class="w-4 h-4" src="assets/icons/list-contents.svg">
                         <span class="text-sm">Conteúdos</span>
                     </div>
                     <div class="relative mt-3 flex flex-row gap-x-3 cursor-pointer behavior-button"
-                        routerLink="/categorias">
+                        (click)="onClick_Categorias()">
                         <img class="w-4 h-4" src="assets/icons/category.svg">
                         <span class="text-sm">Categorias</span>
                     </div>      
@@ -53,7 +52,7 @@
             </div>
 
             <div class="{{b_Show_Modal && b_User_Admin?'flex':'hidden'}}">
-                <div class="flex flex-row xl:flex-col xl:text-center xl:justify-center 3xl:mt-1 cursor-pointer iten-behavior {{b_Show_Input_Desktop?'flex flex-row': ''}}"
+                <div class="div-width-options-modal flex flex-row xl:flex-col xl:text-center xl:justify-center 3xl:mt-1 cursor-pointer iten-behavior {{b_Show_Input_Desktop?'flex flex-row': ''}}"
                     routerLink="/usuarios">
                     <img class="img-width-users my-1 xl:my-0 3xl:w-7 3xl:h-7 xl:mx-auto"
                         src="assets/icons/icon-users.svg">
@@ -61,15 +60,15 @@
                 </div>
             </div>
             <div class="{{b_Show_Modal && b_User_Admin?'flex':'hidden'}}">
-                <div class="flex flex-row xl:flex-col xl:text-center xl:justify-center 3xl:mt-1 cursor-pointer iten-behavior {{b_Show_Input_Desktop?'flex flex-row': ''}}"
+                <div class="div-width-options-modal flex flex-row xl:flex-col xl:text-center xl:justify-center 3xl:mt-1 cursor-pointer iten-behavior {{b_Show_Input_Desktop?'flex flex-row': ''}}"
                     routerLink="/conteudo-adicionar">
                     <img class="img-width-contents my-1 xl:my-0 3xl:w-7 3xl:h-7 xl:mx-auto"
                         src="assets/icons/more-green.svg">
-                    <p class="text-xs md:text-lg xl:text-xs my-auto pl-0.5 xl:my-0 xl:pl-0">Conteúdo</p>
+                    <p class="text-xs md:text-lg xl:text-xs my-auto pl-0.5 xl:my-0 xl:pl-0">Adicionar conteúdo</p>
                 </div>
             </div>
             <div class="{{b_Show_Modal && b_User_Admin?'flex':'hidden'}}">
-                <div class="flex flex-row xl:flex-col xl:text-center xl:justify-center 3xl:mt-1 cursor-pointer iten-behavior {{b_Show_Input_Desktop?'flex flex-row': ''}}"
+                <div class="div-width-options-modal flex flex-row xl:flex-col xl:text-center xl:justify-center 3xl:mt-1 cursor-pointer iten-behavior {{b_Show_Input_Desktop?'flex flex-row': ''}}"
                     routerLink="/conteudo-editar-lista">
                     <img class="img-width-category my-1 xl:my-0 3xl:w-7 3xl:h-7 xl:mx-auto"
                         src="assets/icons/list-contents-green.svg">
@@ -77,7 +76,7 @@
                 </div>
             </div>
             <div class="{{b_Show_Modal && b_User_Admin?'flex':'hidden'}}">
-                <div class="flex flex-row xl:flex-col xl:text-center xl:justify-center 3xl:mt-1 cursor-pointer iten-behavior {{b_Show_Input_Desktop?'flex flex-row': ''}}"
+                <div class="div-width-options-modal flex flex-row xl:flex-col xl:text-center xl:justify-center 3xl:mt-1 cursor-pointer iten-behavior {{b_Show_Input_Desktop?'flex flex-row': ''}}"
                     routerLink="/categorias">
                     <img class="img-width-category my-1 xl:my-0 3xl:w-7 3xl:h-7 xl:mx-auto"
                         src="assets/icons/category-green.svg">

@@ -1,6 +1,7 @@
 import { Location } from '@angular/common';
 import { Component, ElementRef, HostListener, Input, OnInit, ViewChild } from '@angular/core';
 import { FormControl } from '@angular/forms';
+import { Router } from '@angular/router';
 import { Subject } from 'rxjs';
 
 @Component({
@@ -45,7 +46,9 @@ export class HeaderComponent implements OnInit {
   @Input() control = new FormControl()
 
   constructor(
-    private location: Location
+    private location: Location,
+    private route: Router,
+    private eRef: ElementRef
   ) { }
 
   ngOnInit() {
@@ -60,6 +63,15 @@ export class HeaderComponent implements OnInit {
       this.b_Show_Modal = false
     } else {
       this.b_Show_Input_Desktop = false
+    }
+  }
+
+  @HostListener('document:click', ['$event'])
+  clickout(event) {
+    if(this.eRef.nativeElement.contains(event.target)) {
+    
+    } else {
+      this.b_Show_Popover = false;
     }
   }
 
@@ -95,6 +107,19 @@ export class HeaderComponent implements OnInit {
 
   Back(){
     this.location.back();
+  }
+
+  onClick_Usuario(){
+    this.route.navigate(['/usuarios'])
+    this.b_Show_Popover = false
+  }
+  onClick_Conteudos(){
+    this.route.navigate(['/conteudo-editar-lista'])
+    this.b_Show_Popover = false
+  }
+  onClick_Categorias(){
+    this.route.navigate(['/categorias'])
+    this.b_Show_Popover = false
   }
 
 }

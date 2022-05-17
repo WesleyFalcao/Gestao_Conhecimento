@@ -2,7 +2,11 @@
     margin-bottom: 3.5rem;
 
     .logo img {
-        width: 95px;
+        width: 85px;
+
+        @media (min-width: 768px) {
+            width: 95px;
+        }
     } 
 }
 
@@ -17,12 +21,20 @@
 
     p {
         color: var(--laranja-unimed);
-        font-size: 1.5rem;
+        font-size: 1.3rem;
+
+        @media (min-width: 768px) {
+            font-size: 1.5rem;
+        }
     }
 
     h1 {
         color: var(--verde-unimed);
-        font-size: 1.9rem;
+        font-size: 1.6rem;
+
+        @media (min-width: 768px) {
+            font-size: 1.9rem;
+        }
     }
 
     &:after {
@@ -38,6 +50,7 @@
 }
 
 .container-login {
+    margin-top: 1rem;
     display: flex;
     height: 100vh;
     flex-flow: column;
@@ -50,7 +63,15 @@
         padding: 28px;
 
         @media screen and (min-width: 720px) {
-            width: 420px;
+            width: 460px;
+            margin-top: -20rem;
+        }
+        @media screen and (min-width: 1024px) {
+            width: 460px;
+            margin-top: -4rem;
+        }
+        @media screen and (min-width: 1366px) {
+            margin-top: -8rem;
         }
     }
 }

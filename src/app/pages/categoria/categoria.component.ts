@@ -1,4 +1,4 @@
-import { Component, HostListener, OnInit } from '@angular/core';
+import { Component, ElementRef, HostListener, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-adicionar-categoria',
@@ -49,7 +49,7 @@ export class CategoriaComponent implements OnInit {
   /**@description Nome do título */
   ds_Titulo: string = "Categorias"
 
-  constructor() { }
+  constructor(private eRef: ElementRef) { }
 
   ngOnInit(): void {
     this.onResize()
@@ -77,6 +77,15 @@ export class CategoriaComponent implements OnInit {
   @HostListener('window:resize')
   onResize() {
     this.nr_Width = window.innerWidth
+  }
+
+  @HostListener('document:click', ['$event'])
+  clickout(event) {
+    if (this.eRef.nativeElement.contains(event.target)) {
+      
+    } else {
+      this.b_Show_Popover = false
+    }
   }
 
   onFilter_Popover(event) {

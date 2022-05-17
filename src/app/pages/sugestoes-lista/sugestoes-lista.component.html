@@ -1,0 +1,68 @@
+<app-header></app-header>
+
+<div class="container relative top-6 lg:top-14 px-10">
+    <div class="div-grid-title-itens">
+        <div class="flex flex-col relative left-2 lg:left-2 lg:ml-2.5">
+            <uni-title [ds_Titulo]="ds_Titulo"></uni-title>
+        </div>
+        <div class="absolute div-aling-popover z-20">
+            <app-popover [nm_Svg_Top]="nm_Svg_Top" [nm_Svg_Bottom]="nm_Svg_Bottom" [nm_Opcao_top]="nm_Opcao_top"
+                [nm_Opcao_bottom]="nm_Opcao_bottom" [b_Rotate_Triangle]="b_Rotate_Triangle"
+                [b_Show_Popover]="b_Show_Popover" (onClick_Option_Top)="onFilter_Popover($event)"
+                (onClick_Option_Bottom)="onClick_Option_Bottom($event)"></app-popover>
+        </div>
+        <div class="flex flex-row gap-6 lg:gap-14 2xl:gap-20 my-auto justify-end relative right-1 xl:mr-4 cursor-pointer">
+            <img class="behavior-button w-5 h-5 md:w-7 md:h-7 2xl:w-6 2xl:h-6" src="assets/icons/filter.svg"
+                (click)="b_Show_Popover = !b_Show_Popover">
+            <img class="behavior-button w-6 h-6 md:w-8 md:h-8 2xl:w-7 2xl:h-7" src="assets/icons/refresh.svg">
+        </div>
+    </div>
+    <div class="hidden div-grid-title mt-8 lg:grid grid-cols-3">
+        <p class="font-semibold lg:grid ml-5">Título</p>
+        <p class="lg:text-left font-semibold">Descrição</p>
+        <p class="lg:text-center font-semibold">Desarquivar</p>
+    </div>
+    <div class="top-5 relative flex flex-col gap-y-4" *ngFor="let iten of objArrayTeste">
+        <div *ngIf="b_Width == false">
+            <div
+                class="rounded-lg div-grid-title mb-2 shadow-xl lg:h-14 w-full lg:grid lg:grid-cols-6 bg-unimed-background">
+
+                <div class="div-grid-name-arrow grid grid-cols-2 xl:grid-cols-1" (click)="Show_Itens()">
+                    <p class="my-3 lg:my-auto ml-5 w-10/12 font-semibold truncate">
+                        {{iten.nome}}</p>
+                    <img class="my-auto xl:hidden {{b_Show_Itens? 'img-rotation-arrow-down':''}}"
+                        src="assets/icons/arrow-up.svg">
+                </div>
+                <div class="pb-4 flex flex-col gap-y-1" *ngIf="b_Show_Itens && b_Width == false">
+
+                    <p class="ml-5 lg:text-center mb-1 lg:relative font-medium">Descrição:</p>
+                    <div class="flex flex-row gap-x-3">
+                        <p class="my-auto whitespace-normal text-left ml-5">{{iten.descricao}}</p>
+                    </div>
+                    <div class="flex flex-row mt-5 gap-x-3 behavior-button" (click)="b_Confirmation_Show_Modal = true" >
+                        <img class="reltive left-5 ml-5 mt-1 behavior-button w-4 h-4 lg:w-7 lg:h-7 my-auto cursor-pointer lg:mx-auto"
+                            src="assets/icons/undo.svg">
+                        <p class="font-medium">Desarquivar</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div *ngIf="b_Width">
+            <div
+                class="rounded-lg div-grid-title shadow-xl mb-2 lg:h-14 w-full lg:grid lg:grid-cols-3 bg-white hover:bg-slate-100">
+                <p class="my-3 lg:my-auto ml-5 text-ellipsis overflow-hidden whitespace-nowrap">
+                    {{iten.nome}}</p>
+                <p class="text-left my-auto text-ellipsis overflow-hidden whitespace-nowrap">{{iten.descricao}}</p>
+                <img class="behavior-button w-5 h-5 my-auto mx-auto cursor-pointer" src="assets/icons/undo.svg" (click)="b_Confirmation_Show_Modal = true">
+            </div>
+        </div>
+    </div>
+</div>
+
+<app-filter-modal [b_Show_Modal]="b_Show_Modal" (b_Closed_Modal)="Closed_Modal($event)" [ds_Titulo]="ds_Titulo_Filter"
+    [nm_Label_Input_1]="nm_Label_Input_1" [nm_Label_Input_2]="nm_Label_Input_2">
+</app-filter-modal>
+
+<alert-modal [ds_Descricao]="ds_Descricao" [b_Show_Alert_Modal]="b_Confirmation_Show_Modal"
+    (b_Closed_Alert_Modal)="Closed_Alert_Modal()"></alert-modal>

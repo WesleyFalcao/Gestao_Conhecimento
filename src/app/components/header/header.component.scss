@@ -82,19 +82,26 @@
     }
 }
 
+.div-width-options-modal{
+    width: 14rem;
+    @media (min-width: 760px) {
+        width: 22.6rem;
+    }
+}
+
 .div-aling-popover{
     margin-left: 0.8rem;
     @media (min-width: 1280px) {
-        margin-left: -1.2rem;
+        margin-left: 0.7rem;;
     }
     @media (min-width: 1536px) {
-        margin-left: -2.5rem;
+        margin-left: -0.3rem;
     }
     @media (min-width: 1636px) {
-        margin-left: -3.2rem;
+        margin-left: -1.3rem;
     }
     @media (min-width: 1736px) {
-        margin-left: -2.2rem;
+        margin-left: -0.2rem;
     }
 }
 
@@ -103,7 +110,7 @@
     right: calc(80% - 16rem);
 
     @media (min-width: 1536px) {
-       right: calc(80% - 15rem);
+        right: calc(80% - 18rem);
     }
 }
 .position-itens-adm{

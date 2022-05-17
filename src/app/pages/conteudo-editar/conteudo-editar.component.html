@@ -1,35 +1,28 @@
 <app-header></app-header>
 
-<div class="container px-7 xl:px-0">
-    <div class="grid grid-cols-2 mt-12 lg:mt-20">
+<div class="container px-7 lg:px-12">
+    <div class="mt-5 lg:mt-10 xl:mt-14">
         <div class="relative flex flex-col text-sm left-4 md:left-5">
-            <p class="relative text-base font-semibold text-unimed-darkgray md:text-base 3xl:text-xl">
-                Editar conteúdo</p>
-            <div class="w-5 h-1 bg-unimed-pink rounded-full relative">
-            </div>
+            <uni-title [ds_Titulo]="ds_Titulo"></uni-title>
         </div>
     </div>
-
-    <div class="mt-10">
-        <div class="mx-auto">
-            <app-input></app-input>
-            <app-input-conteudo></app-input-conteudo>
-            <app-input></app-input>
-            <div class="div-grid-group grid grid-cols-2">
-                <selection-input [objArrayList]="objArrayGroups" [nm_Label_Selection_Input]="nm_Label_Selection_Input"></selection-input>
-                <div class="behavior-button mt-3 lg:mt-0 lg:flex-row mx-auto cursor-pointer">
-                    <img class="relative mb-1 mx-auto w-5 h-5 lg:w-6 lg:h-6 lg:mt-5 lg:my-auto"
-                        src="assets/icons/add-group.svg">
-                    <div class="text-xs relative lg:text-base pl-2">
-                        Adicionar grupo
-                    </div>
+    <div class="mt-5 flex flex-col gap-y-3">
+        <app-input [nm_Label_Input]="nm_Titulo_Input"></app-input>
+        <app-input [nm_Label_Input]="nm_Subtitulo_Input"></app-input>
+        <app-input [nm_Label_Input]="nm_Link_Input"></app-input>
+        <div class="div-grid-group grid grid-cols-2">
+            <selection-input [objArrayList]="objArrayGroups" [nm_Label_Selection_Input]="nm_Label_Selection_Input"></selection-input>
+            <div class="behavior-button mt-3 lg:mt-0 lg:flex-row mx-auto cursor-pointer" routerLink="/grupo-adicionar">
+                <img class="relative mb-1 mx-auto w-5 h-5 lg:w-6 lg:h-6 lg:mt-5 lg:my-auto"
+                    src="assets/icons/add-group.svg">
+                <div class="text-xs relative lg:text-sm xl:text-base pl-2">
+                    Adicionar grupo
                 </div>
             </div>
-            <div class="grid grid-cols-2 gap-x-4 xl:gap-x-20 w-full relative top-6">
-
-                <uni-button buttonClass="btn-outline">Voltar</uni-button>
-                <uni-button buttonClass="btn-primary">Salvar</uni-button>
-            </div>
+        </div>
+        <div class="grid grid-cols-2 gap-x-4 relative top-4 md:top-12 lg:top-4 xl:top-8 lg:mx-10 lg:gap-x-10">
+            <uni-button buttonClass="btn-outline">Voltar</uni-button>
+            <uni-button buttonClass="btn-primary">Salvar</uni-button>
         </div>
     </div>
 </div>

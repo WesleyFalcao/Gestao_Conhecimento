@@ -3,24 +3,23 @@
 }
 
 .container{
+    max-width: 670px;
     margin: 0 auto;
-    @apply pb-10;
-
-    margin: 0 auto;
-    @media (min-width: 720px) {
-        max-width: 650px;
-    }
+    
     @media (min-width: 1024px) {
-        max-width: 800px;
+        max-width: 850px;
     }
     @media (min-width: 1280px) {
-        max-width: 1120px;
+        max-width: 1250px;
     }
     @media (min-width: 1536px) {
-        max-width: 1120px;
+        max-width: 1300px;
     }
     @media (min-width: 1636px) {
-        max-width: 1380px;
+        max-width: 1300px;
+    }
+    @media (min-width: 1780px) {
+        max-width: 1400px;
     }
 }
 

@@ -1,29 +1,17 @@
-import { Component, ElementRef, HostListener, OnInit } from '@angular/core';
+import { Component, HostListener, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-conteudo-editar-lista',
-  templateUrl: './conteudo-editar-lista.component.html',
-  styleUrls: ['./conteudo-editar-lista.component.scss']
+  selector: 'app-sugestoes-lista',
+  templateUrl: './sugestoes-lista.component.html',
+  styleUrls: ['./sugestoes-lista.component.scss']
 })
-export class ConteudoEditarListaComponent implements OnInit {
+export class SugestoesListaComponent implements OnInit {
 
   /**@description nome do label do primeiro input */
   nm_Label_Input_1: string = "Título"
 
   /**@description nome do label do segundo input */
   nm_Label_Input_2: string = "Descrição"
-
-  /**@description nome do label do terceiro input */
-  nm_Label_Input_3: string = "Grupo"
-
-  /**@description Boolean que recebe o evento de fechamento de modal */
-  b_Closed_Modal: boolean
-
-  /**@description Título da página */
-  ds_Titulo_Filter: string = "Filtros"
-
-  /**@description Título da página */
-  ds_Titulo: string = "Conteúdos"
 
   /**@description caminho com o svg do topo */
   nm_Svg_Top: string = "assets/icons/filter.svg"
@@ -61,7 +49,24 @@ export class ConteudoEditarListaComponent implements OnInit {
   /**@description boolean que fica true acima de 1034px */
   b_Width: boolean
 
-  constructor(private eRef: ElementRef) { }
+  /**@description Título da página */
+  ds_Titulo: string = "Sugestões Arquivadas"
+
+  /**@description Título da página */
+  ds_Titulo_Filter: string = "Filtros"
+
+  /**@description Boolean que recebe o evento de fechamento de modal */
+  b_Closed_Modal: boolean
+
+  /**@description Contém da descrição do modal de alerta*/
+  ds_Descricao: string = "Tem certeza que deseja desarquivar?"
+
+  /** @description Boolean para exibir ou fechar o modal de confirmação */
+  b_Confirmation_Show_Modal: boolean
+
+  constructor(
+   
+    ) { }
 
   ngOnInit(): void {
     this.onResize()
@@ -69,21 +74,22 @@ export class ConteudoEditarListaComponent implements OnInit {
 
   objArrayTeste = [
     {
-      titulo: "O mundo é lindo eu alguns casos porem contudo",
-      id: 1,
-      descricao: "tema da bienal Rubem Braga no ano de 2019 na qual",
-      link: "http://http://localhost:4200/conteudo-editar-lista",
-      grupo: "Cedusc",
-
+      nome: "O mundo é lindo",
+      descricao: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Eum dolorum nostrum aperiam ea repellat error rem vel iure et eos maiores adipisci officiis autem repellendus esse, corporis",
+      usuario: "wesleyfa",
+      perfil: "wesleyfa",
+      status: "ativo",
+      b_iten: true
     },
     {
-      titulo: "O mundo é lindo eu alguns casos porem contudo",
-      id: 1,
-      descricao: "tema da bienal Rubem Braga no ano de 2019 na qual",
-      link: "http://http://localhost:4200/conteudo-editar-lista",
-      grupo: "Cedusc",
-
+      nome: "O mundo é lindo",
+      descricao: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Eum dolorum nostrum aperiam ea repellat error rem vel iure et eos maiores adipisci officiis autem repellendus esse, corporis",
+      usuario: "wesleyfa",
+      perfil: "wesleyfa",
+      status: "ativo",
+      b_iten: true
     },
+  
   ]
 
   @HostListener('window:resize')
@@ -93,15 +99,6 @@ export class ConteudoEditarListaComponent implements OnInit {
       this.b_Width = true
     } else {
       this.b_Width = false
-    }
-  }
-
-  @HostListener('document:click', ['$event'])
-  clickout(event) {
-    if (this.eRef.nativeElement.contains(event.target)) {
-      
-    } else {
-      this.b_Show_Popover = false
     }
   }
 
@@ -118,9 +115,19 @@ export class ConteudoEditarListaComponent implements OnInit {
     }
   }
 
-  Closed_Modal(event){
+  Closed_Modal(event) {
     this.b_Closed_Modal = event
     this.b_Show_Popover = false
     this.b_Show_Modal = false
   }
+
+  Closed_Alert_Modal() {
+    this.b_Confirmation_Show_Modal = false
+    this.b_Show_Popover = false
+  }
+
+  onClick_Option_Bottom(event) {
+    this.b_Confirmation_Show_Modal = event
+  }
+
 }

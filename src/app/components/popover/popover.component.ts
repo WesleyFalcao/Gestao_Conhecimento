@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, ElementRef, EventEmitter, HostListener, Input, OnInit, Output } from '@angular/core';
 
 @Component({
   selector: 'app-popover',
@@ -7,7 +7,7 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 })
 export class PopoverComponent implements OnInit {
 
-b_Popover: boolean = false
+  b_Popover: boolean
 
   /** @description Input para exibir ou não o popover */
   @Input() b_Show_Popover: boolean 
@@ -33,11 +33,22 @@ b_Popover: boolean = false
   /** @description Output que emite true quando é clicado na opção do topo*/
   @Output() onClick_Option_Bottom = new EventEmitter<boolean>()
 
-  constructor() { }
+  constructor(
+    private eRef: ElementRef
+  ) { }
 
   ngOnInit(): void {
   }
 
+  @HostListener('document:click', ['$event'])
+  clickout(event) {
+    if(this.eRef.nativeElement.contains(event.target)) {
+    
+    } else {
+      this.b_Popover = false;
+    }
+  }
+  
   Click_Top_Option(){
     this.onClick_Option_Top.emit(true)
   }

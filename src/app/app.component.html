@@ -1,2 +1,4 @@
-<app-version></app-version>
-<router-outlet></router-outlet>
+<div [@routeAnimations]="prepareRoute(outlet)">
+    <app-version></app-version>
+    <router-outlet #outlet="outlet"></router-outlet>
+</div>
