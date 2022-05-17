@@ -1,4 +1,4 @@
-<div *ngIf="!b_Show_Input, else inputshow">
+<div *ngIf="!b_Show_Input">
 
     <header class="header-container-grid container">
         <div class="xl:hidden area-menu" (click)="Show_Modal()">
@@ -15,17 +15,6 @@
         <div class="area-logo w-16 h-8 md:w-20 md:h-10 mx-auto my-5 md:mt-8 cursor-pointer">
             <img src="assets/images/logo.png" routerLink="/home">
         </div>
-
-        <div class="area-search xl:flex xl:-ml-12 2xl:ml-20 3xl:ml-32 xl:gap-4 xl:w-1/2 xl:mx-auto">
-            <img class="w-6 h-6 mx-auto md:w-7 md:h-7 relative my-6 md:mt-10" src="{{nm_Src_Icon}}"
-                (click)="Show_Input()">
-
-            <div class="hidden xl:flex h-8 border-0 relative top-9 border-l-2 border-gray-600"></div>
-
-            <input #search type="text" class="my-6 bg-transparent {{b_Show_Input_Desktop? 'relative': 'hidden'}}"
-                placeholder="Pesquise...">
-        </div>
-
         <div
             class="area-itens hidden gap-y-4 md:gap-y-7 xl:gap-y-0 pl-4 md:pl-5 pt-5 md:pt-10 xl:pl-0 xl:pt-0 xl:grid xl:w-11/12 3xl:w-8/12 {{b_User_Admin?'xl:grid-cols-5 ':'grid-cols-3'}} {{b_Show_Modal?'div-itens-modal': 'hidden'}}">
 
@@ -115,14 +104,6 @@
         </div>
     </header>
 </div>
-
-<ng-template #inputshow>
-    <header class="header-input">
-        <img class="area-back w-6 h-6 md:w-8 md:h-8 relative mx-auto my-6 md:mt-10" src="{{nm_Src_Icon}}"
-            (click)="Show_Input()">
-        <input #search type="text" class="area-input my-6 md:mt-10 md:text-lg bg-transparent" placeholder="Pesquise...">
-    </header>
-</ng-template>
 
 <div *ngIf="b_Show_Modal">
     <div class="modal-sobreposicao" (click)="b_Show_Modal = false">

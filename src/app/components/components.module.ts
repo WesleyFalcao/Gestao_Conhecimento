@@ -18,6 +18,7 @@ import { SelectionInputComponent } from './selection-input/selection-input.compo
 import { FilterModule } from '../pipes/filter/filter.module';
 import { FilterModalComponent } from './filter-modal/filter-modal.component';
 import { AlertModalComponent } from './alert-modal/alert-modal.component';
+import { HeaderNoSearchComponent } from './header-no-search/header-no-search.component';
 
 @NgModule({
   declarations: [
@@ -35,7 +36,8 @@ import { AlertModalComponent } from './alert-modal/alert-modal.component';
     SelectionModalComponent,
     SelectionInputComponent,
     FilterModalComponent,
-    AlertModalComponent
+    AlertModalComponent,
+    HeaderNoSearchComponent
   ],
   imports: [
     CommonModule,
@@ -58,7 +60,8 @@ import { AlertModalComponent } from './alert-modal/alert-modal.component';
     SelectionModalComponent,
     SelectionInputComponent,
     FilterModalComponent,
-    AlertModalComponent
+    AlertModalComponent,
+    HeaderNoSearchComponent
   ]
 })
 export class ComponentsModule { }
