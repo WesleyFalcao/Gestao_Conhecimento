@@ -16,6 +16,8 @@ import { TitleComponent } from './title/title.component';
 import { SelectionModalComponent } from './selection-modal/selection-modal.component';
 import { SelectionInputComponent } from './selection-input/selection-input.component';
 import { FilterModule } from '../pipes/filter/filter.module';
+import { FilterModalComponent } from './filter-modal/filter-modal.component';
+import { AlertModalComponent } from './alert-modal/alert-modal.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +33,9 @@ import { FilterModule } from '../pipes/filter/filter.module';
     VersionComponent,
     PopoverComponent,
     SelectionModalComponent,
-    SelectionInputComponent
+    SelectionInputComponent,
+    FilterModalComponent,
+    AlertModalComponent
   ],
   imports: [
     CommonModule,
@@ -52,7 +56,9 @@ import { FilterModule } from '../pipes/filter/filter.module';
     TitleComponent,
     VersionComponent,
     SelectionModalComponent,
-    SelectionInputComponent
+    SelectionInputComponent,
+    FilterModalComponent,
+    AlertModalComponent
   ]
 })
 export class ComponentsModule { }

@@ -1,0 +1,12 @@
+<div *ngIf="b_Show_Alert_Modal">
+    <div class="div-modal-sobreposicao" (click)="Modal_Closed()">
+    </div>
+    <div class="div-modal-excluir p-2 pb-4 md:p-4">
+        <h2 class="text-center mx-auto lg:text-xl mb-5 font-semibold text-unimed-green">Atenção!</h2>
+        <p class="text-center font-semibold">{{ds_Descricao}}</p>
+        <div class="flex flex-row mt-8 gap-x-4 mx-4">
+            <uni-button buttonClass="btn-primary">Confirmar</uni-button>
+            <uni-button buttonClass="btn-outline" (click)="Modal_Closed()">Voltar</uni-button>
+        </div>
+    </div>
+</div>

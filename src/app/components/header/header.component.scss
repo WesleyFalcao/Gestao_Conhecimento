@@ -84,11 +84,17 @@
 
 .div-aling-popover{
     margin-left: 0.8rem;
+    @media (min-width: 1280px) {
+        margin-left: -1.2rem;
+    }
     @media (min-width: 1536px) {
-        margin-left: -0.3rem;
+        margin-left: -2.5rem;
     }
     @media (min-width: 1636px) {
-       
+        margin-left: -3.2rem;
+    }
+    @media (min-width: 1736px) {
+        margin-left: -2.2rem;
     }
 }
 
@@ -115,7 +121,7 @@
     border-left: 15px solid transparent;
     border-right: 15px solid transparent;
     border-top: 15px solid #B1D34B;
-    border-top-color: rgb(191, 18, 18);
+    border-top-color: rgb(207, 207, 207);
 }
 
 .behavior-button{

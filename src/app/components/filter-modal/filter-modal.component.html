@@ -1,0 +1,23 @@
+<div *ngIf="b_Show_Modal">
+    <div class="div-modal-sobreposicao" (click)="Modal_Closed()">
+    </div>
+    <div class="div-modal-filter p-2 pb-4 md:p-4">
+        <div class="grid grid-cols-2">
+            <div class="flex flex-col relative left-2 lg:left-2 pb-4 lg:ml-2.5 -mt-4">
+                <uni-title [ds_Titulo]="ds_Titulo"></uni-title>
+            </div>
+            <img class="behavior-button w-5 h-4 mt-1 absolute right-5 lg:right-8 top-8 cursor-pointer" src="assets/icons/X.svg" (click)="Modal_Closed()">
+        </div>
+        <div class="flex flex-col gap-y-2">
+            <app-input [nm_Label_Input]="nm_Label_Input_1"></app-input>
+            <app-input [nm_Label_Input]="nm_Label_Input_2"></app-input>
+            <div *ngIf="nm_Label_Input_3 != null">
+                <app-input [nm_Label_Input]="nm_Label_Input_3"></app-input>
+            </div>
+        </div>
+        <div class="flex flex-row mt-4 gap-x-4 mx-4"> 
+            <uni-button buttonClass="btn-outline" (click)="Modal_Closed()">Voltar</uni-button>
+            <uni-button buttonClass="btn-primary">Filtrar</uni-button>
+        </div>
+    </div>
+</div>

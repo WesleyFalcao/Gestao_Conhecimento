@@ -62,6 +62,8 @@ export class ConteudoEditarComponent implements OnInit {
       nm_Subtitulo: "subtitulos"
     },
   ]
+  /**@description nome do Label do selection input */
+  nm_Label_Selection_Input: string = "Grupos"
   
   constructor() { }
 

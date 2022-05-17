@@ -1,6 +1,6 @@
 <div class="input input-select" (click)="b_Show_Modal = true">
     <input class="input-borda" type="text" [ngClass]="control.touched ? 'ng-touched' : ''" readonly [ngModel]="value?.nm_Nome" [formControl]="control_Aux">
-    <label>grupo</label>
+    <label>{{nm_Label_Selection_Input}}</label>
 
     <div *ngIf="control_Aux.value && control.enabled" class="div-close" (click)="Remover_Valor($event)">
         <img class="w-3 h-3" src="assets/icons/X.svg">

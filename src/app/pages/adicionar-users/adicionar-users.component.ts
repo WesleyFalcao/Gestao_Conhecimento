@@ -7,13 +7,51 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AdicionarUsersComponent implements OnInit {
 
-  nm_Label_Input: string = "Nome do usuário"
+  objArrayPerfil = [
+    {
+      nm_Nome: "Padrão"
+    },
+    {
+      nm_Nome: "Administrador"
+    }
+  ]
+  objArrayAtivo = [
+    {
+      nm_Nome: "Ativo"
+    },
+    {
+      nm_Nome: "Inativo"
+    }
+  ]
+  objArrayUsuarioComputador = [
+    {
+      nm_Nome: "Sim"
+    },
+    {
+      nm_Nome: "Não"
+    }
+  ]
 
-  nm_Label_Perfil: string = "Nome do usuário"
+  /**@description Nome do label do selection input */
+  nm_Label_Selection_Input_Perfil: string = "Perfil"
 
-  nm_Label_Ativo: string = "Nome do usuário"
+  /**@description Nome do label do selection input */
+  nm_Label_Selection_Input_Ativo: string = "Status"
+
+  /**@description Nome do label do selection input */
+  nm_Label_Selection_Input_Usuario: string = "Logar com usuário do computador?"
+
+  /**@description Nome do label do selection input */
+  ds_Titulo: string = "Adicionar Usuário"
+
+  /**@description Nome do label do input */
+  nm_Label_Input_Nome: string = "Nome"
+
+  /**@description Nome do label do input */
+  nm_Label_Input_Usuario: string = "Nome de usuário"
   
-  nm_Label_Logar: string = "Nome do usuário"
+ /**@description Nome do label do input */
+  nm_Label_Input_Senha: string = "Senha"
 
   constructor() { }
 

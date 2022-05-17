@@ -9,32 +9,36 @@ header{
 
 .div-modal{
     
-    width: 20rem;
+    width: 10rem;
     height: calc(70% - 40px);
     top: calc(50% - 15rem);
 
     @apply fixed bg-white my-auto z-30 overflow-y-auto align-middle rounded-sm transform -translate-x-1/2 left-1/2;
 
+    @media (min-width: 153px) {
+        width: 19rem;
+        top:calc(50% - 14rem);
+    }
+
     @media (min-width: 720px) {
         width: 29rem;
         top: calc(50% - 26rem);
     }
-    @media (min-width: 1200px) {
-        width: 26rem;
-        top:calc(50% - 20rem);
+    
+    @media (min-width: 1024px) {
+        width: 29rem;
+        top: calc(50% - 12rem);
     }
-    @media (min-width: 153px) {
+
+    @media (min-width: 1200px) {
         width: 26rem;
         top:calc(50% - 14rem);
     }
+
     @media (min-width: 1636px) {
         width: 26rem;
         top:calc(50% - 20rem);
     }
-}
-
-.line-after{
-    
 }
 
 .input-search {

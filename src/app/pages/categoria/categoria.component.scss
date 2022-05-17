@@ -25,7 +25,7 @@
 }
 
 .div-grid-title-add{
-    @apply grid grid-cols-4;
+    @apply grid grid-cols-2;
     grid-template-areas: 
         "title space space add"
     ;

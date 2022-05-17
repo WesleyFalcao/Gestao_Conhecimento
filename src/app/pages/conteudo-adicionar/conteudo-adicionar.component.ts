@@ -63,6 +63,8 @@ export class ConteudoAdicionarComponent implements OnInit {
     },
   ]
 
+  nm_Label_Selection_Input: string = "Grupo"
+
   /**@description Nome do label do primeiro campo de imput*/
   nm_Titulo_Input: string = "Título"
 

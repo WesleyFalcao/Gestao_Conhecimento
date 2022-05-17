@@ -28,6 +28,8 @@ export class SugestoesComponent implements OnInit {
   /**@description Number que vai receber o total de sugestões */
   nr_Total_Sugestoes: number = 20
 
+  ds_Titulo: string = "Sugestões"
+
   constructor() { }
 
   ngOnInit(): void {

@@ -2,23 +2,24 @@
 
 <div class="container">
 
-    <div class="grid grid-cols-2 pl-14 xl:mt-8 items-end">
-        <div class="calc-width relative flex flex-col mt-10 text-sm">
-            <p class="text-lg font-semibold text-unimed-darkgray md:text-base xl:font-semibold xl:text-lg">
-                Sugestões</p>
-                <div class="w-5 h-1 bg-unimed-pink rounded-full relative"></div>
-            </div>
-            <div class="flex flex-row relative gap-8 md:gap-12 lg:gap-16 mr-16 justify-self-end">
+    <div class="grid grid-cols-2 pl-14 xl:mt-8 items-center">
+        <div class="calc-width relative flex flex-col text-sm">
+            <uni-title [ds_Titulo]="ds_Titulo"></uni-title>
+        </div>
+        <div class="flex flex-row relative gap-8 md:gap-12 lg:gap-16 mr-16 justify-self-end">
             <div class="absolute div-aling-popover z-20">
                 <app-popover [nm_Opcao_top]="nm_Opcao_top" [nm_Opcao_bottom]="nm_Opcao_bottom"
                     [b_Rotate_Triangle]="b_Rotate_Triangle" [b_Show_Popover]="b_Show_Popover"></app-popover>
             </div>
-            <img class="behavior-button img-width-information relative w-6 h-6 xl:w-8 xl:h-8 cursor-pointer" src="assets/icons/information.svg" (click)="b_Show_Popover = !b_Show_Popover">
-            <img class="behavior-button relative w-6 h-6 xl:w-7 xl:h-8 cursor-pointer" src="assets/icons/check-list.svg">
+            <img class="behavior-button img-width-information relative w-6 h-6 cursor-pointer"
+                src="assets/icons/information.svg" (click)="b_Show_Popover = !b_Show_Popover">
+            <img class="behavior-button relative my-auto w-6 h-6 xl:w-7 xl:h-7 cursor-pointer"
+                src="assets/icons/check-list.svg">
         </div>
     </div>
 
-    <div class="grid grid-cols-1 lg:grid-cols-2 relative top-8 md:top-12 lg:gap-x-12 gap-y-10 w-full pb-10 px-12 md:px-16">
+    <div
+        class="grid grid-cols-1 lg:grid-cols-2 relative top-8 md:top-12 lg:gap-x-12 gap-y-6 md:gap-y-10 w-full pb-10 px-12 md:px-16">
         <div
             class="h-52 3xl:h-64 inline-block relative rounded-lg bg-unimed-background shadow-lg mx-auto border-l-8 border-l-unimed-green {{b_Okay? 'div-hidden-card':''}}">
             <div class="div-aling-item-card h-12">

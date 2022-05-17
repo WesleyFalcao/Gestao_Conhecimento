@@ -40,15 +40,15 @@
                         <span class="text-sm">Usuários</span>
                     </div>
                     <div class="relative mt-3 flex flex-row gap-x-3 cursor-pointer behavior-button"
-                        routerLink="/conteudo-adicionar">
-                        <img class="w-4 h-4" src="assets/icons/more.svg">
-                        <span class="text-sm">Conteúdo</span>
+                        routerLink="/conteudo-editar-lista">
+                        <img class="w-4 h-4" src="assets/icons/list-contents.svg">
+                        <span class="text-sm">Conteúdos</span>
                     </div>
                     <div class="relative mt-3 flex flex-row gap-x-3 cursor-pointer behavior-button"
                         routerLink="/categorias">
                         <img class="w-4 h-4" src="assets/icons/category.svg">
                         <span class="text-sm">Categorias</span>
-                    </div>
+                    </div>      
                 </div>
             </div>
 
@@ -66,6 +66,14 @@
                     <img class="img-width-contents my-1 xl:my-0 3xl:w-7 3xl:h-7 xl:mx-auto"
                         src="assets/icons/more-green.svg">
                     <p class="text-xs md:text-lg xl:text-xs my-auto pl-0.5 xl:my-0 xl:pl-0">Conteúdo</p>
+                </div>
+            </div>
+            <div class="{{b_Show_Modal && b_User_Admin?'flex':'hidden'}}">
+                <div class="flex flex-row xl:flex-col xl:text-center xl:justify-center 3xl:mt-1 cursor-pointer iten-behavior {{b_Show_Input_Desktop?'flex flex-row': ''}}"
+                    routerLink="/conteudo-editar-lista">
+                    <img class="img-width-category my-1 xl:my-0 3xl:w-7 3xl:h-7 xl:mx-auto"
+                        src="assets/icons/list-contents-green.svg">
+                    <p class="text-xs md:text-lg xl:text-xs my-auto pl-0.5 xl:my-0 xl:pl-0">Lista de conteúdos</p>
                 </div>
             </div>
             <div class="{{b_Show_Modal && b_User_Admin?'flex':'hidden'}}">

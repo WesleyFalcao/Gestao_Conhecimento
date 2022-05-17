@@ -1,0 +1,22 @@
+.div-modal-excluir{
+    width: calc(100% - 4rem);
+    top: calc(50% - 12rem);
+    @apply fixed bg-white my-auto z-30 rounded-xl transform -translate-x-1/2 left-1/2;
+
+    @media (min-width: 720px) {
+        width: calc(100% - 9rem);
+    }
+
+    @media (min-width: 1200px) {
+        width: calc(50% - 20rem);
+    }
+    @media (min-width: 1636px) {
+        width: calc(50% - 26rem);
+    }
+}
+
+.div-modal-sobreposicao{
+    @apply fixed inset-0 z-20 bg-black opacity-70 cursor-pointer;
+}
+
+

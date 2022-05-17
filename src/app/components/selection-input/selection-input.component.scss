@@ -1,31 +1,11 @@
-.div-close {
-    position: absolute;
-    right: 45px;
-    top: 17px;
-    cursor: pointer;
-    z-index: 10;
-
-    img {
-        width: 25px;
-        margin-top: 8px;
-    }
-}
-
-.input-borda:hover{
-    
-    transition: .280s; 
-}
 
 .input {
     position: relative;
     background-color: transparent;
     border-radius: 3px;
-    padding-top: 15px;
+    padding-top: 10px;
     margin-left: 10px;
-
-    @media (min-width: 1024px) {
-        padding-top: 5px;
-    }
+    margin-bottom: 16px;
 
     label {
         position: absolute;
@@ -152,9 +132,9 @@
         background: transparent;
         width: 100%;
         outline: none;
-        border-bottom: 1px #818181 solid;
-        border-left: 1px #818181 solid;
-        border-right: 1px #818181 solid;
+        border-bottom: 1px #d1d1d1 solid;
+        border-left: 1px #d1d1d1 solid;
+        border-right: 1px #d1d1d1 solid;
         border-top: none;
         transition-duration: 280ms;
         border-radius: 3px;
@@ -319,3 +299,19 @@
     }
 }
 
+.div-close {
+    position: absolute;
+    right: 45px;
+    top: 17px;
+    cursor: pointer;
+    z-index: 10;
+
+    img {
+        width: 25px;
+        margin-top: 8px;
+    }
+}
+
+.input-borda:hover{
+    transition: .280s; 
+}

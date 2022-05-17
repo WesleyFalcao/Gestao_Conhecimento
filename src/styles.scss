@@ -70,3 +70,10 @@ h5,
 h6 {
     font-weight: bold;
 }
+
+.behavior-button{
+    &:active {
+        transform: scale(0.92);
+        transition-duration: 280ms;
+    }
+}

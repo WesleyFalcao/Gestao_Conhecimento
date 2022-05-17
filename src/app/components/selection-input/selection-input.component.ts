@@ -10,11 +10,12 @@ import { SubjectService } from 'src/app/services/subject.service';
 export class SelectionInputComponent implements OnInit {
 
   /** @description Label do Input */
-  @Input() label: string
+  @Input() nm_Label_Selection_Input: string
 
   /** @description FormControl do Campo */
   @Input() control = new FormControl()
 
+  /** @description Array que recebe a listagem */
   @Input() objArrayList
 
   /** @description FormControl auxiliar */

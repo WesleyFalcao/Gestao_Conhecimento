@@ -1,19 +1,32 @@
 .h2-titulo {
-    color: var(--laranja-unimed);
-    font-weight: 500;
-    margin-bottom: 8px;
-    line-height: var(--font-size-large);
-    font-size: 19px;
+    @apply text-base;
+    margin-bottom: 2px;
+    color: var(--marrom-unimed);
+    font-weight: 600;
 
-    @media (min-width: 720px) {
-        font-size: var(--font-size-large);
+    @media (min-width: 768px) { 
+        margin-bottom: 4px;
+        line-height: var(--font-size-large);
+    }
+
+    @media (min-width: 1024px){
+        font-size: 17px;
+    }
+    @media (min-width: 1200px) {
+        font-size: 19px;
     }
 }
 
 .div-separator {
-    width: 30px;
-    height: 3px;
+    @apply w-5;
+    height: 1px;
     border: 3px solid var(--rosa-unimed);
+    background-color: var(--rosa-unimed);
     border-radius: 5px;
     margin-bottom: 24px;
+
+    @media (min-width: 768px) {   
+        width: 24px;
+        height: 3px;    
+    }
 }

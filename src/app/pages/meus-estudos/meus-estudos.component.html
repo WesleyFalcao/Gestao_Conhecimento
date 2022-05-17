@@ -1,20 +1,33 @@
 <app-header></app-header>
 
-<div class="container">
-    <div class="pl-12 xl:mt-8 md:pl-28">
-        <div class="calc-width relative flex flex-col mt-10 text-sm">
-            <p class="text-lg font-semibold text-unimed-darkgray md:text-base xl:font-semibold xl:text-xl">
-                Meus estudos</p>
-            <div class="w-5 h-1 bg-unimed-pink rounded-full relative"></div>
+<div class="container relative top-6 lg:top-14 px-12">
+    <div class="grid grid-cols-2">
+        <div class="flex flex-col relative ">
+            <uni-title [ds_Titulo]="ds_Titulo"></uni-title>
+        </div>
+        <div class="absolute div-aling-popover z-20">
+            <app-popover [nm_Svg_Top]="nm_Filter_Svg_Top" [nm_Svg_Bottom]="nm_Filter_Svg_Bottom"
+                [nm_Opcao_top]="nm_Filter_Opcao_top" [nm_Opcao_bottom]="nm_Filter_Opcao_bottom"
+                [b_Rotate_Triangle]="b_Filter_Rotate_Triangle" [b_Show_Popover]="b_Filter_Show_Popover"
+                (onClick_Option_Top)="onFilter_Popover($event)"></app-popover>
+        </div>
+        <div class="flex flex-row gap-6 lg:gap-10 my-auto justify-end relative right-1 xl:mr-4 cursor-pointer">
+            <img class="behavior-button w-5 h-5 md:w-7 md:h-7 2xl:w-6 2xl:h-6" src="assets/icons/more-options-user.svg"
+                routerLink="/conteudo-adicionar">
+            <img class="behavior-button w-5 h-5 md:w-7 md:h-7 2xl:w-6 2xl:h-6" src="assets/icons/filter.svg"
+                (click)="b_Filter_Show_Popover = !b_Filter_Show_Popover">
+            <img class="behavior-button w-6 h-6 md:w-8 md:h-8 2xl:w-7 2xl:h-7" src="assets/icons/refresh.svg">
         </div>
     </div>
-    <div class="grid grid-cols-1 lg:grid-cols-2 relative top-8 md:top-12 gap-y-8 w-full pb-10 px-7">
+    <div class="grid grid-cols-1 lg:grid-cols-2 relative top-4 md:top-6 gap-y-8 lg:gap-x-8 w-full pb-10">
         <div
             class="calc-width h-52 relative rounded-lg bg-unimed-white shadow-lg mx-auto border-l-8 border-l-unimed-green">
             <div class="absolute div-aling-popover">
                 <app-popover [nm_Svg_Top]="nm_Svg_Top" [nm_Svg_Bottom]="nm_Svg_Bottom" [nm_Opcao_top]="nm_Opcao_top"
                     [nm_Opcao_bottom]="nm_Opcao_bottom" [b_Rotate_Triangle]="b_Rotate_Triangle"
-                    [b_Show_Popover]="b_Show_Popover" (onClick_Option_Top)="onClick_Option_Top()" (onClick_Option_Bottom)="onClick_Option_Bottom($event)"></app-popover>
+                    [b_Show_Popover]="b_Show_Popover" (onClick_Option_Top)="onClick_Option_Top()"
+                    (onClick_Option_Bottom)="onClick_Option_Bottom($event)">
+                </app-popover>
             </div>
             <div class="div-aling-item-card h-12">
                 <p
@@ -42,7 +55,49 @@
                 ipsum dolor sit amet consectetur adipisicing elit. Eum dolorum nostrum aperiam ea repellat error
                 rem vel iure et eos maiores adipisci officiis autem repellendus esse, corporis cumque! Aut, unde.
             </p>
-            
+
+            <button
+                class="behavior-button w-32 h-10 absolute right-6 bottom-4 text-left pl-5 rounded-full bg-unimed-green text-unimed-white text-lg">
+                Acessar
+                <img class="w-4 h-4 absolute right-4 bottom-3" src="assets/icons/arrow-right-white.svg">
+            </button>
+        </div>
+        <div
+            class="calc-width h-52 relative rounded-lg bg-unimed-white shadow-lg mx-auto border-l-8 border-l-unimed-green">
+            <div class="absolute div-aling-popover">
+                <app-popover [nm_Svg_Top]="nm_Svg_Top" [nm_Svg_Bottom]="nm_Svg_Bottom" [nm_Opcao_top]="nm_Opcao_top"
+                    [nm_Opcao_bottom]="nm_Opcao_bottom" [b_Rotate_Triangle]="b_Rotate_Triangle"
+                    [b_Show_Popover]="b_Show_Popover" (onClick_Option_Top)="onClick_Option_Top()"
+                    (onClick_Option_Bottom)="onClick_Option_Bottom($event)">
+                </app-popover>
+            </div>
+            <div class="div-aling-item-card h-12">
+                <p
+                    class="my-auto font-semibold text-lg md:font-semibold pl-4 text-ellipsis w-60 whitespace-nowrap overflow-hidden text-unimed-darkgray">
+                    O mundo é lindo
+                </p>
+                <div class="grid grid-cols-2 cursor-pointer absolute mt-4 gap-x-5 md:gap-x-6 right-3 md:right-6 lg:right-8"
+                    *ngIf="b_User_Admin, else svgiten">
+                    <img class="w-5 h-5 behavior-button cursor-pointer -mt-1" src="{{nm_Start}}" (click)="Start_Svg()">
+                    <div class="lg:w-10 relative mx-auto" (click)="b_Show_Popover = !b_Show_Popover">
+                        <img class="behavior-button cursor-pointer mx-auto" src="assets/icons/filter-three-points.svg">
+                    </div>
+                </div>
+                <ng-template #svgiten>
+                    <img class="w-5 h-5 behavior-button cursor-pointer absolute right-6 lg:right-10 mt-4"
+                        src="{{nm_Start}}" (click)="Start_Svg()">
+                </ng-template>
+            </div>
+            <p
+                class="p-rows pt-2 my-auto font-medium xl:text-base pl-4 text-ellipsis whitespace-normal overflow-hidden">
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Eum dolorum nostrum aperiam ea repellat error
+                rem vel iure et eos maiores adipisci officiis autem repellendus esse, corporis cumque! Aut, unde.Lorem
+                ipsum dolor sit amet consectetur adipisicing elit. Eum dolorum nostrum aperiam ea repellat error
+                rem vel iure et eos maiores adipisci officiis autem repellendus esse, corporis cumque! Aut, unde.Lorem
+                ipsum dolor sit amet consectetur adipisicing elit. Eum dolorum nostrum aperiam ea repellat error
+                rem vel iure et eos maiores adipisci officiis autem repellendus esse, corporis cumque! Aut, unde.
+            </p>
+
             <button
                 class="behavior-button w-32 h-10 absolute right-6 bottom-4 text-left pl-5 rounded-full bg-unimed-green text-unimed-white text-lg">
                 Acessar
@@ -50,28 +105,9 @@
             </button>
         </div>
     </div>
-    <div *ngIf="b_Show_Modal">
-        <div class="div-modal-sobreposicao" (click)="b_Show_Modal = false; b_Show_Popover = !b_Show_Popover">
-        </div>
-        <div class="div-modal-excluir p-4">
-            <div class="grid grid-cols-2">
-                <div class="flex flex-col relative left-2 lg:left-2 pb-4 lg:pb-8 lg:ml-2.5">
-                    <p class="relative text-base lg:text-lg font-semibold text-unimed-darkgray md:text-base">
-                        Excluir</p>
-                    <div class="w-5 h-1 bg-unimed-pink rounded-full relative"></div>
-                </div>
-                <img class="w-7 h-7 mt-1 absolute right-5 cursor-pointer" src="assets/icons/X.svg"
-                    (click)="b_Show_Modal = false; b_Show_Popover = !b_Show_Popover">
-            </div>
-            <div class="flex flex-col">
-                <span class="">Tem certeza que deseja excluir esse conteúdo?</span>
+    <app-filter-modal [b_Show_Modal]="b_Filter_Show_Modal" (b_Closed_Modal)="Closed_Modal($event)"
+        [ds_Titulo]="ds_Titulo_Filter" [nm_Label_Input_1]="nm_Label_Input_1" [nm_Label_Input_2]="nm_Label_Input_2">
+    </app-filter-modal>
 
-                <uni-button buttonClass="btn-primary">Salvar</uni-button>
-                <button
-                    class="w-32 h-10 md:w-44 mt-4 md:h-12 relative mx-auto rounded-xl bg-unimed-pink text-unimed-background text-lg">
-                    Excluir
-                </button>
-            </div>
-        </div>
-    </div>
+    <alert-modal [ds_Descricao]="ds_Descricao" [b_Show_Alert_Modal]="b_Confirmation_Show_Modal" (b_Closed_Alert_Modal)="Closed_Alert_Modal()"></alert-modal>
 </div>

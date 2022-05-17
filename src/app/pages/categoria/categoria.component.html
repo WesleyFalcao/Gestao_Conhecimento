@@ -1,32 +1,39 @@
 <app-header></app-header>
 
-<div class="container relative top-12 lg:top-24 px-10">
+<div class="container relative top-6 lg:top-14 px-12">
     <div class="div-grid-title-add">
         <div class="div-title flex flex-col relative left-2 lg:left-2 lg:ml-2.5">
-            <p class="relative text-base lg:text-xl font-semibold text-unimed-darkgray md:text-base">
-                Categorias</p>
-            <div class="w-5 h-1 bg-unimed-pink rounded-full relative"></div>
+            <uni-title [ds_Titulo]="ds_Titulo"></uni-title>
         </div>
-        <div class="behavior-button mx-auto div-add items-end relative cursor-pointer" routerLink="/categoria-adicionar">
-            <img class="w-5 h-5 lg:w-6 lg:h-6" src="assets/icons/more-options-user.svg">
+        <div class="absolute div-aling-popover z-20">
+            <app-popover [nm_Svg_Top]="nm_Svg_Top" [nm_Svg_Bottom]="nm_Svg_Bottom" [nm_Opcao_top]="nm_Opcao_top"
+                [nm_Opcao_bottom]="nm_Opcao_bottom" [b_Rotate_Triangle]="b_Rotate_Triangle" [b_Show_Popover]="b_Show_Popover" (onClick_Option_Top)="onFilter_Popover($event)"></app-popover>
+        </div>
+        <div class="flex flex-row gap-6 lg:gap-10 my-auto justify-end relative right-1 xl:mr-4 cursor-pointer">
+            <img class="behavior-button w-5 h-5 md:w-7 md:h-7 2xl:w-6 2xl:h-6" src="assets/icons/more-options-user.svg" routerLink="/categoria-adicionar">
+            <img class="behavior-button w-5 h-5 md:w-7 md:h-7 2xl:w-6 2xl:h-6" src="assets/icons/filter.svg" (click)="b_Show_Popover = !b_Show_Popover">
+            <img class="behavior-button w-6 h-6 md:w-8 md:h-8 2xl:w-7 2xl:h-7" src="assets/icons/refresh.svg">
         </div>
     </div>
-    <div class="hidden div-grid-itens mt-14 lg:grid grid-cols-3">
+    <div class="hidden div-grid-itens mt-8 lg:grid grid-cols-3">
         <p class="lg:text-left font-semibold lg:ml-10">ID</p>
-        <p class="font-semibold text-center lg:text-left lg:ml-12 lg:grid">Nome</p>
+        <p class="font-semibold text-center lg:text-center lg:grid">Nome</p>
         <p class="lg:text-center font-semibold">Editar</p>
         <p></p>
     </div>
-    <div class="top-8 relative flex flex-col gap-y-4" *ngFor="let iten of objArrayTeste">
+    <div class="top-6 relative flex flex-col gap-y-4" *ngFor="let iten of objArrayTeste">
 
-        <div class="rounded-lg mb-2 shadow-xl lg:h-14 w-full bg-unimed-background hover:bg-slate-200">
+        <div class="rounded-lg mb-2 shadow-xl lg:h-14 w-full bg-white hover:bg-slate-100">
 
             <div class="lg:mb-0 grid grid-cols-3 div-grid-itens">
                 <p class="text-center my-auto lg:text-left lg:ml-10 lg:my-5">{{iten.id}}</p>
-                <p class="my-3 mx-auto text-center lg:text-left w-10/12 truncate lg:my-5">{{iten.nome}}</p>
+                <p class="my-3 mx-auto text-center lg:text-center w-10/12 truncate lg:my-5">{{iten.nome}}</p>
                 <img class="relative mx-auto behavior-button lg:w-5 lg:h-5 lg:my-5 my-auto cursor-pointer"
                     src="assets/icons/edit.svg" routerLink="/categoria-editar">
             </div>
         </div>
     </div>
 </div>
+
+<app-filter-modal [b_Show_Modal]="b_Show_Modal" (b_Closed_Modal)="Closed_Modal($event)" [ds_Titulo]="ds_Titulo_Filter"
+    [nm_Label_Input_1]="nm_Label_Input_1" [nm_Label_Input_2]="nm_Label_Input_2"></app-filter-modal>

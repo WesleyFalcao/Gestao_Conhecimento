@@ -1,6 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
 
-
 @Component({
     selector: 'uni-title',
     templateUrl: './title.component.html',
