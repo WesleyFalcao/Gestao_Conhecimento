@@ -20,5 +20,8 @@ export class SubjectService {
     subject_Exibindo_Loading = new BehaviorSubject(false);
 
     /**@description Subject para alteração na largura da tela */
-    subject_Width = new BehaviorSubject(0); 
+    subject_Width = new BehaviorSubject(0);
+
+    /** @description Subject que controla o Appbar */
+    subject_Exibir_Not_Found = new BehaviorSubject(false);
 }

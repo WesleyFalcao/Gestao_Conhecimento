@@ -19,6 +19,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { ConteudoEditarListaComponent } from './conteudo-editar-lista/conteudo-editar-lista.component';
 import { SugestoesListaComponent } from './sugestoes-lista/sugestoes-lista.component';
+import { FilterModule } from '../pipes/filtros/filter.module';
 
 @NgModule({
   declarations: [
@@ -44,7 +45,8 @@ import { SugestoesListaComponent } from './sugestoes-lista/sugestoes-lista.compo
     ComponentsModule,
     FormsModule,
     ReactiveFormsModule,
-    RouterModule
+    RouterModule,
+    FilterModule
   ],
   exports:[
     AdicionarGrupoComponent,

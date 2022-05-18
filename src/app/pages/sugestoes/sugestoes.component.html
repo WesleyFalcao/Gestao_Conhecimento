@@ -5,13 +5,6 @@
         <div class="pl-14 lg:pl-16 relative flex flex-col text-sm">
             <uni-title [ds_Titulo]="ds_Titulo"></uni-title>
         </div>
-        <div class="absolute div-aling-popover_filter z-20">
-            <app-popover [nm_Svg_Top]="nm_Filter_Svg_Top" [nm_Svg_Bottom]="nm_Filter_Svg_Bottom"
-                [nm_Opcao_top]="nm_Filter_Opcao_top" [nm_Opcao_bottom]="nm_Filter_Opcao_bottom"
-                [b_Rotate_Triangle]="b_Filter_Rotate_Triangle" [b_Show_Popover]="b_Filter_Show_Popover"
-                (onClick_Option_Top)="onFilter_Popover($event)">
-            </app-popover>
-        </div>
         <div class="flex flex-row relative gap-8 md:gap-12 lg:gap-16 mr-16 justify-self-end">
 
             <div class="flex flex-row gap-6 lg:gap-10 my-auto justify-end relative right-1 xl:mr-4 cursor-pointer">
@@ -20,34 +13,41 @@
                 <img class="behavior-button img-width-information relative w-5 h-5 md:w-6 md:h-6 cursor-pointer"
                     src="assets/icons/list-okay.svg"
                     (click)="b_Show_Popover_Feitos = !b_Show_Popover_Feitos; b_Filter_Show_Popover = false">
-                <img class="hidden md:flex behavior-button w-6 h-6 md:w-7 md:h-7"
-                    src="assets/icons/refresh.svg">
+                <img class="hidden md:flex behavior-button w-6 h-6 md:w-7 md:h-7" src="assets/icons/refresh.svg">
                 <img class="behavior-button w-5 h-5 md:w-6 md:h-6 md:mt-1" src="assets/icons/filter.svg"
                     (click)="b_Filter_Show_Popover = !b_Filter_Show_Popover; b_Show_Popover_Feitos = false">
             </div>
         </div>
     </div>
-    <div class="mt-20 div-aling-popover_sugestoes z-20 -ml-4 {{b_Show_Popover_Feitos? 'absolute':'hidden'}}">
-        <div class="div-triangulo mx-auto rotate-180">
-        </div>
-        <div class="shadow-lg p-3 gap-y-1 lg:flex w-max box-border flex-col bg-white rounded-lg">
-            <div class="relative mt-1 mb-2 flex flex-row gap-x-3 cursor-pointer behavior-button"
-                routerLink="/sugestoes-lista">
-                <img class="w-4 h-4" src="assets/icons/list-contents.svg">
-                <span class="text-sm">Sugestões arquivadas</span>
-            </div>
-            <div class="relative mt-1 flex flex-row gap-x-3 cursor-pointer behavior-button">
-                <span class="text-sm">Minhas sugestões: {{nr_Minhas_Sugestoes}}</span>
-            </div>
-            <div class="relative mt-3 flex flex-row gap-x-3 cursor-pointer behavior-button">
-                <span class="text-sm">Total de sugestões: {{nr_Total_Sugestoes}}</span>
-            </div>
-        </div>
-    </div>
+
     <div
         class="grid grid-cols-1 lg:grid-cols-2 relative top-6 gap-y-6 md:gap-y-10 w-full pb-10 px-12 md:px-16  lg:gap-x-10 lg:top-6">
+        <div class="mt-20 div-aling-popover_sugestoes z-20 -ml-4 {{b_Show_Popover_Feitos? 'absolute':'hidden'}}">
+            <div class="div-triangulo mx-auto rotate-180">
+            </div>
+            <div class="shadow-lg p-3 gap-y-1 lg:flex w-max box-border flex-col bg-white rounded-lg">
+                <div class="relative mt-1 mb-2 flex flex-row gap-x-3 cursor-pointer behavior-button"
+                    routerLink="/sugestoes-lista">
+                    <img class="w-4 h-4" src="assets/icons/list-contents.svg">
+                    <span class="text-sm">Sugestões arquivadas</span>
+                </div>
+                <div class="relative mt-1 flex flex-row gap-x-3 cursor-pointer behavior-button">
+                    <span class="text-sm">Minhas sugestões: {{nr_Minhas_Sugestoes}}</span>
+                </div>
+                <div class="relative mt-3 flex flex-row gap-x-3 cursor-pointer behavior-button">
+                    <span class="text-sm">Total de sugestões: {{nr_Total_Sugestoes}}</span>
+                </div>
+            </div>
+        </div>
+        <div class="absolute div-aling-popover_filter z-20">
+            <app-popover [nm_Svg_Top]="nm_Filter_Svg_Top" [nm_Svg_Bottom]="nm_Filter_Svg_Bottom"
+                [nm_Opcao_top]="nm_Filter_Opcao_top" [nm_Opcao_bottom]="nm_Filter_Opcao_bottom"
+                [b_Rotate_Triangle]="b_Filter_Rotate_Triangle" [b_Show_Popover]="b_Filter_Show_Popover"
+                (onClick_Option_Top)="onFilter_Popover($event)">
+            </app-popover>
+        </div>
         <div
-            class="h-52 3xl:h-64 inline-block relative rounded-lg bg-unimed-white shadow-lg mx-auto border-l-8 border-l-unimed-green {{b_Okay? 'div-hidden-card':''}}">
+            class="h-52 inline-block relative rounded-lg bg-unimed-white shadow-lg mx-auto border-l-8 border-l-unimed-green {{b_Okay? 'div-hidden-card':''}}">
             <div class="div-aling-item-card h-12">
                 <p
                     class="my-auto font-semibold text-lg md:font-semibold pl-4 text-ellipsis w-60 whitespace-nowrap overflow-hidden text-unimed-darkgray">
@@ -72,7 +72,7 @@
             </p>
         </div>
         <div
-            class="h-52 3xl:h-64 inline-block relative rounded-lg bg-white shadow-lg mx-auto border-l-8 border-l-unimed-green {{b_Okay? 'div-hidden-card':''}}">
+            class="h-52 inline-block relative rounded-lg bg-white shadow-lg mx-auto border-l-8 border-l-unimed-green {{b_Okay? 'div-hidden-card':''}}">
             <div class="div-aling-item-card h-12">
                 <p
                     class="my-auto font-semibold text-lg md:font-semibold pl-4 text-ellipsis w-60 whitespace-nowrap overflow-hidden text-unimed-darkgray">

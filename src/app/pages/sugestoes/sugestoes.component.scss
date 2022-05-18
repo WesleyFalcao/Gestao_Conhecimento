@@ -29,7 +29,7 @@
     border-left: 15px solid transparent;
     border-right: 15px solid transparent;
     border-top: 15px solid #B1D34B;
-    border-top-color: rgb(207, 207, 207);
+    border-top-color: rgb(243, 242, 242);
 }
 
 .div-hidden-card{
@@ -60,58 +60,47 @@
     }
 }
 
-
-.div-aling-popover {
-    left: calc(100% - 10rem);
-    top: calc(100% - -0.5rem);
-
-    @media (min-width: 768px) {
-        left: calc(100% - 11rem);
-    }
-    @media (min-width: 1024px) {
-        left: calc(100% - 12.2rem);
-    }
-    @media (min-width: 1200px) {
-        left: calc(100% - 12.8rem);
-    }
-}
-
 .div-aling-popover_filter{
 
-    left: calc(100% - 9.6rem);
-    top: calc(50% - 13rem);
+    left: calc(100% - 9.3rem);
+    top: calc(50% - 18rem);
 
     @media (min-width: 768px) {
-        left: calc(100% - 14rem);
-        top: calc(50% - 26rem);
+        left: calc(100% - 9.5rem);
+        top: calc(50% - 18.3rem);
     }
     @media (min-width: 1024px) {
-        left: calc(100% - 15rem);
-        top: calc(50% - 8.3rem);
+        left: calc(100% - 9.5rem);
+        top: calc(50% - 10.5rem);
     }
     @media (min-width: 1200px) {
         left: calc(100% - 17.3rem);
         top: calc(50% - 11.3rem);
+    }
+    @media (min-width: 1280px) {
+        left: calc(100% - 10.4rem);
+        top: calc(50% - 10.7rem);
     }
 }
 
 .div-aling-popover_sugestoes{
     
     left: calc(100% - 13.1rem);
-    top: calc(50% - 18rem);
+    top: calc(50% - 23rem);
 
     @media (min-width: 768px) {
-        left: calc(100% - 21.5rem);
-        top: calc(50% - 31rem);
+        left: calc(100% - 16.8rem);
+        top: calc(50% - 23.5rem);
     }
     @media (min-width: 1024px) {
-        left: calc(100% - 24.3rem);
-        top: calc(50% - 13.3rem);
+        left: calc(100% - 18.8rem);
+        top: calc(50% - 15.6rem);
     }
-    @media (min-width: 1200px) {
-        left: calc(100% - 26.6rem);
-        top: calc(50% - 16.3rem);
-    } 
+    @media (min-width: 1280px) {
+        left: calc(100% - 19.7rem);
+        top: calc(50% - 15.7rem);
+    }
+    
 }
 
 .div-aling-item-card{

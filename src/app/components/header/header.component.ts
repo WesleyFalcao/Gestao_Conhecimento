@@ -1,8 +1,8 @@
 import { Location } from '@angular/common';
-import { Component, ElementRef, HostListener, Input, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, EventEmitter, HostListener, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { Router } from '@angular/router';
-import { Subject } from 'rxjs';
+import { debounceTime, distinctUntilChanged, Subject } from 'rxjs';
 
 @Component({
   selector: 'app-header',
@@ -11,6 +11,9 @@ import { Subject } from 'rxjs';
 })
 
 export class HeaderComponent implements OnInit {
+
+  /**@description Array que recebe o itens para serem filtrados */
+  @Input() obj_Array_Itens: any
 
   /**@description boolean para abrir ou fechar o popover */
   b_Show_Popover: boolean = false
@@ -42,8 +45,9 @@ export class HeaderComponent implements OnInit {
   /** @description Subject para destruir os subscribers */
   b_Show_Modal: boolean = false
 
-  @ViewChild('search') searchElement: ElementRef
-  @Input() control = new FormControl()
+  @Output() Input_Emit_Value = new EventEmitter()
+
+  modelChanged = new FormControl()
 
   constructor(
     private location: Location,
@@ -53,6 +57,11 @@ export class HeaderComponent implements OnInit {
 
   ngOnInit() {
     this.onResize()
+    this.modelChanged.valueChanges.pipe(debounceTime(500), distinctUntilChanged()).subscribe(async (input) => {
+      const input_value = input
+      this.Input_Emit_Value.emit(input_value)
+      console.log(input_value)
+    })
   }
 
   @HostListener('window:resize')

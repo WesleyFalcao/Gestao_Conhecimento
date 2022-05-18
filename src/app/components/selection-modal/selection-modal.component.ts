@@ -1,13 +1,11 @@
 import { Component, ElementRef, EventEmitter, Input, OnDestroy, OnInit, Output, ViewChild } from '@angular/core';
-import { Subject, takeUntil } from 'rxjs';
-import { SubjectService } from 'src/app/services/subject.service';
-
 
 @Component({
   selector: 'app-selection-modal',
   templateUrl: './selection-modal.component.html',
   styleUrls: ['./selection-modal.component.scss']
 })
+
 export class SelectionModalComponent implements OnInit {
 
   /** @description Array de Itens para listar */

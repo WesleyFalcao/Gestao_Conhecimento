@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { AnimationNothingFoundComponent } from './components/animation-nothing-found/animation-nothing-found.component';
 import { AdicionarGrupoComponent } from './pages/adicionar-grupo/adicionar-grupo.component';
 import { AdicionarUsersComponent } from './pages/adicionar-users/adicionar-users.component';
 import { CategoriaAdicionarComponent } from './pages/categoria-adicionar/categoria-adicionar.component';
@@ -40,6 +41,7 @@ const routes: Routes = [
   { path: 'categoria-adicionar', component: CategoriaAdicionarComponent },
   { path: 'grupo-adicionar', component: AdicionarGrupoComponent },
   { path: 'categoria-editar', component: CategoriaEditarComponent },
+  { path: 'animation-nothing-found', component: AnimationNothingFoundComponent },
 ];
 
 @NgModule({

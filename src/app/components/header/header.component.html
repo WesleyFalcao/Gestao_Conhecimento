@@ -22,7 +22,7 @@
 
             <div class="hidden xl:flex h-8 border-0 relative top-9 border-l-2 border-gray-600"></div>
 
-            <input #search type="text" class="my-6 bg-transparent {{b_Show_Input_Desktop? 'relative': 'hidden'}}"
+            <input #search type="text" [formControl]="modelChanged" class="my-6 bg-transparent {{b_Show_Input_Desktop? 'relative': 'hidden'}}"
                 placeholder="Pesquise...">
         </div>
 

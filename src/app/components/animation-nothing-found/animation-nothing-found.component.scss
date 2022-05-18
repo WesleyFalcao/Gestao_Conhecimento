@@ -1,0 +1,19 @@
+.div-position-animation{
+    @apply mx-auto mt-24 2xl:mt-20;
+    width: 20rem;
+    height: 20rem;
+
+    @media (min-width: 1200px) {
+        width: 32rem;
+        height: 28rem;
+    }
+}
+
+.div-empty {
+    text-align: center;
+
+    h2 {
+        color:rgba(91, 88, 88, 1);
+        font-size: large;
+    }
+}

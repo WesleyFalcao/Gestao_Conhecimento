@@ -14,6 +14,9 @@ export class UsersComponent implements OnInit {
   /**@description nome do label do segundo input */
   nm_Label_Input_2: string = "Usuário do computador"
 
+  /** @description Campo que será usado como Descrição */
+  nm_Descricao = "nome"
+
   /**@description nome do label do terceiro input */
   nm_Label_Input_3: string = "Status (ativo ou inativo)"
 
@@ -62,15 +65,23 @@ export class UsersComponent implements OnInit {
   /**@description Boolean que recebe o evento de fechamento de modal */
   b_Closed_Modal: boolean
 
+  /**@description Recebe o valor digitado pelo usuário no desktop */
+  input_value: string
+
   constructor(
     private eRef: ElementRef
     ) { }
 
   ngOnInit(): void {
     this.onResize()
+    
   }
 
-  objArrayTeste = [
+  obj_Array_Aux: any = [
+    
+  ]
+
+  obj_Array_Usuarios = [
     {
       nome: "Wesley",
       id: 1,
@@ -112,6 +123,7 @@ export class UsersComponent implements OnInit {
     this.b_Show_Itens = !this.b_Show_Itens
   }
 
+
   onFilter_Popover(event) {
     this.onClick_Top = event
     if (this.onClick_Top) {
@@ -119,6 +131,10 @@ export class UsersComponent implements OnInit {
     } else {
       this.b_Show_Modal = false
     }
+  }
+
+  onFilter_Search(iten){
+    this.input_value = iten
   }
 
   Closed_Modal(event){

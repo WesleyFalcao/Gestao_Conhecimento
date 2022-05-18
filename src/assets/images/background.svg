@@ -1,24 +1,23 @@
-<svg width="1280" height="720" viewBox="0 0 1280 720" fill="none" xmlns="http://www.w3.org/2000/svg">
-<g clip-path="url(#clip0_98_103)">
-<path d="M1440 -90H-160V810H1440V-90Z" fill="#FEFFE8"/>
-<path d="M797 360L379 810H1236L797 360Z" fill="#98CA93"/>
-<path d="M797 360L712.9 810H1236L797 360Z" fill="#74A976"/>
-<path d="M-220 810L238 572L656 810H-220Z" fill="#92C279"/>
-<path d="M177 810L238 572L656 810H177Z" fill="#74A168"/>
-<path d="M1043 456L1392 810H716L1043 456Z" fill="#7EBE62"/>
-<path d="M1043 456L1392 810H1002L1043 456Z" fill="#669B5D"/>
-<path d="M481 605L726 810H207L481 605Z" fill="#74B749"/>
-<path d="M427 810L481 605L726 810H427Z" fill="#5B9650"/>
-<path d="M1550 810L1241 542L936 810H1550Z" fill="#6EAF30"/>
-<path d="M1550 810L1241 542L1205 810H1550Z" fill="#568D44"/>
-<path d="M1050 810L811 597L565 810H1050Z" fill="#68A817"/>
-<path d="M783 810H1050L811 597L783 810Z" fill="#478739"/>
-<rect y="-2" width="1279" height="724" fill="#FCFCFC" fill-opacity="0.45"/>
+<svg width="1600" height="900" viewBox="0 0 1600 900" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g clip-path="url(#clip0_67_3502)">
+<path d="M1600 0H0V900H1600V0Z" fill="#FEFFE8"/>
+<path d="M957 450L539 900H1396L957 450Z" fill="#98CA93"/>
+<path d="M957 450L872.9 900H1396L957 450Z" fill="#74A976"/>
+<path d="M-60 900L398 662L816 900H-60Z" fill="#92C279"/>
+<path d="M337 900L398 662L816 900H337Z" fill="#74A168"/>
+<path d="M1203 546L1552 900H876L1203 546Z" fill="#7EBE62"/>
+<path d="M1203 546L1552 900H1162L1203 546Z" fill="#669B5D"/>
+<path d="M641 695L886 900H367L641 695Z" fill="#74B749"/>
+<path d="M587 900L641 695L886 900H587Z" fill="#5B9650"/>
+<path d="M1710 900L1401 632L1096 900H1710Z" fill="#6EAF30"/>
+<path d="M1710 900L1401 632L1365 900H1710Z" fill="#568D44"/>
+<path d="M1210 900L971 687L725 900H1210Z" fill="#68A817"/>
+<path d="M943 900H1210L971 687L943 900Z" fill="#478739"/>
+<rect x="-2" y="-1" width="1605" height="903" fill="#FCFCFC" fill-opacity="0.85"/>
 </g>
-<rect width="1279" height="722" fill="#FCFCFC" fill-opacity="0.54"/>
 <defs>
-<clipPath id="clip0_98_103">
-<rect width="1600" height="900" fill="white" transform="translate(-160 -90)"/>
+<clipPath id="clip0_67_3502">
+<rect width="1600" height="900" fill="white"/>
 </clipPath>
 </defs>
 </svg>
