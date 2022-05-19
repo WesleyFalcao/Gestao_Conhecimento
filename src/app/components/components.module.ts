@@ -1,7 +1,6 @@
 import { PopoverComponent } from './popover/popover.component';
 import { VersionComponent } from './version/version.component';
 import { SnackbarComponent } from './snackbar/snackbar.component';
-import { InputComponent } from './input/input.component';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ButtonComponent } from './button/button.component';
@@ -24,6 +23,8 @@ import { LottieModule } from 'ngx-lottie';
 import player from 'lottie-web';
 import { ButtonFilterComponent } from './button-filter/button-filter.component';
 import { SendSuggestionComponent } from './send-suggestion/send-suggestion.component';
+import { Input2Component } from './input/input.component';
+import { ModalComponent } from './modal/modal.component';
 export function playerFactory() {
   return player;
 }
@@ -33,7 +34,6 @@ export function playerFactory() {
     ButtonComponent,
     CheckboxComponent,
     HeaderComponent,
-    InputComponent,
     InputConteudoComponent,
     LoadingComponent,
     SearchBarComponent,
@@ -48,7 +48,9 @@ export function playerFactory() {
     HeaderNoSearchComponent,
     AnimationNothingFoundComponent,
     ButtonFilterComponent,
-    SendSuggestionComponent
+    SendSuggestionComponent,
+    Input2Component,
+    ModalComponent
   ],
   imports: [
     CommonModule,
@@ -62,7 +64,6 @@ export function playerFactory() {
     ButtonComponent,
     CheckboxComponent,
     HeaderComponent,
-    InputComponent,
     InputConteudoComponent,
     LoadingComponent,
     SearchBarComponent,
@@ -76,7 +77,9 @@ export function playerFactory() {
     HeaderNoSearchComponent,
     ButtonFilterComponent,
     AnimationNothingFoundComponent,
-    SendSuggestionComponent
+    SendSuggestionComponent,
+    Input2Component,
+    ModalComponent
   ]
 })
 export class ComponentsModule { }

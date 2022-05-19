@@ -1,3 +1,15 @@
+// .ng-valid[required],
+// .ng-valid.required {
+//     //border-left: 5px solid #42A948; /* green */
+
+// }
+
+// .ng-invalid:not(form) {
+//     //border-left: 5px solid #a94442; /* red */
+//     border-left-color: #FDE68A;
+//     @apply border-l-4;
+// }
+
 .input {
     position: relative;
     background-color: transparent;
@@ -108,7 +120,9 @@
         }
 
         &.ng-invalid.ng-touched {
-            border: 2px solid var(--rosa-unimed);
+            border-left: 2px solid var(--rosa-unimed);
+            border-right: 2px solid var(--rosa-unimed);
+            border-bottom: 2px solid var(--rosa-unimed); 
         }
 
         &:disabled {
@@ -161,7 +175,9 @@
         }
 
         &.ng-invalid.ng-touched {
-            border: 2px solid var(--rosa-unimed);
+            border-left: 2px solid var(--rosa-unimed);
+            border-right: 2px solid var(--rosa-unimed);
+            border-bottom: 2px solid var(--rosa-unimed);       
         }
 
         &:disabled {
@@ -204,6 +220,7 @@
     }
 
     .input-error {
+        border-top: none;
         border-left: 1px solid var(--rosa-unimed) !important;
         /* red */
     }

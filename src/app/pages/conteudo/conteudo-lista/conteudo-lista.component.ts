@@ -1,7 +1,7 @@
 import { Component, ElementRef, HostListener, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-conteudo-editar-lista',
+  selector: 'app-conteudo-lista',
   templateUrl: './conteudo-lista.component.html',
   styleUrls: ['./conteudo-lista.component.scss']
 })
@@ -21,6 +21,12 @@ export class ConteudoEditarListaComponent implements OnInit {
 
   /**@description Recebe o valor digitado pelo usuário no desktop */
   Input_Value: string
+
+  /**@description Boolean para abrir e fechar o modal de filtro */
+  b_Show_Filter: boolean = false
+
+  /**@description Objeto que recebe o conteudo dos inputs */
+  objFilter = { nm_Nome: "", nm_Usuario: "", nm_Status:"", nm_Grupo:"" }
 
   constructor(private eRef: ElementRef) { }
 
@@ -64,4 +70,17 @@ export class ConteudoEditarListaComponent implements OnInit {
   onFilter_Search(iten){
     this.Input_Value = iten
   }
+
+  Close_Modal(){
+    this.b_Show_Filter = false
+  }
+
+  Filtrar(){
+    console.log(this.objFilter)
+  } 
+
+  Show_Modal(event){
+    this.b_Show_Filter = event
+  }
+
 }

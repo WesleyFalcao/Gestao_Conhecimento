@@ -2,22 +2,29 @@
     <div class="div-modal-sobreposicao" (click)="Modal_Closed()">
     </div>
     <div class="div-modal-filter p-2 pb-4 md:p-4">
+        <ng-content>
+
+        </ng-content>
         <div class="grid grid-cols-2">
             <div class="flex flex-col relative left-2 lg:left-2 pb-4 lg:ml-2.5 -mt-4">
                 <uni-title [ds_Titulo]="ds_Titulo"></uni-title>
             </div>
-            <img class="behavior-button w-5 h-4 mt-1 absolute right-5 lg:right-8 top-8 cursor-pointer" src="assets/icons/X.svg" (click)="Modal_Closed()">
+            <img class="behavior-button w-5 h-4 mt-1 absolute right-5 lg:right-8 top-8 cursor-pointer"
+                src="assets/icons/X.svg" (click)="Modal_Closed()">
         </div>
         <div class="flex flex-col gap-y-2">
-            <app-input [nm_Label_Input]="nm_Label_Input_1" [nm_Field_Input]="nm_Field_1" (Input_Emit_Value)="onFilter_Search($event)"></app-input>
-            <app-input [nm_Label_Input]="nm_Label_Input_2" nm_Field_Input (Input_Emit_Value)="onFilter_Search2($event)"></app-input>
-            <div *ngIf="nm_Label_Input_3 != null">
-                <app-input [nm_Label_Input]="nm_Label_Input_3" (Input_Emit_Value)="onFilter_Search3($event)"></app-input>
-            </div>
+            <form action="">
+                <app-input [required]="true" label="Nome" [(ngModel)]="objFilter.nm_Nome" id="nm_Nome" name="nm_Nome">
+                </app-input>
+                <app-input [required]="true" label="Usuário" [(ngModel)]="objFilter.nm_Usuario" id="nm_Usuario"
+                    name="nm_Usuario"></app-input>
+                <app-input [required]="true" label="Status(ativo ou inativo)" [(ngModel)]="objFilter.nm_Status" id="nm_Status"
+                    name="nm_Status"></app-input>
+            </form>
         </div>
-        <div class="flex flex-row mt-4 gap-x-4 mx-4"> 
+        <div class="flex flex-row mt-4 gap-x-4 mx-4">
             <uni-button buttonClass="btn-outline" (click)="Modal_Closed()">Voltar</uni-button>
-            <uni-button buttonClass="btn-primary">Filtrar</uni-button>
+            <uni-button buttonClass="btn-primary" (click)="Filtrar()">Filtrar</uni-button>
         </div>
     </div>
 </div>

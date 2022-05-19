@@ -1,4 +1,4 @@
-import { Component} from '@angular/core';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-adicionar-categoria',
@@ -9,6 +9,13 @@ export class CategoriaComponent {
 
   /**@description Nome do título */
   ds_Titulo: string = "Categorias"
+
+  /**@description Boolean para abrir e fechar o modal de filtro */
+  b_Show_Filter: boolean = false
+
+  /**@description Objeto que recebe o conteudo dos inputs */
+  objFilter = { nm_Nome: "", nm_Usuario: "", nm_Status: "" }
+
 
   /**@description Recebe o valor digitado pelo usuário no desktop */
   Input_Value: string
@@ -34,5 +41,17 @@ export class CategoriaComponent {
 
   onFilter_Search(iten) {
     this.Input_Value = iten
+  }
+
+  Close_Modal() {
+    this.b_Show_Filter = false
+  }
+
+  Filtrar() {
+    console.log(this.objFilter)
+  }
+
+  Show_Modal(event) {
+    this.b_Show_Filter = event
   }
 }

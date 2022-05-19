@@ -44,15 +44,6 @@ export class AdicionarUsersComponent implements OnInit {
   /**@description Nome do label do selection input */
   ds_Titulo: string = "Adicionar Usuário"
 
-  /**@description Nome do label do input */
-  nm_Label_Input_Nome: string = "Nome"
-
-  /**@description Nome do label do input */
-  nm_Label_Input_Usuario: string = "Nome de usuário"
-  
- /**@description Nome do label do input */
-  nm_Label_Input_Senha: string = "Senha"
-
   constructor() { }
 
   ngOnInit(): void {

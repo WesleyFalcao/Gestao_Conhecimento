@@ -7,9 +7,9 @@
         </div>
     </div>
     <div class="mt-5 flex flex-col gap-y-3">
-        <app-input [nm_Label_Input]="nm_Titulo_Input"></app-input>
-        <app-input [nm_Label_Input]="nm_Subtitulo_Input"></app-input>
-        <app-input [nm_Label_Input]="nm_Link_Input"></app-input>
+        <app-input label="Título"></app-input>
+        <app-input label="Descrição"></app-input>
+        <app-input label="Link"></app-input>
         <div class="div-grid-group grid grid-cols-2">
             <selection-input [objArrayList]="objArrayGroups" [nm_Label_Selection_Input]="nm_Label_Selection_Input"></selection-input>
             <div class="behavior-button mt-3 lg:mt-0 lg:flex-row mx-auto cursor-pointer" routerLink="/grupo-adicionar">

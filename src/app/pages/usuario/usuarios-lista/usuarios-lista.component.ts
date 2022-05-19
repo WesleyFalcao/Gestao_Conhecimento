@@ -20,21 +20,22 @@ export class UsersComponent implements OnInit {
   /**@description Título da página */
   ds_Titulo: string = "Usuários"
 
+  /**@description Boolean para abrir e fechar o modal de filtro */
+  b_Show_Filter: boolean = false
+
   /**@description Recebe o valor digitado pelo usuário no desktop */
   Input_Value: string
 
+  /**@description Objeto que recebe o conteudo dos inputs */
+  objFilter = { nm_Nome: "", nm_Usuario: "", nm_Status: "" }
+
   constructor(
-    
-    ) { }
+
+  ) { }
 
   ngOnInit(): void {
     this.onResize()
-    
   }
-
-  obj_Array_Aux: any = [
-    
-  ]
 
   obj_Array_Usuarios = [
     {
@@ -85,7 +86,19 @@ export class UsersComponent implements OnInit {
     this.b_Show_Itens = !this.b_Show_Itens
   }
 
-  onFilter_Search(iten){
+  onFilter_Search(iten) {
     this.Input_Value = iten
+  }
+
+  Filtrar() {
+    console.log(this.objFilter)
+  }
+
+  Close_Modal() {
+    this.b_Show_Filter = false
+  }
+
+  Show_Modal(event) {
+    this.b_Show_Filter = event
   }
 }

@@ -9,36 +9,6 @@ import { SubjectService } from 'src/app/services/subject.service';
 })
 export class MeusEstudosComponent implements OnInit {
 
-  /**@description caminho com o svg de baixo no filtro*/
-  nm_Filter_Svg_Bottom: string = "assets/icons/lixeira.svg"
-
-  /**@description Boolean para exibir popover no filtro */
-  b_Filter_Show_Popover: boolean = false
-
-  /**@description caminho com o svg de cima no filtro */
-  nm_Filter_Svg_Top: string = "assets/icons/filter.svg"
-
-  /**@description como o nome da opção que aparece por cima no popover do filtro */
-  nm_Filter_Opcao_top: string = "Filtrar"
-
-  /** @description Boolean para exibir ou fechar o modal de filtro */
-  b_Filter_Show_Modal: boolean
-
-  /**@description Gira o triângulo do popover no filtro */
-  b_Filter_Rotate_Triangle: boolean = true
-
-  /**@description como o nome da opção que aparece por baixo no popover do Filtro*/
-  nm_Filter_Opcao_bottom: string = "Limpar filtros"
-
-  /**@description nome do label do primeiro input */
-  nm_Label_Input_Filter_1: string = "Título"
-
-  /**@description nome do label do segundo input */
-  nm_Label_Input_Filter_2: string = "Subtitulo"
-
-  /**@description nome do label do segundo input */
-  nm_Label_Input_3: string = "Grupo"
-
   /**@description Titulo da página */
   ds_Titulo: string = "Meus estudos"
 
@@ -66,9 +36,6 @@ export class MeusEstudosComponent implements OnInit {
   /**@description como o nome da opção que aparece por cima no popover */
   nm_Opcao_top: string = "Editar"
 
-  /**@description Título da página */
-  ds_Filter_Titulo: string = "Filtros"
-
   /**@description como o nome da opção que aparece por baixo no popover */
   nm_Opcao_bottom: string = "Excluir"
 
@@ -83,6 +50,12 @@ export class MeusEstudosComponent implements OnInit {
 
   /**@description Contém da descrição do modal de alerta*/
   ds_Descricao: string = "Tem certeza que deseja excluir este conteúdo?"
+
+  /**@description Objeto que recebe o conteudo dos inputs */
+  objFilter = { nm_Nome: "", nm_Usuario: "", nm_Status: "" }
+
+  /**@description Boolean para abrir e fechar o modal de filtro */
+  b_Show_Filter: boolean = false
 
   constructor(
     private subject_service: SubjectService,
@@ -110,20 +83,7 @@ export class MeusEstudosComponent implements OnInit {
     
     } else {
       this.b_Show_Popover = false;
-      this.b_Filter_Show_Popover = false
     }
-  }
-
-  
-
-  visible: boolean = false;
-
-  clickMe(): void {
-    this.visible = false;
-  }
-
-  change(value: boolean): void {
-    console.log(value);
   }
 
   onClick_Option_Top() {
@@ -134,22 +94,20 @@ export class MeusEstudosComponent implements OnInit {
     this.b_Confirmation_Show_Modal = event
   }
 
-  onFilter_Popover(event) {
-    this.onClick_Top = event
-    if (this.onClick_Top) {
-      this.b_Filter_Show_Modal = true
-    } else {
-      this.b_Filter_Show_Modal = false
-    }
-  }
-
-  Closed_Modal_Filter() {
-    this.b_Filter_Show_Popover = false
-    this.b_Filter_Show_Modal = false
-  }
-
   Closed_Alert_Modal() {
     this.b_Confirmation_Show_Modal = false
     this.b_Show_Popover = false
+  }
+
+  Show_Modal(event){
+    this.b_Show_Filter = event
+  }
+
+  Close_Modal() {
+    this.b_Show_Filter = false
+  }
+
+  Filtrar() {
+    console.log(this.objFilter)
   }
 }

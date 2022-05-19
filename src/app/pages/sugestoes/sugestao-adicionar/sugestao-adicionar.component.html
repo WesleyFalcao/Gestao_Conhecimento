@@ -6,8 +6,8 @@
         <uni-title [ds_Titulo]="ds_Titulo"></uni-title>
     </div>
     <div class="top-6 relative flex flex-col gap-y-4">
-        <app-input [nm_Label_Input]="nm_Label_Input_Titulo"></app-input>
-        <app-input [nm_Label_Input]="nm_Label_Input_Descricao"></app-input>
+        <app-input label="Título"></app-input>
+        <app-input label="Descricao"></app-input>
         <div class="lg:mt-4 flex flex-row w-full xl:w-6/12 px-4 gap-x-4 lg:gap-x-10 mx-auto">
             <uni-button buttonClass="btn-outline">Voltar</uni-button>
             <uni-button buttonClass="btn-primary" (click)="Send_Sugestion()">Adicionar</uni-button>

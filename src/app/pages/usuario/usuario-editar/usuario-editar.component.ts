@@ -45,9 +45,6 @@ export class EditarUserComponent implements OnInit {
   nm_Label_Selection_Input_Usuario: string = "Logar com usuário do computador?"
 
   /**@description Nome do label do input */
-  nm_Label_Input_Nome: string = "Nome"
-
-  /**@description Nome do label do input */
   nm_Label_Input_Usuario: string = "Nome de usuário"
 
   /**@description Nome do label do input */

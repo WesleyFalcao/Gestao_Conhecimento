@@ -128,7 +128,7 @@ export class HeaderComponent implements OnInit {
     this.b_Show_Popover = false
   }
   onClick_Conteudos(){
-    this.route.navigate(['/conteudo-editar-lista'])
+    this.route.navigate(['/conteudo-lista'])
     this.b_Show_Popover = false
   }
   onClick_Categorias(){

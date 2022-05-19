@@ -9,13 +9,6 @@ import { SubjectService } from 'src/app/services/subject.service';
 export class SugestaoAdicionarComponent implements OnInit {
 
   Send_Sugestion_Animacao: boolean = false
-
-  /**@description string que passa o noe do label do input */
-  nm_Label_Input_Titulo: string = "Título"
-
-  /**@description string que passa o noe do label do input */
-  nm_Label_Input_Descricao: string = "Título"
-
   /**@description string que passa o título da página */
   ds_Titulo: string = "Adicionar sugestão"
 

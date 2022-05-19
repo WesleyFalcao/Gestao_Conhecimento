@@ -30,7 +30,7 @@
             class="area-itens hidden gap-y-4 md:gap-y-7 xl:gap-y-0 pl-4 md:pl-5 pt-5 md:pt-10 xl:pl-0 xl:pt-0 xl:grid xl:w-11/12 3xl:w-8/12 {{b_User_Admin?'xl:grid-cols-5 ':'grid-cols-3'}} {{b_Show_Modal?'div-itens-modal': 'hidden'}}">
 
             <div
-                class=" mt-20 div-aling-popover z-20 -ml-4 {{b_Show_Popover && b_Show_Input_Desktop? 'absolute':'hidden'}}">
+                class="teste mt-20 div-aling-popover z-20 -ml-4 transition {{b_Show_Popover && b_Show_Input_Desktop? 'absolute':'hidden'}}">
                 <div class="div-triangulo mx-auto rotate-180">
                 </div>
                 <div class="shadow-lg p-3 lg:flex w-max box-border flex-col bg-white rounded-lg" >
@@ -69,7 +69,7 @@
             </div>
             <div class="{{b_Show_Modal && b_User_Admin?'flex':'hidden'}}">
                 <div class="div-width-options-modal flex flex-row xl:flex-col xl:text-center xl:justify-center 3xl:mt-1 cursor-pointer iten-behavior {{b_Show_Input_Desktop?'flex flex-row': ''}}"
-                    routerLink="/conteudo-editar-lista">
+                    routerLink="/conteudo-lista">
                     <img class="img-width-category my-1 xl:my-0 3xl:w-7 3xl:h-7 xl:mx-auto"
                         src="assets/icons/list-contents-green.svg">
                     <p class="text-xs md:text-lg xl:text-xs my-auto pl-0.5 xl:my-0 xl:pl-0">Lista de conteúdos</p>

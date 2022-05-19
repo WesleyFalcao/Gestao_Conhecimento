@@ -4,9 +4,6 @@
 <div class="absolute div-aling-popover z-20">
     <app-popover [nm_Svg_Top]="nm_Svg_Top" [nm_Svg_Bottom]="nm_Svg_Bottom" [nm_Opcao_top]="nm_Opcao_top"
         [nm_Opcao_bottom]="nm_Opcao_bottom" [b_Rotate_Triangle]="b_Rotate_Triangle" [b_Show_Popover]="b_Show_Popover"
-        (onClick_Option_Top)="onFilter_Popover($event)"></app-popover>
+        (onClick_Option_Top)="onFilter_Popover()">
+    </app-popover>
 </div>
-
-<app-filter-modal [b_Show_Modal]="b_Show_Modal" (b_Closed_Modal)="Closed_Modal()" [ds_Titulo]="ds_Titulo_Filter"
-    [nm_Label_Input_1]="nm_Label_Input_1" [nm_Label_Input_2]="nm_Label_Input_2" [nm_Label_Input_3]="nm_Label_Input_3" [nm_Field_1]="Input_Value">
-</app-filter-modal>

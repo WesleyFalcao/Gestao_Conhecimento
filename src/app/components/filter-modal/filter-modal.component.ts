@@ -7,6 +7,10 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 })
 export class FilterModalComponent implements OnInit {
 
+  objFilter = { nm_Nome: "", nm_Usuario: "", nm_Status:"" }
+
+  @Output() obj_Filter_Emit = new EventEmitter()
+  
   /**@description nome do label do primeiro input */
   @Input() nm_Label_Input_1: string = ""
 
@@ -49,14 +53,19 @@ export class FilterModalComponent implements OnInit {
 
   onFilter_Search(iten){
     this.Input_Value = iten
-    console.log("Campo filtro 1", this.Input_Value)
+    // console.log("Campo filtro 1", this.Input_Value)
   }
   onFilter_Search2(iten){
     this.Input_Value2 = iten
-    console.log("Campo filtro 2", this.Input_Value2)
+    // console.log("Campo filtro 2", this.Input_Value2)
   } 
   onFilter_Search3(iten){
     this.Input_Value3 = iten
-    console.log("Campo filtro 3", this.Input_Value3)
+    // console.log("Campo filtro 3", this.Input_Value3)
   } 
+
+  Filtrar(){
+    this.obj_Filter_Emit.emit(this.objFilter)
+    console.log(this.objFilter)
+  }
 }
