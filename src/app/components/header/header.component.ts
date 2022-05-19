@@ -45,8 +45,13 @@ export class HeaderComponent implements OnInit {
   /** @description Subject para destruir os subscribers */
   b_Show_Modal: boolean = false
 
+  /** @description Emite o conteúdo digitado na barra de pesquisa */
   @Output() Input_Emit_Value = new EventEmitter()
 
+  /** @description Recebe o conteúdo digitado na barra de pesquisa  */
+  Input_Value: string
+
+  /** @description Usado para o debounce */
   modelChanged = new FormControl()
 
   constructor(
@@ -58,9 +63,8 @@ export class HeaderComponent implements OnInit {
   ngOnInit() {
     this.onResize()
     this.modelChanged.valueChanges.pipe(debounceTime(500), distinctUntilChanged()).subscribe(async (input) => {
-      const input_value = input
-      this.Input_Emit_Value.emit(input_value)
-      console.log(input_value)
+      this.Input_Value = input
+      this.Input_Emit_Value.emit(this.Input_Value)
     })
   }
 
@@ -85,6 +89,7 @@ export class HeaderComponent implements OnInit {
   }
 
   Show_Input() {
+    
     if (this.nr_Width < 1280) {
       this.b_Show_Logo = !this.b_Show_Logo
       this.b_Show_Input = !this.b_Show_Input

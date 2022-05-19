@@ -37,12 +37,15 @@
 
 body{
     background-image: url(assets/images/background.svg);
-    @apply bg-no-repeat bg-cover bg-bottom bg-fixed;
+    background-attachment: fixed;
+    background-size: cover;
+    line-height: unset;
 }
 
 *,
 *:before,
 *:after {
+    
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
     box-sizing: border-box;

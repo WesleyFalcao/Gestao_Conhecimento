@@ -9,7 +9,7 @@
             <img class="behavior-button w-5 h-4 mt-1 absolute right-5 lg:right-8 top-8 cursor-pointer" src="assets/icons/X.svg" (click)="Modal_Closed()">
         </div>
         <div class="flex flex-col gap-y-2">
-            <app-input [nm_Label_Input]="nm_Label_Input_1"></app-input>
+            <app-input [nm_Label_Input]="nm_Label_Input_1" [nm_Field_Input]="nm_Field_1" (Input_Emit_Value)="onFilter_Search($event)"></app-input>
             <app-input [nm_Label_Input]="nm_Label_Input_2"></app-input>
             <div *ngIf="nm_Label_Input_3 != null">
                 <app-input [nm_Label_Input]="nm_Label_Input_3"></app-input>

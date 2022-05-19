@@ -7,7 +7,7 @@ import { GraphQLModule } from './graphql.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
-import { FilterModule } from './pipes/filtros/filter.module';
+import { FilterModule } from './pipes/filter/filter.module';
 import { ComponentsModule } from './components/components.module';
 import { PagesModule } from './pages/pages.module';
 

@@ -1,32 +1,28 @@
-<app-header></app-header>
+<app-header [obj_Array_Itens]="obj_Array_Conteudos" (Input_Emit_Value)="onFilter_Search($event)"></app-header>
 
-<div class="container relative top-6 lg:top-14 px-12 lg:px-10">
+<div class="container bg-white bg-opacity-60 relative px-2 top-6 md:top-9 lg:top-14 pb-12">
     <div class="grid grid-cols-2">
         <div class="flex flex-col relative left-2 lg:left-2 lg:ml-2.5">
             <uni-title [ds_Titulo]="ds_Titulo"></uni-title>
         </div>
-        <div class="absolute div-aling-popover z-20">
-            <app-popover [nm_Svg_Top]="nm_Svg_Top" [nm_Svg_Bottom]="nm_Svg_Bottom" [nm_Opcao_top]="nm_Opcao_top"
-                [nm_Opcao_bottom]="nm_Opcao_bottom" [b_Rotate_Triangle]="b_Rotate_Triangle"
-                [b_Show_Popover]="b_Show_Popover" (onClick_Option_Top)="onFilter_Popover($event)"></app-popover>
-        </div>
         <div class="flex flex-row gap-6 lg:gap-10 my-auto justify-end relative right-1 xl:mr-4 cursor-pointer">
-            <img class="behavior-button w-5 h-5 md:w-7 md:h-7 2xl:w-6 2xl:h-6" src="assets/icons/more-options-user.svg"
+            <img class="behavior-button w-5 h-5 xl:w-7 xl:h-7 2xl:w-6 2xl:h-6" src="assets/icons/more-options-user.svg"
                 routerLink="/conteudo-adicionar">
-            <img class="behavior-button w-5 h-5 md:w-7 md:h-7 2xl:w-6 2xl:h-6" src="assets/icons/filter.svg"
-                (click)="b_Show_Popover = !b_Show_Popover">
-            <img class="behavior-button w-6 h-6 md:w-8 md:h-8 2xl:w-7 2xl:h-7" src="assets/icons/refresh.svg">
+                <app-button-filter [Input_Value]="Input_Value"></app-button-filter>
+            <img class="behavior-button w-6 h-6 xl:w-8 xl:h-8 2xl:w-7 2xl:h-7" src="assets/icons/refresh.svg">
         </div>
     </div>
-    <div class="hidden div-grid-title mt-8 lg:grid grid-cols-6">
-        <p class="font-semibold lg:grid ml-5">Título</p>
-        <p class="lg:text-center font-semibold">ID</p>
-        <p class="lg:text-center font-semibold">Descrição</p>
-        <p class="lg:text-center font-semibold">Link</p>
-        <p class="lg:text-center font-semibold">Grupo</p>
-        <p class="lg:text-center font-semibold">Editar</p>
+    <div *ngIf="obj_Array_Conteudos.length != 0">
+        <div class="hidden div-grid-title mt-8 lg:grid grid-cols-6">
+            <p class="lg:text-center font-semibold">ID</p>
+            <p class="font-semibold lg:grid ml-5">Título</p>
+            <p class="lg:text-center font-semibold">Descrição</p>
+            <p class="lg:text-center font-semibold">Link</p>
+            <p class="lg:text-center font-semibold">Grupo</p>
+            <p class="lg:text-center font-semibold">Editar</p>
+        </div>
     </div>
-    <div class="top-5 relative flex flex-col gap-y-4" *ngFor="let iten of objArrayTeste">
+    <div class="top-5 relative flex flex-col gap-y-4" *ngFor="let iten of obj_Array_Conteudos | filter: Input_Value">
         <div *ngIf="b_Width == false">
             <div
                 class="rounded-lg div-grid-title mb-2 shadow-xl lg:h-14 w-full lg:grid lg:grid-cols-6 bg-unimed-background">
@@ -72,9 +68,9 @@
         <div *ngIf="b_Width">
             <div
                 class="rounded-lg div-grid-title shadow-xl mb-2 lg:h-14 w-full lg:grid lg:grid-cols-6 bg-white hover:bg-slate-100">
+                <p class="text-center my-auto text-ellipsis overflow-hidden whitespace-nowrap">{{iten.id}}</p>
                 <p class="my-3 lg:my-auto ml-5 text-ellipsis overflow-hidden whitespace-nowrap">
                     {{iten.titulo}}</p>
-                <p class="text-center my-auto text-ellipsis overflow-hidden whitespace-nowrap">{{iten.id}}</p>
                 <p class="text-center my-auto mx-auto text-ellipsis overflow-hidden whitespace-nowrap w-9/12">{{iten.descricao}}</p>
                 <p class="text-center my-auto text-ellipsis overflow-hidden whitespace-nowrap">{{iten.link}}</p>
                 <p class="text-center my-auto text-ellipsis overflow-hidden whitespace-nowrap">{{iten.grupo}}</p>
@@ -84,5 +80,7 @@
         </div>
     </div>
 </div>
-<app-filter-modal [b_Show_Modal]="b_Show_Modal" (b_Closed_Modal)="Closed_Modal($event)" [ds_Titulo]="ds_Titulo_Filter"
-    [nm_Label_Input_1]="nm_Label_Input_1" [nm_Label_Input_2]="nm_Label_Input_2" [nm_Label_Input_3]="nm_Label_Input_3"></app-filter-modal>
+
+<div *ngIf="obj_Array_Conteudos.length == 0 || !obj_Array_Conteudos">
+    <animation-nothing-found></animation-nothing-found>
+</div>

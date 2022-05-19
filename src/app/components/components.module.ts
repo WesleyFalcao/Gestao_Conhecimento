@@ -15,13 +15,14 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TitleComponent } from './title/title.component';
 import { SelectionModalComponent } from './selection-modal/selection-modal.component';
 import { SelectionInputComponent } from './selection-input/selection-input.component';
-import { FilterModule } from '../pipes/filtros/filter.module';
+import { FilterModule } from '../pipes/filter/filter.module';
 import { FilterModalComponent } from './filter-modal/filter-modal.component';
 import { AlertModalComponent } from './alert-modal/alert-modal.component';
 import { HeaderNoSearchComponent } from './header-no-search/header-no-search.component';
 import { AnimationNothingFoundComponent } from './animation-nothing-found/animation-nothing-found.component';
 import { LottieModule } from 'ngx-lottie';
 import player from 'lottie-web';
+import { ButtonFilterComponent } from './button-filter/button-filter.component';
 export function playerFactory() {
   return player;
 }
@@ -44,7 +45,8 @@ export function playerFactory() {
     FilterModalComponent,
     AlertModalComponent,
     HeaderNoSearchComponent,
-    AnimationNothingFoundComponent
+    AnimationNothingFoundComponent,
+    ButtonFilterComponent
   ],
   imports: [
     CommonModule,
@@ -69,7 +71,9 @@ export function playerFactory() {
     SelectionInputComponent,
     FilterModalComponent,
     AlertModalComponent,
-    HeaderNoSearchComponent
+    HeaderNoSearchComponent,
+    ButtonFilterComponent,
+    AnimationNothingFoundComponent
   ]
 })
 export class ComponentsModule { }

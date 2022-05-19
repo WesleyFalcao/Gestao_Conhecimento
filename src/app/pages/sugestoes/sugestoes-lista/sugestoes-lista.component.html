@@ -1,20 +1,13 @@
 <app-header></app-header>
 
-<div class="container relative top-6 lg:top-14 px-10">
+<div class="container bg-white bg-opacity-70 relative px-2 top-6 md:top-9 lg:top-14 pb-12">
     <div class="div-grid-title-itens">
         <div class="flex flex-col relative left-2 lg:left-2 lg:ml-2.5">
             <uni-title [ds_Titulo]="ds_Titulo"></uni-title>
         </div>
-        <div class="absolute div-aling-popover z-20">
-            <app-popover [nm_Svg_Top]="nm_Svg_Top" [nm_Svg_Bottom]="nm_Svg_Bottom" [nm_Opcao_top]="nm_Opcao_top"
-                [nm_Opcao_bottom]="nm_Opcao_bottom" [b_Rotate_Triangle]="b_Rotate_Triangle"
-                [b_Show_Popover]="b_Show_Popover" (onClick_Option_Top)="onFilter_Popover($event)"
-                (onClick_Option_Bottom)="onClick_Option_Bottom($event)"></app-popover>
-        </div>
-        <div class="flex flex-row gap-6 lg:gap-14 2xl:gap-20 my-auto justify-end relative right-1 xl:mr-4 cursor-pointer">
-            <img class="behavior-button w-5 h-5 md:w-7 md:h-7 2xl:w-6 2xl:h-6" src="assets/icons/filter.svg"
-                (click)="b_Show_Popover = !b_Show_Popover">
-            <img class="behavior-button w-6 h-6 md:w-8 md:h-8 2xl:w-7 2xl:h-7" src="assets/icons/refresh.svg">
+        <div class="flex flex-row gap-6 lg:gap-10 my-auto justify-end relative right-1 xl:mr-4 cursor-pointer">
+            <app-button-filter [Input_Value]="Input_Value"></app-button-filter>
+            <img class="behavior-button w-6 h-6 xl:w-8 xl:h-8 2xl:w-7 2xl:h-7" src="assets/icons/refresh.svg">
         </div>
     </div>
     <div class="hidden div-grid-title mt-8 lg:grid grid-cols-3">
@@ -59,10 +52,6 @@
         </div>
     </div>
 </div>
-
-<app-filter-modal [b_Show_Modal]="b_Show_Modal" (b_Closed_Modal)="Closed_Modal($event)" [ds_Titulo]="ds_Titulo_Filter"
-    [nm_Label_Input_1]="nm_Label_Input_1" [nm_Label_Input_2]="nm_Label_Input_2">
-</app-filter-modal>
 
 <alert-modal [ds_Descricao]="ds_Descricao" [b_Show_Alert_Modal]="b_Confirmation_Show_Modal"
     (b_Closed_Alert_Modal)="Closed_Alert_Modal()"></alert-modal>

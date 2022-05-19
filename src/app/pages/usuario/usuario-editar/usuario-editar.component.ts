@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-adicionar-users',
-  templateUrl: './adicionar-users.component.html',
-  styleUrls: ['./adicionar-users.component.scss']
+  selector: 'app-editar-user',
+  templateUrl: './usuario-editar.component.html',
+  styleUrls: ['./usuario-editar.component.scss']
 })
-export class AdicionarUsersComponent implements OnInit {
+export class EditarUserComponent implements OnInit {
 
   objArrayPerfil = [
     {
@@ -33,6 +33,9 @@ export class AdicionarUsersComponent implements OnInit {
   ]
 
   /**@description Nome do label do selection input */
+  ds_Titulo: string = "Editar Usuário"
+
+  /**@description Nome do label do selection input */
   nm_Label_Selection_Input_Perfil: string = "Perfil"
 
   /**@description Nome do label do selection input */
@@ -41,21 +44,17 @@ export class AdicionarUsersComponent implements OnInit {
   /**@description Nome do label do selection input */
   nm_Label_Selection_Input_Usuario: string = "Logar com usuário do computador?"
 
-  /**@description Nome do label do selection input */
-  ds_Titulo: string = "Adicionar Usuário"
-
   /**@description Nome do label do input */
   nm_Label_Input_Nome: string = "Nome"
 
   /**@description Nome do label do input */
   nm_Label_Input_Usuario: string = "Nome de usuário"
-  
- /**@description Nome do label do input */
+
+  /**@description Nome do label do input */
   nm_Label_Input_Senha: string = "Senha"
 
   constructor() { }
 
   ngOnInit(): void {
   }
-
 }

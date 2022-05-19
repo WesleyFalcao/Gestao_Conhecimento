@@ -1,0 +1,13 @@
+.div-aling-popover {
+    left: calc(100% - 8rem);
+
+    @media (min-width: 768px) {
+        left: calc(100% - 8.8rem);
+    }
+    @media (min-width: 1024px) {
+        left: calc(100% - 9.9rem);    
+    }
+    @media (min-width: 1526px) {
+        left: calc(100% - 9.4rem);  
+    }
+}

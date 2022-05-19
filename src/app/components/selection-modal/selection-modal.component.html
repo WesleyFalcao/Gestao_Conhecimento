@@ -17,7 +17,7 @@
             <button type="button" (click)="Limpar()">Limpar</button>
         </div>
     </header>
-    <ul *ngFor="let item of objArrayItens | filter: value:nm_Descricao">
+    <ul *ngFor="let item of objArrayItens | filter: value">
         <li class="overflow-y-auto mx-4 border-b-2 p-3 mb-3 cursor-pointer hover:font-medium hover:bg-slate-50">
             <p class="title line-after" (click)="Select(item)">{{item.nm_Nome}}</p>
         </li>

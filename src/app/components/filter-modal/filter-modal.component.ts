@@ -16,6 +16,9 @@ export class FilterModalComponent implements OnInit {
   /**@description nome do label do terceiro input */
   @Input() nm_Label_Input_3
 
+  /**@description Valor que vai para o primeiro campo de input */
+  @Input() nm_Field_1: string
+
   /**@description boolean para abrir ou fechar o popover */
   b_Show_Popover: boolean = false
 
@@ -28,6 +31,9 @@ export class FilterModalComponent implements OnInit {
   /**@description Título do modal */
   @Input() ds_Titulo: string = ""
 
+  /**@description Recebe o valor digitado pelo usuário no desktop */
+  Input_Value: string
+
   constructor() { }
 
   ngOnInit(): void {
@@ -35,5 +41,10 @@ export class FilterModalComponent implements OnInit {
 
   Modal_Closed(){
     this.b_Closed_Modal.emit(true)
+  }
+
+  onFilter_Search(iten){
+    this.Input_Value = iten
+    console.log("Filter", this.Input_Value)
   }
 }
