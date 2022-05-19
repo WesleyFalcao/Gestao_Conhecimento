@@ -5,17 +5,10 @@
         <div class="flex flex-col relative ">
             <uni-title [ds_Titulo]="ds_Titulo"></uni-title>
         </div>
-        <div class="absolute div-aling-popover z-20">
-            <app-popover [nm_Svg_Top]="nm_Filter_Svg_Top" [nm_Svg_Bottom]="nm_Filter_Svg_Bottom"
-                [nm_Opcao_top]="nm_Filter_Opcao_top" [nm_Opcao_bottom]="nm_Filter_Opcao_bottom"
-                [b_Rotate_Triangle]="b_Filter_Rotate_Triangle" [b_Show_Popover]="b_Filter_Show_Popover"
-                (onClick_Option_Top)="onFilter_Popover($event)"></app-popover>
-        </div>
         <div class="flex flex-row gap-6 lg:gap-10 my-auto justify-end relative right-1 xl:mr-4 cursor-pointer">
             <img class="behavior-button w-5 h-5 md:w-7 md:h-7 2xl:w-6 2xl:h-6" src="assets/icons/more-options-user.svg"
                 routerLink="/conteudo-adicionar">
-            <img class="behavior-button w-5 h-5 md:w-7 md:h-7 2xl:w-6 2xl:h-6" src="assets/icons/filter.svg"
-                (click)="b_Filter_Show_Popover = !b_Filter_Show_Popover">
+                <app-button-filter [Input_Value]="Input_Value"></app-button-filter>
             <img class="behavior-button w-6 h-6 md:w-8 md:h-8 2xl:w-7 2xl:h-7" src="assets/icons/refresh.svg">
         </div>
     </div>
@@ -106,9 +99,6 @@
         </div>
         
     </div>
-    <app-filter-modal [b_Show_Modal]="b_Filter_Show_Modal" (b_Closed_Modal)="Closed_Modal_Filter()"
-        [ds_Titulo]="ds_Filter_Titulo" [nm_Label_Input_1]="nm_Label_Input_Filter_1" [nm_Label_Input_2]="nm_Label_Input_Filter_2">
-    </app-filter-modal>
 
     <alert-modal [ds_Descricao]="ds_Descricao" [b_Show_Alert_Modal]="b_Confirmation_Show_Modal" (b_Closed_Alert_Modal)="Closed_Alert_Modal()"></alert-modal>
 </div>

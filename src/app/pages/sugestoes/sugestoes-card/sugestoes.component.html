@@ -9,7 +9,7 @@
 
             <div class="flex flex-row gap-6 lg:gap-10 my-auto justify-end relative right-1 xl:mr-4 cursor-pointer">
                 <img class="behavior-button w-5 h-5 md:w-6 md:h-6 2xl:w-6 2xl:h-6"
-                    src="assets/icons/more-options-user.svg" routerLink="/conteudo-adicionar">
+                    src="assets/icons/more-options-user.svg" routerLink="/sugestao-adicionar">
                 <img class="behavior-button img-width-information relative w-5 h-5 md:w-6 md:h-6 cursor-pointer"
                     src="assets/icons/list-okay.svg"
                     (click)="b_Show_Popover_Feitos = !b_Show_Popover_Feitos; b_Filter_Show_Popover = false">
@@ -28,8 +28,8 @@
             <div class="shadow-lg p-3 gap-y-1 lg:flex w-max box-border flex-col bg-white rounded-lg">
                 <div class="relative mt-1 mb-2 flex flex-row gap-x-3 cursor-pointer behavior-button"
                     routerLink="/sugestoes-lista">
-                    <img class="w-4 h-4" src="assets/icons/list-contents.svg">
-                    <span class="text-sm">Sugestões arquivadas</span>
+                    <img class="w-4 h-4" src="assets/icons/list-contents-green.svg">
+                    <span class="text-sm text-unimed-green">Sugestões arquivadas</span>
                 </div>
                 <div class="relative mt-1 flex flex-row gap-x-3 cursor-pointer behavior-button">
                     <span class="text-sm">Minhas sugestões: {{nr_Minhas_Sugestoes}}</span>

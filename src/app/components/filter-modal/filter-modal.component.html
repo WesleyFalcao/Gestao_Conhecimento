@@ -10,9 +10,9 @@
         </div>
         <div class="flex flex-col gap-y-2">
             <app-input [nm_Label_Input]="nm_Label_Input_1" [nm_Field_Input]="nm_Field_1" (Input_Emit_Value)="onFilter_Search($event)"></app-input>
-            <app-input [nm_Label_Input]="nm_Label_Input_2"></app-input>
+            <app-input [nm_Label_Input]="nm_Label_Input_2" nm_Field_Input (Input_Emit_Value)="onFilter_Search2($event)"></app-input>
             <div *ngIf="nm_Label_Input_3 != null">
-                <app-input [nm_Label_Input]="nm_Label_Input_3"></app-input>
+                <app-input [nm_Label_Input]="nm_Label_Input_3" (Input_Emit_Value)="onFilter_Search3($event)"></app-input>
             </div>
         </div>
         <div class="flex flex-row mt-4 gap-x-4 mx-4"> 

@@ -34,6 +34,10 @@ export class FilterModalComponent implements OnInit {
   /**@description Recebe o valor digitado pelo usuário no desktop */
   Input_Value: string
 
+  Input_Value2: string
+
+  Input_Value3: string
+
   constructor() { }
 
   ngOnInit(): void {
@@ -45,6 +49,14 @@ export class FilterModalComponent implements OnInit {
 
   onFilter_Search(iten){
     this.Input_Value = iten
-    console.log("Filter", this.Input_Value)
+    console.log("Campo filtro 1", this.Input_Value)
   }
+  onFilter_Search2(iten){
+    this.Input_Value2 = iten
+    console.log("Campo filtro 2", this.Input_Value2)
+  } 
+  onFilter_Search3(iten){
+    this.Input_Value3 = iten
+    console.log("Campo filtro 3", this.Input_Value3)
+  } 
 }

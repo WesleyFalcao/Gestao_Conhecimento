@@ -131,13 +131,6 @@
     border-top-color: rgb(243, 242, 242);
 }
 
-.behavior-button{
-    &:active {
-        transform: scale(0.92);
-        transition-duration: 280ms;
-    }
-}
-
 
 .header-input{
     @apply grid grid-cols-2;

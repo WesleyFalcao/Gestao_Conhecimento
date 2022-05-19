@@ -23,6 +23,7 @@ import { AnimationNothingFoundComponent } from './animation-nothing-found/animat
 import { LottieModule } from 'ngx-lottie';
 import player from 'lottie-web';
 import { ButtonFilterComponent } from './button-filter/button-filter.component';
+import { SendSuggestionComponent } from './send-suggestion/send-suggestion.component';
 export function playerFactory() {
   return player;
 }
@@ -46,7 +47,8 @@ export function playerFactory() {
     AlertModalComponent,
     HeaderNoSearchComponent,
     AnimationNothingFoundComponent,
-    ButtonFilterComponent
+    ButtonFilterComponent,
+    SendSuggestionComponent
   ],
   imports: [
     CommonModule,
@@ -73,7 +75,8 @@ export function playerFactory() {
     AlertModalComponent,
     HeaderNoSearchComponent,
     ButtonFilterComponent,
-    AnimationNothingFoundComponent
+    AnimationNothingFoundComponent,
+    SendSuggestionComponent
   ]
 })
 export class ComponentsModule { }

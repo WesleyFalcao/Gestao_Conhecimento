@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { AnimationNothingFoundComponent } from './components/animation-nothing-found/animation-nothing-found.component';
 import { AdicionarGrupoComponent } from './pages/adicionar-grupo/adicionar-grupo.component';
 import { AdicionarUsersComponent } from './pages/usuario/usuario-adicionar/usuario-adicionar.component';
 import { CategoriaAdicionarComponent } from './pages/categorias/categoria-adicionar/categoria-adicionar.component';
@@ -17,6 +16,8 @@ import { MeusEstudosComponent } from './pages/meus-estudos/meus-estudos.componen
 import { SugestoesListaComponent } from './pages/sugestoes/sugestoes-lista/sugestoes-lista.component';
 import { SugestoesComponent } from './pages/sugestoes/sugestoes-card/sugestoes.component';
 import { UsersComponent } from './pages/usuario/usuarios-lista/usuarios-lista.component';
+import { SugestaoAdicionarComponent } from './pages/sugestoes/sugestao-adicionar/sugestao-adicionar.component';
+import { SendSuggestionComponent } from './components/send-suggestion/send-suggestion.component';
 
 const routes: Routes = [
   { 
@@ -27,21 +28,23 @@ const routes: Routes = [
     path: 'home', component: HomeComponent,
     data: { animation: "HomePage" },
   },
+  { path: 'meus-estudos', component: MeusEstudosComponent },
+  { path: 'grupo-adicionar', component: AdicionarGrupoComponent },
   { path: 'conteudo', component: ConteudoComponent },
   { path: 'conteudo-editar', component: ConteudoEditarComponent },
-  { path: 'conteudo-editar-lista', component: ConteudoEditarListaComponent },
+  { path: 'conteudo-lista', component: ConteudoEditarListaComponent },
   { path: 'conteudo-adicionar', component: ConteudoAdicionarComponent },
   { path: 'usuarios', component: UsersComponent },
   { path: 'adicionar-usuario', component: AdicionarUsersComponent },
   { path: 'editar-usuario', component: EditarUserComponent },
   { path: 'sugestoes', component: SugestoesComponent },
   { path: 'sugestoes-lista', component: SugestoesListaComponent },
-  { path: 'meus-estudos', component: MeusEstudosComponent },
+  { path: 'sugestao-adicionar', component: SugestaoAdicionarComponent },
   { path: 'categorias', component: CategoriaComponent },
   { path: 'categoria-adicionar', component: CategoriaAdicionarComponent },
-  { path: 'grupo-adicionar', component: AdicionarGrupoComponent },
   { path: 'categoria-editar', component: CategoriaEditarComponent },
-  { path: 'animation-nothing-found', component: AnimationNothingFoundComponent },
+  { path: 'send-sugestion', component: SendSuggestionComponent },
+ 
 ];
 
 @NgModule({

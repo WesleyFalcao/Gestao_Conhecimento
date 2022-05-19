@@ -9,29 +9,6 @@ import { SubjectService } from 'src/app/services/subject.service';
 })
 export class ConteudoComponent implements OnInit {
 
-  /**@description caminho com o svg de baixo no filtro*/
-  nm_Filter_Svg_Bottom: string = "assets/icons/lixeira.svg"
-
-  /**@description Boolean para exibir popover no filtro */
-  b_Filter_Show_Popover: boolean = false
-
-  /**@description caminho com o svg de cima no filtro */
-  nm_Filter_Svg_Top: string = "assets/icons/filter.svg"
-
-  /**@description como o nome da opção que aparece por cima no popover do filtro */
-  nm_Filter_Opcao_top: string = "Filtrar"
-
-  /** @description Boolean para exibir ou fechar o modal de filtro */
-  b_Filter_Show_Modal: boolean
-
-  /**@description Gira o triângulo do popover no filtro */
-  b_Filter_Rotate_Triangle: boolean = true
-
-  /**@description como o nome da opção que aparece por baixo no popover do Filtro*/
-  nm_Filter_Opcao_bottom: string = "Limpar filtros"
-
-  /**@description Título da página */
-  ds_Filter_Titulo: string = "Filtros"
 
   /**@description nome do label do primeiro input */
   nm_Label_Input_Filter_1: string = "Título"
@@ -52,7 +29,7 @@ export class ConteudoComponent implements OnInit {
   nm_Opcao_bottom: string = "Excluir"
 
   /**@description Boolean para exibir svg de okay no check-box */
-  b_Start: boolean = true
+  b_Start: boolean = false
 
   /**@description Titulo da página */
   ds_Titulo: string = "Complice"
@@ -78,6 +55,9 @@ export class ConteudoComponent implements OnInit {
   /**@description Contém da descrição do modal de alerta*/
   ds_Descricao: string = "Tem certeza que deseja excluir este conteúdo?"
 
+  /**@description Recebe o valor digitado pelo usuário no desktop */
+  Input_Value: string
+
   constructor(
     private route: Router,
     private subject_service: SubjectService,
@@ -90,7 +70,7 @@ export class ConteudoComponent implements OnInit {
   }
 
   onClick_Option_Top() {
-
+    this.route.navigate(['/conteudo-editar'])
   }
 
   Start_Svg() {
@@ -104,26 +84,12 @@ export class ConteudoComponent implements OnInit {
     }
   }
 
-  onFilter_Popover(event) {
-    this.onClick_Top = event
-    if (this.onClick_Top) {
-      this.b_Filter_Show_Modal = true
-    } else {
-      this.b_Filter_Show_Modal = false
-    }
-  }
-
   onClick_Option_Bottom(event) {
-    this.route.navigate(['/conteudo-editar'])
+    this.b_Confirmation_Show_Modal = event
   }
 
   Closed_Alert_Modal() {
     this.b_Confirmation_Show_Modal = false
     this.b_Show_Popover = false
-  }
-
-  Closed_Modal_Filter() {
-    this.b_Filter_Show_Popover = false
-    this.b_Filter_Show_Modal = false
   }
 }

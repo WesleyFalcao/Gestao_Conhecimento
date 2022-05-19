@@ -1,0 +1,33 @@
+.div-position-animation {
+    @apply mx-auto mt-28;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+    width: 9rem;
+    height: 9rem;
+
+    @media (min-width: 1200px) {
+        width: 12rem;
+        height: 12rem;
+    }
+}
+
+.div-empty {
+    text-align: center;
+
+    h2 {
+        @apply text-base;
+        color: rgba(91, 88, 88, 1);
+
+        @media (min-width: 1200px) {
+            font-size: large;
+        }
+    }
+}
+
+.div-modal-sobreposicao {
+    @apply fixed inset-0 bg-slate-400 opacity-10 cursor-pointer;
+}

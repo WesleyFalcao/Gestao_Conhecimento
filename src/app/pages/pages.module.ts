@@ -20,6 +20,7 @@ import { RouterModule } from '@angular/router';
 import { ConteudoEditarListaComponent } from './conteudo/conteudo-lista/conteudo-lista.component';
 import { SugestoesListaComponent } from './sugestoes/sugestoes-lista/sugestoes-lista.component';
 import { FilterModule } from '../pipes/filter/filter.module';
+import { SugestaoAdicionarComponent } from './sugestoes/sugestao-adicionar/sugestao-adicionar.component';
 
 @NgModule({
   declarations: [
@@ -38,7 +39,8 @@ import { FilterModule } from '../pipes/filter/filter.module';
     UsersComponent,
     LoginComponent,
     ConteudoEditarListaComponent,
-    SugestoesListaComponent
+    SugestoesListaComponent,
+    SugestaoAdicionarComponent
   ],
   imports: [
     CommonModule,
