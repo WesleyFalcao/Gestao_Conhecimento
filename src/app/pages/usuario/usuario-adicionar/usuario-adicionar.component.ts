@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-adicionar-users',
@@ -42,12 +43,16 @@ export class AdicionarUsersComponent implements OnInit {
   nm_Label_Selection_Input_Ativo: string = "Status"
 
   /**@description Nome do label do selection input */
-  nm_Label_Selection_Input_Usuario: string = "Logar com usuário do computador?"
+  nm_Label_Selection_Input_Usuario: string = "Login com usuário AD?"
 
   /**@description Nome do label do selection input */
   ds_Titulo: string = "Adicionar Usuário"
 
-  constructor() { }
+  Back(){
+    this.location.back();
+  }
+  
+  constructor(private location: Location) { }
 
   ngOnInit(): void {
   }

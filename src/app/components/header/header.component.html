@@ -1,18 +1,18 @@
 <div *ngIf="!b_Show_Input, else inputshow">
 
-    <header class="header-container-grid container">
+    <header class="header-container-grid {{b_Nao_Exibir_Voltar?'container-no-back':'container'}}">
         <div class="xl:hidden area-menu" (click)="Show_Modal()">
             <img class="w-6 h-6 md:w-7 md:h-7 relative mx-auto my-6 md:my-0 md:mt-10 iten-behavior cursor-pointer"
                 src="assets/icons/filter-three-lines.svg">
         </div>
 
-        <div class="{{b_Nao_Exibir_Voltar?'hidden':''}}">
+        <span class="{{b_Nao_Exibir_Voltar?'hidden':''}}">
             <div class="div-left-calc-back area-back hidden relative xl:ml-8 2xl:ml-20 3xl:ml-14 transform -translate-x-1/2 left-1/2 my-7 xl:flex w-11 h-11 xl:mt-9 cursor-pointer iten-behavior"
                 (click)="Back()">
                 <img class="w-4 lg:w-6 mt-1" src="assets/icons/arrow-left.svg">
                 <p class="text-unimed-gray pl-3 my-auto lg:text-base">Voltar</p>
             </div>
-        </div>
+        </span>
 
         <div class="area-logo behavior-button w-16 h-8 md:w-20 md:h-10 mx-auto my-5 md:mt-8 cursor-pointer">
             <img src="assets/images/logo.png" routerLink="/home">
@@ -26,7 +26,6 @@
 
                 <div class="hidden xl:flex h-8 border-0 relative top-9 border-l-2 border-gray-600"></div>
 
-
                 <input #search type="text" [formControl]="modelChanged"
                     class="my-6 bg-transparent {{b_Show_Input_Desktop? 'relative': 'hidden'}}"
                     placeholder="Pesquise...">
@@ -37,7 +36,7 @@
             class="area-itens hidden gap-y-4 md:gap-y-7 xl:gap-y-0 pl-4 md:pl-5 pt-5 md:pt-10 xl:pl-0 xl:pt-0 xl:grid xl:w-11/12 3xl:w-8/12 {{b_User_Admin?'xl:grid-cols-5 ':'grid-cols-3'}} {{b_Show_Modal?'div-itens-modal': 'hidden'}}">
 
             <div
-                class="teste mt-20 div-aling-popover z-20 -ml-4 transition {{b_Show_Popover && b_Show_Input_Desktop? 'absolute':'hidden'}}">
+                class="teste mt-20 div-aling-popover z-20 -ml-4 transition ease-in-out {{b_Show_Popover && b_Show_Input_Desktop? 'absolute':'hidden'}}">
                 <div class="div-triangulo mx-auto rotate-180">
                 </div>
                 <div class="shadow-lg p-3 lg:flex w-max box-border flex-col bg-white rounded-lg">

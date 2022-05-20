@@ -8,7 +8,7 @@
         <div class="flex flex-row gap-6 lg:gap-10 my-auto justify-end relative right-1 xl:mr-4 cursor-pointer">
             <img class="behavior-button w-5 h-5 md:w-7 md:h-7 2xl:w-6 2xl:h-6" src="assets/icons/more-options-user.svg"
                 routerLink="/conteudo-adicionar">
-                <app-button-filter [Input_Value]="Input_Value"></app-button-filter>
+                <app-button-filter (b_Show_Modal)="Show_Modal($event)"></app-button-filter>
             <img class="behavior-button w-6 h-6 md:w-8 md:h-8 2xl:w-7 2xl:h-7" src="assets/icons/refresh.svg">
         </div>
     </div>
@@ -102,3 +102,27 @@
 
     <alert-modal [ds_Descricao]="ds_Descricao" [b_Show_Alert_Modal]="b_Confirmation_Show_Modal" (b_Closed_Alert_Modal)="Closed_Alert_Modal()"></alert-modal>
 </div>
+
+<app-modal (b_Click_Sobreposicao)="Close_Modal()" class="{{b_Show_Filter?'':'hidden'}}">
+    <div class="grid grid-cols-2">
+        <div class="flex flex-col relative left-2 lg:left-2 pb-4 lg:ml-2.5 -mt-4">
+            <uni-title ds_Titulo="Filtro"></uni-title>
+        </div>
+        <img class="behavior-button w-5 h-4 mt-1 absolute right-5 lg:right-8 top-8 cursor-pointer"
+            src="assets/icons/X.svg" (click)="Close_Modal()">
+    </div>
+    <div class="flex flex-col gap-y-2">
+        <form>
+            <app-input [required]="true" label="Nome" [(ngModel)]="objFilter.nm_Nome" id="nm_Nome" name="nm_Nome">
+            </app-input>
+            <app-input [required]="true" label="Usuário" [(ngModel)]="objFilter.nm_Usuario" id="nm_Usuario"
+                name="nm_Usuario"></app-input>
+            <app-input [required]="true" label="Status (ativo ou inativo)" [(ngModel)]="objFilter.nm_Status"
+                id="nm_Status" name="nm_Status"></app-input>
+        </form>
+    </div>
+    <div class="flex flex-row mt-4 gap-x-4 mx-4">
+        <uni-button buttonClass="btn-outline" (click)="Close_Modal()">Voltar</uni-button>
+        <uni-button buttonClass="btn-primary" (click)="Filtrar()">Filtrar</uni-button>
+    </div>
+</app-modal>

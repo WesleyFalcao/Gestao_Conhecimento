@@ -1,3 +1,4 @@
+import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -5,7 +6,10 @@ import { Component, OnInit } from '@angular/core';
   templateUrl: './adicionar-grupo.component.html',
   styleUrls: ['./adicionar-grupo.component.scss']
 })
+
 export class AdicionarGrupoComponent implements OnInit {
+
+  constructor(private location: Location) { }
 
   /**@description string que passa o título da página */
   ds_Titulo: string = "Adicionar grupo"
@@ -13,8 +17,10 @@ export class AdicionarGrupoComponent implements OnInit {
   /**@description Boolean para remover a barra de pesquisa */
   b_Not_Search: boolean = true
 
-  constructor() { }
-
+  Back(){
+    this.location.back();
+  }
+  
   ngOnInit(): void {
   }
 

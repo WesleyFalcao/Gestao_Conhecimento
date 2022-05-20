@@ -1,3 +1,4 @@
+import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -16,7 +17,11 @@ export class CategoriaEditarComponent implements OnInit {
   /**@description Boolean para remover a barra de pesquisa */
   b_Not_Search: boolean = true
 
-  constructor() { }
+  constructor(private location: Location) { }
+
+  Back(){
+    this.location.back();
+  }
 
   ngOnInit(): void {
   }

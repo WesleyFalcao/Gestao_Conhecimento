@@ -1,3 +1,4 @@
+import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { SubjectService } from 'src/app/services/subject.service';
 
@@ -18,11 +19,18 @@ export class SugestaoAdicionarComponent implements OnInit {
   /**@description Boolean para remover a barra de pesquisa */
   b_Not_Search: boolean = true
 
-  constructor(private subject_service: SubjectService) { }
+  constructor(
+    private subject_service: SubjectService,
+    private location: Location
+    ) { }
 
   ngOnInit(): void {
   }
 
+  Back(){
+    this.location.back();
+  }
+  
   Send_Sugestion(){
     this.subject_service.subject_Exibindo_Animation_Send.next(true)
     this.Send_Sugestion_Animacao = true

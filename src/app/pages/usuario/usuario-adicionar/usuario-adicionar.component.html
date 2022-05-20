@@ -1,6 +1,6 @@
 <app-header [b_Not_Search]="b_Not_Search"></app-header>
 
-<div class="container px-8 relative top-4 pb-1 lg:top-14 ">
+<div class="container px-8 relative top-4 pb-1 lg:top-14">
     <div class="flex flex-col relative mb-4 left-4 lg:left-2 lg:ml-2.5">
         <uni-title [ds_Titulo]="ds_Titulo"></uni-title>
     </div>
@@ -25,7 +25,7 @@
         </div>
     </div>
     <div class="flex flex-row mt-4 gap-x-4 mx-4 lg:mx-20 lg:gap-x-20"> 
-        <uni-button buttonClass="btn-outline">Voltar</uni-button>
+        <uni-button buttonClass="btn-outline" (click)="Back()">Voltar</uni-button>
         <uni-button buttonClass="btn-primary">Adicionar</uni-button>
     </div>
 </div>

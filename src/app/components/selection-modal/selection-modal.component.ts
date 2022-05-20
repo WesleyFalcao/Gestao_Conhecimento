@@ -10,6 +10,8 @@ export class SelectionModalComponent implements OnInit {
 
   /** @description Array de Itens para listar */
   @Input() objArrayItens
+
+  @Input() nm_Label_Selection_Input: string
     
   /** @description Campo que será usado como Descrição */
   nm_Descricao = "nm_Nome"

@@ -8,7 +8,7 @@
         <div class="flex flex-row gap-6 lg:gap-10 my-auto justify-end relative right-1 xl:mr-4 cursor-pointer">
             <img class="behavior-button w-5 h-5 xl:w-7 xl:h-7 2xl:w-6 2xl:h-6" src="assets/icons/more-options-user.svg"
                 routerLink="/conteudo-adicionar">
-                <app-button-filter (b_Show_Modal)="Show_Modal($event)"></app-button-filter>
+            <app-button-filter (b_Show_Modal)="Show_Modal($event)"></app-button-filter>
             <img class="behavior-button w-6 h-6 xl:w-8 xl:h-8 2xl:w-7 2xl:h-7" src="assets/icons/refresh.svg">
         </div>
     </div>
@@ -18,7 +18,7 @@
             <p class="font-semibold lg:grid ml-5">Título</p>
             <p class="lg:text-center font-semibold">Descrição</p>
             <p class="lg:text-center font-semibold">Link</p>
-            <p class="lg:text-center font-semibold">Grupo</p>
+            <p class="lg:text-center font-semibold">Categoria</p>
             <p class="lg:text-center font-semibold">Editar</p>
         </div>
     </div>
@@ -59,7 +59,7 @@
                     <div class="flex flex-row gap-x-3 behavior-button">
                         <img class="reltive left-5 ml-5 mt-1 behavior-button w-4 h-4 lg:w-7 lg:h-7 my-auto cursor-pointer lg:mx-auto"
                             src="assets/icons/edit.svg" routerLink="/conteudo-editar">
-                            <p>Editar</p>
+                        <p>Editar</p>
                     </div>
                 </div>
             </div>
@@ -71,7 +71,8 @@
                 <p class="text-center my-auto text-ellipsis overflow-hidden whitespace-nowrap">{{iten.id}}</p>
                 <p class="my-3 lg:my-auto ml-5 text-ellipsis overflow-hidden whitespace-nowrap">
                     {{iten.titulo}}</p>
-                <p class="text-center my-auto mx-auto text-ellipsis overflow-hidden whitespace-nowrap w-9/12">{{iten.descricao}}</p>
+                <p class="text-center my-auto mx-auto text-ellipsis overflow-hidden whitespace-nowrap w-9/12">
+                    {{iten.descricao}}</p>
                 <p class="text-center my-auto text-ellipsis overflow-hidden whitespace-nowrap">{{iten.link}}</p>
                 <p class="text-center my-auto text-ellipsis overflow-hidden whitespace-nowrap">{{iten.grupo}}</p>
                 <img class="behavior-button w-5 h-5 my-auto mx-auto cursor-pointer" src="assets/icons/edit.svg"
@@ -95,10 +96,10 @@
             </app-input>
             <app-input [required]="true" label="Descrição" [(ngModel)]="objFilter.nm_Usuario" id="nm_Usuario"
                 name="nm_Usuario"></app-input>
-            <app-input [required]="true" label="id" [(ngModel)]="objFilter.nm_Status"
-                id="nm_Status" name="nm_Status"></app-input>
-            <app-input [required]="true" label="Grupo" [(ngModel)]="objFilter.nm_Grupo"
-                id="nm_Grupo" name="nm_Grupo"></app-input>
+            <app-input [required]="true" label="id" [(ngModel)]="objFilter.nm_Status" id="nm_Status" name="nm_Status">
+            </app-input>
+            <app-input [required]="true" label="Grupo" [(ngModel)]="objFilter.nm_Grupo" id="nm_Grupo" name="nm_Grupo">
+            </app-input>
         </form>
     </div>
     <div class="flex flex-row mt-4 gap-x-4 mx-4">

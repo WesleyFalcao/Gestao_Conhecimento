@@ -58,6 +58,13 @@ export class ConteudoComponent implements OnInit {
   /**@description Recebe o valor digitado pelo usuário no desktop */
   Input_Value: string
 
+  /**@description Objeto que recebe o conteudo dos inputs */
+  objFilter = { nm_Nome: "", nm_Usuario: "", nm_Status: "" }
+
+  /**@description Boolean para abrir e fechar o modal de filtro */
+  b_Show_Filter: boolean = false
+
+
   constructor(
     private route: Router,
     private subject_service: SubjectService,
@@ -91,5 +98,18 @@ export class ConteudoComponent implements OnInit {
   Closed_Alert_Modal() {
     this.b_Confirmation_Show_Modal = false
     this.b_Show_Popover = false
+  }
+
+  Filtrar() {
+    console.log(this.objFilter)
+    this.b_Show_Filter = false
+  }
+
+  Close_Modal() {
+    this.b_Show_Filter = false
+  }
+
+  Show_Modal(event) {
+    this.b_Show_Filter = event
   }
 }

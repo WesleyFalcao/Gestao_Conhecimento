@@ -1,3 +1,4 @@
+import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -74,9 +75,11 @@ export class ConteudoAdicionarComponent implements OnInit {
   /**@description Nome do label do primeiro campo de imput*/
   nm_Grupo_Input: string = "Grupo"
 
-  constructor(
-    
-  ) { }
+  constructor(private location: Location) { }
+
+  Back(){
+    this.location.back();
+  }
 
   ngOnInit(): void {
   }
