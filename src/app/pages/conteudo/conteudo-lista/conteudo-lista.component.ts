@@ -77,6 +77,7 @@ export class ConteudoEditarListaComponent implements OnInit {
 
   Filtrar(){
     console.log(this.objFilter)
+    this.b_Show_Filter = false
   } 
 
   Show_Modal(event){

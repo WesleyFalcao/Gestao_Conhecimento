@@ -14,7 +14,7 @@ export class CategoriaComponent {
   b_Show_Filter: boolean = false
 
   /**@description Objeto que recebe o conteudo dos inputs */
-  objFilter = { nm_Nome: "", nm_Usuario: "", nm_Status: "" }
+  objFilter = { nr_Id: "", nm_Grupo: "", nm_Status: "" }
 
 
   /**@description Recebe o valor digitado pelo usuário no desktop */
@@ -49,6 +49,7 @@ export class CategoriaComponent {
 
   Filtrar() {
     console.log(this.objFilter)
+    this.b_Show_Filter = false
   }
 
   Show_Modal(event) {

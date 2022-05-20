@@ -17,7 +17,6 @@ import { SelectionInputComponent } from './selection-input/selection-input.compo
 import { FilterModule } from '../pipes/filter/filter.module';
 import { FilterModalComponent } from './filter-modal/filter-modal.component';
 import { AlertModalComponent } from './alert-modal/alert-modal.component';
-import { HeaderNoSearchComponent } from './header-no-search/header-no-search.component';
 import { AnimationNothingFoundComponent } from './animation-nothing-found/animation-nothing-found.component';
 import { LottieModule } from 'ngx-lottie';
 import player from 'lottie-web';
@@ -45,7 +44,6 @@ export function playerFactory() {
     SelectionInputComponent,
     FilterModalComponent,
     AlertModalComponent,
-    HeaderNoSearchComponent,
     AnimationNothingFoundComponent,
     ButtonFilterComponent,
     SendSuggestionComponent,
@@ -74,7 +72,6 @@ export function playerFactory() {
     SelectionInputComponent,
     FilterModalComponent,
     AlertModalComponent,
-    HeaderNoSearchComponent,
     ButtonFilterComponent,
     AnimationNothingFoundComponent,
     SendSuggestionComponent,

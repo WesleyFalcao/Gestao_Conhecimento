@@ -63,6 +63,9 @@ export class ConteudoAdicionarComponent implements OnInit {
     },
   ]
   
+  /**@description Boolean para remover a barra de pesquisa */
+  b_Not_Search: boolean = true
+
   /**@description Título da páginas */
   ds_Titulo: string = "Adicionar conteúdo"
 

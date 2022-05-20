@@ -10,6 +10,8 @@ export class ButtonFilterComponent implements OnInit {
   /**@description Recebe o valor digitado pelo usuário no desktop */
   @Input() Input_Value: string
 
+  @Input() b_Popover_Sugestoes: boolean
+
   /**@description boolean para abrir e fechar o modal */
   @Output() b_Show_Modal = new EventEmitter()
 
@@ -51,4 +53,5 @@ export class ButtonFilterComponent implements OnInit {
   onFilter_Popover() {
     this.b_Show_Modal.emit(true)
   }
+  
 }

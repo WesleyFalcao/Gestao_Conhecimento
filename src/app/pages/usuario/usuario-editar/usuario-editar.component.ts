@@ -32,6 +32,9 @@ export class EditarUserComponent implements OnInit {
     }
   ]
 
+  /**@description Boolean para remover a barra de pesquisa */
+  b_Not_Search: boolean = true
+
   /**@description Nome do label do selection input */
   ds_Titulo: string = "Editar Usuário"
 

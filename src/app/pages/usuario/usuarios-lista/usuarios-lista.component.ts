@@ -92,6 +92,7 @@ export class UsersComponent implements OnInit {
 
   Filtrar() {
     console.log(this.objFilter)
+    this.b_Show_Filter = false
   }
 
   Close_Modal() {

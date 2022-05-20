@@ -6,24 +6,31 @@
                 src="assets/icons/filter-three-lines.svg">
         </div>
 
-        <div class="div-left-calc-back area-back hidden relative xl:ml-8 2xl:ml-20 3xl:ml-14 transform -translate-x-1/2 left-1/2 my-7 xl:flex w-11 h-11 xl:mt-9 cursor-pointer iten-behavior"
-            (click)="Back()">
-            <img class="w-4 lg:w-6 mt-1" src="assets/icons/arrow-left.svg">
-            <p class="text-unimed-gray pl-3 my-auto lg:text-base">Voltar</p>
+        <div class="{{b_Nao_Exibir_Voltar?'hidden':''}}">
+            <div class="div-left-calc-back area-back hidden relative xl:ml-8 2xl:ml-20 3xl:ml-14 transform -translate-x-1/2 left-1/2 my-7 xl:flex w-11 h-11 xl:mt-9 cursor-pointer iten-behavior"
+                (click)="Back()">
+                <img class="w-4 lg:w-6 mt-1" src="assets/icons/arrow-left.svg">
+                <p class="text-unimed-gray pl-3 my-auto lg:text-base">Voltar</p>
+            </div>
         </div>
 
         <div class="area-logo behavior-button w-16 h-8 md:w-20 md:h-10 mx-auto my-5 md:mt-8 cursor-pointer">
             <img src="assets/images/logo.png" routerLink="/home">
         </div>
 
-        <div class="area-search xl:flex xl:-ml-12 2xl:ml-20 3xl:ml-32 xl:gap-4 xl:w-1/2 xl:mx-auto">
-            <img class="w-6 h-6 mx-auto relative my-6 md:mt-10 xl:mt-11" src="{{nm_Src_Icon}}"
-                (click)="Show_Input()">
+        <div class="{{b_Not_Search?'hidden':''}}">
 
-            <div class="hidden xl:flex h-8 border-0 relative top-9 border-l-2 border-gray-600"></div>
+            <div class="area-search xl:flex xl:-ml-12 2xl:ml-20 3xl:ml-32 xl:gap-4 xl:w-1/2 xl:mx-auto">
+                <img class="w-6 h-6 mx-auto relative my-6 xl:my-9 md:mt-10 xl:mt-11" src="{{nm_Src_Icon}}"
+                    (click)="Show_Input()">
 
-            <input #search type="text" [formControl]="modelChanged" class="my-6 bg-transparent {{b_Show_Input_Desktop? 'relative': 'hidden'}}"
-                placeholder="Pesquise...">
+                <div class="hidden xl:flex h-8 border-0 relative top-9 border-l-2 border-gray-600"></div>
+
+
+                <input #search type="text" [formControl]="modelChanged"
+                    class="my-6 bg-transparent {{b_Show_Input_Desktop? 'relative': 'hidden'}}"
+                    placeholder="Pesquise...">
+            </div>
         </div>
 
         <div
@@ -33,8 +40,9 @@
                 class="teste mt-20 div-aling-popover z-20 -ml-4 transition {{b_Show_Popover && b_Show_Input_Desktop? 'absolute':'hidden'}}">
                 <div class="div-triangulo mx-auto rotate-180">
                 </div>
-                <div class="shadow-lg p-3 lg:flex w-max box-border flex-col bg-white rounded-lg" >
-                    <div class="relative mt-1 flex flex-row gap-x-3 cursor-pointer behavior-button" (click)="onClick_Usuario()">
+                <div class="shadow-lg p-3 lg:flex w-max box-border flex-col bg-white rounded-lg">
+                    <div class="relative mt-1 flex flex-row gap-x-3 cursor-pointer behavior-button"
+                        (click)="onClick_Usuario()">
                         <img class="w-4 h-4" src="assets/icons/user-black.svg">
                         <span class="text-sm">Usuários</span>
                     </div>
@@ -47,7 +55,7 @@
                         (click)="onClick_Categorias()">
                         <img class="w-4 h-4" src="assets/icons/category.svg">
                         <span class="text-sm">Categorias</span>
-                    </div>      
+                    </div>
                 </div>
             </div>
 
@@ -120,7 +128,8 @@
     <header class="header-input">
         <img class="area-back w-6 h-6 md:w-8 md:h-8 relative mx-auto my-6 md:mt-10" src="{{nm_Src_Icon}}"
             (click)="Show_Input()">
-        <input #search type="text" class="area-input my-6 md:mt-10 md:text-lg bg-transparent" [formControl]="modelChanged" placeholder="Pesquise...">
+        <input #search type="text" class="area-input my-6 md:mt-10 md:text-lg bg-transparent"
+            [formControl]="modelChanged" placeholder="Pesquise...">
     </header>
 </ng-template>
 

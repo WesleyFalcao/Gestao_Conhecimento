@@ -11,3 +11,17 @@
         left: calc(100% - 9.4rem);  
     }
 }
+
+.div-aling-popover-sugestoes{
+    left: calc(100% - 5rem);
+
+    @media (min-width: 768px) {
+        left: calc(100% - 8.3rem);
+    }
+    @media (min-width: 1024px) {
+        left: calc(100% - 9.2rem);    
+    }
+    @media (min-width: 1526px) {
+        left: calc(100% - 9.5rem);  
+    }
+}

@@ -32,6 +32,9 @@ export class AdicionarUsersComponent implements OnInit {
     }
   ]
 
+  /**@description Boolean para remover a barra de pesquisa */
+  b_Not_Search: boolean = true
+
   /**@description Nome do label do selection input */
   nm_Label_Selection_Input_Perfil: string = "Perfil"
 

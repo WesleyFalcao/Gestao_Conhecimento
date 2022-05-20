@@ -15,6 +15,12 @@ export class HeaderComponent implements OnInit {
   /**@description Array que recebe o itens para serem filtrados */
   @Input() obj_Array_Itens: any
 
+  /**@description Boolean para remover a barra de pesquisa */
+  @Input() b_Not_Search: boolean
+
+  /**@description Boolean retirar botão de voltar */
+  @Input() b_Nao_Exibir_Voltar: boolean
+
   /**@description boolean para abrir ou fechar o popover */
   b_Show_Popover: boolean = false
 

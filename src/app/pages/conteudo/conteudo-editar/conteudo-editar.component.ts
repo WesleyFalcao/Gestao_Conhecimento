@@ -63,6 +63,9 @@ export class ConteudoEditarComponent implements OnInit {
     },
   ]
 
+  /**@description Boolean para remover a barra de pesquisa */
+  b_Not_Search: boolean = true
+
   /**@description Título da página */
   ds_Titulo: string = "Editar conteúdo"
 

@@ -1,7 +1,7 @@
 <img class="behavior-button w-5 h-5 xl:w-7 xl:h-7 2xl:w-6 2xl:h-6" src="assets/icons/filter.svg"
     (click)="b_Show_Popover = !b_Show_Popover">
 
-<div class="absolute div-aling-popover z-20">
+<div class="absolute {{b_Popover_Sugestoes?'div-aling-popover-sugestoes':'div-aling-popover'}} div-aling-popover z-20 ">
     <app-popover [nm_Svg_Top]="nm_Svg_Top" [nm_Svg_Bottom]="nm_Svg_Bottom" [nm_Opcao_top]="nm_Opcao_top"
         [nm_Opcao_bottom]="nm_Opcao_bottom" [b_Rotate_Triangle]="b_Rotate_Triangle" [b_Show_Popover]="b_Show_Popover"
         (onClick_Option_Top)="onFilter_Popover()">

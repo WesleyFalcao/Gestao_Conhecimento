@@ -6,11 +6,17 @@ import { SubjectService } from 'src/app/services/subject.service';
   templateUrl: './sugestao-adicionar.component.html',
   styleUrls: ['./sugestao-adicionar.component.scss']
 })
+
 export class SugestaoAdicionarComponent implements OnInit {
 
+  /**@description Boolean para controlar a animação */
   Send_Sugestion_Animacao: boolean = false
+
   /**@description string que passa o título da página */
   ds_Titulo: string = "Adicionar sugestão"
+
+  /**@description Boolean para remover a barra de pesquisa */
+  b_Not_Search: boolean = true
 
   constructor(private subject_service: SubjectService) { }
 

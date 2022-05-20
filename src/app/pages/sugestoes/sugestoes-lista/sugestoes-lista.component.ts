@@ -36,6 +36,12 @@ export class SugestoesListaComponent implements OnInit {
   /**@description Contém da descrição do modal de alerta*/
   ds_Descricao: string = "Tem certeza que deseja desarquivar?"
 
+  /**@description Boolean para abrir e fechar o modal de filtro */
+  b_Show_Filter: boolean = false
+
+  /**@description Objeto que recebe o conteudo dos inputs */
+  objFilter = { nm_Nome: "", nm_Usuario: "", nm_Status: "" }
+
   constructor(
 
   ) { }
@@ -86,4 +92,16 @@ export class SugestoesListaComponent implements OnInit {
     this.b_Confirmation_Show_Modal = event
   }
 
+  Filtrar() {
+    console.log(this.objFilter)
+    this.b_Show_Filter = false
+  }
+
+  Close_Modal() {
+    this.b_Show_Filter = false
+  }
+
+  Show_Modal(event) {
+    this.b_Show_Filter = event
+  }
 }
