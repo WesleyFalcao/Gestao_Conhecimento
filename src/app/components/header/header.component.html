@@ -1,25 +1,23 @@
 <div *ngIf="!b_Show_Input, else inputshow">
-
     <header class="header-container-grid {{b_Nao_Exibir_Voltar?'container-no-back':'container'}}">
         <div class="xl:hidden area-menu" (click)="Show_Modal()">
             <img class="w-6 h-6 md:w-7 md:h-7 relative mx-auto my-6 md:my-0 md:mt-10 iten-behavior cursor-pointer"
                 src="assets/icons/filter-three-lines.svg">
         </div>
-
-        <span class="{{b_Nao_Exibir_Voltar?'hidden':''}}">
-            <div class="div-left-calc-back area-back hidden relative xl:ml-8 2xl:ml-20 3xl:ml-14 transform -translate-x-1/2 left-1/2 my-7 xl:flex w-11 h-11 xl:mt-9 cursor-pointer iten-behavior"
+        <span class="area-back {{b_Nao_Exibir_Voltar?'hidden':''}}">
+            <div class="div-left-calc-back  hidden relative xl:ml-8 2xl:ml-20 3xl:ml-14 transform -translate-x-1/2 left-1/2 my-7 xl:flex w-11 h-11 xl:mt-9 cursor-pointer iten-behavior"
                 (click)="Back()">
                 <img class="w-4 lg:w-6 mt-1" src="assets/icons/arrow-left.svg">
                 <p class="text-unimed-gray pl-3 my-auto lg:text-base">Voltar</p>
             </div>
         </span>
-
         <div class="area-logo behavior-button w-16 h-8 md:w-20 md:h-10 mx-auto my-5 md:mt-8 cursor-pointer">
+            <div class="absolute -mt-5 mx-auto ml-7">
+                <app-version></app-version>
+            </div>
             <img src="assets/images/logo.png" routerLink="/home">
         </div>
-
         <div class="{{b_Not_Search?'hidden':''}}">
-
             <div class="area-search xl:flex xl:-ml-12 2xl:ml-20 3xl:ml-32 xl:gap-4 xl:w-1/2 xl:mx-auto">
                 <img class="w-6 h-6 mx-auto relative my-6 xl:my-9 md:mt-10 xl:mt-11" src="{{nm_Src_Icon}}"
                     (click)="Show_Input()">
@@ -31,7 +29,6 @@
                     placeholder="Pesquise...">
             </div>
         </div>
-
         <div
             class="area-itens hidden gap-y-4 md:gap-y-7 xl:gap-y-0 pl-4 md:pl-5 pt-5 md:pt-10 xl:pl-0 xl:pt-0 xl:grid xl:w-11/12 3xl:w-8/12 {{b_User_Admin?'xl:grid-cols-5 ':'grid-cols-3'}} {{b_Show_Modal?'div-itens-modal': 'hidden'}}">
 
@@ -57,7 +54,6 @@
                     </div>
                 </div>
             </div>
-
             <div class="{{b_Show_Modal && b_User_Admin?'flex':'hidden'}}">
                 <div class="div-width-options-modal flex flex-row xl:flex-col xl:text-center xl:justify-center 3xl:mt-1 cursor-pointer iten-behavior {{b_Show_Input_Desktop?'flex flex-row': ''}}"
                     routerLink="/usuarios">
@@ -90,7 +86,6 @@
                     <p class="text-xs md:text-lg xl:text-xs my-auto pl-0.5 xl:my-0 xl:pl-0">Categorias</p>
                 </div>
             </div>
-
             <div
                 class="{{b_User_Admin == false && b_Show_Modal == false? 'position-itens-no-adm flex gap-x-16':''}} {{b_Show_Modal == true?'grid gap-y-4 md:gap-y-7':''}} {{b_User_Admin == true && b_Show_Modal == false? 'position-itens-adm flex gap-x-16':''}}">
                 <div class="flex flex-row xl:flex-col xl:text-center xl:justify-center 3xl:mt-1 cursor-pointer iten-behavior {{b_User_Admin?'':'hidden'}} {{b_Show_Input_Desktop?'flex flex-row': 'hidden'}}"
@@ -118,11 +113,9 @@
                     <p class="text-xs md:text-lg xl:text-xs my-auto pl-0.5 xl:my-0 xl:pl-0">Sair</p>
                 </div>
             </div>
-
         </div>
     </header>
 </div>
-
 <ng-template #inputshow>
     <header class="header-input">
         <img class="area-back w-6 h-6 md:w-8 md:h-8 relative mx-auto my-6 md:mt-10" src="{{nm_Src_Icon}}"
@@ -131,7 +124,6 @@
             [formControl]="modelChanged" placeholder="Pesquise...">
     </header>
 </ng-template>
-
 <div *ngIf="b_Show_Modal">
     <div class="modal-sobreposicao" (click)="b_Show_Modal = false">
     </div>

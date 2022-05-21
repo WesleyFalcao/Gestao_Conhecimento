@@ -1,21 +1,30 @@
 .container{
-    max-width: 700px;
+    max-width: 300px;
     margin: 0 auto;
 
+    @media (min-width: 540px) {
+        max-width: 400px;
+    }
+    @media (min-width: 768px) {
+        max-width: 550px;
+    }
+    @media (min-width: 900px) {
+        max-width: 650px;
+    }
     @media (min-width: 1024px) {
-        max-width: 850px;
+        max-width: 750px;
     }
     @media (min-width: 1280px) {
-        max-width: 1250px;
+        max-width: 1150px;
     }
     @media (min-width: 1536px) {
-        max-width: 1300px;
+        max-width: 1250px;
     }
     @media (min-width: 1636px) {
-        max-width: 1300px;
+        max-width: 1200px;
     }
     @media (min-width: 1780px) {
-        max-width: 1400px;
+        max-width: 1300px;
     }
 
 

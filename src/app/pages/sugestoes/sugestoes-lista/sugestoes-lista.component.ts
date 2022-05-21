@@ -21,6 +21,7 @@ export class SugestoesListaComponent implements OnInit {
 
   /**@description Título da página */
   ds_Titulo: string = "Sugestões arquivadas"
+  
   /**@description recebe a largura atual da tela */
   nr_Width: number
 
