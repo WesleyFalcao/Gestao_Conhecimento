@@ -10,6 +10,7 @@ import { RouterModule } from '@angular/router';
 import { FilterModule } from './pipes/filter/filter.module';
 import { ComponentsModule } from './components/components.module';
 import { PagesModule } from './pages/pages.module';
+import { AuthGuard } from './guards/auth-guard';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,7 @@ import { PagesModule } from './pages/pages.module';
     ReactiveFormsModule,
     FilterModule,
   ],
-  providers: [],
+  providers: [AuthGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

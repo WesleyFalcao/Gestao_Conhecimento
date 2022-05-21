@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
+import { RouterModule, Routes, CanActivate } from '@angular/router';
 import { AdicionarGrupoComponent } from './pages/adicionar-grupo/adicionar-grupo.component';
 import { AdicionarUsersComponent } from './pages/usuario/usuario-adicionar/usuario-adicionar.component';
 import { CategoriaAdicionarComponent } from './pages/categorias/categoria-adicionar/categoria-adicionar.component';
@@ -18,33 +18,65 @@ import { SugestoesComponent } from './pages/sugestoes/sugestoes-card/sugestoes.c
 import { UsersComponent } from './pages/usuario/usuarios-lista/usuarios-lista.component';
 import { SugestaoAdicionarComponent } from './pages/sugestoes/sugestao-adicionar/sugestao-adicionar.component';
 import { SendSuggestionComponent } from './components/send-suggestion/send-suggestion.component';
+import { AuthGuard } from './guards/auth-guard';
 
 const routes: Routes = [
-  { 
-    path: '', component: LoginComponent,
+
+  { path: '', component: LoginComponent,
     data: { animation: "LoginPage" },
   },
-  { 
-    path: 'home', component: HomeComponent,
+  { path: 'home', component: HomeComponent,
     data: { animation: "HomePage" },
+    canActivate: [AuthGuard]
   },
-  { path: 'meus-estudos', component: MeusEstudosComponent },
-  { path: 'grupo-adicionar', component: AdicionarGrupoComponent },
-  { path: 'conteudo', component: ConteudoComponent },
-  { path: 'conteudo-editar', component: ConteudoEditarComponent },
-  { path: 'conteudo-lista', component: ConteudoEditarListaComponent },
-  { path: 'conteudo-adicionar', component: ConteudoAdicionarComponent },
-  { path: 'usuarios', component: UsersComponent },
-  { path: 'adicionar-usuario', component: AdicionarUsersComponent },
-  { path: 'editar-usuario', component: EditarUserComponent },
-  { path: 'sugestoes', component: SugestoesComponent },
-  { path: 'sugestoes-lista', component: SugestoesListaComponent },
-  { path: 'sugestao-adicionar', component: SugestaoAdicionarComponent },
-  { path: 'categorias', component: CategoriaComponent },
-  { path: 'categoria-adicionar', component: CategoriaAdicionarComponent },
-  { path: 'categoria-editar', component: CategoriaEditarComponent },
-  { path: 'send-sugestion', component: SendSuggestionComponent },
- 
+  { path: 'meus-estudos', component: MeusEstudosComponent,
+    canActivate: [AuthGuard]
+  },
+  { path: 'grupo-adicionar', component: AdicionarGrupoComponent,
+    canActivate: [AuthGuard]
+  },
+  { path: 'conteudo', component: ConteudoComponent,
+    canActivate: [AuthGuard] 
+  },
+  { path: 'conteudo-editar', component: ConteudoEditarComponent,
+    canActivate: [AuthGuard]
+  },
+  { path: 'conteudo-lista', component: ConteudoEditarListaComponent,
+    canActivate: [AuthGuard]
+  },
+  { path: 'conteudo-adicionar', component: ConteudoAdicionarComponent,
+    canActivate: [AuthGuard]  
+  },
+  { path: 'usuarios', component: UsersComponent,
+  canActivate: [AuthGuard]  
+  },
+  { path: 'adicionar-usuario', component: AdicionarUsersComponent,
+  canActivate: [AuthGuard]
+  },
+  { path: 'editar-usuario', component: EditarUserComponent,
+  canActivate: [AuthGuard]  
+  },
+  { path: 'sugestoes', component: SugestoesComponent,
+  canActivate: [AuthGuard]  
+  },
+  { path: 'sugestoes-lista', component: SugestoesListaComponent,
+  canActivate: [AuthGuard] 
+  },
+  { path: 'sugestao-adicionar', component: SugestaoAdicionarComponent,
+  canActivate: [AuthGuard]
+  },
+  { path: 'categorias', component: CategoriaComponent,
+  canActivate: [AuthGuard]  
+  },
+  { path: 'categoria-adicionar', component: CategoriaAdicionarComponent,
+  canActivate: [AuthGuard]
+  },
+  { path: 'categoria-editar', component: CategoriaEditarComponent,
+  canActivate: [AuthGuard]  
+  },
+  { path: 'send-sugestion', component: SendSuggestionComponent,
+  canActivate: [AuthGuard]  
+  },
 ];
 
 @NgModule({
