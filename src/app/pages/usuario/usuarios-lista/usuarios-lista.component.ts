@@ -27,7 +27,7 @@ export class UsersComponent implements OnInit {
   Input_Value: string
 
   /**@description Objeto que recebe o conteudo dos inputs */
-  objFilter = { nm_Nome: "", nm_Usuario: "", nm_Status: "" }
+  objFilter = { nm_Nome: "", nm_Usuario: "", nm_Status: "", id: "" }
 
   constructor(
 

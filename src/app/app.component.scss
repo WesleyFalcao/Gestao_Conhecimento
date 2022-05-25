@@ -1,1 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap');
+
+.aling-version{
+    left: 49%;
+    @apply mx-auto absolute transform -translate-x-1/2
+}

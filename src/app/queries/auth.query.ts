@@ -1,21 +1,21 @@
 import { Injectable } from "@angular/core";
 
 @Injectable({
-    providedIn: "root"
+  providedIn: "root"
 })
 export class AuthQuery {
 
-    constructor(
-    ) {
-    }
+  constructor(
+  ) {
+  }
 
-    Set_Login() {
-        return {
-            header: [{
-                field: '$params',
-                type: 'LoginInput!'
-            },],
-            query: `login(params: $params) {
+  Set_Login() {
+    return {
+      header: [{
+        field: '$params',
+        type: 'LoginInput!'
+      },],
+      query: `login(params: $params) {
                 data {
                   subcontratos {
                     cd_Grupo_Empresa
@@ -39,47 +39,6 @@ export class AuthQuery {
                 status
                 statusCode
               }`
-        }
     }
-
-    Set_Registrar() {
-        return {
-            header: [{
-                field: '$params',
-                type: 'RegistrarInput!'
-            },],
-            query: `
-            registrar(params: $params) {
-                data
-                motivos_Critica {
-                  criticas
-                  propriedade
-                }
-                nr_Registros
-                status
-                statusCode
-              }`
-        }
-    }
-
-    Get_Url_Chat() {
-        return {
-            header: [{
-                field: '$cd_Subcontrato',
-                type: 'Float!'
-            },],
-            query: `
-            chat(cd_Subcontrato: $cd_Subcontrato) {
-                data{
-                    ds_Link
-                }
-                motivos_Critica {
-                  criticas
-                  propriedade
-                }
-                status
-                statusCode
-              }`
-        }
-    }
+  }
 }

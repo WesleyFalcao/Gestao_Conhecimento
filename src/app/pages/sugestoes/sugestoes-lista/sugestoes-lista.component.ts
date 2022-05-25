@@ -41,7 +41,7 @@ export class SugestoesListaComponent implements OnInit {
   b_Show_Filter: boolean = false
 
   /**@description Objeto que recebe o conteudo dos inputs */
-  objFilter = { nm_Nome: "", nm_Usuario: "", nm_Status: "" }
+  objFilter = { ds_Titulo: "", ds_Descricao: "", cd_id: ""}
 
   constructor(
 
@@ -51,22 +51,16 @@ export class SugestoesListaComponent implements OnInit {
     this.onResize()
   }
 
-  objArrayTeste = [
+  obj_Array_Sugestoes_Arquivadas = [
     {
       nome: "O mundo é lindo",
       descricao: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Eum dolorum nostrum aperiam ea repellat error rem vel iure et eos maiores adipisci officiis autem repellendus esse, corporis",
-      usuario: "wesleyfa",
-      perfil: "wesleyfa",
-      status: "ativo",
-      b_iten: true
+      id: 1,
     },
     {
       nome: "O mundo é lindo",
       descricao: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Eum dolorum nostrum aperiam ea repellat error rem vel iure et eos maiores adipisci officiis autem repellendus esse, corporis",
-      usuario: "wesleyfa",
-      perfil: "wesleyfa",
-      status: "ativo",
-      b_iten: true
+      id: 2, 
     },
 
   ]

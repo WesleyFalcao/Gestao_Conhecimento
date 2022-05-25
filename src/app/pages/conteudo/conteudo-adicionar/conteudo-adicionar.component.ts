@@ -70,10 +70,7 @@ export class ConteudoAdicionarComponent implements OnInit {
   /**@description Título da páginas */
   ds_Titulo: string = "Adicionar conteúdo"
 
-  nm_Label_Selection_Input: string = "Grupo"
-
-  /**@description Nome do label do primeiro campo de imput*/
-  nm_Grupo_Input: string = "Grupo"
+  nm_Label_Selection_Input: string = "Categoria"
 
   constructor(private location: Location) { }
 

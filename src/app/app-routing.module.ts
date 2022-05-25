@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes, CanActivate } from '@angular/router';
-import { AdicionarGrupoComponent } from './pages/adicionar-grupo/adicionar-grupo.component';
 import { AdicionarUsersComponent } from './pages/usuario/usuario-adicionar/usuario-adicionar.component';
 import { CategoriaAdicionarComponent } from './pages/categorias/categoria-adicionar/categoria-adicionar.component';
 import { CategoriaEditarComponent } from './pages/categorias/categoria-editar/categoria-editar.component';
@@ -30,9 +29,6 @@ const routes: Routes = [
     canActivate: [AuthGuard]
   },
   { path: 'meus-estudos', component: MeusEstudosComponent,
-    canActivate: [AuthGuard]
-  },
-  { path: 'grupo-adicionar', component: AdicionarGrupoComponent,
     canActivate: [AuthGuard]
   },
   { path: 'conteudo', component: ConteudoComponent,

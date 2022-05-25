@@ -1,6 +1,6 @@
 <app-header [b_Not_Search]="b_Not_Search"></app-header>
 
-<div class="container px-7 lg:px-12">
+<div class="container lg:bg-white lg:bg-opacity-60 pb-12">
     <div class="mt-5 lg:mt-10 xl:mt-14">
         <div class="relative flex flex-col text-sm left-4 md:left-5">
             <uni-title [ds_Titulo]="ds_Titulo"></uni-title>
@@ -12,7 +12,7 @@
         <app-input label="Link"></app-input>
         <div class="div-grid-group grid grid-cols-2">
             <selection-input [objArrayList]="objArrayGroups" [nm_Label_Selection_Input]="nm_Label_Selection_Input"></selection-input>
-            <div class="behavior-button mt-3 lg:mt-0 lg:flex-row mx-auto cursor-pointer" routerLink="/grupo-adicionar">
+            <div class="behavior-button mt-3 lg:mt-0 lg:flex-row mx-auto cursor-pointer" routerLink="/categoria-adicionar">
                 <img class="relative mb-1 mx-auto w-5 h-5 lg:w-6 lg:h-6 lg:mt-5 lg:my-auto"
                     src="assets/icons/add-group.svg">
                 <div class="text-xs relative lg:text-sm xl:text-base pl-2">

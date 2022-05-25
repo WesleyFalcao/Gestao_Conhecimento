@@ -51,10 +51,8 @@ export class LoginComponent implements OnInit {
 
     async Logar() {
         await this.loginService.Set_Login(this.formGroup.getRawValue());
-
-        this.route.navigate(['/home']).then(() => {
-            setTimeout(() => this.subjectService.subject_Exibindo_Bar.next(true));
-        });
+        
+        
     }
 
     Abrir_Registrar() {

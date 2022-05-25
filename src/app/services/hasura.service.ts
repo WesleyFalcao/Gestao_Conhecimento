@@ -1,26 +1,21 @@
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { Injectable } from "@angular/core";
-import { Apollo } from "apollo-angular";
-import { LoginParams } from "src/app/models/auth/login-params.model";
-import { DataService } from "src/app/services/data.service";
-import { ConhecimentoFacade } from "../facade/conhecimento.facade";
-import { AuthRepository } from "../repositories/auth.repository";
+import { Apollo, gql } from "apollo-angular";
 import { environment } from "src/environments/environment";
-import { Router } from "@angular/router";
+import { QueryModel } from "../models/query/query.model";
+import { Copy } from "../utils/utils";
+import { DataService } from "./data.service";
 
 @Injectable({
     providedIn: "root"
 })
-export class LoginService {
+export class ApiService {
     httpOptions = {};
 
     constructor(
-        private dataService: DataService,
-        private authRepository: AuthRepository,
         private apollo: Apollo, private data: DataService,
         private http: HttpClient,
-        private route: Router) {
-
+    ) {
         this.Preparar_HttpOptions();
     }
 
@@ -42,6 +37,12 @@ export class LoginService {
             headers: headersCustom
         };
     }
+
+    /**
+    * @description Executa uma ou várias consultas GraphQL
+    * @param querys Array de strings com as querys GraphQL
+    * @param objHeaders Objeto de headers HTTP
+    */
     _Query(querys: string[], objHeaders = null) {
         this.Preparar_HttpOptions(objHeaders);
 
@@ -61,6 +62,13 @@ export class LoginService {
 
     }
 
+    /**
+     * @description Mutation
+     * @param {QueryModel[]} mutations
+     * @param {*} objVariables
+     * @param {*} [objHeaders=null]
+     * @return {*}
+     */
 
     _Mutation(strMutation: string, objHeaders: any = null) {
         this.Preparar_HttpOptions(objHeaders);
@@ -77,38 +85,9 @@ export class LoginService {
             .toPromise();
     }
 
-    _Execute(strQuery: string, variables: any, objHeaders: any = null) {
-        this.Preparar_HttpOptions(objHeaders);
+    Post({ url, body }: { url: string, body: any }) {
+        this.Preparar_HttpOptions()
 
-        let objBody = { query: `${strQuery}`, variables };
-
-        // Retorna o promise
-        return this.http
-            .post<any>(
-                environment.CONS_URL_API_LOGIN,
-                objBody,
-                this.httpOptions
-            )
-            .toPromise();
-    }
-
-    async Set_Login(objLogin: LoginParams){
-        let query = `mutation ($ds_Login: String, $ds_Senha: String){
-            login:auth_login(params: { username: $ds_Login , password: $ds_Senha }) {
-                sucesso
-                accessToken
-            }
-        }
-        `
-        let res = await this._Execute(query, objLogin)
-        if(res.data.login.sucesso){
-            this.dataService.Set_Session("token", res.data.login.accessToken)
-            this.route.navigate(['/home']).then(() => {
-                // setTimeout(() => this.subjectService.subject_Exibindo_Bar.next(true));
-            });
-        }else{
-            return res.data.login.mensagem
-            //snackbar 
-        }
+        return this.http.post<any>(environment.CONS_URL_APIBASE + url, body, this.httpOptions).toPromise()
     }
 }

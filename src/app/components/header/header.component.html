@@ -4,17 +4,14 @@
             <img class="w-6 h-6 md:w-7 md:h-7 relative mx-auto my-6 md:my-0 md:mt-10 iten-behavior cursor-pointer"
                 src="assets/icons/filter-three-lines.svg">
         </div>
-        <span class="area-back {{b_Nao_Exibir_Voltar?'hidden':''}}">
-            <div class="div-left-calc-back  hidden relative xl:ml-8 2xl:ml-20 3xl:ml-14 transform -translate-x-1/2 left-1/2 my-7 xl:flex w-11 h-11 xl:mt-9 cursor-pointer iten-behavior"
-                (click)="Back()">
+        <span class="area-back {{b_Nao_Exibir_Voltar?'hidden':''}}" (click)="Back()">
+            <div
+                class="div-left-calc-back  hidden relative xl:ml-8 2xl:ml-20 3xl:ml-14 transform -translate-x-1/2 left-1/2 my-7 xl:flex w-11 h-11 xl:mt-9 cursor-pointer iten-behavior">
                 <img class="w-4 lg:w-6 mt-1" src="assets/icons/arrow-left.svg">
                 <p class="text-unimed-gray pl-3 my-auto lg:text-base">Voltar</p>
             </div>
         </span>
         <div class="area-logo behavior-button w-16 h-8 md:w-20 md:h-10 mx-auto my-5 md:mt-8 cursor-pointer">
-            <div class="absolute -mt-5 mx-auto ml-7">
-                <app-version></app-version>
-            </div>
             <img src="assets/images/logo.png" routerLink="/home">
         </div>
         <div class="{{b_Not_Search?'hidden':''}}">

@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { AdicionarGrupoComponent } from './adicionar-grupo/adicionar-grupo.component';
 import { ComponentsModule } from '../components/components.module';
 import { AdicionarUsersComponent } from './usuario/usuario-adicionar/usuario-adicionar.component';
 import { CategoriaComponent } from './categorias/categorias-lista/categoria.component';
@@ -24,7 +23,6 @@ import { SugestaoAdicionarComponent } from './sugestoes/sugestao-adicionar/suges
 
 @NgModule({
   declarations: [
-    AdicionarGrupoComponent,
     AdicionarUsersComponent,
     CategoriaComponent,
     CategoriaAdicionarComponent,
@@ -51,7 +49,6 @@ import { SugestaoAdicionarComponent } from './sugestoes/sugestao-adicionar/suges
     FilterModule
   ],
   exports:[
-    AdicionarGrupoComponent,
     AdicionarUsersComponent,
     CategoriaComponent,
     CategoriaAdicionarComponent,
