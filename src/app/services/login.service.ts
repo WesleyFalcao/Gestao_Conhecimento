@@ -50,7 +50,7 @@ export class LoginService {
         let res = await this._Execute(QUERY_LOGIN, objLogin)
         if (res.data.login.sucesso) {
             this.b_User_Authenticated = true
-            this.dataService.Set_Session("token", res.data.login.accessToken)
+            this.dataService.Set_Local("token", res.data.login.accessToken)
             this.route.navigate(['/home']).then(() => {
                 // setTimeout(() => this.subjectService.subject_Exibindo_Bar.next(true));
             });

@@ -23,7 +23,7 @@ export class DataService {
     }
 
     Get_Session(nm_Chave: string) {
-        return JSON.parse(window.sessionStorage.getItem(this.nm_Session + "_" + nm_Chave)|| '{}')
+        return JSON.parse(window.localStorage.getItem(this.nm_Session + "_" + nm_Chave)|| '{}')
     }
 
     Set_Session(nm_Chave: string, objValue: any) {

@@ -38,15 +38,15 @@ export class ApiHasuraService {
         };
     }
 
-       _Execute(strQuery: string, variables: any, objHeaders: any = null) {
+       _Execute(strQuery: string, objHeaders: any = null) {
         this.Preparar_HttpOptions(objHeaders);
 
-        let objBody = { query: `${strQuery}`, variables };
+        let objBody = { query: `${strQuery}` };
 
         // Retorna o promise
         return this.http
             .post<any>(
-                environment.CONS_URL_API_LOGIN,
+                environment.CONS_URL_API_HASURA,
                 objBody,
                 this.httpOptions
             )

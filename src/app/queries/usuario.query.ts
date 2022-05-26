@@ -12,15 +12,17 @@ export class UsuarioQuery {
 
   Get_Usuarios_Listagem() {
     return `
-    query MyQuery {
-      usuarios{
+    {
+      usuarios {
         b_login_ad
         cd_login
         cd_perfil
         cd_usuario
-        ds_senha
         dt_bloqueio
         nm_usuario
+        perfil {
+          role
+        }
       }
     }
     `

@@ -12,15 +12,15 @@
             <img class="behavior-button w-6 h-6 xl:w-8 xl:h-8 2xl:w-7 2xl:h-7" src="assets/icons/refresh.svg">
         </div>
     </div>
-    <div *ngIf="obj_Array_Usuarios.length != 0">
+    <div *ngIf="obj_Array_Usuarios.length >= 1">
 
         <div class="hidden div-grid-title mt-8 lg:grid grid-cols-6">
-            <p class="lg:text-center font-semibold">ID</p>
-            <p class="font-semibold lg:grid ml-5">Nome</p>
-            <p class="lg:text-center font-semibold">Usuário</p>
-            <p class="lg:text-center font-semibold">Perfil</p>
-            <p class="lg:text-center font-semibold">Status</p>
-            <p class="lg:text-center font-semibold">Editar</p>
+            <p class="lg:text-center font-semibold text-base">ID</p>
+            <p class="font-semibold lg:grid ml-5 text-base">Nome</p>
+            <p class="lg:text-center font-semibold text-base">Usuário</p>
+            <p class="lg:text-center font-semibold text-base">Perfil</p>
+            <p class="lg:text-center font-semibold text-base">Status</p>
+            <p class="lg:text-center font-semibold text-base">Editar</p>
         </div>
     </div>
     <div class="top-5 relative flex flex-col gap-y-4" *ngFor="let iten of obj_Array_Usuarios | filter: Input_Value">
@@ -30,7 +30,7 @@
 
                 <div class="div-grid-name-arrow grid grid-cols-2 xl:grid-cols-1" (click)="Show_Itens()">
                     <p class="my-3 lg:my-auto ml-5 w-10/12 font-medium truncate">
-                        {{iten.nome}}</p>
+                        {{iten.cd_login}}</p>
                     <img class="my-auto xl:hidden {{b_Show_Itens? 'img-rotation-arrow-down':''}}"
                         src="assets/icons/arrow-up.svg">
                 </div>
@@ -38,21 +38,21 @@
 
                     <div class="flex flex-row gap-x-3">
                         <p class="ml-5 lg:text-center lg:relative font-semibold">ID:</p>
-                        <p class="text-center my-auto truncate">{{iten.id}}</p>
+                        <p class="text-center my-auto truncate">{{iten.cd_usuario}}</p>
                     </div>
                     <div class="flex flex-row gap-x-3">
                         <p class="ml-5 lg:text-center font-semibold">Usuário:</p>
-                        <p class="lg:text-center my-auto w-7/12 truncate">{{iten.usuario}}
+                        <p class="lg:text-center my-auto w-7/12 truncate">{{iten.nm_usuario}}
                         </p>
                     </div>
                     <div class="flex flex-row gap-x-3">
                         <p class="ml-5 lg:text-center font-semibold">Perfil:</p>
-                        <p class="lg:text-center my-auto w-8/12 truncate">{{iten.perfil}}
+                        <p class="lg:text-center my-auto w-8/12 truncate">{{iten.perfil.role}}
                         </p>
                     </div>
                     <div class="flex flex-row gap-x-3">
-                        <p class="ml-5 lg:text-center font-semibold">Perfil:</p>
-                        <p class="lg:text-center my-auto w-8/12 truncate">{{iten.status}}
+                        <p class="ml-5 lg:text-center font-semibold">Status:</p>
+                        <p class="lg:text-center my-auto w-8/12 truncate">{{iten.dt_bloqueio == null?'Ativo':'Inativo'}}
                         </p>
                     </div>
                     <div class="flex flex-row gap-x-3 behavior-button" routerLink="/editar-usuario">
@@ -67,12 +67,11 @@
         <div *ngIf="b_Width">
             <div
                 class="rounded-lg div-grid-title shadow-xl mb-2 lg:h-14 w-full lg:grid lg:grid-cols-6 bg-white hover:bg-slate-100">
-                <p class="text-center my-auto text-ellipsis overflow-hidden whitespace-nowrap">{{iten.id}}</p>
-                <p class="my-3 lg:my-auto ml-5 text-ellipsis overflow-hidden whitespace-nowrap">
-                    {{iten.nome}}</p>
-                <p class="text-center my-auto text-ellipsis overflow-hidden whitespace-nowrap">{{iten.usuario}}</p>
-                <p class="text-center my-auto text-ellipsis overflow-hidden whitespace-nowrap">{{iten.perfil}}</p>
-                <p class="text-center my-auto text-ellipsis overflow-hidden whitespace-nowrap">{{iten.status}}</p>
+                <p class="text-center my-auto text-ellipsis overflow-hidden whitespace-nowrap font-medium text-base">{{iten.cd_usuario}}</p>
+                <p class="my-3 lg:my-auto ml-5 text-ellipsis overflow-hidden whitespace-nowrap font-medium text-base">{{iten.nm_usuario}}</p>
+                <p class="text-center my-auto text-ellipsis overflow-hidden whitespace-nowrap font-medium text-base">{{iten.cd_login}}</p>
+                <p class="text-center my-auto text-ellipsis overflow-hidden whitespace-nowrap font-medium text-base">{{iten.perfil.role}}</p>
+                <p class="text-center my-auto text-ellipsis overflow-hidden whitespace-nowrap font-medium text-base">{{iten.dt_bloqueio == null?'Ativo':'Inativo'}}</p>
                 <img class="behavior-button w-5 h-5 my-auto mx-auto cursor-pointer" src="assets/icons/edit.svg"
                     routerLink="/editar-usuario">
             </div>

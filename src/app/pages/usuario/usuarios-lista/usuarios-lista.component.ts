@@ -34,6 +34,8 @@ export class UsersComponent implements OnInit {
   /** @description Index da Página */
   nr_Pagina = 1
 
+  obj_Array_Usuarios: []
+
   /** @description Evento para retornar se o botão de paginação foi apertado */
   @Output() onPageChange = new EventEmitter();
 
@@ -54,44 +56,45 @@ export class UsersComponent implements OnInit {
   async ngOnInit() {
     this.onResize()
 
-    const responseusuario = await this.usuarioRepository.Get_Usuarios(this.objFilter)
-    // this.obj_Array_Usuarios = responseusuario
+    const responseusuario = await this.usuarioRepository.Get_Usuarios()
+    this.obj_Array_Usuarios = responseusuario.usuarios
+    console.log("arrayusuarios",this.obj_Array_Usuarios)
   }
 
-  obj_Array_Usuarios = [
-    {
-      nome: "Ana Luiza",
-      id: 1,
-      usuario: "wesleyfa",
-      perfil: "admin",
-      status: "ativo",
-      b_iten: true
-    },
-    {
-      nome: "Ana luiza",
-      id: 2,
-      usuario: "brunop",
-      perfil: "admin",
-      status: "ativo",
-      b_iten: true
-    },
-    {
-      nome: "Ana luiza",
-      id: 2,
-      usuario: "brunop",
-      perfil: "admin",
-      status: "ativo",
-      b_iten: true
-    },
-    {
-      nome: "Ana luiza",
-      id: 2,
-      usuario: "brunop",
-      perfil: "admin",
-      status: "ativo",
-      b_iten: true
-    },
-  ]
+  // obj_Array_Usuarios = [
+  //   {
+  //     nome: "Ana Luiza",
+  //     id: 1,
+  //     usuario: "wesleyfa",
+  //     perfil: "admin",
+  //     status: "ativo",
+  //     b_iten: true
+  //   },
+  //   {
+  //     nome: "Ana luiza",
+  //     id: 2,
+  //     usuario: "brunop",
+  //     perfil: "admin",
+  //     status: "ativo",
+  //     b_iten: true
+  //   },
+  //   {
+  //     nome: "Ana luiza",
+  //     id: 2,
+  //     usuario: "brunop",
+  //     perfil: "admin",
+  //     status: "ativo",
+  //     b_iten: true
+  //   },
+  //   {
+  //     nome: "Ana luiza",
+  //     id: 2,
+  //     usuario: "brunop",
+  //     perfil: "admin",
+  //     status: "ativo",
+  //     b_iten: true
+  //   },
+  // ]
 
   @HostListener('window:resize')
   onResize() {
