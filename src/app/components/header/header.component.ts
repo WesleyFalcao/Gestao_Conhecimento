@@ -3,6 +3,7 @@ import { Component, ElementRef, EventEmitter, HostListener, Input, OnInit, Outpu
 import { FormControl } from '@angular/forms';
 import { Router } from '@angular/router';
 import { debounceTime, distinctUntilChanged, Subject } from 'rxjs';
+import { DataService } from 'src/app/services/data.service';
 
 @Component({
   selector: 'app-header',
@@ -61,6 +62,7 @@ export class HeaderComponent implements OnInit {
   modelChanged = new FormControl()
 
   constructor(
+    private dataService: DataService,
     private location: Location,
     private route: Router,
     private eRef: ElementRef
@@ -87,15 +89,15 @@ export class HeaderComponent implements OnInit {
 
   @HostListener('document:click', ['$event'])
   clickout(event) {
-    if(this.eRef.nativeElement.contains(event.target)) {
-    
+    if (this.eRef.nativeElement.contains(event.target)) {
+
     } else {
       this.b_Show_Popover = false;
     }
   }
 
   Show_Input() {
-    
+
     if (this.nr_Width < 1280) {
       this.b_Show_Logo = !this.b_Show_Logo
       this.b_Show_Input = !this.b_Show_Input
@@ -107,39 +109,43 @@ export class HeaderComponent implements OnInit {
     }
   }
 
-  onFilter_Popover(event){
+  onFilter_Popover(event) {
     this.onClick_Top = event
-    if(this.onClick_Top){
+    if (this.onClick_Top) {
       this.b_Show_Modal = true
-    }else{
+    } else {
       this.b_Show_Modal = false
     }
   }
 
-  Show_Modal(){
+  Show_Modal() {
     this.b_Show_Modal = true
+  }
+
+  Logout() {
+    this.dataService.Limpar_Session();
+    this.route.navigate(['']);
+  } 
+
+  Back() {
+    this.location.back();
+  }
+
+  onClick_Usuario() {
+    this.route.navigate(['/usuarios'])
+    this.b_Show_Popover = false
+  }
+  onClick_Conteudos() {
+    this.route.navigate(['/conteudo-lista'])
+    this.b_Show_Popover = false
+  }
+  onClick_Categorias() {
+    this.route.navigate(['/categorias'])
+    this.b_Show_Popover = false
   }
 
   ngOnDestroy() {
     this.subject_unsub.next(true)
     this.subject_unsub.complete()
   }
-
-  Back(){
-    this.location.back();
-  }
-
-  onClick_Usuario(){
-    this.route.navigate(['/usuarios'])
-    this.b_Show_Popover = false
-  }
-  onClick_Conteudos(){
-    this.route.navigate(['/conteudo-lista'])
-    this.b_Show_Popover = false
-  }
-  onClick_Categorias(){
-    this.route.navigate(['/categorias'])
-    this.b_Show_Popover = false
-  }
-
 }

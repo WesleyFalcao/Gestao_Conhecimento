@@ -18,7 +18,7 @@ export class LoginComponent implements OnInit {
 
     /**@description Form do Login e Senha */
     formGroup = this.loginForm.Get_Form;
-
+    
     constructor(
         private dataService: DataService,
         private subjectService: SubjectService,
@@ -50,9 +50,9 @@ export class LoginComponent implements OnInit {
     }
 
     async Logar() {
+        this.subjectService.subject_Exibindo_Loading.next(true)
         await this.loginService.Set_Login(this.formGroup.getRawValue());
-        
-        
+        this.subjectService.subject_Exibindo_Loading.next(false)
     }
 
     Abrir_Registrar() {

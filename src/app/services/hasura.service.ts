@@ -9,7 +9,7 @@ import { DataService } from "./data.service";
 @Injectable({
     providedIn: "root"
 })
-export class ApiService {
+export class ApiHasuraService {
     httpOptions = {};
 
     constructor(
@@ -38,18 +38,10 @@ export class ApiService {
         };
     }
 
-    /**
-    * @description Executa uma ou várias consultas GraphQL
-    * @param querys Array de strings com as querys GraphQL
-    * @param objHeaders Objeto de headers HTTP
-    */
-    _Query(querys: string[], objHeaders = null) {
+       _Execute(strQuery: string, variables: any, objHeaders: any = null) {
         this.Preparar_HttpOptions(objHeaders);
 
-        let objBody = {
-            query: "query { " + querys.join(" \r\n") + " }",
-            variables: null
-        };
+        let objBody = { query: `${strQuery}`, variables };
 
         // Retorna o promise
         return this.http
@@ -59,35 +51,5 @@ export class ApiService {
                 this.httpOptions
             )
             .toPromise();
-
-    }
-
-    /**
-     * @description Mutation
-     * @param {QueryModel[]} mutations
-     * @param {*} objVariables
-     * @param {*} [objHeaders=null]
-     * @return {*}
-     */
-
-    _Mutation(strMutation: string, objHeaders: any = null) {
-        this.Preparar_HttpOptions(objHeaders);
-
-        let objBody = { query: `mutation { ${strMutation} }` };
-
-        // Retorna o promise
-        return this.http
-            .post<any>(
-                environment.CONS_URL_API_LOGIN,
-                objBody,
-                this.httpOptions
-            )
-            .toPromise();
-    }
-
-    Post({ url, body }: { url: string, body: any }) {
-        this.Preparar_HttpOptions()
-
-        return this.http.post<any>(environment.CONS_URL_APIBASE + url, body, this.httpOptions).toPromise()
     }
 }

@@ -21,9 +21,6 @@ import { AuthGuard } from './guards/auth-guard';
 
 const routes: Routes = [
 
-  { path: '', component: LoginComponent,
-    data: { animation: "LoginPage" },
-  },
   { path: 'home', component: HomeComponent,
     data: { animation: "HomePage" },
     canActivate: [AuthGuard]
@@ -72,6 +69,12 @@ const routes: Routes = [
   },
   { path: 'send-sugestion', component: SendSuggestionComponent,
   canActivate: [AuthGuard]  
+  },
+  { path: '', component: LoginComponent,
+    data: { animation: "LoginPage" },
+  },
+  { path: '**', component: LoginComponent,
+    data: { animation: "LoginPage" },
   },
 ];
 

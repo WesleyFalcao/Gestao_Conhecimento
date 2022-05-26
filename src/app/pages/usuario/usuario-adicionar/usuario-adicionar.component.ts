@@ -46,7 +46,7 @@ export class AdicionarUsersComponent implements OnInit {
   nm_Label_Selection_Input_Usuario: string = "Login com usuário AD?"
 
   /**@description Nome do label do selection input */
-  ds_Titulo: string = "Adicionar Usuário"
+  ds_Titulo: string = "Adicionar usuário"
 
   Back(){
     this.location.back();

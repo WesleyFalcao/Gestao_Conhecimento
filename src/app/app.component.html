@@ -1,6 +1,8 @@
 <div [@routeAnimations]="prepareRoute(outlet)">
-    <div class="aling-version ">
-        <app-version></app-version>
-    </div>
+  <div class="aling-version ">
+    <app-version></app-version>
+  </div>
     <router-outlet #outlet="outlet"></router-outlet>
+      <snackbar></snackbar>
+      <loading *ngIf="b_Exibindo_Loading"></loading>
 </div>

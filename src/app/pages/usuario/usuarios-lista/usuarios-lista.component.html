@@ -1,4 +1,4 @@
-<app-header [obj_Array_Itens]="obj_Array_Usuarios" (Input_Emit_Value)="onFilter_Search($event)"></app-header>
+<app-header (Input_Emit_Value)="onFilter_Search($event)"></app-header>
 
 <div class="container lg:bg-white lg:bg-opacity-60 relative px-2 top-6 md:top-9 lg:top-14 pb-12">
     <div class="grid grid-cols-2">
@@ -79,6 +79,9 @@
         </div>
     </div>
 </div>
+<uni-paginator (onPageChange)="Mudar_Pagina($event)" [nr_Pagina]="nr_Pagina" [nr_Por_Pagina]="pageLength"
+    [nr_Registros]="nr_Registros">
+</uni-paginator>
 
 <app-modal (b_Click_Sobreposicao)="Close_Modal()" class="{{b_Show_Filter?'':'hidden'}}">
     <div class="grid grid-cols-2">
@@ -90,14 +93,16 @@
     </div>
     <div class="flex flex-col gap-y-2">
         <form>
-            <app-input [required]="true" label="Id" [(ngModel)]="objFilter.id" id="id" name="id">
+            <app-input [required]="true" label="Id" [(ngModel)]="objFilter.cd_usuario" id="cd_usuario"
+                name="cd_usuario">
             </app-input>
-            <app-input [required]="true" label="Nome" [(ngModel)]="objFilter.nm_Nome" id="nm_Nome" name="nm_Nome">
+            <app-input [required]="true" label="Nome" [(ngModel)]="objFilter.nm_usuario" id="nm_usuario"
+                name="nm_usuario">
             </app-input>
-            <app-input [required]="true" label="Usuário" [(ngModel)]="objFilter.nm_Usuario" id="nm_Usuario"
-                name="nm_Usuario"></app-input>
-            <app-input [required]="true" label="Status (ativo ou inativo)" [(ngModel)]="objFilter.nm_Status"
-                id="nm_Status" name="nm_Status"></app-input>
+            <app-input [required]="true" label="Usuário" [(ngModel)]="objFilter.cd_login" id="cd_login" name="cd_login">
+            </app-input>
+            <app-input [required]="true" label="Status (ativo ou inativo)" [(ngModel)]="objFilter.dt_bloqueio"
+                id="dt_bloqueio" name="dt_bloqueio"></app-input>
         </form>
     </div>
     <div class="flex flex-row mt-4 gap-x-4 mx-4">

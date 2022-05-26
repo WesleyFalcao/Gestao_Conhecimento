@@ -1,4 +1,6 @@
-import { Component, ElementRef, HostListener, OnInit } from '@angular/core';
+import { Component, ElementRef, EventEmitter, HostListener, Input, OnInit, Output } from '@angular/core';
+import { UsuarioRepository } from 'src/app/repositories/usuario.repository';
+import { SubjectService } from 'src/app/services/subject.service';
 
 @Component({
   selector: 'app-users',
@@ -26,15 +28,34 @@ export class UsersComponent implements OnInit {
   /**@description Recebe o valor digitado pelo usuário no desktop */
   Input_Value: string
 
+  /** @description Variavel auxiliar para controlar a pagina */
+  aux_Pagina = 1
+
+  /** @description Index da Página */
+  nr_Pagina = 1
+
+  /** @description Evento para retornar se o botão de paginação foi apertado */
+  @Output() onPageChange = new EventEmitter();
+
+  /** @description Número de registros a serem exibidos por página */
+  @Input() pageLength: number = 10
+
+  /** @description Variavel para guardar a quantidade de registros */
+  @Input() nr_Registros = 0
+
   /**@description Objeto que recebe o conteudo dos inputs */
-  objFilter = { nm_Nome: "", nm_Usuario: "", nm_Status: "", id: "" }
+  objFilter = { cd_usuario: 0, nm_usuario: "", cd_login: "", dt_bloqueio: "",}
 
   constructor(
-
+    private subjectService: SubjectService,
+    private usuarioRepository: UsuarioRepository
   ) { }
 
-  ngOnInit(): void {
+  async ngOnInit() {
     this.onResize()
+
+    const responseusuario = await this.usuarioRepository.Get_Usuarios(this.objFilter)
+    // this.obj_Array_Usuarios = responseusuario
   }
 
   obj_Array_Usuarios = [
@@ -42,7 +63,7 @@ export class UsersComponent implements OnInit {
       nome: "Ana Luiza",
       id: 1,
       usuario: "wesleyfa",
-      perfil: "wesleyfa",
+      perfil: "admin",
       status: "ativo",
       b_iten: true
     },
@@ -50,7 +71,7 @@ export class UsersComponent implements OnInit {
       nome: "Ana luiza",
       id: 2,
       usuario: "brunop",
-      perfil: "brunop",
+      perfil: "admin",
       status: "ativo",
       b_iten: true
     },
@@ -58,7 +79,7 @@ export class UsersComponent implements OnInit {
       nome: "Ana luiza",
       id: 2,
       usuario: "brunop",
-      perfil: "brunop",
+      perfil: "admin",
       status: "ativo",
       b_iten: true
     },
@@ -66,7 +87,7 @@ export class UsersComponent implements OnInit {
       nome: "Ana luiza",
       id: 2,
       usuario: "brunop",
-      perfil: "brunop",
+      perfil: "admin",
       status: "ativo",
       b_iten: true
     },
@@ -93,6 +114,7 @@ export class UsersComponent implements OnInit {
   Filtrar() {
     console.log(this.objFilter)
     this.b_Show_Filter = false
+    
   }
 
   Close_Modal() {
@@ -102,4 +124,9 @@ export class UsersComponent implements OnInit {
   Show_Modal(event) {
     this.b_Show_Filter = event
   }
+
+  /** @description Avança uma pagina */
+  Mudar_Pagina(nr_Pagina: number) {
+    this.onPageChange.emit(this.aux_Pagina = nr_Pagina)
+}
 }

@@ -23,6 +23,7 @@
     "apollo-angular": "^3.0.1",
     "graphql": "^16",
     "lottie-web": "^5.9.4",
+    "ng-zorro-antd": "^13.2.2",
     "ngx-lottie": "^8.2.0",
     "rxjs": "~7.5.0",
     "tslib": "^2.3.0",

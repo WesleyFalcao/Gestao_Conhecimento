@@ -24,6 +24,8 @@ import { ButtonFilterComponent } from './button-filter/button-filter.component';
 import { SendSuggestionComponent } from './send-suggestion/send-suggestion.component';
 import { Input2Component } from './input/input.component';
 import { ModalComponent } from './modal/modal.component';
+import { PaginatorComponent } from './paginator/paginator.component';
+import { NzPopoverModule } from 'ng-zorro-antd/popover';
 export function playerFactory() {
   return player;
 }
@@ -37,6 +39,7 @@ export function playerFactory() {
     LoadingComponent,
     SearchBarComponent,
     SnackbarComponent,
+    PaginatorComponent,
     TitleComponent,
     VersionComponent,
     PopoverComponent,
@@ -55,10 +58,12 @@ export function playerFactory() {
     RouterModule,
     ReactiveFormsModule,
     FormsModule,
+    NzPopoverModule,
     FilterModule,
     LottieModule.forRoot({ player: playerFactory })
   ],
   exports: [
+    PaginatorComponent,
     ButtonComponent,
     CheckboxComponent,
     HeaderComponent,
@@ -73,6 +78,7 @@ export function playerFactory() {
     FilterModalComponent,
     AlertModalComponent,
     ButtonFilterComponent,
+    SnackbarComponent,
     AnimationNothingFoundComponent,
     SendSuggestionComponent,
     Input2Component,
