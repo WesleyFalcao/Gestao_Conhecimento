@@ -40,13 +40,13 @@ export class UsersComponent implements OnInit {
   @Output() onPageChange = new EventEmitter();
 
   /** @description Número de registros a serem exibidos por página */
-  @Input() pageLength: number = 10
+  @Input() page_Length: number = 10
 
   /** @description Variavel para guardar a quantidade de registros */
   @Input() nr_Registros = 0
 
   /**@description Objeto que recebe o conteudo dos inputs */
-  objFilter = { cd_usuario: 0, nm_usuario: "", cd_login: "", dt_bloqueio: "",}
+  objFilter = { cd_usuario: undefined, nm_usuario: "", cd_login: "", dt_bloqueio: "", nr_pagina: this.nr_Pagina, nr_page_length: this.page_Length, nr_registos: this.nr_Registros }
 
   constructor(
     private subjectService: SubjectService,
@@ -56,45 +56,12 @@ export class UsersComponent implements OnInit {
   async ngOnInit() {
     this.onResize()
 
-    const responseusuario = await this.usuarioRepository.Get_Usuarios()
-    this.obj_Array_Usuarios = responseusuario.usuarios
-    console.log("arrayusuarios",this.obj_Array_Usuarios)
+    const responseusuario = await this.usuarioRepository.Get_Usuarios(this.objFilter)
+    this.obj_Array_Usuarios = responseusuario.data.usuarios_aggregate.nodes
+    this.nr_Registros = responseusuario.data.usuarios_aggregate.aggregate.count
+    console.log("registros", this.nr_Registros)
+    console.log("arrayusuarios", this.obj_Array_Usuarios)
   }
-
-  // obj_Array_Usuarios = [
-  //   {
-  //     nome: "Ana Luiza",
-  //     id: 1,
-  //     usuario: "wesleyfa",
-  //     perfil: "admin",
-  //     status: "ativo",
-  //     b_iten: true
-  //   },
-  //   {
-  //     nome: "Ana luiza",
-  //     id: 2,
-  //     usuario: "brunop",
-  //     perfil: "admin",
-  //     status: "ativo",
-  //     b_iten: true
-  //   },
-  //   {
-  //     nome: "Ana luiza",
-  //     id: 2,
-  //     usuario: "brunop",
-  //     perfil: "admin",
-  //     status: "ativo",
-  //     b_iten: true
-  //   },
-  //   {
-  //     nome: "Ana luiza",
-  //     id: 2,
-  //     usuario: "brunop",
-  //     perfil: "admin",
-  //     status: "ativo",
-  //     b_iten: true
-  //   },
-  // ]
 
   @HostListener('window:resize')
   onResize() {
@@ -117,7 +84,7 @@ export class UsersComponent implements OnInit {
   Filtrar() {
     console.log(this.objFilter)
     this.b_Show_Filter = false
-    
+
   }
 
   Close_Modal() {
@@ -131,5 +98,5 @@ export class UsersComponent implements OnInit {
   /** @description Avança uma pagina */
   Mudar_Pagina(nr_Pagina: number) {
     this.onPageChange.emit(this.aux_Pagina = nr_Pagina)
-}
+  }
 }

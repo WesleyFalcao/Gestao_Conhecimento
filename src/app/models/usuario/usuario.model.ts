@@ -1,7 +1,7 @@
-export class UsuarioParams {
+import { PaginatedFormParams } from "../generics/paginated.model"
+
+export class UsuarioParams extends PaginatedFormParams{
     nm_search?: string
-    page?: number = 1
-    page_length?: number = 10
     cd_usuario?: number
     nm_usuario?: string
     cd_login?: string

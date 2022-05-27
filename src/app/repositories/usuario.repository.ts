@@ -18,11 +18,12 @@ export class UsuarioRepository {
     private apiHasuraService: ApiHasuraService
   ) { }
 
-  async Get_Usuarios(){
-    // this.subjectService.subject_Exibindo_Loading.next(true)
+  async Get_Usuarios(param: UsuarioParams){
+    this.subjectService.subject_Exibindo_Loading.next(true)
     const query = this.usuarioQuery.Get_Usuarios_Listagem()
     const response = await this.apiHasuraService._Execute(query, this.httpOptions)
     this.subjectService.subject_Exibindo_Loading.next(false)
-    return response.data
+    console.log(response)
+    return response
   }
 }

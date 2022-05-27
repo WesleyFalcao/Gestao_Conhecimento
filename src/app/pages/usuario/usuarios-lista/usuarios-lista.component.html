@@ -12,7 +12,7 @@
             <img class="behavior-button w-6 h-6 xl:w-8 xl:h-8 2xl:w-7 2xl:h-7" src="assets/icons/refresh.svg">
         </div>
     </div>
-    <div *ngIf="obj_Array_Usuarios.length >= 1">
+    
 
         <div class="hidden div-grid-title mt-8 lg:grid grid-cols-6">
             <p class="lg:text-center font-semibold text-base">ID</p>
@@ -22,7 +22,7 @@
             <p class="lg:text-center font-semibold text-base">Status</p>
             <p class="lg:text-center font-semibold text-base">Editar</p>
         </div>
-    </div>
+  
     <div class="top-5 relative flex flex-col gap-y-4" *ngFor="let iten of obj_Array_Usuarios | filter: Input_Value">
         <div *ngIf="b_Width == false">
             <div
@@ -78,7 +78,7 @@
         </div>
     </div>
 </div>
-<uni-paginator (onPageChange)="Mudar_Pagina($event)" [nr_Pagina]="nr_Pagina" [nr_Por_Pagina]="pageLength"
+<uni-paginator (onPageChange)="Mudar_Pagina($event)" [nr_Pagina]="nr_Pagina" [nr_Por_Pagina]="page_Length"
     [nr_Registros]="nr_Registros">
 </uni-paginator>
 
@@ -110,6 +110,6 @@
     </div>
 </app-modal>
 
-<div *ngIf="obj_Array_Usuarios.length == 0 || !obj_Array_Usuarios">
+<!-- <div *ngIf="obj_Array_Usuarios.length == 0 || !obj_Array_Usuarios">
     <animation-nothing-found></animation-nothing-found>
-</div>
+</div> -->
