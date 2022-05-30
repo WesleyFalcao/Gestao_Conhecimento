@@ -1,4 +1,3 @@
-
 .input {
     position: relative;
     background-color: transparent;
@@ -98,14 +97,16 @@
             transition-duration: 280ms;
         }
 
-        &:not([disabled]):hover ~ label,
-        &:not([disabled]):focus ~ label {
+        &:not([disabled]):hover~label,
+        &:not([disabled]):focus~label {
             color: var(--laranja-unimed);
             transition-duration: 280ms;
         }
 
         &.ng-invalid.ng-touched {
-            border: 2px solid var(--rosa-unimed);
+            border-bottom: 1px var(--rosa-unimed);
+            border-left: 1px var(--rosa-unimed);
+            border-right: 1px var(--rosa-unimed);
         }
 
         &:disabled {
@@ -115,7 +116,7 @@
             cursor: not-allowed;
         }
 
-        &:disabled ~ label {
+        &:disabled~label {
             background: none;
         }
     }
@@ -151,14 +152,15 @@
             transition-duration: 280ms;
         }
 
-        &:not([disabled]):hover ~ label,
-        &:not([disabled]):focus ~ label {
+        &:not([disabled]):hover~label,
+        &:not([disabled]):focus~label {
             color: var(--laranja-unimed);
             transition-duration: 280ms;
         }
 
         &.ng-invalid.ng-touched {
             border: 2px solid var(--rosa-unimed);
+            border-top: none;
         }
 
         &:disabled {
@@ -168,7 +170,7 @@
             cursor: not-allowed;
         }
 
-        &:disabled ~ label {
+        &:disabled~label {
             background: none;
         }
     }
@@ -277,12 +279,12 @@
     }
 }
 
-.div-modal-sobreposicao{
+.div-modal-sobreposicao {
     @apply fixed inset-0 z-20 bg-black opacity-70 cursor-pointer;
 
 }
 
-.div-modal-filter{
+.div-modal-filter {
     width: calc(100% - 40px);
     top: calc(50% - 12rem);
     @apply fixed bg-white my-auto z-30 rounded-lg transform -translate-x-1/2 left-1/2;
@@ -294,6 +296,7 @@
     @media (min-width: 1200px) {
         width: calc(100% - 50rem);
     }
+
     @media (min-width: 1636px) {
         width: calc(100% - 60rem);
     }
@@ -312,6 +315,6 @@
     }
 }
 
-.input-borda:hover{
-    transition: .280s; 
+.input-borda:hover {
+    transition: .280s;
 }

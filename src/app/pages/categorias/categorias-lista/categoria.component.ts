@@ -1,11 +1,19 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { HomeService } from '../../home/home.service';
+import { CategoriaService } from '../categoria.service';
 
 @Component({
   selector: 'app-adicionar-categoria',
   templateUrl: './categoria.component.html',
   styleUrls: ['./categoria.component.scss']
 })
-export class CategoriaComponent {
+export class CategoriaComponent implements OnInit {
+
+  constructor(
+    private homeService: HomeService
+  ){
+
+  }
 
   /**@description Nome do título */
   ds_Titulo: string = "Categorias"
@@ -16,31 +24,19 @@ export class CategoriaComponent {
   /**@description Objeto que recebe o conteudo dos inputs */
   objFilter = { nr_Id: "", nm_Grupo: "", nm_Status: "" }
 
-
   /**@description Recebe o valor digitado pelo usuário no desktop */
   Input_Value: string
 
-  obj_Array_Categorias: any = [
-    {
-      nome: "CEDUSC",
-      id: 1,
-      usuario: "wesleyfa",
-      perfil: "wesleyfa",
-      status: "ativo",
-      b_iten: true
-    },
-    {
-      nome: "COMPLICE",
-      id: 2,
-      usuario: "brunop",
-      perfil: "brunop",
-      status: "ativo",
-      b_iten: true
-    },
-  ]
+  /**@description Recebe o array de categorias */
+  obj_Array_Categorias: any
 
   onFilter_Search(iten) {
     this.Input_Value = iten
+  }
+
+  async ngOnInit() {
+    const responsecategorias = await this.homeService.Get_Categorias_Listagem()
+    this.obj_Array_Categorias = responsecategorias.data.categorias
   }
 
   Close_Modal() {

@@ -23,13 +23,13 @@ const routes: Routes = [
 
   { path: 'home', component: HomeComponent,
     data: { animation: "HomePage" },
-    canActivate: [AuthGuard]
+    canActivate: [AuthGuard],
   },
   { path: 'meus-estudos', component: MeusEstudosComponent,
     canActivate: [AuthGuard]
   },
-  { path: 'conteudo', component: ConteudoComponent,
-    canActivate: [AuthGuard] 
+  { path: 'conteudo/:id', component: ConteudoComponent,
+    
   },
   { path: 'conteudo-editar', component: ConteudoEditarComponent,
     canActivate: [AuthGuard]

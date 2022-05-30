@@ -1,6 +1,9 @@
 import { Component, HostListener, OnDestroy, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Subject, takeUntil } from 'rxjs';
+import { HomeRepository } from 'src/app/repositories/home.repository';
 import { SubjectService } from 'src/app/services/subject.service';
+import { HomeService } from './home.service';
 
 @Component({
   selector: 'app-home',
@@ -8,6 +11,9 @@ import { SubjectService } from 'src/app/services/subject.service';
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit {
+
+ /** @description Recebe o array de categorias */
+  obj_Array_Categoria
 
   /** @description String que armazena o caminho do SVG */
   nm_Src_Icon: string = "assets/icons/search-glass-black.svg"
@@ -25,11 +31,15 @@ export class HomeComponent implements OnInit {
   b_Nao_Exibir_Voltar: boolean = true
 
   constructor(
-    private subjectService: SubjectService
+    private subjectService: SubjectService,
+    private homeService: HomeService,
+    private router: Router
   ) { }
 
-  ngOnInit(): void {
-
+  async ngOnInit(){
+    const responsecategoria = await this.homeService.Get_Categorias_Listagem()
+    this.obj_Array_Categoria = responsecategoria.data.categorias
+    
   }
 
   @HostListener('window:resize')

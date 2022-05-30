@@ -13,7 +13,6 @@
         </div>
     </div>
     
-
         <div class="hidden div-grid-title mt-8 lg:grid grid-cols-6">
             <p class="lg:text-center font-semibold text-base">ID</p>
             <p class="font-semibold lg:grid ml-5 text-base">Nome</p>
@@ -23,36 +22,36 @@
             <p class="lg:text-center font-semibold text-base">Editar</p>
         </div>
   
-    <div class="top-5 relative flex flex-col gap-y-4" *ngFor="let iten of obj_Array_Usuarios | filter: Input_Value">
+    <div class="top-5 relative flex flex-col gap-y-4" *ngFor="let item of obj_Array_Usuarios | filter: Input_Value">
         <div *ngIf="b_Width == false">
             <div
                 class="rounded-lg div-grid-title mb-2 shadow-xl lg:h-14 w-full lg:grid lg:grid-cols-6 bg-unimed-background">
 
-                <div class="div-grid-name-arrow grid grid-cols-2 xl:grid-cols-1" (click)="Show_Itens()">
+                <div class="div-grid-name-arrow grid grid-cols-2 xl:grid-cols-1" (click)="Show_Item(item)">
                     <p class="my-3 lg:my-auto ml-5 w-10/12 font-medium truncate">
-                        {{iten.cd_login}}</p>
-                    <img class="my-auto xl:hidden {{b_Show_Itens? 'img-rotation-arrow-down':''}}"
+                        {{item.cd_login}}</p>
+                    <img class="my-auto xl:hidden {{item.show? 'img-rotation-arrow-down':''}}"
                         src="assets/icons/arrow-up.svg">
                 </div>
-                <div class="pb-4 flex flex-col gap-y-1" *ngIf="b_Show_Itens && b_Width == false">
+                <div class="pb-4 flex flex-col gap-y-1" *ngIf="item.show && b_Width == false">
 
                     <div class="flex flex-row gap-x-3">
                         <p class="ml-5 lg:text-center lg:relative font-semibold">ID:</p>
-                        <p class="text-center my-auto truncate">{{iten.cd_usuario}}</p>
+                        <p class="text-center my-auto truncate">{{item.cd_usuario}}</p>
                     </div>
                     <div class="flex flex-row gap-x-3">
                         <p class="ml-5 lg:text-center font-semibold">Usuário:</p>
-                        <p class="lg:text-center my-auto w-7/12 truncate">{{iten.nm_usuario}}
+                        <p class="lg:text-center my-auto w-7/12 truncate">{{item.nm_usuario}}
                         </p>
                     </div>
                     <div class="flex flex-row gap-x-3">
                         <p class="ml-5 lg:text-center font-semibold">Perfil:</p>
-                        <p class="lg:text-center my-auto w-8/12 truncate">{{iten.perfil.role}}
+                        <p class="lg:text-center my-auto w-8/12 truncate">{{item.perfil.role}}
                         </p>
                     </div>
                     <div class="flex flex-row gap-x-3">
                         <p class="ml-5 lg:text-center font-semibold">Status:</p>
-                        <p class="lg:text-center my-auto w-8/12 truncate">{{iten.dt_bloqueio == null?'Ativo':'Inativo'}}
+                        <p class="lg:text-center my-auto w-8/12 truncate">{{item.dt_bloqueio == null?'Ativo':'Inativo'}}
                         </p>
                     </div>
                     <div class="flex flex-row gap-x-3 behavior-button" routerLink="/editar-usuario">
@@ -67,20 +66,22 @@
         <div *ngIf="b_Width">
             <div
                 class="rounded-lg div-grid-title shadow-xl mb-2 lg:h-14 w-full lg:grid lg:grid-cols-6 bg-white hover:bg-slate-100">
-                <p class="text-center my-auto text-ellipsis overflow-hidden whitespace-nowrap font-medium text-base">{{iten.cd_usuario}}</p>
-                <p class="my-3 lg:my-auto ml-5 text-ellipsis overflow-hidden whitespace-nowrap font-medium text-base">{{iten.nm_usuario}}</p>
-                <p class="text-center my-auto text-ellipsis overflow-hidden whitespace-nowrap font-medium text-base">{{iten.cd_login}}</p>
-                <p class="text-center my-auto text-ellipsis overflow-hidden whitespace-nowrap font-medium text-base">{{iten.perfil.role}}</p>
-                <p class="text-center my-auto text-ellipsis overflow-hidden whitespace-nowrap font-medium text-base">{{iten.dt_bloqueio == null?'Ativo':'Inativo'}}</p>
+                <p class="text-center my-auto text-ellipsis overflow-hidden whitespace-nowrap font-medium text-base">{{item.cd_usuario}}</p>
+                <p class="my-3 lg:my-auto ml-5 text-ellipsis overflow-hidden whitespace-nowrap font-medium text-base">{{item.nm_usuario}}</p>
+                <p class="text-center my-auto text-ellipsis overflow-hidden whitespace-nowrap font-medium text-base">{{item.cd_login}}</p>
+                <p class="text-center my-auto text-ellipsis overflow-hidden whitespace-nowrap font-medium text-base">{{item.perfil.role}}</p>
+                <p class="text-center my-auto text-ellipsis overflow-hidden whitespace-nowrap font-medium text-base">{{item.dt_bloqueio == null?'Ativo':'Inativo'}}</p>
                 <img class="behavior-button w-5 h-5 my-auto mx-auto cursor-pointer" src="assets/icons/edit.svg"
                     routerLink="/editar-usuario">
             </div>
         </div>
     </div>
 </div>
-<uni-paginator (onPageChange)="Mudar_Pagina($event)" [nr_Pagina]="nr_Pagina" [nr_Por_Pagina]="page_Length"
-    [nr_Registros]="nr_Registros">
-</uni-paginator>
+<div class="relative" style="width: 502px; margin: 10px auto 0; justify-content: center; display: flex;">
+    <uni-paginator (onPageChange)="Mudar_Pagina($event)" [nr_Pagina]="nr_Pagina" [nr_Por_Pagina]="page_Length"
+        [nr_Registros]="nr_Registros">
+    </uni-paginator>
+</div>
 
 <app-modal (b_Click_Sobreposicao)="Close_Modal()" class="{{b_Show_Filter?'':'hidden'}}">
     <div class="grid grid-cols-2">

@@ -46,6 +46,15 @@ export class AppComponent implements OnInit, OnDestroy {
     );
   }
 
+  Data_Atual(){
+    const data = new Date()
+    const dia = String(data.getDate()).padStart(2, '0')
+    const mes = String(data.getMonth() + 1).padStart(2, '0');
+    const ano = data.getFullYear();
+    const dataAtual = ano + '-' + mes + '-' + dia;
+    return dataAtual
+  }
+
   ngOnDestroy() {
     this.subject_unsub.next(true)
     this.subject_unsub.complete()

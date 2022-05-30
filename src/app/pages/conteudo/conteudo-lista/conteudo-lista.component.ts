@@ -1,4 +1,5 @@
 import { Component, ElementRef, HostListener, OnInit } from '@angular/core';
+import { ConteudoService } from '../conteudo.service';
 
 @Component({
   selector: 'app-conteudo-lista',
@@ -9,9 +10,6 @@ export class ConteudoEditarListaComponent implements OnInit {
 
   /**@description Título da página */
   ds_Titulo: string = "Conteúdos"
-
-  /**@description boolean que exibe os itens da listagem quando não é card */
-  b_Show_Itens: boolean = false
 
   /**@description recebe a largura atual da tela */
   nr_Width: number
@@ -28,30 +26,17 @@ export class ConteudoEditarListaComponent implements OnInit {
   /**@description Objeto que recebe o conteudo dos inputs */
   objFilter = { nm_Nome: "", nm_Usuario: "", nm_Status:"", nm_Grupo:"" }
 
-  constructor(private eRef: ElementRef) { }
+  constructor(
+    private conteudoService: ConteudoService
+    ) { }
 
-  ngOnInit(): void {
+  async ngOnInit() {
+    const responseconteudo = await this.conteudoService.Get_Conteudos()
+    this.obj_Array_Conteudos = responseconteudo.data.conteudos_aggregate.nodes
     this.onResize()
   }
 
-  obj_Array_Conteudos = [
-    {
-      titulo: "O mundo é lindo igual o Wesley",
-      id: 1,
-      descricao: "tema da bienal Rubem Braga no ano de 2019 na qual",
-      link: "http://localhost:4200/conteudo-editar-lista",
-      grupo: "Cedusc",
-
-    },
-    {
-      titulo: "O mundo é lindo eu alguns casos porem contudo",
-      id: 23,
-      descricao: "tema da bienal Rubem Braga no ano de 019 na qual",
-      link: "http://localhost:400/conteudo-editar-lista",
-      grupo: "Cedusc",
-
-    },
-  ]
+  obj_Array_Conteudos: any[]
 
   @HostListener('window:resize')
   onResize() {
@@ -63,8 +48,15 @@ export class ConteudoEditarListaComponent implements OnInit {
     }
   }
 
-  Show_Itens() {
-    this.b_Show_Itens = !this.b_Show_Itens
+  Show_Item(conteudo){
+    conteudo.show = !conteudo.show
+    if(conteudo.show){
+      this.obj_Array_Conteudos.forEach(fe => {
+        if(conteudo.cd_conteudo != fe.cd_conteudo){
+          fe.show = false
+        }
+      })
+    }
   }
 
   onFilter_Search(iten){
@@ -83,5 +75,4 @@ export class ConteudoEditarListaComponent implements OnInit {
   Show_Modal(event){
     this.b_Show_Filter = event
   }
-
 }

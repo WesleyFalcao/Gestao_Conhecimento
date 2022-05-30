@@ -24,13 +24,9 @@ export class SendSuggestionComponent implements OnInit {
   animationCreated( animationItem: AnimationItem ): void { }
 
   constructor(
-    private subject_service: SubjectService
-    ) { }
+  ) { }
 
   ngOnInit(): void {
-    this.subject_service.subject_Exibindo_Animation_Send.pipe(takeUntil(this.subject_unsub)).subscribe(
-      (Show_Animation) => this.Show_Animation = Show_Animation
-    )
 
     if(this.Show_Animation){
       setTimeout(() => {

@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { SubjectService } from 'src/app/services/subject.service';
 
@@ -27,11 +27,13 @@ export class SelectionInputComponent implements OnInit {
   /** @description Recebe o evento de fechar modal */
   b_Closed_Modal: boolean
 
-  /** @description Contém o valor selecionado pelo usuário no madal */
-  value: any
+  /** @description Emite o valor selecionado pelo usuário no madal */
+  @Output() nm_Value_Select = new EventEmitter()
+
+  /** @description Recebe o valor que é selecionado pelo usuário no madal */
+  Iten_Select: any
 
   constructor(
-    
   ) { }
 
   ngOnInit(): void {
@@ -41,7 +43,6 @@ export class SelectionInputComponent implements OnInit {
   Remover_Valor(event) {
     event.preventDefault()
     event.stopPropagation()
-
     this.control.setValue(null)
     this.control_Aux.setValue(null)
   }
@@ -52,7 +53,7 @@ export class SelectionInputComponent implements OnInit {
   }
 
   Iten_Select_Modal(event){
-    this.value = event
-    console.log(event)
+    this.Iten_Select = event
+    this.nm_Value_Select.emit(event)
   }
 }

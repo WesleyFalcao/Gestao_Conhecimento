@@ -22,38 +22,38 @@
             <p class="lg:text-center font-semibold">Editar</p>
         </div>
     </div>
-    <div class="top-5 relative flex flex-col gap-y-4" *ngFor="let iten of obj_Array_Conteudos | filter: Input_Value">
+    <div class="top-5 relative flex flex-col gap-y-4" *ngFor="let conteudo of obj_Array_Conteudos | filter: Input_Value">
         <div *ngIf="b_Width == false">
             <div
                 class="rounded-lg div-grid-title mb-2 shadow-xl lg:h-14 w-full lg:grid lg:grid-cols-6 bg-unimed-background">
 
-                <div class="div-grid-name-arrow grid grid-cols-2 xl:grid-cols-1" (click)="Show_Itens()">
+                <div class="div-grid-name-arrow grid grid-cols-2 xl:grid-cols-1" (click)="Show_Item(conteudo)">
                     <p class="my-3 lg:my-auto ml-5 w-10/12 truncate font-medium">
-                        {{iten.titulo}}</p>
-                    <img class="my-auto xl:hidden {{b_Show_Itens? 'img-rotation-arrow-down':''}}"
+                        {{conteudo.nm_titulo}}</p>
+                    <img class="my-auto xl:hidden {{conteudo.show? 'img-rotation-arrow-down':''}}"
                         src="assets/icons/arrow-up.svg">
                 </div>
 
-                <div class="pb-4" *ngIf="b_Show_Itens && b_Width == false">
+                <div class="pb-4" *ngIf="conteudo.show && b_Width == false">
 
                     <div class="flex flex-row gap-x-3">
                         <p class="ml-5 lg:text-center lg:relative font-semibold">ID:</p>
-                        <p class="text-center my-auto truncate">{{iten.id}}</p>
+                        <p class="text-center my-auto truncate">{{conteudo.cd_conteudo}}</p>
                     </div>
                     <div class="flex flex-row gap-x-3">
                         <p class="ml-5 lg:text-center font-semibold">Usuário:</p>
-                        <p class="text-center my-auto w-7/12 truncate">{{iten.descricao}}
+                        <p class="text-center my-auto w-7/12 truncate">{{conteudo.ds_conteudo}}
                         </p>
                     </div>
                     <div class="flex flex-row gap-x-3">
                         <p class="ml-5 lg:text-center font-semibold">Perfil:</p>
-                        <p class="text-center my-auto w-8/12 truncate">{{iten.link}}
+                        <p class="text-center my-auto w-8/12 truncate">{{conteudo.ds_link}}
                         </p>
                     </div>
                     <div class="flex flex-row gap-x-3">
-                        <p class="ml-5 lg:text-center font-semibold">Status:</p>
+                        <p class="ml-5 lg:text-center font-semibold">Contegoria:</p>
                         <p class="my-auto w-6/12 truncate">
-                            {{iten.grupo}}</p>
+                            {{conteudo.nm_categoria}}</p>
 
                     </div>
                     <div class="flex flex-row gap-x-3 behavior-button">
@@ -68,13 +68,13 @@
         <div *ngIf="b_Width">
             <div
                 class="rounded-lg div-grid-title shadow-xl mb-2 lg:h-14 w-full lg:grid lg:grid-cols-6 bg-white hover:bg-slate-100">
-                <p class="text-center my-auto text-ellipsis overflow-hidden whitespace-nowrap">{{iten.id}}</p>
-                <p class="my-3 lg:my-auto ml-5 text-ellipsis overflow-hidden whitespace-nowrap">
-                    {{iten.titulo}}</p>
-                <p class="text-center my-auto mx-auto text-ellipsis overflow-hidden whitespace-nowrap w-9/12">
-                    {{iten.descricao}}</p>
-                <p class="text-center my-auto text-ellipsis overflow-hidden whitespace-nowrap">{{iten.link}}</p>
-                <p class="text-center my-auto text-ellipsis overflow-hidden whitespace-nowrap">{{iten.grupo}}</p>
+                <p class="text-center my-auto text-ellipsis overflow-hidden whitespace-nowrap font-normal text-base">{{conteudo.cd_conteudo}}</p>
+                <p class="my-3 lg:my-auto ml-5 text-ellipsis overflow-hidden whitespace-nowrap font-normal text-base">
+                    {{conteudo.nm_titulo}}</p>
+                <p class="text-center my-auto mx-auto text-ellipsis overflow-hidden whitespace-nowrap w-9/12 font-normal text-base">
+                    {{conteudo.ds_conteudo}}</p>
+                <p class="text-center my-auto text-ellipsis overflow-hidden whitespace-nowrap font-normal text-base">{{conteudo.ds_link}}</p>
+                <p class="text-center my-auto text-ellipsis overflow-hidden whitespace-nowrap font-normal text-base">{{conteudo.nm_categoria}}</p>
                 <img class="behavior-button w-5 h-5 my-auto mx-auto cursor-pointer" src="assets/icons/edit.svg"
                     routerLink="/conteudo-editar">
             </div>

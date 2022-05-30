@@ -39,54 +39,24 @@
                 </div>
             </div>
         </div>
-        <div
-            class="h-52 inline-block relative rounded-lg bg-unimed-white shadow-lg mx-auto border-l-8 border-l-unimed-green {{b_Okay? 'div-hidden-card':''}}">
+        <div class="h-52 inline-block relative rounded-lg bg-unimed-white shadow-lg border-l-8 border-l-unimed-green {{sugestao.show? 'div-hidden-card':''}}"
+            *ngFor="let sugestao of obj_Array_Sugestoes; let i = index;">
             <div class="div-aling-item-card h-12">
                 <p
                     class="my-auto font-semibold text-lg md:font-semibold pl-4 text-ellipsis w-60 whitespace-nowrap overflow-hidden text-unimed-darkgray">
-                    O mundo é lindo
+                    {{sugestao.nm_titulo}}
                 </p>
                 <div class="flex flex-row">
                     <p class="mt-3 lg:mt-4 absolute hidden sm:flex font-medium right-12 lg:right-16">Arquivar</p>
                     <div class="w-5 h-5 rounded-full absolute right-5 lg:right-9 border-2 cursor-pointer mt-3 lg:mt-4 border-unimed-green"
-                        (click)="b_Okay = !b_Okay">
-                        <img class="relative {{b_Okay? '':'hidden'}}" src="assets/icons/okay.svg">
+                        (click)="File_Suggestion(sugestao, i)">
+                        <img class="relative {{sugestao.show? '':'hidden'}}" src="assets/icons/okay.svg">
                     </div>
                 </div>
             </div>
             <p
                 class="p-rows pt-2 my-auto font-medium xl:text-base xl:leading-7 pl-4 text-ellipsis whitespace-normal overflow-hidden">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Eum dolorum nostrum aperiam ea repellat error
-                rem vel iure et eos maiores adipisci officiis autem repellendus esse, corporis cumque! Aut, unde.Lorem
-                ipsum dolor sit amet consectetur adipisicing elit. Eum dolorum nostrum aperiam ea repellat error
-                rem vel iure et eos maiores adipisci officiis autem repellendus esse, corporis cumque! Aut, unde.Lorem
-                ipsum dolor sit amet consectetur adipisicing elit. Eum dolorum nostrum aperiam ea repellat error
-                rem vel iure et eos maiores adipisci officiis autem repellendus esse, corporis cumque! Aut, unde.
-            </p>
-        </div>
-        <div
-            class="h-52 inline-block relative rounded-lg bg-white shadow-lg mx-auto border-l-8 border-l-unimed-green {{b_Okay? 'div-hidden-card':''}}">
-            <div class="div-aling-item-card h-12">
-                <p
-                    class="my-auto font-semibold text-lg md:font-semibold pl-4 text-ellipsis w-60 whitespace-nowrap overflow-hidden text-unimed-darkgray">
-                    O mundo é lindo
-                </p>
-                <div class="flex flex-row">
-                    <p class="mt-3 lg:mt-4 absolute hidden sm:flex font-medium right-12 lg:right-16">Arquivar</p>
-                    <div class="w-5 h-5 rounded-full absolute right-5 lg:right-9 border-2 cursor-pointer mt-3 lg:mt-4 border-unimed-green"
-                        (click)="b_Okay = !b_Okay">
-                        <img class="relative {{b_Okay? '':'hidden'}}" src="assets/icons/okay.svg">
-                    </div>
-                </div>
-            </div>
-            <p
-                class="p-rows pt-2 my-auto font-medium xl:text-base xl:leading-7 pl-4 text-ellipsis whitespace-normal overflow-hidden">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Eum dolorum nostrum aperiam ea repellat error
-                rem vel iure et eos maiores adipisci officiis autem repellendus esse, corporis cumque! Aut, unde.Lorem
-                ipsum dolor sit amet consectetur adipisicing elit. Eum dolorum nostrum aperiam ea repellat error
-                rem vel iure et eos maiores adipisci officiis autem repellendus esse, corporis cumque! Aut, unde.Lorem
-                ipsum dolor sit amet consectetur adipisicing elit. Eum dolorum nostrum aperiam ea repellat error
-                rem vel iure et eos maiores adipisci officiis autem repellendus esse, corporis cumque! Aut, unde.
+                {{sugestao.ds_sugestao}}
             </p>
         </div>
     </div>
@@ -101,14 +71,19 @@
     </div>
     <div class="flex flex-col gap-y-2">
         <form>
-            <app-input [required]="true" label="Título" [(ngModel)]="objFilter.nm_Titulo" id="nm_Titulo" name="nm_Titulo">
+            <app-input [required]="false" label="Título" [(ngModel)]="objFilter.nm_Titulo" id="nm_Titulo"
+                name="nm_Titulo">
             </app-input>
-            <app-input [required]="true" label="Descrição" [(ngModel)]="objFilter.nm_Descricao" id="nm_Descricao"
+            <app-input [required]="false" label="Descrição" [(ngModel)]="objFilter.nm_Descricao" id="nm_Descricao"
                 name="nm_Descricao"></app-input>
         </form>
     </div>
     <div class="flex flex-row mt-4 gap-x-4 mx-4">
         <uni-button buttonClass="btn-outline" (click)="Close_Modal()">Voltar</uni-button>
-        <uni-button buttonClass="btn-primary" (click)="Filtrar()">Filtrar</uni-button>
+        <uni-button buttonClass="btn-primary" (click)="Filter()">Filtrar</uni-button>
     </div>
 </app-modal>
+
+<div *ngIf="obj_Array_Sugestoes.length == 0 || !obj_Array_Sugestoes">
+    <animation-nothing-found></animation-nothing-found>
+</div>

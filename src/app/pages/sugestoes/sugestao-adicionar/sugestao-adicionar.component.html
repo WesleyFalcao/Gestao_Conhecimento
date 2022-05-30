@@ -6,14 +6,23 @@
         <uni-title [ds_Titulo]="ds_Titulo"></uni-title>
     </div>
     <div class="top-6 relative flex flex-col gap-y-4">
-        <app-input label="Título"></app-input>
-        <app-input label="Descricao"></app-input>
+        <app-input [required]="true" label="Título" [(ngModel)]="obj_Add_Suggestion.nm_Titulo" id="nm_Titulo"
+            name="nm_Titulo">
+        </app-input>
+        <app-input [required]="true" label="Descrição" [(ngModel)]="obj_Add_Suggestion.nm_Descricao" id="nm_Descricao"
+            name="nm_Descricao">
+        </app-input>
         <div class="lg:mt-4 flex flex-row w-full xl:w-6/12 px-4 gap-x-4 lg:gap-x-10 mx-auto">
+            <uni-button buttonClass="btn-primary" (click)="Send_Sugestion()">Salvar</uni-button>
             <uni-button buttonClass="btn-outline" (click)="Back()">Voltar</uni-button>
-            <uni-button buttonClass="btn-primary" (click)="Send_Sugestion()">Adicionar</uni-button>
         </div>
     </div>
 </div>
+
 <div *ngIf="Send_Sugestion_Animacao">
     <app-send-suggestion></app-send-suggestion>
 </div>
+
+
+<alert-modal [ds_Descricao]="ds_Alert_Descricao" [b_Show_Alert_Modal]="b_Alert_Modal"
+    (b_Closed_Alert_Modal)="Closed_Alert_Modal()"></alert-modal>

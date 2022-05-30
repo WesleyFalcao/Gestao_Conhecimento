@@ -1,67 +1,11 @@
 <app-header [b_Nao_Exibir_Voltar]="b_Nao_Exibir_Voltar"></app-header>
 
-<div class="w-full mt-10 md:mt-16 lg:mt-20 mb-10 mx-auto">
-    <div class="cards-itens container">
-        <div class="card" routerLink="/conteudo">
-            <img class="icon-card" src="assets/icons/person-study.svg">
-            <p>Complice</p>
-        </div>
-        <div class="card">
-            <img class="icon-card" src="assets/icons/person-study.svg">
-            <p>Sumario</p>
-        </div>
-        <div class="card">
-            <img class="icon-card" src="assets/icons/person-study.svg">
-            <p>Sumario</p>
-        </div>
-        <div class="card">
-            <img class="icon-card" src="assets/icons/person-study.svg">
-            <p>Sumario</p>
-        </div>
-        <div class="card">
-            <img class="icon-card" src="assets/icons/person-study.svg">
-            <p>Sumario</p>
-        </div>
-        <div class="card">
-            <img class="icon-card" src="assets/icons/person-study.svg">
-            <p>Sumario</p>
-        </div>
-        <div class="card">
-            <img class="icon-card" src="assets/icons/person-study.svg">
-            <p>Sumario</p>
-        </div>
-        <div class="card">
-            <img class="icon-card" src="assets/icons/person-study.svg">
-            <p>Sumario</p>
-        </div>
-        <div class="card">
-            <img class="icon-card" src="assets/icons/person-study.svg">
-            <p>Sumario</p>
-        </div>
-        <div class="card">
-            <img class="icon-card" src="assets/icons/person-study.svg">
-            <p>Sumario</p>
-        </div>
-        <div class="card">
-            <img class="icon-card" src="assets/icons/person-study.svg">
-            <p>Sumario</p>
-        </div>
-        <div class="card">
-            <img class="icon-card" src="assets/icons/person-study.svg">
-            <p>Sumario</p>
-        </div>
-        <div class="card">
-            <img class="icon-card" src="assets/icons/person-study.svg">
-            <p>Sumario</p>
-        </div>
-        <div class="card">
-            <img class="icon-card" src="assets/icons/person-study.svg">
-            <p>Sumario</p>
-        </div>
-        <div class="card">
-            <img class="icon-card" src="assets/icons/person-study.svg">
-            <p>Sumario</p>
-        </div>
+<div class="container mb-10 mt-8 lg:mt-10 mx-auto cards-itens">
+    <div *ngFor="let categoria of obj_Array_Categoria">
+        <div class="card" [routerLink]="['/conteudo', categoria.cd_categoria]" >
+            <img class="icon-card pt-9" src="assets/icons/person-study.svg">
+            <p>{{categoria.nm_categoria}}</p>
+        </div> 
     </div>
 </div>
 

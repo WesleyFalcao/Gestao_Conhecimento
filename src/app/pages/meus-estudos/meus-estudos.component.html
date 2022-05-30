@@ -6,9 +6,7 @@
             <uni-title [ds_Titulo]="ds_Titulo"></uni-title>
         </div>
         <div class="flex flex-row gap-6 lg:gap-10 my-auto justify-end relative right-1 xl:mr-4 cursor-pointer">
-            <img class="behavior-button w-5 h-5 md:w-6 md:h-6" src="assets/icons/more-options-user.svg"
-                routerLink="/conteudo-adicionar">
-                <app-button-filter (b_Show_Modal)="Show_Modal($event)" ></app-button-filter>
+            <app-button-filter (b_Show_Modal)="Show_Modal($event)"></app-button-filter>
             <img class="behavior-button w-6 h-6 md:w-7 md:h-7" src="assets/icons/refresh.svg">
         </div>
     </div>
@@ -133,8 +131,8 @@
                 </app-input>
                 <app-input [required]="true" label="Descrição" [(ngModel)]="objFilter.nm_Usuario" id="nm_Usuario"
                     name="nm_Usuario"></app-input>
-                <app-input [required]="true" label="Grupo" [(ngModel)]="objFilter.nm_Status"
-                    id="nm_Status" name="nm_Status"></app-input>
+                <app-input [required]="true" label="Grupo" [(ngModel)]="objFilter.nm_Status" id="nm_Status"
+                    name="nm_Status"></app-input>
             </form>
         </div>
         <div class="flex flex-row mt-4 gap-x-4 mx-4">

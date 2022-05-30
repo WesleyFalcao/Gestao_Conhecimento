@@ -1,4 +1,5 @@
 import { HttpClient, HttpHeaders } from "@angular/common/http";
+import { variable } from "@angular/compiler/src/output/output_ast";
 import { Injectable } from "@angular/core";
 import { Apollo, gql } from "apollo-angular";
 import { environment } from "src/environments/environment";
@@ -38,10 +39,10 @@ export class ApiHasuraService {
         };
     }
 
-       _Execute(strQuery: string, objHeaders: any = null) {
+       _Execute(strQuery: string, variables?: any, objHeaders: any = null) {
         this.Preparar_HttpOptions(objHeaders);
 
-        let objBody = { query: `${strQuery}` };
+        let objBody = { query: `${strQuery}`, variables};
 
         // Retorna o promise
         return this.http

@@ -1,14 +1,15 @@
-import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+import { Subscription } from 'rxjs';
 import { SubjectService } from 'src/app/services/subject.service';
+import { ConteudoService } from '../conteudo.service';
 
 @Component({
   selector: 'app-conteudo',
   templateUrl: './conteudo.component.html',
   styleUrls: ['./conteudo.component.scss']
 })
-export class ConteudoComponent implements OnInit {
-
+export class ConteudoComponent implements OnInit, OnDestroy {
 
   /**@description nome do label do primeiro input */
   nm_Label_Input_Filter_1: string = "Título"
@@ -64,16 +65,29 @@ export class ConteudoComponent implements OnInit {
   /**@description Boolean para abrir e fechar o modal de filtro */
   b_Show_Filter: boolean = false
 
+  /**@description Recebe o parâmetro da rota */
+  cd_Id_Param: number
 
+  /**@description Recebe o parâmetro da rota */
+  subject_unsub: Subscription
+  
   constructor(
     private route: Router,
+    private routerParam: ActivatedRoute,
     private subject_service: SubjectService,
-  ) { }
+    private conteudoService: ConteudoService
+  ) { 
+  }
 
   visible: boolean = false;
 
-  ngOnInit(): void {
-
+  async ngOnInit() {
+    this.subject_unsub = this.routerParam.params.subscribe((params: any)=>{
+      this.cd_Id_Param = params['id']
+    })
+    
+    const responseconteudo = await this.conteudoService.Get_Conteudo(this.cd_Id_Param)
+    console.log(responseconteudo)
   }
 
   onClick_Option_Top() {
@@ -111,5 +125,9 @@ export class ConteudoComponent implements OnInit {
 
   Show_Modal(event) {
     this.b_Show_Filter = event
+  }
+
+  ngOnDestroy(){
+    this.subject_unsub.unsubscribe()
   }
 }

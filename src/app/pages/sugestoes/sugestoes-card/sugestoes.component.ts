@@ -1,4 +1,5 @@
 import { Component, ElementRef, HostListener, OnInit } from '@angular/core';
+import { SugestoesService } from '../sugestoes.service';
 
 @Component({
   selector: 'app-sugestoes',
@@ -7,17 +8,17 @@ import { Component, ElementRef, HostListener, OnInit } from '@angular/core';
 })
 export class SugestoesComponent implements OnInit {
 
+/**@description Recebe o array de sugestões */
+  obj_Array_Sugestoes
+
   /**@description Título da página */
   ds_Titulo: string = "Sugestões"
 
-  /**@description Bolean para exibir svg de okay no check-box */
-  b_Okay: boolean = false
-
   /**@description Number que vai receber o número de sugestões cadastradas pelo usuário */
-  nr_Minhas_Sugestoes: number = 6
+  nr_Minhas_Sugestoes: number = 0
 
   /**@description Number que vai receber o total de sugestões */
-  nr_Total_Sugestoes: number = 20
+  nr_Total_Sugestoes: number
 
   /**@description Boolean para abrir e fechar o modal de filtro */
   b_Show_Filter: boolean = false
@@ -31,10 +32,14 @@ export class SugestoesComponent implements OnInit {
   objFilter = { nm_Titulo: "", nm_Descricao: "" }
 
   constructor(
-    private eRef: ElementRef
+    private eRef: ElementRef,
+    private sugestoesService: SugestoesService
   ) { }
 
-  ngOnInit(): void {
+  async ngOnInit() {
+    const reponsesugestoes = await this.sugestoesService.Get_Suggestion()
+    this.obj_Array_Sugestoes = reponsesugestoes.data.sugestoes_aggregate.nodes
+    this.nr_Total_Sugestoes = reponsesugestoes.data.sugestoes_aggregate.aggregate.count
   }
 
   @HostListener('document:click', ['$event'])
@@ -46,6 +51,18 @@ export class SugestoesComponent implements OnInit {
     }
   }
 
+  async File_Suggestion(item, index){
+    console.log("indexf", index)
+    item.show = !item.show
+    const responsefile = await this.sugestoesService.Set_File_Suggestion(item.cd_sugestao)
+    
+    if(responsefile.data.update_sugestoes.returning.lenght != 1){
+      setTimeout(() => {   
+      this.obj_Array_Sugestoes.splice(index, 1)
+      }, 1850);
+    }
+  }
+
   Show_Modal(event) {
     this.b_Show_Filter = event
   }
@@ -53,8 +70,9 @@ export class SugestoesComponent implements OnInit {
   Close_Modal() {
     this.b_Show_Filter = false
   }
-
-  Filtrar() {
+  
+  async Filter() {
+    await this.sugestoesService.Get_Filter_Suggestion(this.objFilter)
     this.b_Show_Filter = false
     console.log(this.objFilter)
   }

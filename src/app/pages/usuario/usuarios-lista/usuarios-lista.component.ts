@@ -1,6 +1,8 @@
 import { Component, ElementRef, EventEmitter, HostListener, Input, OnInit, Output } from '@angular/core';
 import { UsuarioRepository } from 'src/app/repositories/usuario.repository';
 import { SubjectService } from 'src/app/services/subject.service';
+import { UsuariosService } from '../usuarios.service';
+
 
 @Component({
   selector: 'app-users',
@@ -9,9 +11,6 @@ import { SubjectService } from 'src/app/services/subject.service';
 })
 
 export class UsersComponent implements OnInit {
-
-  /**@description boolean que exibe os itens da listagem quando não é card */
-  b_Show_Itens: boolean = false
 
   /**@description recebe a largura atual da tela */
   nr_Width: number
@@ -34,7 +33,7 @@ export class UsersComponent implements OnInit {
   /** @description Index da Página */
   nr_Pagina = 1
 
-  obj_Array_Usuarios: []
+  obj_Array_Usuarios: any[]
 
   /** @description Evento para retornar se o botão de paginação foi apertado */
   @Output() onPageChange = new EventEmitter();
@@ -46,21 +45,21 @@ export class UsersComponent implements OnInit {
   @Input() nr_Registros = 0
 
   /**@description Objeto que recebe o conteudo dos inputs */
-  objFilter = { cd_usuario: undefined, nm_usuario: "", cd_login: "", dt_bloqueio: "", nr_pagina: this.nr_Pagina, nr_page_length: this.page_Length, nr_registos: this.nr_Registros }
+  objFilter = { cd_usuario: undefined, nm_usuario: undefined, cd_login: undefined, dt_bloqueio: undefined, nr_pagina: this.nr_Pagina, page_lenght: this.page_Length, nr_registos: this.nr_Registros }
+
+  objPaginacao = { nr_pagina: this.nr_Pagina, page_lenght: this.page_Length, nr_registos: this.nr_Registros }
 
   constructor(
-    private subjectService: SubjectService,
-    private usuarioRepository: UsuarioRepository
+    private usuarioService: UsuariosService
   ) { }
 
   async ngOnInit() {
     this.onResize()
-
-    const responseusuario = await this.usuarioRepository.Get_Usuarios(this.objFilter)
-    this.obj_Array_Usuarios = responseusuario.data.usuarios_aggregate.nodes
+    const responseusuario = await this.usuarioService.Get_Usuarios(this.objFilter)
+    this.obj_Array_Usuarios = responseusuario.data.usuarios
+    console.log(this.obj_Array_Usuarios)
+    console.log(responseusuario)
     this.nr_Registros = responseusuario.data.usuarios_aggregate.aggregate.count
-    console.log("registros", this.nr_Registros)
-    console.log("arrayusuarios", this.obj_Array_Usuarios)
   }
 
   @HostListener('window:resize')
@@ -73,18 +72,24 @@ export class UsersComponent implements OnInit {
     }
   }
 
-  Show_Itens() {
-    this.b_Show_Itens = !this.b_Show_Itens
-  }
-
   onFilter_Search(iten) {
     this.Input_Value = iten
+  }
+
+  Show_Item(item){
+    item.show = !item.show
+    if(item.show){
+      this.obj_Array_Usuarios.forEach(fe => {
+        if(item.cd_usuario != fe.cd_usuario){
+          fe.show = false
+        }
+      })
+    }
   }
 
   Filtrar() {
     console.log(this.objFilter)
     this.b_Show_Filter = false
-
   }
 
   Close_Modal() {
@@ -97,6 +102,6 @@ export class UsersComponent implements OnInit {
 
   /** @description Avança uma pagina */
   Mudar_Pagina(nr_Pagina: number) {
-    this.onPageChange.emit(this.aux_Pagina = nr_Pagina)
+    this.nr_Pagina = nr_Pagina
   }
 }
