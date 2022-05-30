@@ -1,4 +1,5 @@
 import { Component, HostListener, OnInit } from '@angular/core';
+import { SugestoesService } from '../sugestoes.service';
 
 @Component({
   selector: 'app-sugestoes-lista',
@@ -9,9 +10,6 @@ export class SugestoesListaComponent implements OnInit {
 
   /**@description boolean para abrir e fechar o modal */
   b_Show_Modal: boolean = false
-
-  /**@description boolean que exibe os itens da listagem quando não é card */
-  b_Show_Itens: boolean = false
 
   /**@description Título da página */
   ds_Titulo_Filter: string = "Filtros"
@@ -40,30 +38,28 @@ export class SugestoesListaComponent implements OnInit {
   /**@description Boolean para abrir e fechar o modal de filtro */
   b_Show_Filter: boolean = false
 
+  /**@description Recebe o id da sugestão clicada */
+  cd_Sugestao: number
+
+  /**@description Recebe o index da sugestão clicada */
+  cd_Index: number
+
   /**@description Objeto que recebe o conteudo dos inputs */
   objFilter = { ds_Titulo: "", ds_Descricao: "", cd_id: ""}
 
-  constructor(
+  /**@description Recebe o array de sugestões arquivadas */
+  obj_Array_Sugestoes_Arquivadas
 
+  constructor(
+    private  sugestoesService: SugestoesService
   ) { }
 
-  ngOnInit(): void {
+  async ngOnInit(){
     this.onResize()
+    const responselist = await this.sugestoesService.Get_Files_Suggestion()
+    this.obj_Array_Sugestoes_Arquivadas = responselist.data.sugestoes
+    console.log(this.obj_Array_Sugestoes_Arquivadas)
   }
-
-  obj_Array_Sugestoes_Arquivadas = [
-    {
-      nome: "O mundo é lindo",
-      descricao: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Eum dolorum nostrum aperiam ea repellat error rem vel iure et eos maiores adipisci officiis autem repellendus esse, corporis",
-      id: 1,
-    },
-    {
-      nome: "O mundo é lindo",
-      descricao: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Eum dolorum nostrum aperiam ea repellat error rem vel iure et eos maiores adipisci officiis autem repellendus esse, corporis",
-      id: 2, 
-    },
-
-  ]
 
   @HostListener('window:resize')
   onResize() {
@@ -75,8 +71,31 @@ export class SugestoesListaComponent implements OnInit {
     }
   }
 
-  Show_Itens() {
-    this.b_Show_Itens = !this.b_Show_Itens
+  Show_Itens(item) {
+    item.show = !item.show
+    if(item.show){
+      this.obj_Array_Sugestoes_Arquivadas.forEach(fe => {
+        if(item.cd_sugestao != fe.cd_sugestao){
+          fe.show = false
+        }
+      })
+    }
+  }
+
+  onClick_Unarchive(iten, index){
+    this.b_Confirmation_Show_Modal = true
+    this.cd_Sugestao = iten
+    this.cd_Index = index
+  }
+
+  async Unarchive(){
+    this.b_Confirmation_Show_Modal = false
+    const responseunarchive = await this.sugestoesService.Set_Unarchive_Suggestion(this.cd_Sugestao)
+    if(responseunarchive.errors){
+
+    }else{
+      this.obj_Array_Sugestoes_Arquivadas.splice(this.cd_Index, 1)
+    }
   }
 
   Closed_Alert_Modal() {

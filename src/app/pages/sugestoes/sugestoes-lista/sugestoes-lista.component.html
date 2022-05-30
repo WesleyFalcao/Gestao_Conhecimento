@@ -11,30 +11,30 @@
         </div>
     </div>
     <div class="hidden div-grid-title mt-8 lg:grid grid-cols-4">
-        <p class="font-semibold lg:grid ml-5">Id</p>
+        <p class="font-semibold lg:grid ml-5 lg:pl-4">Id</p>
         <p class="font-semibold lg:grid ml-5">Título</p>
         <p class="lg:text-left font-semibold">Descrição</p>
         <p class="lg:text-center font-semibold">Desarquivar</p>
     </div>
-    <div class="top-5 relative flex flex-col gap-y-4" *ngFor="let iten of obj_Array_Sugestoes_Arquivadas">
+    <div class="top-5 relative flex flex-col gap-y-4" *ngFor="let item of obj_Array_Sugestoes_Arquivadas, let i = index">
         <div *ngIf="b_Width == false">
             <div
                 class="rounded-lg div-grid-title mb-2 shadow-xl lg:h-14 w-full lg:grid lg:grid-cols-6 bg-unimed-background">
 
-                <div class="div-grid-name-arrow grid grid-cols-2 xl:grid-cols-1" (click)="Show_Itens()">
+                <div class="div-grid-name-arrow grid grid-cols-2 xl:grid-cols-1" (click)="Show_Itens(item)">
                     <p class="my-3 lg:my-auto ml-5 w-10/12 font-semibold truncate">
-                        {{iten.nome}}</p>
-                    <img class="my-auto xl:hidden {{b_Show_Itens? 'img-rotation-arrow-down':''}}"
+                        {{item.nm_titulo}}</p>
+                    <img class="my-auto xl:hidden {{item.show? 'img-rotation-arrow-down':''}}"
                         src="assets/icons/arrow-up.svg">
                 </div>
-                <div class="pb-4 flex flex-col gap-y-1" *ngIf="b_Show_Itens && b_Width == false">
+                <div class="pb-4 flex flex-col gap-y-1" *ngIf="item.show && b_Width == false">
                     
-                    <p class="ml-5 lg:text-center mb-1 lg:relative font-medium">Id: {{iten.id}}</p>
+                    <p class="ml-5 lg:text-center mb-1 lg:relative font-medium">Id: {{item.cd_sugestao}}</p>
                     <p class="ml-5 lg:text-center mb-1 lg:relative font-medium">Descrição:</p>
                     <div class="flex flex-row gap-x-3">
-                        <p class="my-auto whitespace-normal text-left ml-5">{{iten.descricao}}</p>
+                        <p class="my-auto whitespace-normal text-left ml-5">{{item.ds_sugestao}}</p>
                     </div>
-                    <div class="flex flex-row mt-5 gap-x-3 behavior-button" (click)="b_Confirmation_Show_Modal = true" >
+                    <div class="flex flex-row mt-5 gap-x-3 behavior-button" (click)="onClick_Unarchive(item.cd_sugestao, i)">
                         <img class="reltive left-5 ml-5 mt-1 behavior-button w-4 h-4 lg:w-7 lg:h-7 my-auto cursor-pointer lg:mx-auto"
                             src="assets/icons/undo.svg">
                         <p class="font-medium">Desarquivar</p>
@@ -46,11 +46,11 @@
         <div *ngIf="b_Width">
             <div
                 class="rounded-lg div-grid-title shadow-xl mb-2 lg:h-14 w-full lg:grid lg:grid-cols-3 bg-white hover:bg-slate-100">
-                <p class="my-3 lg:my-auto ml-5 text-ellipsis overflow-hidden whitespace-nowrap">{{iten.id}}</p>
-                <p class="my-3 lg:my-auto ml-5 text-ellipsis overflow-hidden whitespace-nowrap">
-                    {{iten.nome}}</p>
-                <p class="text-left my-auto text-ellipsis overflow-hidden whitespace-nowrap">{{iten.descricao}}</p>
-                <img class="behavior-button w-5 h-5 my-auto mx-auto cursor-pointer" src="assets/icons/undo.svg" (click)="b_Confirmation_Show_Modal = true">
+                <p class="my-3 lg:my-auto pl-4 ml-5 text-ellipsis overflow-hidden whitespace-nowrap font-medium text-base">{{item.cd_sugestao}}</p>
+                <p class="my-3 lg:my-auto ml-5 text-ellipsis overflow-hidden whitespace-nowrap font-medium text-base">
+                    {{item.nm_titulo}}</p>
+                <p class="text-left my-auto text-ellipsis overflow-hidden whitespace-nowrap font-medium text-base">{{item.ds_sugestao}}</p>
+                <img class="behavior-button w-5 h-5 my-auto mx-auto cursor-pointer" src="assets/icons/undo.svg" (click)="onClick_Unarchive(item.cd_sugestao, i)">
             </div>
         </div>
     </div>
@@ -81,4 +81,5 @@
 </app-modal>
 
 <alert-modal [ds_Descricao]="ds_Descricao" [b_Show_Alert_Modal]="b_Confirmation_Show_Modal"
-    (b_Closed_Alert_Modal)="Closed_Alert_Modal()"></alert-modal>
+    (b_Closed_Alert_Modal)="Closed_Alert_Modal()" (b_Confirmed)="
+    Unarchive()"></alert-modal>

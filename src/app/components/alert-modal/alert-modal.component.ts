@@ -12,6 +12,9 @@ export class AlertModalComponent implements OnInit {
 
   /**@description emite true quando o modal é fechado */
   @Output() b_Closed_Alert_Modal = new EventEmitter()
+
+  /**@description emite true quando o modal é fechado */
+  @Output() b_Confirmed = new EventEmitter()
   
   /**@description Contém da descrição do modal de alerta*/
   @Input() ds_Descricao: string = ""
@@ -23,5 +26,9 @@ export class AlertModalComponent implements OnInit {
 
   Modal_Closed(){
     this.b_Closed_Alert_Modal.emit()
+  }
+
+  Click_Confirmed(){
+    this.b_Confirmed.emit()
   }
 }

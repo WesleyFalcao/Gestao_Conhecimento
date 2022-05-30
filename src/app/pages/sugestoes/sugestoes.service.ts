@@ -20,6 +20,10 @@ export class SugestoesService {
         return this.sugestoesRepository.Set_File_Suggestion(sugestao)
     }
 
+    Get_Files_Suggestion(){
+        return this.sugestoesRepository.Get_Files_Suggestion()
+    }
+
     Get_Filter_Suggestion(filtersugestao){
         return this.sugestoesRepository.Get_Filter_Suggestion(filtersugestao)
     }
@@ -29,5 +33,9 @@ export class SugestoesService {
             return false
         }
         return this.sugestoesRepository.Set_Add_Suggestion(addsugestion)
+    }
+
+    Set_Unarchive_Suggestion(cd_Sugestao){
+        return this.sugestoesRepository.Set_Unarchive_Suggestion(cd_Sugestao)
     }
 }

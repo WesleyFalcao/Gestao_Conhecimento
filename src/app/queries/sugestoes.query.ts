@@ -29,6 +29,21 @@ export class SugestoesQuery {
     `
   }
 
+  Get_Files_Suggestion(){
+    return `
+    query {
+      sugestoes(where: {dt_arquivamento: {_is_null: false}}) {
+        cd_sugestao
+        cd_usuario
+        dt_arquivamento
+        dt_sugestao
+        nm_titulo
+        ds_sugestao
+      }
+    }    
+    `
+  }
+
   Set_File_Suggestion(){
     return `
     mutation ($data: date, $cd_sugestao: Int) {
@@ -60,6 +75,25 @@ export class SugestoesQuery {
         }
       }
     }
+    `
+  }
+
+  
+
+  Set_Unarchive_Suggestion(){
+    return `
+    mutation ($cd_sugestao: Int) {
+      update_sugestoes(where: {cd_sugestao: {_eq: $cd_sugestao}}, _set: {dt_arquivamento: null}) {
+        returning {
+          dt_arquivamento
+          cd_sugestao
+          cd_usuario
+          nm_titulo
+          dt_sugestao
+          ds_sugestao
+        }
+      }
+    }    
     `
   }
 }
