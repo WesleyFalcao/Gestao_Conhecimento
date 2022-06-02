@@ -1,5 +1,8 @@
 import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
+import { ListModel } from 'src/app/models/arraylist/array-list';
+import { SubjectService } from 'src/app/services/subject.service';
+import { CategoriaService } from '../../categorias/categoria.service';
 import { ConteudoService } from '../conteudo.service';
 
 @Component({
@@ -10,60 +13,7 @@ import { ConteudoService } from '../conteudo.service';
 export class ConteudoAdicionarComponent implements OnInit {
 
   /** @description Array de grupos */
-  objArrayGroups: any[] = [
-    {
-      nm_Nome: "Ana",
-      nm_Subtitulo: "subtitulos"
-    },
-    {
-      nm_Nome: "descricao",
-      nm_Subtitulo: "subtitulos"
-    },
-    {
-      nm_Nome: "descricao",
-      nm_Subtitulo: "subtitulos"
-    },
-    {
-      nm_Nome: "descricao",
-      nm_Subtitulo: "subtitulos"
-    },
-    {
-      nm_Nome: "wesley",
-      nm_Subtitulo: "subtitulos"
-    },
-    {
-      nm_Nome: "descricao",
-      nm_Subtitulo: "subtitulos"
-    },
-    {
-      nm_Nome: "descricao",
-      nm_Subtitulo: "subtitulos"
-    },
-    {
-      nm_Nome: "descricao",
-      nm_Subtitulo: "subtitulos"
-    },
-    {
-      nm_Nome: "descricao",
-      nm_Subtitulo: "subtitulos"
-    },
-    {
-      nm_Nome: "descricao",
-      nm_Subtitulo: "subtitulos"
-    },
-    {
-      nm_Nome: "descricao",
-      nm_Subtitulo: "subtitulos"
-    },
-    {
-      nm_Nome: "descricao",
-      nm_Subtitulo: "subtitulos"
-    },
-    {
-      nm_Nome: "descricao",
-      nm_Subtitulo: "subtitulos"
-    },
-  ]
+  obj_Array_Categorias: Array<ListModel>
 
   /**@description Boolean para controlar a animação */
   Send_Sugestion_Animacao: boolean = false
@@ -78,23 +28,28 @@ export class ConteudoAdicionarComponent implements OnInit {
   b_Not_Search: boolean = true
 
   /**@description Objeto que recebe o conteudo dos inputs */
-  obj_Add_Content: any = {nm_Titulo: null, nm_Descricao: null, ds_Link: null, nm_Categoria: null}
+  obj_Add_Content: any = {nm_Titulo: null, nm_Descricao: null, ds_Link: null, cd_Categoria: null, nome: ""}
 
   /**@description Título da páginas */
   ds_Titulo: string = "Adicionar conteúdo"
 
+  
   nm_Label_Selection_Input: string = "Categoria"
 
   constructor(
     private location: Location,
-    private conteudoService: ConteudoService
+    private conteudoService: ConteudoService,
+    private categoriaService: CategoriaService,
+    private subjectService: SubjectService
     ) { }
 
   Back(){
     this.location.back();
   }
 
-  ngOnInit(): void {
+  async ngOnInit() {
+    const responsecategories = await this.categoriaService.Get_Categories_List()
+    this.obj_Array_Categorias = responsecategories.data.categorias
   }
 
   Closed_Alert_Modal() {
@@ -102,7 +57,7 @@ export class ConteudoAdicionarComponent implements OnInit {
   }
 
   Value_Select(event){
-    this.obj_Add_Content.nm_Categoria = event.nm_Nome
+    this.obj_Add_Content.cd_Categoria = event.id
   }
 
   async Add_Content(){
@@ -117,6 +72,10 @@ export class ConteudoAdicionarComponent implements OnInit {
       setTimeout(() => {
         this.Send_Sugestion_Animacao = !this.Send_Sugestion_Animacao
       }, 3000);  
+    }
+
+    if(responsecontent.errors){
+      this.subjectService.subject_Exibindo_Snackbar.next({ message: 'Não foi possível adicionar' })
     }
   }
 }

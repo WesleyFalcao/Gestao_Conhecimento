@@ -12,8 +12,9 @@ header{
     width: 10rem;
     height: calc(70% - 40px);
     top: calc(50% - 15rem);
+    z-index: 99999;
 
-    @apply fixed bg-white my-auto z-30 overflow-y-auto align-middle rounded-sm transform -translate-x-1/2 left-1/2;
+    @apply fixed bg-white my-auto overflow-y-auto align-middle rounded-sm transform -translate-x-1/2 left-1/2;
 
     @media (min-width: 153px) {
         width: 19rem;

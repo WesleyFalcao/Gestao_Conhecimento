@@ -1,5 +1,6 @@
 import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
+import { SubjectService } from 'src/app/services/subject.service';
 import { CategoriaService } from '../categoria.service';
 
 @Component({
@@ -21,7 +22,7 @@ export class CategoriaAdicionarComponent implements OnInit {
   /**@description String que contém a mensagem do modal de alerta */
   ds_Alert_Descricao: string = "Os campos não podem estar vazios!"
 
-  /**@description  Recebe o nome da nova categoria*/
+  /**@description Recebe o nome da nova categoria*/
   nm_Categoria: string
 
   /**@description Boolean para remover a barra de pesquisa */
@@ -29,7 +30,8 @@ export class CategoriaAdicionarComponent implements OnInit {
 
   constructor(
     private location: Location,
-    private categoriaService: CategoriaService
+    private categoriaService: CategoriaService,
+    private subjectService: SubjectService
   ) { }
 
   Back() {
@@ -45,7 +47,7 @@ export class CategoriaAdicionarComponent implements OnInit {
 
   async Send_Category() {
 
-    const responsesetcategory = await this.categoriaService.Set_Category(this.nm_Categoria)
+    const responsesetcategory = await this.categoriaService.Set_Add_Category(this.nm_Categoria)
     if (responsesetcategory == false) {
       this.b_Alert_Modal = true
       this.ds_Alert_Descricao = "O campo tem que ser preenchido!"
@@ -55,6 +57,10 @@ export class CategoriaAdicionarComponent implements OnInit {
       setTimeout(() => {
         this.Send_Sugestion_Animacao = !this.Send_Sugestion_Animacao
       }, 3000);
+    }
+
+    if(responsesetcategory.errors){
+      this.subjectService.subject_Exibindo_Snackbar.next({ message: 'Não foi possível adicionar' })
     }
   }
 }

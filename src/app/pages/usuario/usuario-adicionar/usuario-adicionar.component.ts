@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Location } from '@angular/common';
+import { UsuariosService } from '../usuarios.service';
+import { ListModel } from 'src/app/models/arraylist/array-list';
+import { SubjectService } from 'src/app/services/subject.service';
 
 @Component({
   selector: 'app-adicionar-users',
@@ -8,30 +11,30 @@ import { Location } from '@angular/common';
 })
 export class AdicionarUsersComponent implements OnInit {
 
-  objArrayPerfil = [
+  /**@description objeto que recebe os perfil cadastrados no banco*/
+  objArrayPerfil = []
+
+  /**@description objeto que recebe as opções de usuario ad*/
+  objArrayUsuarioAd: Array<ListModel> = [
     {
-      nm_Nome: "Padrão"
+      nome: "Sim",
     },
     {
-      nm_Nome: "Administrador"
+      nome: "Não",
     }
   ]
-  objArrayAtivo = [
-    {
-      nm_Nome: "Ativo"
-    },
-    {
-      nm_Nome: "Inativo"
-    }
-  ]
-  objArrayUsuarioComputador = [
-    {
-      nm_Nome: "Sim"
-    },
-    {
-      nm_Nome: "Não"
-    }
-  ]
+
+  /**@description Boolean para controlar a animação */
+  Send_Sugestion_Animacao: boolean = false
+
+  /**@description String que contém a mensagem do modal de alerta */
+  ds_Alert_Descricao: string = ""
+
+  /**@description Boolean mostra o modal de alerta */
+  b_Alert_Modal: boolean = false
+
+  /**@description objeto que recebe os valores dos input*/
+  obj_Usuario = { nm_usuario: "", cd_login: null, ds_senha: null, b_login_ad: true, cd_perfil: 2 }
 
   /**@description Boolean para remover a barra de pesquisa */
   b_Not_Search: boolean = true
@@ -48,13 +51,55 @@ export class AdicionarUsersComponent implements OnInit {
   /**@description Nome do label do selection input */
   ds_Titulo: string = "Adicionar usuário"
 
-  Back(){
+  Back() {
     this.location.back();
   }
-  
-  constructor(private location: Location) { }
 
-  ngOnInit(): void {
+  constructor(
+    private location: Location,
+    private usuarioService: UsuariosService,
+    private subjectService: SubjectService
+  ) { }
+
+  async ngOnInit() {
+    const responseperfil = await this.usuarioService.Get_Perfil_Usuario()
+    this.objArrayPerfil = responseperfil.data.perfis
   }
 
+  Value_Select_Perfil(event) {
+    this.obj_Usuario.cd_perfil = event.cd_perfil
+  }
+
+  Value_Select_AD(event) {
+    if (event.nome == "Não") {
+      this.obj_Usuario.b_login_ad = false
+
+    } else {
+      this.obj_Usuario.b_login_ad = true
+    }
+  }
+
+  Closed_Alert_Modal() {
+    this.b_Alert_Modal = false
+  }
+
+  async Add_User() {
+    const responseadduser = await this.usuarioService.Set_Add_Usuario(this.obj_Usuario)
+    if(responseadduser == false) {
+      this.b_Alert_Modal = true
+      this.ds_Alert_Descricao = "Todos os campos devem ser preenchidos!"
+    }
+    if(responseadduser.errors) {
+      this.subjectService.subject_Exibindo_Snackbar.next({ message: 'Não foi possível adicionar' })
+      this.obj_Usuario.ds_senha = null
+    }
+
+    if(responseadduser.data.insert_usuarios.returning.length == 1){
+      this.obj_Usuario.ds_senha = null
+      this.Send_Sugestion_Animacao = true
+      setTimeout(() => {
+        this.Send_Sugestion_Animacao = !this.Send_Sugestion_Animacao
+      }, 3000);
+    }
+  }
 }

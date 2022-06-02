@@ -1,4 +1,5 @@
 import { Component, ElementRef, EventEmitter, HostListener, Input, OnInit, Output } from '@angular/core';
+import { UsuarioParams } from 'src/app/models/usuario/usuario.model';
 import { UsuarioRepository } from 'src/app/repositories/usuario.repository';
 import { SubjectService } from 'src/app/services/subject.service';
 import { UsuariosService } from '../usuarios.service';
@@ -45,9 +46,7 @@ export class UsersComponent implements OnInit {
   @Input() nr_Registros = 0
 
   /**@description Objeto que recebe o conteudo dos inputs */
-  objFilter = { cd_usuario: undefined, nm_usuario: undefined, cd_login: undefined, dt_bloqueio: undefined, nr_pagina: this.nr_Pagina, page_lenght: this.page_Length, nr_registos: this.nr_Registros }
-
-  objPaginacao = { nr_pagina: this.nr_Pagina, page_lenght: this.page_Length, nr_registos: this.nr_Registros }
+  objFilter = new UsuarioParams
 
   constructor(
     private usuarioService: UsuariosService
@@ -55,11 +54,9 @@ export class UsersComponent implements OnInit {
 
   async ngOnInit() {
     this.onResize()
-    const responseusuario = await this.usuarioService.Get_Usuarios(this.objFilter)
-    this.obj_Array_Usuarios = responseusuario.data.usuarios
-    console.log(this.obj_Array_Usuarios)
-    console.log(responseusuario)
-    this.nr_Registros = responseusuario.data.usuarios_aggregate.aggregate.count
+    const responseusuarios = await this.usuarioService.Get_Usuarios(this.objFilter)
+    this.obj_Array_Usuarios = responseusuarios.data.usuarios
+    this.nr_Registros = responseusuarios.data.usuarios_aggregate.aggregate.count
   }
 
   @HostListener('window:resize')

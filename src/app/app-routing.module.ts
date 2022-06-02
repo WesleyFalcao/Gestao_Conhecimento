@@ -29,9 +29,9 @@ const routes: Routes = [
     canActivate: [AuthGuard]
   },
   { path: 'conteudo/:id', component: ConteudoComponent,
-    
+    canActivate: [AuthGuard]
   },
-  { path: 'conteudo-editar', component: ConteudoEditarComponent,
+  { path: 'conteudo-editar/:id', component: ConteudoEditarComponent,
     canActivate: [AuthGuard]
   },
   { path: 'conteudo-lista', component: ConteudoEditarListaComponent,
@@ -46,7 +46,7 @@ const routes: Routes = [
   { path: 'adicionar-usuario', component: AdicionarUsersComponent,
   canActivate: [AuthGuard]
   },
-  { path: 'editar-usuario', component: EditarUserComponent,
+  { path: 'editar-usuario/:id', component: EditarUserComponent,
   canActivate: [AuthGuard]  
   },
   { path: 'sugestoes', component: SugestoesComponent,
@@ -64,7 +64,7 @@ const routes: Routes = [
   { path: 'categoria-adicionar', component: CategoriaAdicionarComponent,
   canActivate: [AuthGuard]
   },
-  { path: 'categoria-editar', component: CategoriaEditarComponent,
+  { path: 'categoria-editar/:id', component: CategoriaEditarComponent,
   canActivate: [AuthGuard]  
   },
   { path: 'send-sugestion', component: SendSuggestionComponent,

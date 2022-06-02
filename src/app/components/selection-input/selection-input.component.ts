@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { SubjectService } from 'src/app/services/subject.service';
+import { ListModel } from 'src/app/models/arraylist/array-list';
 
 @Component({
   selector: 'selection-input',
@@ -16,7 +16,13 @@ export class SelectionInputComponent implements OnInit {
   @Input() control = new FormControl()
 
   /** @description Array que recebe a listagem */
-  @Input() objArrayList
+  @Input() objArrayList: Array<ListModel>
+
+  /** @description Recebe o valor que é selecionado pelo usuário no madal */
+  @Input() Iten_Select: any
+
+  /** @description Emite o valor selecionado pelo usuário no madal */
+  @Output() Value_Select = new EventEmitter()
 
   /** @description FormControl auxiliar */
   control_Aux = new FormControl()
@@ -27,33 +33,27 @@ export class SelectionInputComponent implements OnInit {
   /** @description Recebe o evento de fechar modal */
   b_Closed_Modal: boolean
 
-  /** @description Emite o valor selecionado pelo usuário no madal */
-  @Output() nm_Value_Select = new EventEmitter()
-
-  /** @description Recebe o valor que é selecionado pelo usuário no madal */
-  Iten_Select: any
-
   constructor(
   ) { }
 
-  ngOnInit(): void {
-    
-  }
+  ngOnInit(): void {}
 
   Remover_Valor(event) {
     event.preventDefault()
     event.stopPropagation()
-    this.control.setValue(null)
-    this.control_Aux.setValue(null)
+    // this.control.setValue(null)
+    // this.control_Aux.setValue(null)
+    this.Iten_Select = null
   }
 
-  Closed_Modal(event){
+  Closed_Modal(event: any){
     this.b_Closed_Modal = event
     this.b_Show_Modal = false
   }
 
-  Iten_Select_Modal(event){
+  Iten_Select_Modal(event: any){
     this.Iten_Select = event
-    this.nm_Value_Select.emit(event)
+    console.log("this.Iten_Select",this.Iten_Select)
+    this.Value_Select.emit(event)
   }
 }

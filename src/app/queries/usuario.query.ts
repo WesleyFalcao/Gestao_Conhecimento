@@ -35,6 +35,38 @@ export class UsuarioQuery {
     `
   }
 
+  Get_Usuario(){
+    return `
+    query ($cd_usuario: Int) {
+      usuarios(where: {cd_usuario: {_eq: $cd_usuario}}) {
+        b_login_ad
+        cd_login
+        cd_perfil
+        cd_usuario
+        dt_bloqueio
+        nm_usuario
+        perfil {
+          cd_perfil
+          nm_perfil
+          role
+        }
+      }
+    }
+       
+    `
+  }
+
+  Get_Perfil_Usuario() {
+    return `
+    query MyQuery {
+      perfis {
+        nome:nm_perfil
+        cd_perfil
+      }
+    }    
+    `
+  }
+
   Get_Usuarios_Listagem_Paginacao() {
     return `
     query ($where: usuarios_bool_exp, $limit: Int, $offset: Int) {
@@ -51,13 +83,55 @@ export class UsuarioQuery {
           cd_perfil
         }
       }
-    
-       usuarios_aggregate (where: $where){
-            aggregate {
-              count
-            }
+      usuarios_aggregate(where: $where) {
+        aggregate {
+          count
+        }
       }
     }           
+    `
+  }
+
+  Set_Add_Usuario() {
+    return `
+    mutation ($nm_usuario: String,  $b_login_ad: Boolean, $cd_login: String, $cd_perfil: Int, $ds_senha: String ) {
+      insert_usuarios(objects: {nm_usuario: $nm_usuario, ds_senha: $ds_senha, b_login_ad: $b_login_ad, cd_login: $cd_login, cd_perfil: $cd_perfil}) {
+        returning {
+          perfil {
+            cd_perfil
+            nm_perfil
+            role
+          }
+          nm_usuario
+          dt_bloqueio
+          cd_usuario
+          cd_perfil
+          cd_login
+          b_login_ad
+        }
+      }
+    }    
+    `
+  }
+
+  Set_Edit_Usuario(){
+    return `
+    mutation ($cd_usuario: Int, $b_login_ad: Boolean, $cd_login: String, $cd_perfil: Int, $ds_senha: String, $dt_bloqueio: date) {
+      update_usuarios(where: {cd_usuario: {_eq: $cd_usuario}}, _set: {b_login_ad: $b_login_ad, cd_login: $cd_login, cd_perfil: $cd_perfil, ds_senha: $ds_senha, dt_bloqueio: $dt_bloqueio}) {
+        returning {
+          perfil {
+            role
+            nm_perfil
+            cd_perfil
+          }
+          cd_usuario
+          cd_perfil
+          dt_bloqueio
+          cd_login
+          b_login_ad
+        }
+      }
+    }    
     `
   }
 }

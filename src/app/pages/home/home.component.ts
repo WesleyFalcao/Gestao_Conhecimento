@@ -3,7 +3,8 @@ import { Router } from '@angular/router';
 import { Subject, takeUntil } from 'rxjs';
 import { HomeRepository } from 'src/app/repositories/home.repository';
 import { SubjectService } from 'src/app/services/subject.service';
-import { HomeService } from './home.service';
+import { CategoriaService } from '../categorias/categoria.service';
+
 
 @Component({
   selector: 'app-home',
@@ -32,14 +33,13 @@ export class HomeComponent implements OnInit {
 
   constructor(
     private subjectService: SubjectService,
-    private homeService: HomeService,
+    private categoriaService: CategoriaService,
     private router: Router
   ) { }
 
   async ngOnInit(){
-    const responsecategoria = await this.homeService.Get_Categorias_Listagem()
+    const responsecategoria = await this.categoriaService.Get_Categories_List()
     this.obj_Array_Categoria = responsecategoria.data.categorias
-    
   }
 
   @HostListener('window:resize')

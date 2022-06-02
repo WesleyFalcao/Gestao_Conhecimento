@@ -98,10 +98,10 @@ export class ConteudoComponent implements OnInit, OnDestroy {
     this.b_Start = !this.b_Start
     if (this.b_Start) {
       this.nm_Start = "assets/icons/start-yellow.svg"
-      this.subject_service.subject_Exibindo_Snackbar.next({ message: 'Para listar os planos selecione um subcontrato ao lado.' })
+      this.subject_service.subject_Exibindo_Snackbar.next({ message: '' })
     } else {
       this.nm_Start = "assets/icons/star-with-no-background.svg"
-      this.subject_service.subject_Exibindo_Snackbar.next({ message: 'Para listar os planos selecione um subcontrato ao lado.' })
+      this.subject_service.subject_Exibindo_Snackbar.next({ message: '' })
     }
   }
 

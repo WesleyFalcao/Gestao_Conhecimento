@@ -10,16 +10,6 @@ export class HomeQuery {
   ) {
   }
 
-  Get_Categorias_Listagem() {
-    return `
-      {
-        categorias(order_by: {nm_categoria: asc}) {
-          cd_categoria
-          nm_categoria
-        }
-      }    
-    `
-  }
   Get_Conteudo() {
     return `
       {

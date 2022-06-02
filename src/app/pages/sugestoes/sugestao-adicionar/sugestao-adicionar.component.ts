@@ -32,7 +32,9 @@ export class SugestaoAdicionarComponent implements OnInit {
   constructor(
     private subject_service: SubjectService,
     private location: Location,
-    private sugestaoService: SugestoesService
+    private sugestaoService: SugestoesService,
+    private subjectService: SubjectService
+
     ) { }
 
   ngOnInit(): void {
@@ -53,6 +55,9 @@ export class SugestaoAdicionarComponent implements OnInit {
       setTimeout(() => {
         this.Send_Sugestion_Animacao = !this.Send_Sugestion_Animacao
       }, 3000);   
+    }
+    if(responsesuggestion.errors){
+      this.subjectService.subject_Exibindo_Snackbar.next({ message: 'Não foi possível adicionar' })
     }
   }
 

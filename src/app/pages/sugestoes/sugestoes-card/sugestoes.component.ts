@@ -1,4 +1,5 @@
 import { Component, ElementRef, HostListener, OnInit } from '@angular/core';
+import { SubjectService } from 'src/app/services/subject.service';
 import { SugestoesService } from '../sugestoes.service';
 
 @Component({
@@ -33,7 +34,8 @@ export class SugestoesComponent implements OnInit {
 
   constructor(
     private eRef: ElementRef,
-    private sugestoesService: SugestoesService
+    private sugestoesService: SugestoesService,
+    private subjectService: SubjectService
   ) { }
 
   async ngOnInit() {
@@ -58,9 +60,17 @@ export class SugestoesComponent implements OnInit {
     
     if(responsefile.data.update_sugestoes.returning.lenght != 1){
       setTimeout(() => {   
+      this.subjectService.subject_Exibindo_Snackbar.next({ message: 'Arquivado com sucesso!' })
       this.obj_Array_Sugestoes.splice(index, 1)
       }, 1850);
     }
+    if(responsefile.errors){
+      this.subjectService.subject_Exibindo_Snackbar.next({ message: 'Não foi possível arquivar' })
+    }
+  }
+
+  async onClick_Refresh(){
+    const reponsesugestoes = await this.sugestoesService.Get_Suggestion()
   }
 
   Show_Modal(event) {

@@ -72,7 +72,7 @@
                 <p class="text-center my-auto text-ellipsis overflow-hidden whitespace-nowrap font-medium text-base">{{item.perfil.role}}</p>
                 <p class="text-center my-auto text-ellipsis overflow-hidden whitespace-nowrap font-medium text-base">{{item.dt_bloqueio == null?'Ativo':'Inativo'}}</p>
                 <img class="behavior-button w-5 h-5 my-auto mx-auto cursor-pointer" src="assets/icons/edit.svg"
-                    routerLink="/editar-usuario">
+                    [routerLink]="['/editar-usuario', item.cd_usuario]">
             </div>
         </div>
     </div>

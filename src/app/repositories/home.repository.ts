@@ -20,15 +20,6 @@ export class HomeRepository {
     private apiHasuraService: ApiHasuraService
   ) { }
 
-  async Get_Categorias_Listagem(){
-    this.subjectService.subject_Exibindo_Loading.next(true)
-    const query = this.homeQuery.Get_Categorias_Listagem()
-    const response = await this.apiHasuraService._Execute(query, this.httpOptions)
-    this.subjectService.subject_Exibindo_Loading.next(false)
-    console.log(response)
-    return response
-  }
-
   async Get_Conteudo(param){
     this.subjectService.subject_Exibindo_Loading.next(true)
     const query = this.homeQuery.Get_Conteudo()

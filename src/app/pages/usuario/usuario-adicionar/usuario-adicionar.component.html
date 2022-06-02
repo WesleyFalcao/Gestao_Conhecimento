@@ -4,28 +4,35 @@
     <div class="flex flex-col relative mb-4 left-4 lg:left-2 lg:ml-2.5">
         <uni-title [ds_Titulo]="ds_Titulo"></uni-title>
     </div>
-    <div class="grid grid-cols-1 lg:grid-cols-2 gap-y-4 xl:gap-y-0 2xl:mb-10">
+    <div class="grid grid-cols-1 gap-y-4 xl:gap-y-0 2xl:mb-10">
         <div class="flex flex-col gap-y-4">
-            <p class="ml-4 mb-2 font-semibold text-unimed-darkgray text-xs lg:text-sm">Dados pessoais</p>
-            <app-input label="Nome"></app-input>
             <div class="-mt-3 pr-3">
-                <selection-input [nm_Label_Selection_Input]="nm_Label_Selection_Input_Perfil" [objArrayList]="objArrayPerfil"></selection-input>
+                <selection-input [nm_Label_Selection_Input]="nm_Label_Selection_Input_Usuario"
+                    [objArrayList]="objArrayUsuarioAd" (Value_Select)="Value_Select_AD($event)"></selection-input>
+            </div>
+            <app-input [required]="!obj_Usuario.b_login_ad" label="Usuario" [(ngModel)]="obj_Usuario.nm_usuario"
+                id="nm_usuario" name="nm_usuario">
+            </app-input>
+            <div *ngIf="!obj_Usuario.b_login_ad">
+                <app-input [required]="true" label="Senha" [(ngModel)]="obj_Usuario.ds_senha" id="ds_senha" name="ds_senha">
+                </app-input>
             </div>
             <div class="-mt-3 pr-3">
-                <selection-input [nm_Label_Selection_Input]="nm_Label_Selection_Input_Ativo" [objArrayList]="objArrayAtivo"></selection-input>
+                <selection-input [nm_Label_Selection_Input]="nm_Label_Selection_Input_Perfil"
+                    (Value_Select)="Value_Select_Perfil($event)" [objArrayList]="objArrayPerfil"></selection-input>
             </div>
-        </div>
-        <div class="flex flex-col gap-y-4">
-            <p class="ml-4 mb-2 font-semibold text-unimed-darkgray text-xs lg:text-sm">Login</p>
-            <div class="-mt-3 pr-3">
-                <selection-input [nm_Label_Selection_Input]="nm_Label_Selection_Input_Usuario" [objArrayList]="objArrayUsuarioComputador"></selection-input>
-            </div> 
-            <app-input label="Nome de usuário"></app-input>
-            <app-input label="Senha"></app-input>     
         </div>
     </div>
-    <div class="flex flex-row mt-4 gap-x-4 mx-4 lg:mx-20 lg:gap-x-20"> 
+    <div class="flex flex-row mt-4 gap-x-4 mx-4 lg:mx-20 lg:gap-x-20">
+        <uni-button buttonClass="btn-primary" (click)="Add_User()">Adicionar</uni-button>
         <uni-button buttonClass="btn-outline" (click)="Back()">Voltar</uni-button>
-        <uni-button buttonClass="btn-primary">Adicionar</uni-button>
     </div>
 </div>
+
+<div *ngIf="Send_Sugestion_Animacao">
+    <app-send-suggestion></app-send-suggestion>
+</div>
+
+
+<alert-modal [ds_Descricao]="ds_Alert_Descricao" [b_Show_Alert_Modal]="b_Alert_Modal"
+    (b_Closed_Alert_Modal)="Closed_Alert_Modal()" (b_Confirmed)="Closed_Alert_Modal()"></alert-modal>

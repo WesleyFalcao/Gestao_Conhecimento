@@ -1,4 +1,6 @@
 import { Component, ElementRef, EventEmitter, Input, OnDestroy, OnInit, Output, ViewChild } from '@angular/core';
+import { ListModel } from 'src/app/models/arraylist/array-list';
+
 
 @Component({
   selector: 'app-selection-modal',
@@ -9,13 +11,11 @@ import { Component, ElementRef, EventEmitter, Input, OnDestroy, OnInit, Output, 
 export class SelectionModalComponent implements OnInit {
 
   /** @description Array de Itens para listar */
-  @Input() objArrayItens
+  @Input() objArrayItens: Array<ListModel>
 
+  /** @description recebe o label do input */
   @Input() nm_Label_Selection_Input: string
-    
-  /** @description Campo que será usado como Descrição */
-  nm_Descricao = "nm_Nome"
-
+ 
   /**@description emite true quando o modal é fechado */
   @Output() b_Closed_Modal = new EventEmitter<boolean>()
 
@@ -25,15 +25,12 @@ export class SelectionModalComponent implements OnInit {
   /** @description Valor da Pesquisa */
   value: string
 
-  @Input() show: boolean = false
-
   /** @description Instância de Filtro */
   @ViewChild("inputFiltro") input_Filtro: ElementRef
 
   constructor() { }
 
   ngOnInit(): void {
-
   }
 
   Modal_Closed() {
@@ -42,16 +39,11 @@ export class SelectionModalComponent implements OnInit {
 
   Limpar() {
     this.value = '';
-
-    this.objArrayItens.forEach(element => {
-      element._checkbox = false
-    });
   }
 
   Select(iten) {
     this.value = iten
     this.nm_Iten_Select.emit(iten)
-    this.show = false
     this.b_Closed_Modal.emit(true)
   }
 }

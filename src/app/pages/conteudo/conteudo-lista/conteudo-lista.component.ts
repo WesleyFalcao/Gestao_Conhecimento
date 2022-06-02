@@ -23,6 +23,9 @@ export class ConteudoEditarListaComponent implements OnInit {
   /**@description Boolean para abrir e fechar o modal de filtro */
   b_Show_Filter: boolean = false
 
+  /**@description Recebe o array de conteudos */
+  obj_Array_Conteudos: any[]
+
   /**@description Objeto que recebe o conteudo dos inputs */
   objFilter = { nm_Nome: "", nm_Usuario: "", nm_Status:"", nm_Grupo:"" }
 
@@ -31,12 +34,9 @@ export class ConteudoEditarListaComponent implements OnInit {
     ) { }
 
   async ngOnInit() {
-    const responseconteudo = await this.conteudoService.Get_Conteudos()
-    this.obj_Array_Conteudos = responseconteudo.data.conteudos_aggregate.nodes
+    this.onClick_Search()
     this.onResize()
   }
-
-  obj_Array_Conteudos: any[]
 
   @HostListener('window:resize')
   onResize() {
@@ -46,6 +46,11 @@ export class ConteudoEditarListaComponent implements OnInit {
     } else {
       this.b_Width = false
     }
+  }
+
+  async onClick_Search(){
+    const responseconteudo = await this.conteudoService.Get_Conteudos()
+    this.obj_Array_Conteudos = responseconteudo.data.conteudos_aggregate.nodes
   }
 
   Show_Item(conteudo){

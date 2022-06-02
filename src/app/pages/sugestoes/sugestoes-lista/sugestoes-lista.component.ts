@@ -1,4 +1,5 @@
 import { Component, HostListener, OnInit } from '@angular/core';
+import { SubjectService } from 'src/app/services/subject.service';
 import { SugestoesService } from '../sugestoes.service';
 
 @Component({
@@ -51,13 +52,15 @@ export class SugestoesListaComponent implements OnInit {
   obj_Array_Sugestoes_Arquivadas
 
   constructor(
-    private  sugestoesService: SugestoesService
+    private sugestoesService: SugestoesService,
+    private subjectService: SubjectService
   ) { }
 
   async ngOnInit(){
     this.onResize()
     const responselist = await this.sugestoesService.Get_Files_Suggestion()
     this.obj_Array_Sugestoes_Arquivadas = responselist.data.sugestoes
+    console.log("obj_Array_Sugestoes_Arquivadas", this.obj_Array_Sugestoes_Arquivadas)
     console.log(this.obj_Array_Sugestoes_Arquivadas)
   }
 
@@ -92,8 +95,9 @@ export class SugestoesListaComponent implements OnInit {
     this.b_Confirmation_Show_Modal = false
     const responseunarchive = await this.sugestoesService.Set_Unarchive_Suggestion(this.cd_Sugestao)
     if(responseunarchive.errors){
-
+      this.subjectService.subject_Exibindo_Snackbar.next({ message: 'Não foi possível desarquivar' })
     }else{
+      this.subjectService.subject_Exibindo_Snackbar.next({ message: 'Desarquivado com sucesso!' })
       this.obj_Array_Sugestoes_Arquivadas.splice(this.cd_Index, 1)
     }
   }
@@ -104,6 +108,10 @@ export class SugestoesListaComponent implements OnInit {
 
   onClick_Option_Bottom(event) {
     this.b_Confirmation_Show_Modal = event
+  }
+
+  async onClick_Refresh(){
+    const responselist = await this.sugestoesService.Get_Files_Suggestion()
   }
 
   Filtrar() {

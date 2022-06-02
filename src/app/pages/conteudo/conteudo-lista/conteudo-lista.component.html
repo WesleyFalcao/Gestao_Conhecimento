@@ -9,10 +9,10 @@
             <img class="behavior-button w-5 h-5 xl:w-7 xl:h-7 2xl:w-6 2xl:h-6" src="assets/icons/more-options-user.svg"
                 routerLink="/conteudo-adicionar">
             <app-button-filter (b_Show_Modal)="Show_Modal($event)"></app-button-filter>
-            <img class="behavior-button w-6 h-6 xl:w-8 xl:h-8 2xl:w-7 2xl:h-7" src="assets/icons/refresh.svg">
+            <img class="behavior-button w-6 h-6 xl:w-8 xl:h-8 2xl:w-7 2xl:h-7" src="assets/icons/refresh.svg" (click)="onClick_Search()">
         </div>
     </div>
-    <div *ngIf="obj_Array_Conteudos.length != 0">
+    <div *ngIf="obj_Array_Conteudos?.length != 0">
         <div class="hidden div-grid-title mt-8 lg:grid grid-cols-6">
             <p class="lg:text-center font-semibold">ID</p>
             <p class="font-semibold lg:grid ml-5">Título</p>
@@ -34,7 +34,7 @@
                         src="assets/icons/arrow-up.svg">
                 </div>
 
-                <div class="pb-4" *ngIf="conteudo.show && b_Width == false">
+                <div class="pb-4 grid gap-y-2" *ngIf="conteudo.show && b_Width == false">
 
                     <div class="flex flex-row gap-x-3">
                         <p class="ml-5 lg:text-center lg:relative font-semibold">ID:</p>
@@ -42,23 +42,23 @@
                     </div>
                     <div class="flex flex-row gap-x-3">
                         <p class="ml-5 lg:text-center font-semibold">Usuário:</p>
-                        <p class="text-center my-auto w-7/12 truncate">{{conteudo.ds_conteudo}}
+                        <p class="my-auto w-7/12 truncate">{{conteudo.ds_conteudo}}
                         </p>
                     </div>
                     <div class="flex flex-row gap-x-3">
                         <p class="ml-5 lg:text-center font-semibold">Perfil:</p>
-                        <p class="text-center my-auto w-8/12 truncate">{{conteudo.ds_link}}
+                        <p class=" my-auto w-8/12 truncate">{{conteudo.ds_link}}
                         </p>
                     </div>
                     <div class="flex flex-row gap-x-3">
                         <p class="ml-5 lg:text-center font-semibold">Contegoria:</p>
                         <p class="my-auto w-6/12 truncate">
-                            {{conteudo.nm_categoria}}</p>
+                            {{conteudo.categoria.nm_categoria}}</p>
 
                     </div>
                     <div class="flex flex-row gap-x-3 behavior-button">
                         <img class="reltive left-5 ml-5 mt-1 behavior-button w-4 h-4 lg:w-7 lg:h-7 my-auto cursor-pointer lg:mx-auto"
-                            src="assets/icons/edit.svg" routerLink="/conteudo-editar">
+                            src="assets/icons/edit.svg" [routerLink]="['/conteudo-editar', conteudo.cd_conteudo]">
                         <p>Editar</p>
                     </div>
                 </div>
@@ -74,9 +74,9 @@
                 <p class="text-center my-auto mx-auto text-ellipsis overflow-hidden whitespace-nowrap w-9/12 font-normal text-base">
                     {{conteudo.ds_conteudo}}</p>
                 <p class="text-center my-auto text-ellipsis overflow-hidden whitespace-nowrap font-normal text-base">{{conteudo.ds_link}}</p>
-                <p class="text-center my-auto text-ellipsis overflow-hidden whitespace-nowrap font-normal text-base">{{conteudo.nm_categoria}}</p>
+                <p class="text-center my-auto text-ellipsis overflow-hidden whitespace-nowrap font-normal text-base">{{conteudo.categoria.nm_categoria}}</p>
                 <img class="behavior-button w-5 h-5 my-auto mx-auto cursor-pointer" src="assets/icons/edit.svg"
-                    routerLink="/conteudo-editar">
+                    [routerLink]="['/conteudo-editar', conteudo.cd_conteudo]">
             </div>
         </div>
     </div>
@@ -108,6 +108,6 @@
     </div>
 </app-modal>
 
-<div *ngIf="obj_Array_Conteudos.length == 0 || !obj_Array_Conteudos">
+<div *ngIf="!obj_Array_Conteudos || obj_Array_Conteudos?.length == 0">
     <animation-nothing-found></animation-nothing-found>
 </div>

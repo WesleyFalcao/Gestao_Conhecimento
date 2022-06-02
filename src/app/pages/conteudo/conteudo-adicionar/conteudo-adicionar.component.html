@@ -14,7 +14,7 @@
         <app-input [required]="true" label="Link" [(ngModel)]="obj_Add_Content.ds_Link" id="ds_Link" name="ds_Link">
         </app-input>
         <div class="div-grid-group grid grid-cols-2">
-            <selection-input [objArrayList]="objArrayGroups" (nm_Value_Select)="Value_Select($event)" [nm_Label_Selection_Input]="nm_Label_Selection_Input"></selection-input>
+            <selection-input [objArrayList]="obj_Array_Categorias" [Iten_Select]="obj_Add_Content" (Value_Select)="Value_Select($event)" [nm_Label_Selection_Input]="nm_Label_Selection_Input"></selection-input>
             <div class="behavior-button mt-3 lg:mt-0 lg:flex-row mx-auto cursor-pointer" routerLink="/categoria-adicionar">
                 <img class="relative mb-1 mx-auto w-5 h-5 lg:w-6 lg:h-6 lg:mt-5 lg:my-auto"
                     src="assets/icons/add-group.svg">

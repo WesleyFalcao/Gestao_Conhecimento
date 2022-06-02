@@ -14,13 +14,39 @@ export class CategoriaRepository {
 
   constructor(
     private categoriaQuery: CategoriaQuery,
+    private subjectService: SubjectService,
     private apiHasuraService: ApiHasuraService
   ) { }
 
-  async Set_Category(nm_Categoria){
-    const query = this.categoriaQuery.Set_Category()
+  async Get_Categories_List(){
+    this.subjectService.subject_Exibindo_Loading.next(true)
+    const query = this.categoriaQuery.Get_Categories_List()
+    const response = await this.apiHasuraService._Execute(query, this.httpOptions)
+    this.subjectService.subject_Exibindo_Loading.next(false)
+    return response
+  }
+
+  async Get_Category(param){
+    this.subjectService.subject_Exibindo_Loading.next(true)
+    const query = this.categoriaQuery.Get_Category()
+    const variables = {"cd_categoria": param }
+    const response = await this.apiHasuraService._Execute(query, variables, this.httpOptions)
+    this.subjectService.subject_Exibindo_Loading.next(false)
+    return response
+  }
+
+  async Set_Add_Category(nm_Categoria){
+    const query = this.categoriaQuery.Set_Add_Category()
     const variables = {"nm_categoria": nm_Categoria}
     const response = await this.apiHasuraService._Execute(query, variables, this.httpOptions)
+    return response
+  }
+
+  async Set_Edit_Category(nm_Categoria, cd_Id_Param){
+    const query = this.categoriaQuery.Set_Edit_Category()
+    const variables = {"nm_categoria": nm_Categoria, "cd_categoria": cd_Id_Param}
+    const response = await this.apiHasuraService._Execute(query, variables, this.httpOptions)
+    console.log("editado", response)
     return response
   }
 }

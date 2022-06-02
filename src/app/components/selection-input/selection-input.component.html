@@ -1,5 +1,6 @@
 <div class="input input-select" (click)="b_Show_Modal = true">
-    <input class="input-borda" [required]="true" type="text" [ngClass]="control.touched ? 'ng-touched' : ''" readonly [ngModel]="Iten_Select?.nm_Nome" [formControl]="control_Aux">
+    <input class="input-borda" [required]="true" type="text" [ngClass]="control.touched ? 'ng-touched' : ''" readonly
+        [ngModel]="Iten_Select?.nome" [formControl]="control_Aux">
     <label>{{nm_Label_Selection_Input}}</label>
 
     <div *ngIf="control_Aux.value && control.enabled" class="div-close" (click)="Remover_Valor($event)">
@@ -8,5 +9,6 @@
 </div>
 
 <div *ngIf="b_Show_Modal">
-    <app-selection-modal [objArrayItens]="objArrayList" [nm_Label_Selection_Input]="nm_Label_Selection_Input" (b_Closed_Modal)="Closed_Modal($event)" (nm_Iten_Select)="Iten_Select_Modal($event)"></app-selection-modal>
+    <app-selection-modal [objArrayItens]="objArrayList" [nm_Label_Selection_Input]="nm_Label_Selection_Input"
+        (b_Closed_Modal)="Closed_Modal($event)" (nm_Iten_Select)="Iten_Select_Modal($event)"></app-selection-modal>
 </div>

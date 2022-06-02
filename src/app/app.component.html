@@ -2,7 +2,7 @@
   <div class="aling-version ">
     <app-version></app-version>
   </div>
-    <router-outlet #outlet="outlet"></router-outlet>
-      <snackbar></snackbar>
-      <loading *ngIf="b_Exibindo_Loading"></loading>
+  <router-outlet #outlet="outlet"></router-outlet>
+  <snackbar></snackbar>
 </div>
+<app-loading *ngIf="b_Exibindo_Loading"></app-loading>

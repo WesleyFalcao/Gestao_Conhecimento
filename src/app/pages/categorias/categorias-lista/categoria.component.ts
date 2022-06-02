@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { HomeService } from '../../home/home.service';
 import { CategoriaService } from '../categoria.service';
 
 @Component({
@@ -8,12 +7,6 @@ import { CategoriaService } from '../categoria.service';
   styleUrls: ['./categoria.component.scss']
 })
 export class CategoriaComponent implements OnInit {
-
-  constructor(
-    private homeService: HomeService
-  ){
-
-  }
 
   /**@description Nome do título */
   ds_Titulo: string = "Categorias"
@@ -30,12 +23,16 @@ export class CategoriaComponent implements OnInit {
   /**@description Recebe o array de categorias */
   obj_Array_Categorias: any
 
-  onFilter_Search(iten) {
-    this.Input_Value = iten
-  }
+  constructor(
+    private categoriaService: CategoriaService
+  ){}
 
   async ngOnInit() {
-    const responsecategorias = await this.homeService.Get_Categorias_Listagem()
+    this.onClick_Search()
+  }
+
+  async onClick_Search(){
+    const responsecategorias = await this.categoriaService.Get_Categories_List()
     this.obj_Array_Categorias = responsecategorias.data.categorias
   }
 
@@ -46,6 +43,10 @@ export class CategoriaComponent implements OnInit {
   Filtrar() {
     console.log(this.objFilter)
     this.b_Show_Filter = false
+  }
+
+  onFilter_Search(iten) {
+    this.Input_Value = iten
   }
 
   Show_Modal(event) {
