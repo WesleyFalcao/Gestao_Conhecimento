@@ -4,7 +4,6 @@ import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { ListModel } from 'src/app/models/arraylist/array-list';
 import { objConteudoModel } from 'src/app/models/conteudo/conteudo.model';
-
 import { SubjectService } from 'src/app/services/subject.service';
 import { CategoriaService } from '../../categorias/categoria.service';
 import { ConteudoService } from '../conteudo.service';
@@ -78,8 +77,9 @@ export class ConteudoEditarComponent implements OnInit, OnDestroy {
     const responsecategories = await this.categoriaService.Get_Categories_List()
     this.obj_Array_Categorias = responsecategories.data.categorias
 
-    const responseconteudo = await this.conteudoService.Get_Conteudo(this.cd_Id_Param)
+    const responseconteudo = await this.conteudoService.Get_Conteudo_Edit(this.cd_Id_Param)
     this.obj_Filds_Input = responseconteudo.data.conteudos[0]
+    console.log(responseconteudo)
   }
 
   async Set_Edit_User() {

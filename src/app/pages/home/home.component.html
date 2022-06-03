@@ -2,7 +2,7 @@
 
 <div class="container mb-10 mt-8 lg:mt-10 mx-auto cards-itens">
     <div *ngFor="let categoria of obj_Array_Categoria">
-        <div class="card" [routerLink]="['/conteudo', categoria.cd_categoria]" >
+        <div class="card" [routerLink]="['/conteudo', categoria.id]" >
             <img class="icon-card pt-9" src="assets/icons/person-study.svg">
             <p>{{categoria.nome}}</p>
         </div> 

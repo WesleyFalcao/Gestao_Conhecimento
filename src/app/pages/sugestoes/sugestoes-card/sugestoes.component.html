@@ -8,12 +8,16 @@
         <div class="flex flex-row relative gap-8 md:gap-12 lg:gap-16 mr-16 justify-self-end">
 
             <div class="flex flex-row gap-6 lg:gap-10 my-auto justify-end relative right-1 xl:mr-4 cursor-pointer">
-                <img class="behavior-button w-5 h-5 xl:w-7 xl:h-7 2xl:w-6 2xl:h-6 {{obj_Array_Sugestoes.length == 0 || !obj_Array_Sugestoes? 'hidden':''}}"
+                <img class="behavior-button w-5 h-5 xl:w-7 xl:h-7 2xl:w-6 2xl:h-6"
                     src="assets/icons/more-options-user.svg" routerLink="/sugestao-adicionar">
-                <img class="behavior-button relative w-5 h-5 xl:w-7 xl:h-7 2xl:w-6 2xl:h-6 cursor-pointer"
-                    src="assets/icons/list-okay.svg" (click)="b_Show_Popover_Feitos = !b_Show_Popover_Feitos">
-                <app-button-filter class="{{obj_Array_Sugestoes.length == 0 || !obj_Array_Sugestoes? 'hidden':''}}" [b_Popover_Sugestoes]="b_Popover_Sugestoes" (b_Show_Modal)="Show_Modal($event)">
+                <div *ngIf="b_User_Admin">
+                    <img class="behavior-button relative w-5 h-5 xl:w-7 xl:h-7 2xl:w-6 2xl:h-6 cursor-pointer"
+                        src="assets/icons/list-okay.svg" (click)="b_Show_Popover_Feitos = !b_Show_Popover_Feitos">
+                </div>
+                <app-button-filter class="{{obj_Array_Sugestoes?.length == 0 || !obj_Array_Sugestoes? 'hidden':''}}"
+                    [b_Popover_Sugestoes]="b_Popover_Sugestoes" (b_Show_Modal)="Show_Modal($event)">
                 </app-button-filter>
+
                 <img class="hidden md:flex behavior-button w-6 h-6 xl:w-8 xl:h-8 2xl:w-7 2xl:h-7"
                     src="assets/icons/refresh.svg" (click)="onClick_Refresh()">
             </div>
@@ -84,6 +88,6 @@
     </div>
 </app-modal>
 
-<div *ngIf="obj_Array_Sugestoes.length == 0 || !obj_Array_Sugestoes">
+<div *ngIf="obj_Array_Sugestoes?.length == 0 || !obj_Array_Sugestoes">
     <animation-nothing-found></animation-nothing-found>
 </div>

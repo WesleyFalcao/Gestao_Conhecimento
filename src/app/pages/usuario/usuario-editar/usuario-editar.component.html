@@ -14,7 +14,7 @@
                 name="nm_usuario">
             </app-input>
             <div *ngIf="!obj_Filds_Input.b_login_ad">
-                <app-input [required]="false" label="Nova senha" [(ngModel)]="obj_Filds_Input.ds_senha" id="ds_senha"
+                <app-input [required]="true" label="Nova senha" [(ngModel)]="obj_Filds_Input.ds_senha" id="ds_senha"
                     name="ds_senha">
                 </app-input>
             </div>
@@ -33,3 +33,11 @@
         <uni-button buttonClass="btn-outline">Voltar</uni-button>
     </div>
 </div>
+
+<div *ngIf="Send_Sugestion_Animacao">
+    <app-send-suggestion></app-send-suggestion>
+</div>
+
+
+<alert-modal [ds_Descricao]="ds_Alert_Descricao" [b_Show_Alert_Modal]="b_Alert_Modal"
+    (b_Closed_Alert_Modal)="Closed_Alert_Modal()" (b_Confirmed)="Closed_Alert_Modal()"></alert-modal>

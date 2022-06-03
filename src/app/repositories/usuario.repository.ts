@@ -49,11 +49,9 @@ export class UsuarioRepository {
     /**@description where para um usuario pelo nome */
     //where: {cd_login: {_eq: "ana"}}
     
-    console.log("param", param)
     this.subjectService.subject_Exibindo_Loading.next(true)
     const query = this.usuarioQuery.Get_Usuarios_Listagem_Paginacao()
     const variables = { where, limit: param.page_lenght, offset: ((param.nr_pagina - 1)*param.page_lenght)}
-    console.log("offset", variables.offset)
     const response = await this.apiHasuraService._Execute(query, variables, this.httpOptions)
     this.subjectService.subject_Exibindo_Loading.next(false)
     return response

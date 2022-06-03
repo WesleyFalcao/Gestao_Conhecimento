@@ -1,5 +1,6 @@
 import { Component, ElementRef, HostListener, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { LoginService } from 'src/app/services/login.service';
 import { SubjectService } from 'src/app/services/subject.service';
 
 @Component({
@@ -45,6 +46,9 @@ export class MeusEstudosComponent implements OnInit {
   /**@description Recebe true quando o usuário clica no primeiro item do popover */
   onClick_Top: boolean
 
+  /**@description Recebe o Id do usuário logado */
+  cd_Id_User_Logged: number
+
   /** @description Boolean para exibir ou fechar o modal de confirmação */
   b_Confirmation_Show_Modal: boolean
 
@@ -60,20 +64,23 @@ export class MeusEstudosComponent implements OnInit {
   constructor(
     private subject_service: SubjectService,
     private router: Router,
+    private loginService: LoginService,
     private eRef: ElementRef
   ) { }
 
   ngOnInit(): void {
+    this.cd_Id_User_Logged = this.loginService.Id_User_Logged()
+    
   }
 
   Start_Svg() {
     this.b_Start = !this.b_Start
     if (this.b_Start) {
       this.nm_Start = "assets/icons/start-yellow.svg"
-      this.subject_service.subject_Exibindo_Snackbar.next({ message: 'Para listar os planos selecione um subcontrato ao lado.' })
+      this.subject_service.subject_Exibindo_Snackbar.next({ message: 'Favoritado com sucesso!' })
     } else {
       this.nm_Start = "assets/icons/star-with-no-background.svg"
-      this.subject_service.subject_Exibindo_Snackbar.next({ message: 'Para listar os planos selecione um subcontrato ao lado.' })
+      this.subject_service.subject_Exibindo_Snackbar.next({ message: 'Desfavoritado com sucesso!' })
     }
   }
 

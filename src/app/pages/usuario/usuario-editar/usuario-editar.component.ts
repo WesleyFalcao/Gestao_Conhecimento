@@ -56,6 +56,15 @@ export class EditarUserComponent implements OnInit, OnDestroy {
   /**@description Recebe o parâmetro da rota */
   cd_Id_Param: Number
 
+  /**@description Boolean para controlar a animação */
+  Send_Sugestion_Animacao: boolean = false
+
+  /**@description String que contém a mensagem do modal de alerta */
+  ds_Alert_Descricao: string = ""
+
+  /**@description Boolean mostra o modal de alerta */
+  b_Alert_Modal: boolean = false
+
   /**@description Recebe o parâmetro da rota */
   subject_unsub: Subscription
 
@@ -68,37 +77,34 @@ export class EditarUserComponent implements OnInit, OnDestroy {
     private subjectService: SubjectService,
   ) { }
 
-  Value_Select_AD(iten){
-    if(iten.nome == "Sim"){
+  Value_Select_AD(iten) {
+    if (iten.nome == "Sim") {
       this.obj_Filds_Input.b_login_ad = true
-    }else{
+    } else {
       this.obj_Filds_Input.b_login_ad = false
     }
   }
-  Value_Select_Perfil(iten){
-    if(iten.nome == "Administrador"){
-      this.obj_Filds_Input.cd_perfil = 1
-    } else if(iten.nome == "Usuario"){
-      this.obj_Filds_Input.cd_perfil = 2
-    }
-    console.log(this.obj_Filds_Input.cd_perfil = 2)
+
+  Value_Select_Perfil(iten) {
+    this.obj_Filds_Input.cd_perfil = iten.id
   }
-  Value_Select_Status(iten){
-    if(iten.nome == "Inativo"){
+
+  Value_Select_Status(iten) {
+    if (iten.nome == "Inativo") {
       const data = new Date()
       const dia = String(data.getDate()).padStart(2, '0')
       const mes = String(data.getMonth() + 1).padStart(2, '0');
       const ano = data.getFullYear();
       const dataAtual = ano + '-' + mes + '-' + dia;
       this.obj_Filds_Input.dt_bloqueio = dataAtual
-      
-    }else{
+
+    } else {
       this.obj_Filds_Input.dt_bloqueio = null
     }
   }
 
   async ngOnInit() {
-    this.subject_unsub = this.route.params.subscribe((param: any)=>{
+    this.subject_unsub = this.route.params.subscribe((param: any) => {
       this.cd_Id_Param = param['id']
     })
 
@@ -109,8 +115,30 @@ export class EditarUserComponent implements OnInit, OnDestroy {
     this.objArrayPerfil = responseperfil.data.perfis
   }
 
-  async Set_Edit_User(){
+  Closed_Alert_Modal() {
+    this.b_Alert_Modal = false
+  }
+
+  async Set_Edit_User() {
     const responseedituser = await this.usuarioService.Set_Edit_Usuario(this.obj_Filds_Input)
+    console.log(responseedituser)
+    if (responseedituser == false) {
+      this.b_Alert_Modal = true
+      this.ds_Alert_Descricao = "Todos os campos devem ser preenchidos!"
+    }
+
+    if (responseedituser.errors) {
+      this.subjectService.subject_Exibindo_Snackbar.next({ message: 'Não foi possível adicionar' })
+      this.obj_Filds_Input.ds_senha = null
+    }
+    if (responseedituser.data.update_usuarios.returning.length) {
+
+      this.obj_Filds_Input.ds_senha = null
+      this.Send_Sugestion_Animacao = true
+      setTimeout(() => {
+        this.Send_Sugestion_Animacao = !this.Send_Sugestion_Animacao
+      }, 3000);
+    }
   }
 
   ngOnDestroy() {

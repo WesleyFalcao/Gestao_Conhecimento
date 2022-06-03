@@ -81,23 +81,28 @@
         left: calc(100% - 10.4rem);
         top: calc(50% - 10.7rem);
     }
+    
 }
 
 .div-aling-popover_sugestoes{
     
     left: calc(100% - 13.1rem);
-    top: calc(50% - 23rem);
+    top: calc(50% - 16rem);
 
     @media (min-width: 768px) {
-        left: calc(100% - 16.8rem);
-        top: calc(50% - 23.5rem);
+        left: calc(100% - 16.2rem);
+        top: calc(50% - 15.8rem);
     }
     @media (min-width: 1024px) {
-        left: calc(100% - 18.8rem);
+        left: calc(100% - 18.1rem);
         top: calc(50% - 15.6rem);
     }
     @media (min-width: 1280px) {
-        left: calc(100% - 19.7rem);
+        left: calc(100% - 20.5rem);
+        top: calc(50% - 15.7rem);
+    }
+    @media (min-width: 1536px) {
+        left: calc(100% - 19.8rem);
         top: calc(50% - 15.7rem);
     }
     

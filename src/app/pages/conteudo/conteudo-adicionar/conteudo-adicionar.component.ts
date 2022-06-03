@@ -33,7 +33,6 @@ export class ConteudoAdicionarComponent implements OnInit {
   /**@description Título da páginas */
   ds_Titulo: string = "Adicionar conteúdo"
 
-  
   nm_Label_Selection_Input: string = "Categoria"
 
   constructor(

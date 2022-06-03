@@ -1,8 +1,10 @@
 import { CategoriaModel } from "../categoria/categoria.model"
 
 export class objConteudoModel {
-    nm_titulo: string = ""
+    categoria: CategoriaModel
+    cd_categoria?: number
+    cd_conteudo?: number
     ds_conteudo: string = ""
     ds_link: string = ""
-    categoria: CategoriaModel
+    nm_titulo: string = ""
 }

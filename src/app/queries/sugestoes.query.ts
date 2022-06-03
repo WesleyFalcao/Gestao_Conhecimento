@@ -10,7 +10,7 @@ export class SugestoesQuery {
   ) {
   }
 
-  Get_Suggestion() {
+  Get_Suggestions_Admin() {
     return `
     {
       sugestoes_aggregate(where: {dt_arquivamento: {_is_null: true}}) {
@@ -65,8 +65,8 @@ export class SugestoesQuery {
 
   Set_Add_Suggestion(){
     return `
-    mutation ($titulo: String, $descricao: String) {
-      insert_sugestoes(objects: {nm_titulo: $titulo, ds_sugestao: $descricao}) {
+    mutation ($titulo: String, $descricao: String, $cd_usuario: String ) {
+      insert_sugestoes(objects: {nm_titulo: $titulo, ds_sugestao: $descricao, cd_usuario: $cd_usuario}) {
         returning {
           ds_sugestao
           nm_titulo
@@ -74,7 +74,7 @@ export class SugestoesQuery {
           cd_usuario
         }
       }
-    }
+    }    
     `
   }
 

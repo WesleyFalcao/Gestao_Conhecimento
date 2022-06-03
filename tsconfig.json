@@ -13,6 +13,7 @@
     "resolveJsonModule": true,
     "downlevelIteration": true,
     "noImplicitAny": false,
+    "noPropertyAccessFromIndexSignature": false,
     "noImplicitReturns": false,
     "strictPropertyInitialization": false,
     "experimentalDecorators": true,

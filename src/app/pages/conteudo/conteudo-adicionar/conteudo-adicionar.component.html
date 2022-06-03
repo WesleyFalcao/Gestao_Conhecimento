@@ -11,7 +11,7 @@
         </app-input>
         <app-input [required]="true" label="Descrição" [(ngModel)]="obj_Add_Content.nm_Descricao" id="nm_Descricao" name="nm_Descricao">
         </app-input>
-        <app-input [required]="true" label="Link" [(ngModel)]="obj_Add_Content.ds_Link" id="ds_Link" name="ds_Link">
+        <app-input [required]="true" label="Link" placeholder="https://" [(ngModel)]="obj_Add_Content.ds_Link" id="ds_Link" name="ds_Link">
         </app-input>
         <div class="div-grid-group grid grid-cols-2">
             <selection-input [objArrayList]="obj_Array_Categorias" [Iten_Select]="obj_Add_Content" (Value_Select)="Value_Select($event)" [nm_Label_Selection_Input]="nm_Label_Selection_Input"></selection-input>

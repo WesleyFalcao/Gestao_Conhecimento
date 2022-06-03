@@ -1,5 +1,6 @@
 import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
+import { LoginService } from 'src/app/services/login.service';
 import { SubjectService } from 'src/app/services/subject.service';
 import { SugestoesService } from '../sugestoes.service';
 
@@ -22,22 +23,27 @@ export class SugestaoAdicionarComponent implements OnInit {
 
   /**@description Boolean para remover a barra de pesquisa */
   b_Not_Search: boolean = true
+
+  /**@description Recebe o nome do usário que adicionou a sugestão */
+  nm_User: string
   
   /**@description Boolean mostra o modal de alerta */
   b_Alert_Modal: boolean = false
 
   /**@description Objeto que recebe o conteudo dos inputs */
-  obj_Add_Suggestion: any = { nm_Titulo: null, nm_Descricao: null}
+  obj_Add_Suggestion: any = { nm_Titulo: null, nm_Descricao: null, cd_Usuario: null}
 
   constructor(
     private subject_service: SubjectService,
     private location: Location,
+    private loginService: LoginService,
     private sugestaoService: SugestoesService,
     private subjectService: SubjectService
 
     ) { }
 
   ngOnInit(): void {
+    this.nm_User = this.loginService.Name_User_Logged()
   }
 
   Back(){
@@ -45,6 +51,9 @@ export class SugestaoAdicionarComponent implements OnInit {
   }
   
   async Send_Sugestion(){
+
+    this.obj_Add_Suggestion.cd_Usuario = this.nm_User
+ 
     const responsesuggestion = await this.sugestaoService.Set_Add_Suggestion(this.obj_Add_Suggestion)
     if(responsesuggestion == false){
       this.b_Alert_Modal = true

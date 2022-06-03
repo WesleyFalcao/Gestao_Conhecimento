@@ -12,7 +12,7 @@ import { SubjectService } from './services/subject.service';
   styleUrls: ['./app.component.scss'],
   animations: [AppAnimations]
 })
-export class AppComponent implements OnInit, OnDestroy {
+export class AppComponent implements OnDestroy {
 
   constructor(private subjectService: SubjectService) {}
 
@@ -25,11 +25,12 @@ export class AppComponent implements OnInit, OnDestroy {
   /** @description Instância Snackbar */
   @ViewChild(SnackbarComponent) snackbar: SnackbarComponent
 
-  ngOnInit(): void {
-
-    this.subjectService.subject_Exibindo_Loading.pipe(takeUntil(this.subject_unsub)).subscribe((bool: boolean) => {
-      this.b_Exibindo_Loading = bool
-    })
+  ngAfterViewInit(){
+    setTimeout(() => {
+      this.subjectService.subject_Exibindo_Loading.pipe(takeUntil(this.subject_unsub)).subscribe((bool: boolean) => {
+        this.b_Exibindo_Loading = bool
+      })
+    }, 0);
 
     this.subjectService.subject_Exibindo_Snackbar.pipe(takeUntil(this.subject_unsub)).subscribe((snackbar: ISnackbar) => {
       this.snackbar?.timer(snackbar.message)

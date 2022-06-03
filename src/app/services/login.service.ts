@@ -6,6 +6,8 @@ import { DataService } from "src/app/services/data.service";
 import { environment } from "src/environments/environment";
 import { Router } from "@angular/router";
 import { SubjectService } from "./subject.service";
+import * as jwt_decode from "jwt-decode";
+import { JwtHelperService } from '@auth0/angular-jwt';
 
 const QUERY_LOGIN = `mutation ($ds_Login: String, $ds_Senha: String){
     login:auth_login(params: { username: $ds_Login , password: $ds_Senha }) {
@@ -25,13 +27,16 @@ export class LoginService {
     /**@description Boolean para verificar a autenticação do usuário */
     b_User_Authenticated: boolean = false
 
+    /**@description Instância do jwtService */
+    helper = new JwtHelperService()
+
     constructor(
         private dataService: DataService,
         private apollo: Apollo, private data: DataService,
         private http: HttpClient,
         private route: Router,
         private subjectService: SubjectService,
-        ) {
+    ) {
     }
 
     _Execute(strQuery: string, variables: any, objHeaders: any = null) {
@@ -43,7 +48,7 @@ export class LoginService {
                 objBody,
                 this.httpOptions
             )
-            .toPromise();
+        .toPromise();
     }
 
     async Set_Login(objLogin: LoginParams) {
@@ -55,7 +60,35 @@ export class LoginService {
                 // setTimeout(() => this.subjectService.subject_Exibindo_Bar.next(true));
             });
         } else {
-            this.subjectService.subject_Exibindo_Snackbar.next({message: (res.data.login.mensagem)})
+            this.subjectService.subject_Exibindo_Snackbar.next({ message: (res.data.login.mensagem) })
         }
+    }
+
+    Token_Expired(){
+        const token = this.dataService.Get_Local("token")
+        return this.helper.isTokenExpired(token);
+    }
+
+    Date_Expiration_Token(){
+        const token = this.dataService.Get_Local("token")
+        return this.helper.getTokenExpirationDate(token)
+    }   
+
+    Name_User_Logged(){
+        const token = this.dataService.Get_Local("token")
+        const user = this.helper.decodeToken(token)
+        return user.id
+    }
+
+    Id_User_Logged(){
+        const token = this.dataService.Get_Local("token")
+        const id_user = this.helper.decodeToken(token)
+        return (id_user["https://hasura.io/jwt/claims"])["x-hasura-user-id"]
+    }
+
+    Name_Role(){
+        const token = this.dataService.Get_Local("token")
+        const role = this.helper.decodeToken(token)
+        return (role["https://hasura.io/jwt/claims"])["x-hasura-default-role"]
     }
 }

@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input} from '@angular/core';
 
 @Component({
     selector: 'uni-title',
@@ -6,16 +6,9 @@ import { Component, Input, OnInit } from '@angular/core';
     styleUrls: ['./title.component.scss']
 })
 
-export class TitleComponent implements OnInit {
+export class TitleComponent {
 
     /** @description Titulo da página */
-    @Input() ds_Titulo: string
-
-    constructor() {
-    }
-
-    ngOnInit() {
-    }
-
+    @Input() ds_Titulo: string 
 
 }

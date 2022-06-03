@@ -67,7 +67,7 @@ export class AdicionarUsersComponent implements OnInit {
   }
 
   Value_Select_Perfil(event) {
-    this.obj_Usuario.cd_perfil = event.cd_perfil
+    this.obj_Usuario.cd_perfil = event.id
   }
 
   Value_Select_AD(event) {

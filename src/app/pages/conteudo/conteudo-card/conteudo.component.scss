@@ -6,6 +6,9 @@
     max-width: 670px;
     margin: 0 auto;
     
+    max-width: 670px;
+    margin: 0 auto;
+    
     @media (min-width: 1024px) {
         max-width: 850px;
     }
@@ -13,7 +16,7 @@
         max-width: 1250px;
     }
     @media (min-width: 1536px) {
-        max-width: 1300px;
+        max-width: 1322px;
     }
     @media (min-width: 1636px) {
         max-width: 1300px;
@@ -21,6 +24,11 @@
     @media (min-width: 1780px) {
         max-width: 1400px;
     }
+}
+
+.div-grid-header-card{
+    display: grid;
+    grid-template-columns: 2fr 1fr;
 }
 
 .div-aling-popover{

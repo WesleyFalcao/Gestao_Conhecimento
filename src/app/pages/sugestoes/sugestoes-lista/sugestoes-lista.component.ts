@@ -60,8 +60,6 @@ export class SugestoesListaComponent implements OnInit {
     this.onResize()
     const responselist = await this.sugestoesService.Get_Files_Suggestion()
     this.obj_Array_Sugestoes_Arquivadas = responselist.data.sugestoes
-    console.log("obj_Array_Sugestoes_Arquivadas", this.obj_Array_Sugestoes_Arquivadas)
-    console.log(this.obj_Array_Sugestoes_Arquivadas)
   }
 
   @HostListener('window:resize')

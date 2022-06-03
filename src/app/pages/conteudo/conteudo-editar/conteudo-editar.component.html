@@ -12,7 +12,7 @@
         <app-input [required]="true" label="Descrição" [(ngModel)]="obj_Filds_Input.ds_conteudo" id="ds_descricao"
             name="ds_descricao">
         </app-input>
-        <app-input [required]="true" label="Link" [(ngModel)]="obj_Filds_Input.ds_link" id="ds_link" name="ds_link">
+        <app-input [required]="true" placeholder="https://" label="Link" [(ngModel)]="obj_Filds_Input.ds_link" id="ds_link" name="ds_link">
         </app-input>
         <div class="div-grid-group grid grid-cols-2">
             <selection-input [objArrayList]="obj_Array_Categorias" [nm_Label_Selection_Input]="nm_Label_Selection_Input"

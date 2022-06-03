@@ -1,16 +1,16 @@
 <app-header></app-header>
 
-<div class="container bg-opacity-70 relative px-2 top-6 md:top-9 lg:top-14 pb-12 {{obj_Array_Sugestoes_Arquivadas.length != 0?'lg:bg-white':''}}">
+<div class="container bg-opacity-70 relative px-2 top-6 md:top-9 lg:top-14 pb-12 {{obj_Array_Sugestoes_Arquivadas?.length != 0?'lg:bg-white':''}}">
     <div class="div-grid-title-itens">
         <div class="flex flex-col relative left-2 lg:left-2 lg:ml-2.5">
             <uni-title [ds_Titulo]="ds_Titulo"></uni-title>
         </div>
-        <div class="flex flex-row gap-6 lg:gap-10 my-auto justify-end relative right-1 xl:mr-4 cursor-pointer {{obj_Array_Sugestoes_Arquivadas.length != 0?'':'hidden'}}">
+        <div class="flex flex-row gap-6 lg:gap-10 my-auto justify-end relative right-1 xl:mr-4 cursor-pointer {{obj_Array_Sugestoes_Arquivadas?.length != 0?'':'hidden'}}">
             <app-button-filter (b_Show_Modal)="Show_Modal($event)"></app-button-filter>
             <img class="behavior-button w-6 h-6 xl:w-8 xl:h-8 2xl:w-7 2xl:h-7" src="assets/icons/refresh.svg" (click)="onClick_Refresh()">
         </div>
     </div>
-    <div *ngIf="obj_Array_Sugestoes_Arquivadas.length != 0">
+    <div *ngIf="obj_Array_Sugestoes_Arquivadas?.length != 0">
         <div class="hidden div-grid-title mt-8 lg:grid grid-cols-4">
             <p class="font-semibold lg:grid ml-5 lg:pl-4">Id</p>
             <p class="font-semibold lg:grid ml-5">Título</p>
@@ -93,6 +93,6 @@
     (b_Closed_Alert_Modal)="Closed_Alert_Modal()" (b_Confirmed)="
     Unarchive()"></alert-modal>
 
-<div *ngIf="obj_Array_Sugestoes_Arquivadas.length == 0">
+<div *ngIf="obj_Array_Sugestoes_Arquivadas?.length == 0">
     <animation-nothing-found></animation-nothing-found>
 </div>

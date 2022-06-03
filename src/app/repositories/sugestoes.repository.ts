@@ -1,4 +1,3 @@
-
 import { Injectable } from '@angular/core';
 import { SugestoesQuery } from '../queries/sugestoes.query';
 import { ApiHasuraService } from '../services/hasura.service';
@@ -15,12 +14,12 @@ export class SugestoesRepository {
   constructor(
     private subjectService: SubjectService,
     private sugestoesQuery: SugestoesQuery,
-    private apiHasuraService: ApiHasuraService
+    private apiHasuraService: ApiHasuraService,
   ) { }
 
-  async Get_Suggestion() {
+  async Get_Suggestions_Admin() {
     this.subjectService.subject_Exibindo_Loading.next(true)
-    const query = this.sugestoesQuery.Get_Suggestion()
+    const query = this.sugestoesQuery.Get_Suggestions_Admin()
     const response = await this.apiHasuraService._Execute(query, this.httpOptions)
     this.subjectService.subject_Exibindo_Loading.next(false)
     return response
@@ -43,17 +42,16 @@ export class SugestoesRepository {
     return response
   }
   
-
   async Set_Add_Suggestion(addsugestion){
     const query = this.sugestoesQuery.Set_Add_Suggestion()
-    const variables = {"titulo": addsugestion.nm_Titulo, "descricao": addsugestion.nm_Descricao}
+    const variables = { titulo: addsugestion.nm_Titulo, descricao: addsugestion.nm_Descricao, cd_usuario: addsugestion.cd_Usuario}
     const response = await this.apiHasuraService._Execute(query, variables, this.httpOptions)
     return response
   }
 
   async Set_Unarchive_Suggestion(cd_Sugestao){
     const query = this.sugestoesQuery.Set_Unarchive_Suggestion()
-    const variables = {"cd_sugestao": cd_Sugestao}
+    const variables = {cd_sugestao: cd_Sugestao}
     const response = await this.apiHasuraService._Execute(query, variables, this.httpOptions)
     return response
   }

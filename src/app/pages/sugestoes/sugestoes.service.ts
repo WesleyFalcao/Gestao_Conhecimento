@@ -12,8 +12,8 @@ export class SugestoesService {
     ) {    
     }
 
-    Get_Suggestion() {
-        return this.sugestoesRepository.Get_Suggestion()
+    Get_Suggestions_Admin() {
+        return this.sugestoesRepository.Get_Suggestions_Admin()
     }
 
     Set_File_Suggestion(sugestao){

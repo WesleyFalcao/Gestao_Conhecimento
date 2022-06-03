@@ -31,10 +31,28 @@ export class ConteudoQuery {
     `
   }
 
-  Get_Conteudo(){
+  Get_Conteudo_Edit(){
     return `
     query ($cd_conteudo: Int) {
       conteudos(where: {cd_conteudo: {_eq: $cd_conteudo}}) {
+        cd_categoria
+        cd_conteudo
+        ds_conteudo
+        ds_link
+        nm_titulo
+        categoria {
+          id:cd_categoria
+          nome:nm_categoria
+        }
+      }
+    }    
+    `
+  }
+  
+  Get_Conteudos(){
+    return `
+    query ($cd_conteudo: Int) {
+      conteudos(where: {cd_categoria: {_eq: $cd_conteudo}}) {
         cd_categoria
         cd_conteudo
         ds_conteudo
@@ -86,6 +104,56 @@ export class ConteudoQuery {
         }
       }
     }    
+    `
+  }
+
+  Set_Delete_Conteudo(){
+    return `
+    mutation ($cd_conteudo: Int) {
+      delete_conteudos(where: {cd_conteudo: {_eq: $cd_conteudo}}) {
+        returning {
+          categoria {
+            cd_categoria
+            nm_categoria
+          }
+          cd_categoria
+          cd_conteudo
+          ds_conteudo
+          ds_link
+          nm_titulo
+        }
+      }
+    }
+    `
+  }
+
+  Set_Gravar_Dados(){
+    return `
+    mutation ($cd_conteudo: Int, $nm_usuario: String) {
+      insert_acessos_one(object: {cd_conteudo: $cd_conteudo, nm_usuario: $nm_usuario}) {
+        conteudo {
+          cd_categoria
+          cd_conteudo
+          ds_conteudo
+          ds_link
+          nm_titulo
+          categoria {
+            cd_categoria
+            nm_categoria
+          }
+        }
+      }
+    }
+    `
+  }
+
+  Set_Favorite(){
+    return `
+    `
+  }
+
+  Set_Disfavor(){
+    return `
     `
   }
 }

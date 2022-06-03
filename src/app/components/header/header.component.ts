@@ -4,6 +4,7 @@ import { FormControl } from '@angular/forms';
 import { Router } from '@angular/router';
 import { debounceTime, distinctUntilChanged, Subject } from 'rxjs';
 import { DataService } from 'src/app/services/data.service';
+import { LoginService } from 'src/app/services/login.service';
 
 @Component({
   selector: 'app-header',
@@ -65,15 +66,23 @@ export class HeaderComponent implements OnInit {
     private dataService: DataService,
     private location: Location,
     private route: Router,
-    private eRef: ElementRef
+    private eRef: ElementRef,
+    private loginService: LoginService
   ) { }
 
   ngOnInit() {
+    const role_user = this.loginService.Name_Role()
+    if(role_user == "user"){
+      this.b_User_Admin = false
+    }
     this.onResize()
     this.modelChanged.valueChanges.pipe(debounceTime(500), distinctUntilChanged()).subscribe(async (input) => {
       this.Input_Value = input
       this.Input_Emit_Value.emit(this.Input_Value)
     })
+
+    const teste = this.loginService.Name_Role()
+    console.log("tipo de usuário",teste)
   }
 
   @HostListener('window:resize')

@@ -61,7 +61,7 @@ export class UsuarioQuery {
     query MyQuery {
       perfis {
         nome:nm_perfil
-        cd_perfil
+        id:cd_perfil
       }
     }    
     `

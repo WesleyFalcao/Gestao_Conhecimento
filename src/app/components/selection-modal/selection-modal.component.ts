@@ -1,7 +1,6 @@
 import { Component, ElementRef, EventEmitter, Input, OnDestroy, OnInit, Output, ViewChild } from '@angular/core';
 import { ListModel } from 'src/app/models/arraylist/array-list';
 
-
 @Component({
   selector: 'app-selection-modal',
   templateUrl: './selection-modal.component.html',

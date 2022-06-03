@@ -1,9 +1,5 @@
-
 import { Injectable } from '@angular/core';
-import { UsuarioParams } from '../models/usuario/usuario.model';
 import { ConteudoQuery } from '../queries/conteudo.query';
-import { SugestoesQuery } from '../queries/sugestoes.query';
-import { UsuarioQuery } from '../queries/usuario.query';
 import { ApiHasuraService } from '../services/hasura.service';
 import { SubjectService } from '../services/subject.service';
 
@@ -31,8 +27,17 @@ export class ConteudoRepository {
   
   async Get_Conteudo(param){
     this.subjectService.subject_Exibindo_Loading.next(true)
-    const query = this.conteudoQuery.Get_Conteudo()
-    const variables = { cd_conteudo:param }
+    const query = this.conteudoQuery.Get_Conteudos()
+    const variables = { cd_conteudo: param }
+    const response = await this.apiHasuraService._Execute(query, variables, this.httpOptions)
+    this.subjectService.subject_Exibindo_Loading.next(false)
+    return response
+  }
+
+  async Get_Conteudo_Edit(param){
+    this.subjectService.subject_Exibindo_Loading.next(true)
+    const query = this.conteudoQuery.Get_Conteudo_Edit()
+    const variables = { cd_conteudo: param }
     const response = await this.apiHasuraService._Execute(query, variables, this.httpOptions)
     this.subjectService.subject_Exibindo_Loading.next(false)
     return response
@@ -52,8 +57,39 @@ export class ConteudoRepository {
     const query = this.conteudoQuery.Set_Edit_User()
     const variables = {"cd_conteudo": idconteudo, "nm_titulo": objparam.nm_titulo, "ds_conteudo": objparam.ds_conteudo, "ds_link": objparam.ds_link, "cd_categoria": objparam.categoria.id}
     const response = await this.apiHasuraService._Execute(query, variables, this.httpOptions)
-    console.log(response)
     this.subjectService.subject_Exibindo_Loading.next(false)
+    return response
+  }
+
+  async Set_Delete_Conteudo(param){
+    this.subjectService.subject_Exibindo_Loading.next(true)
+    const query = this.conteudoQuery.Set_Delete_Conteudo()
+    const variables = {cd_conteudo: param}
+    const response = await this.apiHasuraService._Execute(query, variables, this.httpOptions)
+    this.subjectService.subject_Exibindo_Loading.next(false)
+    return response
+  }
+
+  async Set_Gravar_Dados(param){
+    this.subjectService.subject_Exibindo_Loading.next(true)
+    const query = this.conteudoQuery.Set_Gravar_Dados()
+    const variables = {cd_conteudo: param.cd_Conteudo, nm_usuario: param.nm_Usuario }
+    const response = await this.apiHasuraService._Execute(query, variables, this.httpOptions)
+    this.subjectService.subject_Exibindo_Loading.next(false)
+    return response
+  }
+
+  async Set_Favorite(param){
+    const query = this.conteudoQuery.Set_Favorite()
+    const variables = {cd_conteudo: param.cd_Conteudo, nm_usuario: param.nm_Usuario }
+    const response = await this.apiHasuraService._Execute(query, variables, this.httpOptions)
+    return response
+  }
+
+  async Set_Disfavor(param){
+    const query = this.conteudoQuery.Set_Disfavor()
+    const variables = {cd_conteudo: param.cd_Conteudo, nm_usuario: param.nm_Usuario }
+    const response = await this.apiHasuraService._Execute(query, variables, this.httpOptions)
     return response
   }
 }

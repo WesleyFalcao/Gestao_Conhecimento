@@ -1,5 +1,4 @@
 import { Injectable } from "@angular/core";
-import { UsuarioParams } from "src/app/models/usuario/usuario.model";
 import { UsuarioRepository } from "src/app/repositories/usuario.repository";
 import {Md5} from 'ts-md5/dist/md5';
 
@@ -13,7 +12,7 @@ export class UsuariosService {
     ) {    
     }
 
-    Get_Usuarios(param: UsuarioParams) {
+    Get_Usuarios(param) {
         return this.usuariosRepository.Get_Usuarios(param)
     }
 
@@ -43,7 +42,10 @@ export class UsuariosService {
     }
 
     Set_Edit_Usuario(objparam){
-        if(objparam.b_login_ad == false && objparam.ds_senha == "" || objparam.ds_senha == null){
+        if(objparam.b_login_ad == false && objparam.ds_senha == null){
+            return false
+        }
+        if(objparam.b_login_ad == false && objparam.ds_senha == ""){
             return false
         }
         return this.usuariosRepository.Set_Edit_Usuario(objparam)

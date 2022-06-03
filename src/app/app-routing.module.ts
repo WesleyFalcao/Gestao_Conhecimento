@@ -32,42 +32,49 @@ const routes: Routes = [
     canActivate: [AuthGuard]
   },
   { path: 'conteudo-editar/:id', component: ConteudoEditarComponent,
+    data: {b_only_admin: true},
     canActivate: [AuthGuard]
   },
   { path: 'conteudo-lista', component: ConteudoEditarListaComponent,
+    data: {b_only_admin: true},
     canActivate: [AuthGuard]
   },
   { path: 'conteudo-adicionar', component: ConteudoAdicionarComponent,
+    data: {b_only_admin: true},
     canActivate: [AuthGuard]  
   },
   { path: 'usuarios', component: UsersComponent,
+  data: {b_only_admin: true},
   canActivate: [AuthGuard]  
   },
   { path: 'adicionar-usuario', component: AdicionarUsersComponent,
+  data: {b_only_admin: true},
   canActivate: [AuthGuard]
   },
   { path: 'editar-usuario/:id', component: EditarUserComponent,
+  data: {b_only_admin: true},
   canActivate: [AuthGuard]  
   },
   { path: 'sugestoes', component: SugestoesComponent,
   canActivate: [AuthGuard]  
   },
   { path: 'sugestoes-lista', component: SugestoesListaComponent,
+  data: {b_only_admin: true},
   canActivate: [AuthGuard] 
   },
   { path: 'sugestao-adicionar', component: SugestaoAdicionarComponent,
   canActivate: [AuthGuard]
   },
   { path: 'categorias', component: CategoriaComponent,
+  data: {b_only_admin: true},
   canActivate: [AuthGuard]  
   },
   { path: 'categoria-adicionar', component: CategoriaAdicionarComponent,
+  data: {b_only_admin: true},
   canActivate: [AuthGuard]
   },
   { path: 'categoria-editar/:id', component: CategoriaEditarComponent,
-  canActivate: [AuthGuard]  
-  },
-  { path: 'send-sugestion', component: SendSuggestionComponent,
+  data: {b_only_admin: true},
   canActivate: [AuthGuard]  
   },
   { path: '', component: LoginComponent,

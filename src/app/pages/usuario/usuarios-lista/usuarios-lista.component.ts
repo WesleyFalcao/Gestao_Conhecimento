@@ -1,9 +1,9 @@
 import { Component, ElementRef, EventEmitter, HostListener, Input, OnInit, Output } from '@angular/core';
 import { UsuarioParams } from 'src/app/models/usuario/usuario.model';
 import { UsuarioRepository } from 'src/app/repositories/usuario.repository';
+import { LoginService } from 'src/app/services/login.service';
 import { SubjectService } from 'src/app/services/subject.service';
 import { UsuariosService } from '../usuarios.service';
-
 
 @Component({
   selector: 'app-users',
@@ -49,7 +49,8 @@ export class UsersComponent implements OnInit {
   objFilter = new UsuarioParams
 
   constructor(
-    private usuarioService: UsuariosService
+    private usuarioService: UsuariosService,
+    private loginService: LoginService
   ) { }
 
   async ngOnInit() {
@@ -57,6 +58,9 @@ export class UsersComponent implements OnInit {
     const responseusuarios = await this.usuarioService.Get_Usuarios(this.objFilter)
     this.obj_Array_Usuarios = responseusuarios.data.usuarios
     this.nr_Registros = responseusuarios.data.usuarios_aggregate.aggregate.count
+
+    const teste = this.loginService.Name_Role()
+    console.log("tipo de usuário",teste)
   }
 
   @HostListener('window:resize')
