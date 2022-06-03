@@ -35,9 +35,25 @@ export class SugestoesRepository {
 
   async Get_Filter_Suggestion(filtersugestao){
     this.subjectService.subject_Exibindo_Loading.next(true)
+    // cd_sugestao: filtersugestao.cd_sugestao, nm_titulo: "%" + filtersugestao.nm_Titulo.replace(" " ,"%") + "%", ds_sugestao: filtersugestao.nm_Descricao
+    // nm_titulo: {_ilike: $nm_titulo}, _or: {ds_sugestao: {_ilike: $ds_sugestao}}
     const query = this.sugestoesQuery.Filter_Suggestion()
-    const variables = {}
+
+    let where: any = {_or: {}}
+  
+    if(filtersugestao.cd_sugestao != null || filtersugestao.cd_sugestao != ""){
+      where._or.cd_sugestao = {_eq: filtersugestao.cd_sugestao}
+    }
+    if(filtersugestao.nm_Titulo != null || filtersugestao.nm_Titulo != ""){
+      where._or.nm_titulo = {_ilike: "%" + filtersugestao.nm_Titulo.replace(" " ,"%") + "%"}
+    }
+    if(filtersugestao.nm_Descricao != null || filtersugestao.nm_Descricao != ""){
+      where._or.ds_sugestao = {_ilike: "%" + filtersugestao.nm_Descricao.replace(" " ,"%") + "%"}
+    }
+
+    const variables = {where}
     const response = await this.apiHasuraService._Execute(query, variables, this.httpOptions)
+    console.log("responsefilter",response)
     this.subjectService.subject_Exibindo_Loading.next(false)
     return response
   }

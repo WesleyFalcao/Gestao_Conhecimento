@@ -34,7 +34,7 @@ export class SugestoesComponent implements OnInit {
   b_Show_Popover_Feitos: boolean = false
 
   /**@description Objeto que recebe o conteudo dos inputs */
-  objFilter = { nm_Titulo: "", nm_Descricao: "" }
+  objFilter = { cd_sugestao: null, nm_Titulo: null, nm_Descricao: null}
 
   constructor(
     private eRef: ElementRef,
@@ -91,8 +91,13 @@ export class SugestoesComponent implements OnInit {
   }
 
   async Filter() {
-    await this.sugestoesService.Get_Filter_Suggestion(this.objFilter)
-    this.b_Show_Filter = false
-    console.log(this.objFilter)
+    const responsefilter = await this.sugestoesService.Get_Filter_Suggestion(this.objFilter)
+    if(responsefilter.errors){
+      this.subjectService.subject_Exibindo_Snackbar.next({ message: 'Não foi possível filtrar' })
+    }else{
+      console.log("resposta filtro", responsefilter.data.sugestoes)
+      this.obj_Array_Sugestoes = responsefilter.data.sugestoes
+      this.b_Show_Filter = false
+    } 
   }
 }

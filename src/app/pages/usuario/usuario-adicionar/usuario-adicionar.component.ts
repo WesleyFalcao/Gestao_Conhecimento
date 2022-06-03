@@ -34,7 +34,7 @@ export class AdicionarUsersComponent implements OnInit {
   b_Alert_Modal: boolean = false
 
   /**@description objeto que recebe os valores dos input*/
-  obj_Usuario = { nm_usuario: "", cd_login: null, ds_senha: null, b_login_ad: true, cd_perfil: 2 }
+  obj_Usuario = { nm_usuario: "", cd_login: null, ds_senha: "", b_login_ad: true, cd_perfil: 2 }
 
   /**@description Boolean para remover a barra de pesquisa */
   b_Not_Search: boolean = true
@@ -50,10 +50,6 @@ export class AdicionarUsersComponent implements OnInit {
 
   /**@description Nome do label do selection input */
   ds_Titulo: string = "Adicionar usuário"
-
-  Back() {
-    this.location.back();
-  }
 
   constructor(
     private location: Location,
@@ -83,7 +79,12 @@ export class AdicionarUsersComponent implements OnInit {
     this.b_Alert_Modal = false
   }
 
+  Back() {
+    this.location.back();
+  }
+
   async Add_User() {
+    console.log("this.obj_Usuario",this.obj_Usuario)
     const responseadduser = await this.usuarioService.Set_Add_Usuario(this.obj_Usuario)
     if(responseadduser == false) {
       this.b_Alert_Modal = true
@@ -91,11 +92,11 @@ export class AdicionarUsersComponent implements OnInit {
     }
     if(responseadduser.errors) {
       this.subjectService.subject_Exibindo_Snackbar.next({ message: 'Não foi possível adicionar' })
-      this.obj_Usuario.ds_senha = null
+      this.obj_Usuario.ds_senha = ""
     }
 
     if(responseadduser.data.insert_usuarios.returning.length == 1){
-      this.obj_Usuario.ds_senha = null
+      this.obj_Usuario.ds_senha = ""
       this.Send_Sugestion_Animacao = true
       setTimeout(() => {
         this.Send_Sugestion_Animacao = !this.Send_Sugestion_Animacao

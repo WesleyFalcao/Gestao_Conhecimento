@@ -13,9 +13,26 @@
                 <div *ngIf="b_User_Admin">
                     <img class="behavior-button relative w-5 h-5 xl:w-7 xl:h-7 2xl:w-6 2xl:h-6 cursor-pointer"
                         src="assets/icons/list-okay.svg" (click)="b_Show_Popover_Feitos = !b_Show_Popover_Feitos">
+                    <div
+                        class="mt-20 div-aling-popover_sugestoes z-20 -ml-4 {{b_Show_Popover_Feitos? 'absolute':'hidden'}}">
+                        <div class="div-triangulo mx-auto rotate-180">
+                        </div>
+                        <div class="shadow-lg p-3 gap-y-1 lg:flex w-max box-border flex-col bg-white rounded-lg">
+                            <div class="relative mt-1 mb-2 flex flex-row gap-x-3 cursor-pointer behavior-button"
+                                routerLink="/sugestoes-lista">
+                                <img class="w-4 h-4" src="assets/icons/list-contents-green.svg">
+                                <span class="text-sm text-unimed-green">Sugestões arquivadas</span>
+                            </div>
+                            <div class="relative mt-1 flex flex-row gap-x-3 cursor-pointer behavior-button">
+                                <span class="text-sm">Minhas sugestões: {{nr_Minhas_Sugestoes}}</span>
+                            </div>
+                            <div class="relative mt-3 flex flex-row gap-x-3 cursor-pointer behavior-button">
+                                <span class="text-sm">Total de sugestões: {{nr_Total_Sugestoes}}</span>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <app-button-filter class="{{obj_Array_Sugestoes?.length == 0 || !obj_Array_Sugestoes? 'hidden':''}}"
-                    [b_Popover_Sugestoes]="b_Popover_Sugestoes" (b_Show_Modal)="Show_Modal($event)">
+                <app-button-filter [b_Popover_Sugestoes]="b_Popover_Sugestoes" (b_Show_Modal)="Show_Modal($event)">
                 </app-button-filter>
 
                 <img class="hidden md:flex behavior-button w-6 h-6 xl:w-8 xl:h-8 2xl:w-7 2xl:h-7"
@@ -24,25 +41,9 @@
         </div>
     </div>
 
+
     <div
         class="grid grid-cols-1 lg:grid-cols-2 relative top-6 gap-y-6 md:gap-y-10 w-full pb-10 px-12 md:px-16  lg:gap-x-10 lg:top-6">
-        <div class="mt-20 div-aling-popover_sugestoes z-20 -ml-4 {{b_Show_Popover_Feitos? 'absolute':'hidden'}}">
-            <div class="div-triangulo mx-auto rotate-180">
-            </div>
-            <div class="shadow-lg p-3 gap-y-1 lg:flex w-max box-border flex-col bg-white rounded-lg">
-                <div class="relative mt-1 mb-2 flex flex-row gap-x-3 cursor-pointer behavior-button"
-                    routerLink="/sugestoes-lista">
-                    <img class="w-4 h-4" src="assets/icons/list-contents-green.svg">
-                    <span class="text-sm text-unimed-green">Sugestões arquivadas</span>
-                </div>
-                <div class="relative mt-1 flex flex-row gap-x-3 cursor-pointer behavior-button">
-                    <span class="text-sm">Minhas sugestões: {{nr_Minhas_Sugestoes}}</span>
-                </div>
-                <div class="relative mt-3 flex flex-row gap-x-3 cursor-pointer behavior-button">
-                    <span class="text-sm">Total de sugestões: {{nr_Total_Sugestoes}}</span>
-                </div>
-            </div>
-        </div>
         <div class="h-52 inline-block relative rounded-lg bg-unimed-white shadow-lg border-l-8 border-l-unimed-green {{sugestao.show? 'div-hidden-card':''}}"
             *ngFor="let sugestao of obj_Array_Sugestoes; let i = index;">
             <div class="div-aling-item-card h-12">
@@ -62,6 +63,9 @@
                 class="p-rows pt-2 my-auto font-medium xl:text-base xl:leading-7 pl-4 text-ellipsis whitespace-normal overflow-hidden">
                 {{sugestao.ds_sugestao}}
             </p>
+            <div class="mt-2 ml-3 font-medium">ID:
+                {{sugestao.cd_sugestao}}
+            </div>
         </div>
     </div>
 </div>
@@ -75,6 +79,9 @@
     </div>
     <div class="flex flex-col gap-y-2">
         <form>
+            <app-input [required]="false" label="Id" [(ngModel)]="objFilter.cd_sugestao" id="cd_sugestao"
+                name="cd_sugestao">
+            </app-input>
             <app-input [required]="false" label="Título" [(ngModel)]="objFilter.nm_Titulo" id="nm_Titulo"
                 name="nm_Titulo">
             </app-input>
@@ -83,8 +90,8 @@
         </form>
     </div>
     <div class="flex flex-row mt-4 gap-x-4 mx-4">
-        <uni-button buttonClass="btn-outline" (click)="Close_Modal()">Voltar</uni-button>
         <uni-button buttonClass="btn-primary" (click)="Filter()">Filtrar</uni-button>
+        <uni-button buttonClass="btn-outline" (click)="Close_Modal()">Voltar</uni-button>
     </div>
 </app-modal>
 

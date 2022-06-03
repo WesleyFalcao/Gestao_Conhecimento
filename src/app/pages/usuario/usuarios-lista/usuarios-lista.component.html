@@ -101,13 +101,15 @@
             </app-input>
             <app-input [required]="true" label="Usuário" [(ngModel)]="objFilter.cd_login" id="cd_login" name="cd_login">
             </app-input>
-            <app-input [required]="true" label="Status (ativo ou inativo)" [(ngModel)]="objFilter.dt_bloqueio"
-                id="dt_bloqueio" name="dt_bloqueio"></app-input>
+            <div class="-mt-3 pr-3">
+                <selection-input [nm_Label_Selection_Input]="nm_Label_Selection"
+                    [objArrayList]="objArrayStatus" (Value_Select)="Value_Select_Status($event)"></selection-input>
+            </div>
         </form>
     </div>
     <div class="flex flex-row mt-4 gap-x-4 mx-4">
-        <uni-button buttonClass="btn-outline" (click)="Close_Modal()">Voltar</uni-button>
         <uni-button buttonClass="btn-primary" (click)="Filtrar()">Filtrar</uni-button>
+        <uni-button buttonClass="btn-outline" (click)="Close_Modal()">Voltar</uni-button>
     </div>
 </app-modal>
 

@@ -1,4 +1,5 @@
 import { Component, ElementRef, EventEmitter, HostListener, Input, OnInit, Output } from '@angular/core';
+import { ListModel } from 'src/app/models/arraylist/array-list';
 import { UsuarioParams } from 'src/app/models/usuario/usuario.model';
 import { UsuarioRepository } from 'src/app/repositories/usuario.repository';
 import { LoginService } from 'src/app/services/login.service';
@@ -13,11 +14,24 @@ import { UsuariosService } from '../usuarios.service';
 
 export class UsersComponent implements OnInit {
 
+  /**@description recebe o array de status */
+  objArrayStatus: Array<ListModel> = [
+    {
+      nome: "Ativo"
+    },
+    {
+      nome: "Inativo"
+    }
+  ]
+
   /**@description recebe a largura atual da tela */
   nr_Width: number
 
   /**@description boolean que fica true acima de 1034px */
   b_Width: boolean
+
+  /**@description Nome do label do selection input */
+  nm_Label_Selection: string = "Status"
 
   /**@description Título da página */
   ds_Titulo: string = "Usuários"
@@ -60,7 +74,7 @@ export class UsersComponent implements OnInit {
     this.nr_Registros = responseusuarios.data.usuarios_aggregate.aggregate.count
 
     const teste = this.loginService.Name_Role()
-    console.log("tipo de usuário",teste)
+    console.log("tipo de usuário", teste)
   }
 
   @HostListener('window:resize')
@@ -77,11 +91,17 @@ export class UsersComponent implements OnInit {
     this.Input_Value = iten
   }
 
-  Show_Item(item){
+  Value_Select_Status(iten) {
+    if (iten.nome == "Ativo") {
+    this.objFilter.dt_bloqueio = null
+    } 
+  }
+
+  Show_Item(item) {
     item.show = !item.show
-    if(item.show){
+    if (item.show) {
       this.obj_Array_Usuarios.forEach(fe => {
-        if(item.cd_usuario != fe.cd_usuario){
+        if (item.cd_usuario != fe.cd_usuario) {
           fe.show = false
         }
       })

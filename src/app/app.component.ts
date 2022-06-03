@@ -25,7 +25,7 @@ export class AppComponent implements OnDestroy {
   /** @description Instância Snackbar */
   @ViewChild(SnackbarComponent) snackbar: SnackbarComponent
 
-  ngAfterViewInit(){
+  ngOnInit(): void {
     setTimeout(() => {
       this.subjectService.subject_Exibindo_Loading.pipe(takeUntil(this.subject_unsub)).subscribe((bool: boolean) => {
         this.b_Exibindo_Loading = bool

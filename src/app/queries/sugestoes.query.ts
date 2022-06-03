@@ -59,7 +59,16 @@ export class SugestoesQuery {
 
   Filter_Suggestion(){
     return `
-    
+    query ($where:sugestoes_bool_exp) {
+      sugestoes(where: $where) {
+        cd_sugestao
+        cd_usuario
+        ds_sugestao
+        dt_arquivamento
+        dt_sugestao
+        nm_titulo
+      }
+    }     
     `
   }
 
