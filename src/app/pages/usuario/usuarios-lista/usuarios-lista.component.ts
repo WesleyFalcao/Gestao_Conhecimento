@@ -1,4 +1,4 @@
-import { Component, ElementRef, EventEmitter, HostListener, Input, OnInit, Output, ViewChild } from '@angular/core';
+import { Component, ElementRef, EventEmitter, HostListener, Input, NgZone, OnInit, Output, ViewChild } from '@angular/core';
 import { ListModel } from 'src/app/models/arraylist/array-list';
 import { CdkVirtualScrollViewport } from '@angular/cdk/scrolling';
 import { UsuarioParams } from 'src/app/models/usuario/usuario.model';
@@ -7,6 +7,7 @@ import { UsuarioRepository } from 'src/app/repositories/usuario.repository';
 import { LoginService } from 'src/app/services/login.service';
 import { SubjectService } from 'src/app/services/subject.service';
 import { UsuariosService } from '../usuarios.service';
+import { filter, map, pairwise, throttleTime } from 'rxjs';
 
 @Component({
   selector: 'app-users',
@@ -58,12 +59,24 @@ export class UsersComponent implements OnInit {
   constructor(
     private usuarioService: UsuariosService,
     private loginService: LoginService,
-    private subjectService: SubjectService
+    private subjectService: SubjectService,
+    private ngZone: NgZone
   ) { }
 
   async ngOnInit() {
+    this.scroller.elementScrolled().pipe(
+      map(() => this.scroller.measureScrollOffset('bottom')),
+      pairwise(),
+      filter(([y1, y2]) => (y2 < y1 && y2 < 140)),
+      throttleTime(200)
+    ).subscribe(() => {
+      this.ngZone.run(async() => {
+        this.objUsuarios.nr_pagina++
+        await this.Search_User();  //sempre que atualizar a lista tem que retornar uma nova instancia da lista
+      });
+    })
     this.onResize()
-    this.Search_User()
+   
   }
 
   @HostListener('window:resize')
@@ -117,10 +130,10 @@ export class UsersComponent implements OnInit {
     if(this.b_Width){
       this.obj_Array_Usuarios = responseusuarios.data.usuarios
       this.objUsuarios.nr_registos = responseusuarios.data.usuarios_aggregate.aggregate.count
-
-    }else{
-
     }
+    // }else{
+    //   this.obj_Array_Usuarios = [...this.obj_Array_Usuarios, ]
+    // }
   }
 
   /** @description Avança uma pagina */

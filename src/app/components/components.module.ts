@@ -51,7 +51,7 @@ export function playerFactory() {
     ButtonFilterComponent,
     SendSuggestionComponent,
     Input2Component,
-    ModalComponent
+    ModalComponent,
   ],
   imports: [
     CommonModule,

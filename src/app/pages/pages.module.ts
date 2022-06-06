@@ -20,6 +20,7 @@ import { ConteudoEditarListaComponent } from './conteudo/conteudo-lista/conteudo
 import { SugestoesListaComponent } from './sugestoes/sugestoes-lista/sugestoes-lista.component';
 import { FilterModule } from '../pipes/filter/filter.module';
 import { SugestaoAdicionarComponent } from './sugestoes/sugestao-adicionar/sugestao-adicionar.component';
+import { ScrollingModule } from '@angular/cdk/scrolling';
 
 @NgModule({
   declarations: [
@@ -42,6 +43,7 @@ import { SugestaoAdicionarComponent } from './sugestoes/sugestao-adicionar/suges
   ],
   imports: [
     CommonModule,
+    ScrollingModule,
     ComponentsModule,
     FormsModule,
     ReactiveFormsModule,

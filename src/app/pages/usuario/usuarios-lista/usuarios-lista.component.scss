@@ -66,6 +66,18 @@
     transition: all 0.4s ease;
 }
 
+.virtual-scroll{
+    @apply shadow-lg pl-2 lg:pl-0 rounded-lg h-full;
+
+    @screen md{
+        @apply shadow-none mx-20;
+    }
+
+    @screen lg{
+        @apply shadow-lg -top-14 mx-40 pt-12 bg-white; 
+    }
+}
+
 .div-modal-sobreposicao{
     @apply fixed inset-0 z-20 bg-black opacity-70 cursor-pointer;
 }

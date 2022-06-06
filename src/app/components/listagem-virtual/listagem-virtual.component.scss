@@ -1,0 +1,38 @@
+.cdk-listagem-items{
+    height: calc(100vh - 6rem);
+    @apply w-full overflow-y-auto rounded-lg;
+
+    @screen md{
+        height: calc(100vh - 10rem);
+        @apply md:mt-12;   
+    }
+    @screen lg{
+        @apply lg:text-sm lg:bg-white;
+    }
+    @screen xl{
+        @apply xl:text-sm
+    }
+}
+
+.li-pai-listagem{
+    @apply ml-4 relative mb-4 font-medium transform cursor-pointer active:scale-95 transition duration-300 rounded-lg bg-white shadow-lg;
+
+    @screen lg{
+        @apply lg:flex-row lg:bg-transparent lg:shadow-none;
+    }
+}
+
+.item-nm-item{
+    @apply pl-2 w-80 overflow-hidden overflow-ellipsis whitespace-nowrap;
+
+    @screen md{
+        @apply w-8/12 text-left whitespace-normal
+    }
+    @screen lg{
+        @apply lg:font-medium flex flex-row;
+    }
+}
+
+li{
+    list-style-type: none;
+}
