@@ -21,11 +21,11 @@
         <p class="lg:text-center font-semibold text-base">Status</p>
         <p class="lg:text-center font-semibold text-base">Editar</p>
     </div>
-    <div class="top-5 relative flex flex-col gap-y-4">
-        <div class="{{b_Width == false? '':'hidden'}}">
+    <div class="top-5 relative flex flex-col">
+        <div class="lg:hidden">
             <cdk-virtual-scroll-viewport
-                class="virtual-scroll rounded-lg div-grid-title mb-2 shadow-xl lg:h-14 w-full lg:grid lg:grid-cols-6 bg-unimed-background"
-                [itemSize]="10" minBufferPx="700" maxBufferPx="700">
+                class="cdk-listagem-items rounded-lg div-grid-title mb-2 shadow-xl lg:h-14 w-full lg:grid lg:grid-cols-6 bg-unimed-background"
+                [itemSize]="40" minBufferPx="600" maxBufferPx="600">
 
                 <div *cdkVirtualFor="let item of obj_Array_Usuarios | filter: Input_Value">
 
@@ -67,7 +67,7 @@
             </cdk-virtual-scroll-viewport>
         </div>
 
-        <div class="{{b_Width == true? '':'hidden'}}" *ngFor="let item of obj_Array_Usuarios | filter: Input_Value">
+        <div class="hidden lg:flex" *ngFor="let item of obj_Array_Usuarios | filter: Input_Value">
             <div
                 class="rounded-lg div-grid-title shadow-xl mb-2 lg:h-14 w-full lg:grid lg:grid-cols-6 bg-white hover:bg-slate-100">
                 <p class="text-center my-auto text-ellipsis overflow-hidden whitespace-nowrap font-medium text-base">
@@ -86,10 +86,12 @@
         </div>
     </div>
 </div>
-<div class="relative" style="width: 502px; margin: 10px auto 0; justify-content: center; display: flex; top: 50px;">
-    <uni-paginator (onPageChange)="Mudar_Pagina($event)" [nr_Pagina]="objUsuarios.nr_pagina"
-        [nr_Por_Pagina]="objUsuarios.page_lenght" [nr_Registros]="objUsuarios.nr_registos">
-    </uni-paginator>
+<div class="hidden lg:flex">
+    <div class="relative" style="width: 502px; margin: 10px auto 0; justify-content: center; display: flex; top: 50px;">
+        <uni-paginator (onPageChange)="Mudar_Pagina($event)" [nr_Pagina]="objUsuarios.nr_pagina"
+            [nr_Por_Pagina]="objUsuarios.page_lenght" [nr_Registros]="objUsuarios.nr_registos">
+        </uni-paginator>
+    </div>
 </div>
 
 <app-modal (b_Click_Sobreposicao)="Close_Modal()" class="{{b_Show_Filter?'':'hidden'}}">

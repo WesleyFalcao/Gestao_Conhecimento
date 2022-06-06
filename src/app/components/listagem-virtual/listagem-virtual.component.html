@@ -1,8 +1,17 @@
 <cdk-virtual-scroll-viewport class="cdk-listagem-items" [itemSize]="120" minBufferPx="700" maxBufferPx="700">
     <li class="li-pai-listagem" (click)="Get_Card(item)" *cdkVirtualFor="let item of objArrayItens">
-        <div class="item-nm-item" [title]="item[campo.nm_Atibruto]" [class]="campo.nm_Classe"
-            *ngFor="let campo of objArrayCampos">
-            {{ item[campo.nm_Atibruto] }}
+        <div class="div-grid-name-arrow grid grid-cols-2 xl:grid-cols-1" (click)="Show_Item(item)">
+            <p class="my-3 lg:my-auto ml-5 w-10/12 font-medium truncate">
+                {{item.cd_login}}</p>
+            <img class="my-auto xl:hidden {{item.show? 'img-rotation-arrow-down':''}}"
+                src="assets/icons/arrow-up.svg">
+        </div>
+        <div class="pb-4 flex flex-col gap-y-1" *ngIf="item.show && b_Width == false">
+
+            <div class="flex flex-row gap-x-3">
+                <p class="ml-5 lg:text-center lg:relative font-semibold">ID:</p>
+                <p class="text-center my-auto truncate">{{item.cd_usuario}}</p>
+            </div>
         </div>
     </li>
     <div class="mx-auto pt-11 lg:pt-0 w-6/12  h-6/12 lg:w-4/12 lg:h-4/12" *ngIf="objArrayItens.length == 0">

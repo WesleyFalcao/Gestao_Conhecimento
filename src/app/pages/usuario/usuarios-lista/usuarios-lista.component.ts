@@ -48,14 +48,17 @@ export class UsersComponent implements OnInit {
   /** @description Index da Página */
   nr_Pagina = 1
 
+  /** @description Recebe true quando no  final do virtual scroll*/
+  b_Fim_Lista: boolean = false
+
   /** @description Recebe o array de usuário */
   obj_Array_Usuarios: any[]
 
   /**@description Objeto que recebe os valores de cada coluna */
   objUsuarios = new UsuarioParams
 
-  @ViewChild( CdkVirtualScrollViewport ) scroller: CdkVirtualScrollViewport
-  
+  @ViewChild(CdkVirtualScrollViewport) scroller: CdkVirtualScrollViewport
+
   constructor(
     private usuarioService: UsuariosService,
     private loginService: LoginService,
@@ -64,19 +67,27 @@ export class UsersComponent implements OnInit {
   ) { }
 
   async ngOnInit() {
+    this.onResize()
+  }
+
+  ngAfterViewInit() {
+    if(this.b_Width){
+      this.Search_User()
+    }
     this.scroller.elementScrolled().pipe(
       map(() => this.scroller.measureScrollOffset('bottom')),
       pairwise(),
       filter(([y1, y2]) => (y2 < y1 && y2 < 140)),
       throttleTime(200)
     ).subscribe(() => {
-      this.ngZone.run(async() => {
-        this.objUsuarios.nr_pagina++
-        await this.Search_User();  //sempre que atualizar a lista tem que retornar uma nova instancia da lista
+      this.ngZone.run(async () => {
+        if (this.b_Fim_Lista != true) {
+          this.objUsuarios.nr_pagina++
+          this.Search_User();
+        }
       });
     })
-    this.onResize()
-   
+    
   }
 
   @HostListener('window:resize')
@@ -95,8 +106,8 @@ export class UsersComponent implements OnInit {
 
   Value_Select_Status(iten) {
     if (iten.nome == "Ativo") {
-    this.objUsuarios.dt_bloqueio = null
-    } 
+      this.objUsuarios.dt_bloqueio = null
+    }
   }
 
   Show_Item(item) {
@@ -122,27 +133,33 @@ export class UsersComponent implements OnInit {
     this.b_Show_Filter = event
   }
 
-  async Search_User(){
+  async Search_User() {
     const responseusuarios = await this.usuarioService.Get_Usuarios(this.objUsuarios)
-    if(responseusuarios.errors){
+    if (responseusuarios.errors) {
       this.subjectService.subject_Exibindo_Snackbar.next({ message: 'Não foi possível trazer a listagem' })
     }
-    if(this.b_Width){
+    if (this.obj_Array_Usuarios?.length == 0) {
+      this.b_Fim_Lista = true
+    }
+    if (this.b_Width) {
       this.obj_Array_Usuarios = responseusuarios.data.usuarios
       this.objUsuarios.nr_registos = responseusuarios.data.usuarios_aggregate.aggregate.count
+      console.log("paginacao",this.obj_Array_Usuarios)
+
+    } else {
+      this.obj_Array_Usuarios = responseusuarios.data.usuarios
+      this.obj_Array_Usuarios = [...this.obj_Array_Usuarios, ...responseusuarios.data.usuarios]
+      console.log("virtual",this.obj_Array_Usuarios)
     }
-    // }else{
-    //   this.obj_Array_Usuarios = [...this.obj_Array_Usuarios, ]
-    // }
   }
 
   /** @description Avança uma pagina */
   async Mudar_Pagina(nr_Pagina: number) {
     this.objUsuarios.nr_pagina = nr_Pagina
     const responseusuarios = await this.usuarioService.Get_Usuarios(this.objUsuarios)
-    if(responseusuarios.errors){
+    if (responseusuarios.errors) {
       this.subjectService.subject_Exibindo_Snackbar.next({ message: 'Não foi possível trazer a listagem' })
-    }else{
+    } else {
       this.obj_Array_Usuarios = responseusuarios.data.usuarios
     }
   }
