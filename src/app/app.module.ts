@@ -11,8 +11,6 @@ import { FilterModule } from './pipes/filter/filter.module';
 import { ComponentsModule } from './components/components.module';
 import { PagesModule } from './pages/pages.module';
 import { LoginService } from './services/login.service';
-import { NZ_I18N } from 'ng-zorro-antd/i18n';
-import { en_US } from 'ng-zorro-antd/i18n';
 import { registerLocaleData } from '@angular/common';
 import en from '@angular/common/locales/en';
 
@@ -35,7 +33,7 @@ registerLocaleData(en);
     ReactiveFormsModule,
     FilterModule,
   ],
-  providers: [LoginService, { provide: NZ_I18N, useValue: en_US }],
+  providers: [LoginService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

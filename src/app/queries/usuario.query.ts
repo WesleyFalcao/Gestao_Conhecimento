@@ -69,8 +69,8 @@ export class UsuarioQuery {
 
   Get_Usuarios_Listagem_Paginacao() {
     return `
-    query ($where: usuarios_bool_exp, $limit: Int, $offset: Int) {
-      usuarios(order_by: {nm_usuario: asc}, limit: $limit, offset: $offset, where: $where) {
+    query ($limit: Int, $offset: Int) {
+      usuarios(order_by: {nm_usuario: asc}, limit: $limit, offset: $offset) {
         nm_usuario
         dt_bloqueio
         cd_usuario
@@ -83,12 +83,12 @@ export class UsuarioQuery {
           cd_perfil
         }
       }
-      usuarios_aggregate(where: $where) {
+      usuarios_aggregate {
         aggregate {
           count
         }
       }
-    }           
+    }              
     `
   }
 

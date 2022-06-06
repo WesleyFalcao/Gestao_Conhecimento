@@ -20,38 +20,10 @@ export class UsuarioRepository {
   ) { }
 
   async Get_Usuarios(param: UsuarioParams){
-    let where:any = {
-      //type: {_eq: 2}
-    };
-
-    if(param.cd_usuario != undefined){
-
-    }
-
-    if(param.nm_usuario != undefined){
-
-    }
-
-    if(param.cd_login != undefined){
-      
-    }
-
-    if(param.dt_bloqueio != undefined){
-      where = {dt_bloqueio: {_is_null: false}}
-    }
-
-    /**@description where para trazer os não bloqueados */
-    //where: {dt_bloqueio: {_is_null: true}}
-
-    /**@description where para trazer os bloqueados */
-    //where: {dt_bloqueio: {_is_null: false}}
-
-    /**@description where para um usuario pelo nome */
-    //where: {cd_login: {_eq: "ana"}}
-    
+    console.log(param)
     this.subjectService.subject_Exibindo_Loading.next(true)
     const query = this.usuarioQuery.Get_Usuarios_Listagem_Paginacao()
-    const variables = { where, limit: param.page_lenght, offset: ((param.nr_pagina - 1)*param.page_lenght)}
+    const variables = { limit: param.page_lenght, offset: ((param.nr_pagina - 1)*param.page_lenght)}
     const response = await this.apiHasuraService._Execute(query, variables, this.httpOptions)
     this.subjectService.subject_Exibindo_Loading.next(false)
     return response

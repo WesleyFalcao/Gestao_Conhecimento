@@ -1,6 +1,8 @@
-import { Component, ElementRef, EventEmitter, HostListener, Input, OnInit, Output } from '@angular/core';
+import { Component, ElementRef, EventEmitter, HostListener, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { ListModel } from 'src/app/models/arraylist/array-list';
+import { CdkVirtualScrollViewport } from '@angular/cdk/scrolling';
 import { UsuarioParams } from 'src/app/models/usuario/usuario.model';
+import { UsuarioFilter } from 'src/app/models/usuario/usuariofilter.model';
 import { UsuarioRepository } from 'src/app/repositories/usuario.repository';
 import { LoginService } from 'src/app/services/login.service';
 import { SubjectService } from 'src/app/services/subject.service';
@@ -42,39 +44,26 @@ export class UsersComponent implements OnInit {
   /**@description Recebe o valor digitado pelo usuário no desktop */
   Input_Value: string
 
-  /** @description Variavel auxiliar para controlar a pagina */
-  aux_Pagina = 1
-
   /** @description Index da Página */
   nr_Pagina = 1
 
+  /** @description Recebe o array de usuário */
   obj_Array_Usuarios: any[]
 
-  /** @description Evento para retornar se o botão de paginação foi apertado */
-  @Output() onPageChange = new EventEmitter();
+  /**@description Objeto que recebe os valores de cada coluna */
+  objUsuarios = new UsuarioParams
 
-  /** @description Número de registros a serem exibidos por página */
-  @Input() page_Length: number = 10
-
-  /** @description Variavel para guardar a quantidade de registros */
-  @Input() nr_Registros = 0
-
-  /**@description Objeto que recebe o conteudo dos inputs */
-  objFilter = new UsuarioParams
-
+  @ViewChild( CdkVirtualScrollViewport ) scroller: CdkVirtualScrollViewport
+  
   constructor(
     private usuarioService: UsuariosService,
-    private loginService: LoginService
+    private loginService: LoginService,
+    private subjectService: SubjectService
   ) { }
 
   async ngOnInit() {
     this.onResize()
-    const responseusuarios = await this.usuarioService.Get_Usuarios(this.objFilter)
-    this.obj_Array_Usuarios = responseusuarios.data.usuarios
-    this.nr_Registros = responseusuarios.data.usuarios_aggregate.aggregate.count
-
-    const teste = this.loginService.Name_Role()
-    console.log("tipo de usuário", teste)
+    this.Search_User()
   }
 
   @HostListener('window:resize')
@@ -93,7 +82,7 @@ export class UsersComponent implements OnInit {
 
   Value_Select_Status(iten) {
     if (iten.nome == "Ativo") {
-    this.objFilter.dt_bloqueio = null
+    this.objUsuarios.dt_bloqueio = null
     } 
   }
 
@@ -109,7 +98,6 @@ export class UsersComponent implements OnInit {
   }
 
   Filtrar() {
-    console.log(this.objFilter)
     this.b_Show_Filter = false
   }
 
@@ -121,8 +109,28 @@ export class UsersComponent implements OnInit {
     this.b_Show_Filter = event
   }
 
+  async Search_User(){
+    const responseusuarios = await this.usuarioService.Get_Usuarios(this.objUsuarios)
+    if(responseusuarios.errors){
+      this.subjectService.subject_Exibindo_Snackbar.next({ message: 'Não foi possível trazer a listagem' })
+    }
+    if(this.b_Width){
+      this.obj_Array_Usuarios = responseusuarios.data.usuarios
+      this.objUsuarios.nr_registos = responseusuarios.data.usuarios_aggregate.aggregate.count
+
+    }else{
+
+    }
+  }
+
   /** @description Avança uma pagina */
-  Mudar_Pagina(nr_Pagina: number) {
-    this.nr_Pagina = nr_Pagina
+  async Mudar_Pagina(nr_Pagina: number) {
+    this.objUsuarios.nr_pagina = nr_Pagina
+    const responseusuarios = await this.usuarioService.Get_Usuarios(this.objUsuarios)
+    if(responseusuarios.errors){
+      this.subjectService.subject_Exibindo_Snackbar.next({ message: 'Não foi possível trazer a listagem' })
+    }else{
+      this.obj_Array_Usuarios = responseusuarios.data.usuarios
+    }
   }
 }

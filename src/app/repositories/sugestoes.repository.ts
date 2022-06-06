@@ -40,14 +40,14 @@ export class SugestoesRepository {
     const query = this.sugestoesQuery.Filter_Suggestion()
 
     let where: any = {_or: {}}
-  
-    if(filtersugestao.cd_sugestao != null || filtersugestao.cd_sugestao != ""){
+    console.log(filtersugestao)
+    if(filtersugestao.cd_sugestao != null && filtersugestao.cd_sugestao != ""){
       where._or.cd_sugestao = {_eq: filtersugestao.cd_sugestao}
     }
-    if(filtersugestao.nm_Titulo != null || filtersugestao.nm_Titulo != ""){
+    if(filtersugestao.nm_Titulo != null && filtersugestao.nm_Titulo != ""){
       where._or.nm_titulo = {_ilike: "%" + filtersugestao.nm_Titulo.replace(" " ,"%") + "%"}
     }
-    if(filtersugestao.nm_Descricao != null || filtersugestao.nm_Descricao != ""){
+    if(filtersugestao.nm_Descricao != null && filtersugestao.nm_Descricao != ""){
       where._or.ds_sugestao = {_ilike: "%" + filtersugestao.nm_Descricao.replace(" " ,"%") + "%"}
     }
 
