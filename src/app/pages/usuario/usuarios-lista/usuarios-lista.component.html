@@ -13,7 +13,7 @@
         </div>
     </div>
 
-    <div class="hidden div-grid-title mt-8 lg:grid grid-cols-6">
+    <div class="hidden div-grid-title mt-8 lg:grid grid-cols-6" *ngIf="obj_Array_Usuarios?.length != 0">
         <p class="lg:text-center font-semibold text-base">ID</p>
         <p class="font-semibold lg:grid ml-5 text-base">Nome</p>
         <p class="lg:text-center font-semibold text-base">Usuário</p>
@@ -24,12 +24,12 @@
     <div class="top-5 relative flex flex-col">
         <div class="lg:hidden">
             <cdk-virtual-scroll-viewport
-                class="cdk-listagem-items rounded-lg div-grid-title mb-2 shadow-xl lg:h-14 w-full lg:grid lg:grid-cols-6 bg-unimed-background"
+                class="cdk-listagem-items overflow-auto rounded-lg div-grid-title mb-2 shadow-xl lg:h-14 w-full lg:grid lg:grid-cols-6"
                 [itemSize]="40" minBufferPx="600" maxBufferPx="600">
 
-                <div *cdkVirtualFor="let item of obj_Array_Usuarios | filter: Input_Value">
+                <div class="bg-unimed-background my-1" *cdkVirtualFor="let item of obj_Array_Usuarios | filter: Input_Value" (click)="Focus_Item(target)">
 
-                    <div class="div-grid-name-arrow grid grid-cols-2 xl:grid-cols-1" (click)="Show_Item(item)">
+                    <div #target class="div-grid-name-arrow grid grid-cols-2 xl:grid-cols-1" (click)="Show_Item(item)">
                         <p class="my-3 lg:my-auto ml-5 w-10/12 font-medium truncate">
                             {{item.cd_login}}</p>
                         <img class="my-auto xl:hidden {{item.show? 'img-rotation-arrow-down':''}}"
@@ -57,7 +57,7 @@
                                 null?'Ativo':'Inativo'}}
                             </p>
                         </div>
-                        <div class="flex flex-row gap-x-3 behavior-button" routerLink="/editar-usuario">
+                        <div class="flex flex-row gap-x-3 behavior-button" [routerLink]="['/editar-usuario', item.cd_usuario]">
                             <img class="reltive left-5 ml-5 mt-1 behavior-button w-4 h-4 lg:w-7 lg:h-7 my-auto cursor-pointer lg:mx-auto"
                                 src="assets/icons/edit.svg">
                             <p>Editar</p>
@@ -86,7 +86,7 @@
         </div>
     </div>
 </div>
-<div class="hidden lg:flex">
+<div class="hidden lg:flex" *ngIf="obj_Array_Usuarios?.length != 0">
     <div class="relative" style="width: 502px; margin: 10px auto 0; justify-content: center; display: flex; top: 50px;">
         <uni-paginator (onPageChange)="Mudar_Pagina($event)" [nr_Pagina]="objUsuarios.nr_pagina"
             [nr_Por_Pagina]="objUsuarios.page_lenght" [nr_Registros]="objUsuarios.nr_registos">
@@ -126,6 +126,6 @@
     </div>
 </app-modal>
 
-<!-- <div *ngIf="obj_Array_Usuarios.length == 0 || !obj_Array_Usuarios">
+<div *ngIf="obj_Array_Usuarios.length == 0 || !obj_Array_Usuarios">
     <animation-nothing-found></animation-nothing-found>
-</div> -->
+</div>

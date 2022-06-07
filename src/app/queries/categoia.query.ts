@@ -21,6 +21,22 @@ export class CategoriaQuery {
     `
   }
 
+  Get_Categories_Paginator(){
+    return `
+    query ($limit: Int, $offset: Int) {
+      categorias(order_by: {nm_categoria: asc}, limit: $limit, offset: $offset) {
+        id: cd_categoria
+        nome: nm_categoria
+      }
+      categorias_aggregate {
+        aggregate {
+          count
+        }
+      }
+    }    
+    `
+  }
+
   Get_Categories_List(){
     return `
     {

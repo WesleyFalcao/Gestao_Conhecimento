@@ -1,7 +1,9 @@
 import { Component, ElementRef, HostListener, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { MeusEstudosModel } from 'src/app/models/meus-estudos/meus-estudos.model';
 import { LoginService } from 'src/app/services/login.service';
 import { SubjectService } from 'src/app/services/subject.service';
+import { MeusEstudosService } from './meus-estudos.service';
 
 @Component({
   selector: 'app-meus-estudos',
@@ -13,11 +15,11 @@ export class MeusEstudosComponent implements OnInit {
   /**@description Titulo da página */
   ds_Titulo: string = "Meus estudos"
 
+  /**@description Array que vai conter os estudos de cada usuário */
+  Obj_Array_Meus_Estudos: Array<any>
+
   /**@description String para armazenar o caminho do svg */
   nm_Start: string = "assets/icons/start-yellow.svg"
-
-  /**@description Boolean para exibir svg de okay no check-box */
-  b_Start: boolean = true
 
   /**@description String que contém o nome do grupo do card expecífico*/
   nm_Grupo: string = "Complice"
@@ -47,7 +49,7 @@ export class MeusEstudosComponent implements OnInit {
   onClick_Top: boolean
 
   /**@description Recebe o Id do usuário logado */
-  cd_Id_User_Logged: number
+  cd_Conteudo_Selected: number
 
   /** @description Boolean para exibir ou fechar o modal de confirmação */
   b_Confirmation_Show_Modal: boolean
@@ -58,6 +60,9 @@ export class MeusEstudosComponent implements OnInit {
   /**@description Objeto que recebe o conteudo dos inputs */
   objFilter = { nm_Nome: "", nm_Usuario: "", nm_Status: "" }
 
+  /**@description Objeto que recebe os dados do Hasura */
+  obj_Meus_Estudos = new MeusEstudosModel
+
   /**@description Boolean para abrir e fechar o modal de filtro */
   b_Show_Filter: boolean = false
 
@@ -65,22 +70,30 @@ export class MeusEstudosComponent implements OnInit {
     private subject_service: SubjectService,
     private router: Router,
     private loginService: LoginService,
+    private meuestudosService: MeusEstudosService,
     private eRef: ElementRef
   ) { }
 
   ngOnInit(): void {
-    this.cd_Id_User_Logged = this.loginService.Id_User_Logged()
-    
+    this.Get_My_Estudies()
   }
 
-  Start_Svg() {
-    this.b_Start = !this.b_Start
-    if (this.b_Start) {
-      this.nm_Start = "assets/icons/start-yellow.svg"
+  async Start_Svg(estudo) {
+    estudo.favorite = !estudo.favorite
+    if (!estudo.favorite) {
+      
       this.subject_service.subject_Exibindo_Snackbar.next({ message: 'Favoritado com sucesso!' })
+      const responsedeleteestudo = await this.meuestudosService.Set_My_Study(estudo.conteudo.cd_conteudo)
+      if(responsedeleteestudo.erros){
+        this.subject_service.subject_Exibindo_Snackbar.next({ message: 'Não foi possível concluir a ação' })
+      }
     } else {
-      this.nm_Start = "assets/icons/star-with-no-background.svg"
+      
       this.subject_service.subject_Exibindo_Snackbar.next({ message: 'Desfavoritado com sucesso!' })
+      const responseaddestudo = await this.meuestudosService.Delete_My_Study(estudo.conteudo.cd_conteudo)
+      if(responseaddestudo.erros){
+        this.subject_service.subject_Exibindo_Snackbar.next({ message: 'Não foi possível concluir a ação' })
+      }
     }
   }
 
@@ -91,6 +104,13 @@ export class MeusEstudosComponent implements OnInit {
     } else {
       this.b_Show_Popover = false;
     }
+  }
+
+  async Get_My_Estudies(){
+    const responsemystudies = await this.meuestudosService.Get_My_Studies()
+    console.log(responsemystudies)
+    this.Obj_Array_Meus_Estudos = responsemystudies.data.estudos
+    console.log("Obj_Array_Meus_Estudos", this.Obj_Array_Meus_Estudos)
   }
 
   onClick_Option_Top() {

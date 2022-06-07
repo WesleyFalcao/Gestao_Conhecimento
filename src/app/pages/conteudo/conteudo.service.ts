@@ -46,12 +46,4 @@ export class ConteudoService {
     Set_Gravar_Dados(param){
         return this.conteudoRepository.Set_Gravar_Dados(param)
     }
-
-    Set_Favorite(param){
-        return this.conteudoRepository.Set_Favorite(param)
-    }
-
-    Set_Disfavor(param){
-        return this.conteudoRepository.Set_Disfavor(param)
-    }
 }

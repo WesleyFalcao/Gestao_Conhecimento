@@ -79,17 +79,5 @@ export class ConteudoRepository {
     return response
   }
 
-  async Set_Favorite(param){
-    const query = this.conteudoQuery.Set_Favorite()
-    const variables = {cd_conteudo: param.cd_Conteudo, nm_usuario: param.nm_Usuario }
-    const response = await this.apiHasuraService._Execute(query, variables, this.httpOptions)
-    return response
-  }
-
-  async Set_Disfavor(param){
-    const query = this.conteudoQuery.Set_Disfavor()
-    const variables = {cd_conteudo: param.cd_Conteudo, nm_usuario: param.nm_Usuario }
-    const response = await this.apiHasuraService._Execute(query, variables, this.httpOptions)
-    return response
-  }
+  
 }

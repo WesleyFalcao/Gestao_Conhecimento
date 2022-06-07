@@ -93,9 +93,9 @@ export class SugestoesComponent implements OnInit {
   async Filter() {
     const responsefilter = await this.sugestoesService.Get_Filter_Suggestion(this.objFilter)
     if(responsefilter.errors){
+
       this.subjectService.subject_Exibindo_Snackbar.next({ message: 'Não foi possível filtrar' })
     }else{
-      console.log("resposta filtro", responsefilter.data.sugestoes)
       this.obj_Array_Sugestoes = responsefilter.data.sugestoes
       this.b_Show_Filter = false
     } 

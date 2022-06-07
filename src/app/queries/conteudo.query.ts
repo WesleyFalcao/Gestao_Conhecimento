@@ -146,14 +146,4 @@ export class ConteudoQuery {
     }
     `
   }
-
-  Set_Favorite(){
-    return `
-    `
-  }
-
-  Set_Disfavor(){
-    return `
-    `
-  }
 }

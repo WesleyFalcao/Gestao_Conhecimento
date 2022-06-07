@@ -52,7 +52,7 @@ export class UsersComponent implements OnInit {
   b_Fim_Lista: boolean = false
 
   /** @description Recebe o array de usuário */
-  obj_Array_Usuarios: any[]
+  obj_Array_Usuarios: any[] = []
 
   /**@description Objeto que recebe os valores de cada coluna */
   objUsuarios = new UsuarioParams
@@ -67,13 +67,14 @@ export class UsersComponent implements OnInit {
   ) { }
 
   async ngOnInit() {
-    this.onResize()
   }
 
   ngAfterViewInit() {
-    if(this.b_Width){
+    this.onResize()
+    setTimeout(() => {
       this.Search_User()
-    }
+    });
+
     this.scroller.elementScrolled().pipe(
       map(() => this.scroller.measureScrollOffset('bottom')),
       pairwise(),
@@ -81,13 +82,13 @@ export class UsersComponent implements OnInit {
       throttleTime(200)
     ).subscribe(() => {
       this.ngZone.run(async () => {
-        if (this.b_Fim_Lista != true) {
-          this.objUsuarios.nr_pagina++
+        if (!this.b_Fim_Lista) {
+
           this.Search_User();
+          this.objUsuarios.nr_pagina++
         }
       });
     })
-    
   }
 
   @HostListener('window:resize')
@@ -97,6 +98,7 @@ export class UsersComponent implements OnInit {
       this.b_Width = true
     } else {
       this.b_Width = false
+      this.objUsuarios.page_lenght = 30
     }
   }
 
@@ -129,6 +131,10 @@ export class UsersComponent implements OnInit {
     this.b_Show_Filter = false
   }
 
+  Focus_Item(el: HTMLElement) {
+    el.scrollIntoView();
+  }
+
   Show_Modal(event) {
     this.b_Show_Filter = event
   }
@@ -138,18 +144,18 @@ export class UsersComponent implements OnInit {
     if (responseusuarios.errors) {
       this.subjectService.subject_Exibindo_Snackbar.next({ message: 'Não foi possível trazer a listagem' })
     }
-    if (this.obj_Array_Usuarios?.length == 0) {
+
+    if (responseusuarios.data.usuarios.length == 0) {
       this.b_Fim_Lista = true
     }
     if (this.b_Width) {
       this.obj_Array_Usuarios = responseusuarios.data.usuarios
       this.objUsuarios.nr_registos = responseusuarios.data.usuarios_aggregate.aggregate.count
-      console.log("paginacao",this.obj_Array_Usuarios)
+      
 
     } else {
-      this.obj_Array_Usuarios = responseusuarios.data.usuarios
       this.obj_Array_Usuarios = [...this.obj_Array_Usuarios, ...responseusuarios.data.usuarios]
-      console.log("virtual",this.obj_Array_Usuarios)
+      console.log("obj_Array_Usuarios", this.obj_Array_Usuarios)
     }
   }
 
@@ -161,6 +167,9 @@ export class UsersComponent implements OnInit {
       this.subjectService.subject_Exibindo_Snackbar.next({ message: 'Não foi possível trazer a listagem' })
     } else {
       this.obj_Array_Usuarios = responseusuarios.data.usuarios
+      if(this.obj_Array_Usuarios == undefined){
+        this.obj_Array_Usuarios = []
+      }
     }
   }
 }

@@ -4,6 +4,7 @@ import { Subscription } from 'rxjs';
 import { objConteudoModel } from 'src/app/models/conteudo/conteudo.model';
 import { LoginService } from 'src/app/services/login.service';
 import { SubjectService } from 'src/app/services/subject.service';
+import { MeusEstudosService } from '../../meus-estudos/meus-estudos.service';
 import { ConteudoService } from '../conteudo.service';
 
 @Component({
@@ -15,7 +16,7 @@ export class ConteudoComponent implements OnInit, OnDestroy {
 
   /**@description nome do label do primeiro input */
   obj_Array_Conteudos
-  
+
   /**@description nome do label do primeiro input */
   nm_Label_Input_Filter_1: string = "Título"
 
@@ -68,7 +69,7 @@ export class ConteudoComponent implements OnInit, OnDestroy {
   b_Show_Filter: boolean = false
 
   /**@description Contém os dados do usuário que seram gravados */
-  objDados = {cd_Conteudo: null, nm_Usuario: ""}
+  objDados = { cd_Conteudo: null, nm_Usuario: "" }
 
   /**@description Recebe o parâmetro da rota */
   cd_Id_Param: number
@@ -89,51 +90,55 @@ export class ConteudoComponent implements OnInit, OnDestroy {
   objFilds = new objConteudoModel
 
   /**@description Recebe as informações do usuário para favoritar um conteúdo */
-  objFavorite = {cd_usuario: null, cd_conteudo: ""}
-  
+  objFavorite = { cd_usuario: null, cd_conteudo: "" }
+
   constructor(
     private route: Router,
     private routerParam: ActivatedRoute,
     private loginService: LoginService,
     private subject_service: SubjectService,
+    private meuestudosService: MeusEstudosService,
     private conteudoService: ConteudoService
-  ) { 
+  ) {
   }
 
   visible: boolean = false;
 
   async ngOnInit() {
-      this.nm_User = this.loginService.Name_User_Logged()
-      this.subject_unsub = this.routerParam.params.subscribe((params: any) => {
+    
+    this.nm_User = this.loginService.Name_User_Logged()
+    this.subject_unsub = this.routerParam.params.subscribe((params: any) => {
       this.cd_Id_Param = params['id']
       this.cd_User_Logged = this.loginService.Id_User_Logged()
     })
-    
+
     const responseconteudo = await this.conteudoService.Get_Conteudo(this.cd_Id_Param)
     this.obj_Array_Conteudos = responseconteudo.data.conteudos
     this.ds_Titulo = this.obj_Array_Conteudos[0].categoria.nome
   }
 
-  async Star_Svg(conteudo) {
+  async onClick_Favorite(conteudo) {
+    conteudo.favorite = !conteudo.favorite
     this.b_Start = !this.b_Start
-    if (this.b_Start) {
+    if (conteudo.favorite) {
       this.nm_Star = "assets/icons/start-yellow.svg"
       this.objFavorite.cd_usuario = this.cd_User_Logged
       this.objFavorite.cd_conteudo = conteudo.cd_conteudo
-      const responsefavorito = await this.conteudoService.Set_Favorite(this.objFavorite)
-      if(responsefavorito.errors){
+      const responsefavorito = await this.meuestudosService.Set_My_Study(conteudo.cd_conteudo)
+      console.log(responsefavorito)
+      if (responsefavorito.errors) {
         this.subject_service.subject_Exibindo_Snackbar.next({ message: 'Não foi possível favoritar' })
-      }else{
+      } else {
         this.subject_service.subject_Exibindo_Snackbar.next({ message: 'Favoritado com sucesso' })
       }
     } else {
       this.nm_Star = "assets/icons/star-with-no-background.svg"
       this.objFavorite.cd_usuario = this.cd_User_Logged
       this.objFavorite.cd_conteudo = conteudo.cd_conteudo
-      const responsedesfavoritar = await this.conteudoService.Set_Disfavor(this.objFavorite)
-      if(responsedesfavoritar.erros){
+      const responsedesfavoritar = await this.meuestudosService.Delete_My_Study(conteudo.cd_conteudo)
+      if (responsedesfavoritar.erros) {
         this.subject_service.subject_Exibindo_Snackbar.next({ message: 'Não foi possível desfavoritar' })
-      }else{
+      } else {
         this.subject_service.subject_Exibindo_Snackbar.next({ message: 'Desfavoritado com sucesso' })
       }
     }
@@ -144,14 +149,14 @@ export class ConteudoComponent implements OnInit, OnDestroy {
     console.log(this.cd_Id_Param)
   }
 
-  async OnClick_Access(conteudo){
-    
+  async OnClick_Access(conteudo) {
+
     this.objDados.cd_Conteudo = conteudo.cd_conteudo
     this.objDados.nm_Usuario = this.nm_User
     const responseacesso = await this.conteudoService.Set_Gravar_Dados(this.objDados)
-    if(responseacesso.errors){
+    if (responseacesso.errors) {
       this.subject_service.subject_Exibindo_Snackbar.next({ message: 'Não foi possível adicionar' })
-    }else{
+    } else {
       window.location.href = conteudo.ds_link
     }
   }
@@ -160,11 +165,20 @@ export class ConteudoComponent implements OnInit, OnDestroy {
     this.b_Confirmation_Show_Modal = event
   }
 
-  async Set_Delete_Conteudo(){
+  async Set_Delete_Conteudo() {
     console.log(this.cd_Id_Conteudo)
     const responsedeleteconteudo = await this.conteudoService.Set_Delete_Conteudo(this.cd_Id_Conteudo)
     this.Closed_Alert_Modal()
     this.onClick_Refresh()
+  }
+
+  async Get_Favorites() {
+    const responsefavorites = await this.meuestudosService.Get_My_Studies()
+    console.log(responsefavorites)
+    if (responsefavorites.data.conteudo.length >= 1) {
+      this.b_Start = true
+    }
+    console.log("Get_Favorites", responsefavorites)
   }
 
   Closed_Alert_Modal() {
@@ -172,7 +186,7 @@ export class ConteudoComponent implements OnInit, OnDestroy {
     this.b_Show_Popover = false
   }
 
-  async onClick_Refresh(){
+  async onClick_Refresh() {
     const responseconteudo = await this.conteudoService.Get_Conteudo(this.cd_Id_Param)
     this.obj_Array_Conteudos = responseconteudo.data.conteudos
   }
@@ -190,21 +204,21 @@ export class ConteudoComponent implements OnInit, OnDestroy {
     this.b_Show_Filter = event
   }
 
-  Show_Popover(conteudo){
+  Show_Popover(conteudo) {
     this.cd_Id_Conteudo = conteudo.cd_conteudo
     console.log(this.cd_Id_Conteudo)
     conteudo.show = !conteudo.show
     this.b_Show_Popover = conteudo.show
-    if(conteudo.show){
+    if (conteudo.show) {
       this.obj_Array_Conteudos.forEach(fe => {
-        if(conteudo.cd_conteudo != fe.cd_conteudo){
+        if (conteudo.cd_conteudo != fe.cd_conteudo) {
           fe.show = false
         }
       })
     }
   }
 
-  ngOnDestroy(){
+  ngOnDestroy() {
     this.subject_unsub.unsubscribe()
   }
 }

@@ -8,6 +8,10 @@ export class CategoriaService {
 
     constructor(private categoriaRepository: CategoriaRepository) { }
     
+    Get_Categories_Paginator(param) {
+        return this.categoriaRepository.Get_Categories_Paginator(param)
+    }
+
     Get_Categories_List() {
         return this.categoriaRepository.Get_Categories_List()
     }

@@ -18,6 +18,16 @@ export class CategoriaRepository {
     private apiHasuraService: ApiHasuraService
   ) { }
 
+  async Get_Categories_Paginator(param){
+    this.subjectService.subject_Exibindo_Loading.next(true)
+    const query = this.categoriaQuery.Get_Categories_Paginator()
+    const variables = { limit: param.page_lenght, offset: ((param.nr_pagina - 1)*param.page_lenght)}
+    const response = await this.apiHasuraService._Execute(query, variables,this.httpOptions)
+    this.subjectService.subject_Exibindo_Loading.next(false)
+    console.log(response)
+    return response
+  }
+
   async Get_Categories_List(){
     this.subjectService.subject_Exibindo_Loading.next(true)
     const query = this.categoriaQuery.Get_Categories_List()
