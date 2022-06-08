@@ -1,4 +1,4 @@
-<app-header></app-header>
+<app-header (Input_Emit_Value)="onFilter_Search($event)"></app-header>
 
 <div class="container">
     <div class="grid grid-cols-2 mt-4 md:mt-14 xl:mt-14 items-center">
@@ -8,11 +8,13 @@
         <div class="flex flex-row relative gap-8 md:gap-12 lg:gap-16 mr-16 justify-self-end">
 
             <div class="flex flex-row gap-6 lg:gap-10 my-auto justify-end relative right-1 xl:mr-4 cursor-pointer">
-                <img class="behavior-button w-5 h-5 xl:w-7 xl:h-7 2xl:w-6 2xl:h-6"
-                    src="assets/icons/more-options-user.svg" routerLink="/sugestao-adicionar">
                 <div *ngIf="b_User_Admin">
                     <img class="behavior-button relative w-5 h-5 xl:w-7 xl:h-7 2xl:w-6 2xl:h-6 cursor-pointer"
                         src="assets/icons/list-okay.svg" (click)="b_Show_Popover_Feitos = !b_Show_Popover_Feitos">
+                </div>
+                <div *ngIf="b_User_Admin">
+                    <img class="behavior-button w-5 h-5 xl:w-7 xl:h-7 2xl:w-6 2xl:h-6"
+                        src="assets/icons/more-options-user.svg" routerLink="/sugestao-adicionar">
                     <div
                         class="mt-20 div-aling-popover_sugestoes z-20 -ml-4 {{b_Show_Popover_Feitos? 'absolute':'hidden'}}">
                         <div class="div-triangulo mx-auto rotate-180">
@@ -32,7 +34,8 @@
                         </div>
                     </div>
                 </div>
-                <app-button-filter [b_Popover_Sugestoes]="b_Popover_Sugestoes" (b_Show_Modal)="Show_Modal($event)">
+                <app-button-filter class="hidden" [b_Popover_Sugestoes]="b_Popover_Sugestoes"
+                    (b_Show_Modal)="Show_Modal($event)">
                 </app-button-filter>
 
                 <img class="hidden md:flex behavior-button w-6 h-6 xl:w-8 xl:h-8 2xl:w-7 2xl:h-7"
@@ -40,12 +43,10 @@
             </div>
         </div>
     </div>
-
-
     <div
         class="grid grid-cols-1 lg:grid-cols-2 relative top-6 gap-y-6 md:gap-y-10 w-full pb-10 px-12 md:px-16  lg:gap-x-10 lg:top-6">
         <div class="h-52 inline-block relative rounded-lg bg-unimed-white shadow-lg border-l-8 border-l-unimed-green {{sugestao.show? 'div-hidden-card':''}}"
-            *ngFor="let sugestao of obj_Array_Sugestoes; let i = index;">
+            *ngFor="let sugestao of obj_Array_Sugestoes | filter: Input_Value; let i = index">
             <div class="div-aling-item-card h-12">
                 <p
                     class="my-auto font-semibold text-lg md:font-semibold pl-4 text-ellipsis w-60 whitespace-nowrap overflow-hidden text-unimed-darkgray">

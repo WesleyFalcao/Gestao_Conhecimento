@@ -25,22 +25,20 @@ export class SugestoesRepository {
     return response
   }
 
-  async Get_Files_Suggestion(){
+  async Get_Files_Suggestion(param){
     this.subjectService.subject_Exibindo_Loading.next(true)
     const query = this.sugestoesQuery.Get_Files_Suggestion()
-    const response = await this.apiHasuraService._Execute(query, this.httpOptions)
+    const variables = {limit: param.page_lenght, offset: ((param.nr_pagina - 1)*param.page_lenght)}
+    const response = await this.apiHasuraService._Execute(query, variables, this.httpOptions)
     this.subjectService.subject_Exibindo_Loading.next(false)
     return response
   }
 
   async Get_Filter_Suggestion(filtersugestao){
     this.subjectService.subject_Exibindo_Loading.next(true)
-    // cd_sugestao: filtersugestao.cd_sugestao, nm_titulo: "%" + filtersugestao.nm_Titulo.replace(" " ,"%") + "%", ds_sugestao: filtersugestao.nm_Descricao
-    // nm_titulo: {_ilike: $nm_titulo}, _or: {ds_sugestao: {_ilike: $ds_sugestao}}
     const query = this.sugestoesQuery.Filter_Suggestion()
 
     let where: any = {_or: {}}
-    console.log(filtersugestao)
     if(filtersugestao.cd_sugestao != null && filtersugestao.cd_sugestao != ""){
       where._or.cd_sugestao = {_eq: filtersugestao.cd_sugestao}
     }

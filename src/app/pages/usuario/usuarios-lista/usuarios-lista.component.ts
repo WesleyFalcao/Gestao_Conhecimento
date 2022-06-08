@@ -78,14 +78,14 @@ export class UsersComponent implements OnInit {
     this.scroller.elementScrolled().pipe(
       map(() => this.scroller.measureScrollOffset('bottom')),
       pairwise(),
-      filter(([y1, y2]) => (y2 < y1 && y2 < 140)),
+      filter(([y1, y2]) => (y2 < y1 && y2 < 500)),
       throttleTime(200)
     ).subscribe(() => {
       this.ngZone.run(async () => {
         if (!this.b_Fim_Lista) {
 
-          this.Search_User();
           this.objUsuarios.nr_pagina++
+          this.Search_User();
         }
       });
     })
@@ -141,6 +141,7 @@ export class UsersComponent implements OnInit {
 
   async Search_User() {
     const responseusuarios = await this.usuarioService.Get_Usuarios(this.objUsuarios)
+    
     if (responseusuarios.errors) {
       this.subjectService.subject_Exibindo_Snackbar.next({ message: 'Não foi possível trazer a listagem' })
     }
@@ -152,10 +153,8 @@ export class UsersComponent implements OnInit {
       this.obj_Array_Usuarios = responseusuarios.data.usuarios
       this.objUsuarios.nr_registos = responseusuarios.data.usuarios_aggregate.aggregate.count
       
-
     } else {
       this.obj_Array_Usuarios = [...this.obj_Array_Usuarios, ...responseusuarios.data.usuarios]
-      console.log("obj_Array_Usuarios", this.obj_Array_Usuarios)
     }
   }
 

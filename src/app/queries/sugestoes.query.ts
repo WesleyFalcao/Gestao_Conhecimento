@@ -31,16 +31,21 @@ export class SugestoesQuery {
 
   Get_Files_Suggestion(){
     return `
-    query {
-      sugestoes(where: {dt_arquivamento: {_is_null: false}}) {
-        cd_sugestao
-        cd_usuario
-        dt_arquivamento
-        dt_sugestao
+    query ($limit: Int, $offset: Int) {
+      sugestoes(limit: $limit, offset: $offset, order_by: {cd_sugestao: asc}, where: {dt_arquivamento: {_is_null: false}}) {
         nm_titulo
+        dt_sugestao
+        dt_arquivamento
+        cd_usuario
+        cd_sugestao
         ds_sugestao
       }
-    }    
+      sugestoes_aggregate {
+        aggregate {
+          count
+        }
+      }
+    }        
     `
   }
 

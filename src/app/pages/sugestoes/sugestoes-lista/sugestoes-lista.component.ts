@@ -1,4 +1,7 @@
-import { Component, HostListener, OnInit } from '@angular/core';
+import { CdkVirtualScrollViewport } from '@angular/cdk/scrolling';
+import { Component, HostListener, NgZone, OnInit, ViewChild } from '@angular/core';
+import { filter, map, pairwise, throttleTime } from 'rxjs';
+import { SugestaoModel } from 'src/app/models/sugestao/sugestao.model';
 import { SubjectService } from 'src/app/services/subject.service';
 import { SugestoesService } from '../sugestoes.service';
 
@@ -20,15 +23,18 @@ export class SugestoesListaComponent implements OnInit {
 
   /**@description Título da página */
   ds_Titulo: string = "Sugestões arquivadas"
-  
+
   /**@description recebe a largura atual da tela */
   nr_Width: number
 
   /**@description boolean que fica true acima de 1034px */
   b_Width: boolean
 
-  /**@description Recebe o valor digitado pelo usuário no desktop */
+  /**@description Recebe o valor digitado pelo usuário*/
   Input_Value: string
+
+  /** @description Recebe true quando no  final do virtual scroll*/
+  b_Fim_Lista: boolean = false
 
   /** @description Boolean para exibir ou fechar o modal de confirmação */
   b_Confirmation_Show_Modal: boolean
@@ -45,21 +51,41 @@ export class SugestoesListaComponent implements OnInit {
   /**@description Recebe o index da sugestão clicada */
   cd_Index: number
 
-  /**@description Objeto que recebe o conteudo dos inputs */
-  objFilter = { ds_Titulo: "", ds_Descricao: "", cd_id: ""}
+  /**@description Objeto de sugestao */
+  objSugestao = new SugestaoModel
 
   /**@description Recebe o array de sugestões arquivadas */
-  obj_Array_Sugestoes_Arquivadas
+  obj_Array_Sugestoes_Arquivadas: Array<any> = []
+
+  /**@description Instância do virtual scroll */
+  @ViewChild(CdkVirtualScrollViewport) scroller: CdkVirtualScrollViewport
 
   constructor(
     private sugestoesService: SugestoesService,
-    private subjectService: SubjectService
+    private subjectService: SubjectService,
+    private ngZone: NgZone
   ) { }
 
-  async ngOnInit(){
+  async ngOnInit() {
     this.onResize()
-    const responselist = await this.sugestoesService.Get_Files_Suggestion()
-    this.obj_Array_Sugestoes_Arquivadas = responselist.data.sugestoes
+    this.Search_Sugestoes()
+  }
+
+  ngAfterViewInit() {
+    this.scroller.elementScrolled().pipe(
+      map(() => this.scroller.measureScrollOffset('bottom')),
+      pairwise(),
+      filter(([y1, y2]) => (y2 < y1 && y2 < 140)),
+      throttleTime(200)
+    ).subscribe(() => {
+      this.ngZone.run(async () => {
+        if (!this.b_Fim_Lista) {
+
+          this.objSugestao.nr_pagina++
+          this.Search_Sugestoes();
+        }
+      });
+    })
   }
 
   @HostListener('window:resize')
@@ -74,29 +100,29 @@ export class SugestoesListaComponent implements OnInit {
 
   Show_Itens(item) {
     item.show = !item.show
-    if(item.show){
+    if (item.show) {
       this.obj_Array_Sugestoes_Arquivadas.forEach(fe => {
-        if(item.cd_sugestao != fe.cd_sugestao){
+        if (item.cd_sugestao != fe.cd_sugestao) {
           fe.show = false
         }
       })
     }
   }
 
-  onClick_Unarchive(iten, index){
+  onClick_Unarchive(iten, index) {
     this.b_Confirmation_Show_Modal = true
     this.cd_Sugestao = iten
     this.cd_Index = index
   }
 
-  async Unarchive(){
+  async Unarchive() {
     this.b_Confirmation_Show_Modal = false
     const responseunarchive = await this.sugestoesService.Set_Unarchive_Suggestion(this.cd_Sugestao)
-    if(responseunarchive.errors){
+    if (responseunarchive.errors) {
       this.subjectService.subject_Exibindo_Snackbar.next({ message: 'Não foi possível desarquivar' })
-    }else{
+    } else {
       this.subjectService.subject_Exibindo_Snackbar.next({ message: 'Desarquivado com sucesso!' })
-      this.obj_Array_Sugestoes_Arquivadas.splice(this.cd_Index, 1)
+      this.obj_Array_Sugestoes_Arquivadas.splice(this.cd_Index, 1)  
     }
   }
 
@@ -108,14 +134,36 @@ export class SugestoesListaComponent implements OnInit {
     this.b_Confirmation_Show_Modal = event
   }
 
-  async onClick_Refresh(){
-    const responselist = await this.sugestoesService.Get_Files_Suggestion()
+  onFilter_Search(iten) {
+    this.Input_Value = iten
+  }
+
+  async Search_Sugestoes() {
+    const responselist = await this.sugestoesService.Get_Files_Suggestion(this.objSugestao)
+    if(responselist.erros){
+      this.subjectService.subject_Exibindo_Snackbar.next({ message: 'Não foi possível trazer a listagem' })
+    }
+    if (responselist.data.sugestoes.length == 0) {
+      this.b_Fim_Lista = true
+    }
+    if(this.b_Width){
+      this.obj_Array_Sugestoes_Arquivadas = responselist.data.sugestoes
+      this.objSugestao.nr_registos = responselist.data.sugestoes_aggregate.aggregate.count
+
+    }else{
+      this.obj_Array_Sugestoes_Arquivadas = [...this.obj_Array_Sugestoes_Arquivadas, ...responselist.data.sugestoes]
+    }
   }
 
   Filtrar() {
-    console.log(this.objFilter)
+
     this.b_Show_Filter = false
   }
+
+  Focus_Item(el: HTMLElement) {
+    el.scrollIntoView();
+  }
+
 
   Close_Modal() {
     this.b_Show_Filter = false
@@ -123,5 +171,19 @@ export class SugestoesListaComponent implements OnInit {
 
   Show_Modal(event) {
     this.b_Show_Filter = event
+  }
+
+  /** @description Avança uma pagina */
+  async Mudar_Pagina(nr_Pagina: number) {
+    this.objSugestao.nr_pagina = nr_Pagina
+    const responseusuarios = await this.sugestoesService.Get_Files_Suggestion(this.objSugestao)
+    if (responseusuarios.errors) {
+      this.subjectService.subject_Exibindo_Snackbar.next({ message: 'Não foi possível trazer a listagem' })
+    } else {
+      this.obj_Array_Sugestoes_Arquivadas = responseusuarios.data.sugestoes
+      if (this.obj_Array_Sugestoes_Arquivadas == undefined) {
+        this.obj_Array_Sugestoes_Arquivadas = []
+      }
+    }
   }
 }

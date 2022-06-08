@@ -25,21 +25,28 @@ export class UsuariosService {
     }
 
     Set_Add_Usuario(param){
-       
+        
         if(param.b_login_ad == false && param.cd_login == null){
             return false
         }
+
         if(param.b_login_ad == false && param.cd_login == ''){
             return false
         }
-        if(param.ds_senha != ''){
+
+        if(param.ds_senha != null){
             const md5 = new Md5();
             param.ds_senha = md5.appendStr(param.ds_senha).end()
         }
-        if(param.ds_senha = "" || param.cd_login == ""){
+
+        if(param.ds_senha == "" && param.cd_login == ""){
             return false
         }
-       
+
+        if(param.b_login_ad == true){
+            param.ds_senha = null
+        }
+        
         return this.usuariosRepository.Set_Add_Usuario(param)
     }
 

@@ -84,7 +84,7 @@ export class AdicionarUsersComponent implements OnInit {
   }
 
   async Add_User() {
-    console.log("this.obj_Usuario",this.obj_Usuario)
+    console.log("this.obj_Usuario", this.obj_Usuario)
     const responseadduser = await this.usuarioService.Set_Add_Usuario(this.obj_Usuario)
     if(responseadduser == false) {
       this.b_Alert_Modal = true

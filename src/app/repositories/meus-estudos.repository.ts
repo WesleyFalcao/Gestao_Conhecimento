@@ -27,6 +27,14 @@ export class MeusEstudosRepository {
     return response
   }
 
+  async Get_Cd_Studies(){
+    this.subjectService.subject_Exibindo_Loading.next(true)
+    const query = this.meusEstudosQuery.Get_Cd_Studies()
+    const response = await this.apiHasuraService._Execute(query, this.httpOptions)
+    this.subjectService.subject_Exibindo_Loading.next(false)
+    return response
+  }
+
   async Set_My_Study(estudo){
     this.subjectService.subject_Exibindo_Loading.next(true)
     const query = this.meusEstudosQuery.Set_My_Studies()

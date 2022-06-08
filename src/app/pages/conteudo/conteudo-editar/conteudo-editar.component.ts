@@ -3,7 +3,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { ListModel } from 'src/app/models/arraylist/array-list';
-import { objConteudoModel } from 'src/app/models/conteudo/conteudo.model';
+import { ConteudoModel } from 'src/app/models/conteudo/conteudo.model';
 import { SubjectService } from 'src/app/services/subject.service';
 import { CategoriaService } from '../../categorias/categoria.service';
 import { ConteudoService } from '../conteudo.service';
@@ -46,7 +46,7 @@ export class ConteudoEditarComponent implements OnInit, OnDestroy {
   nm_Grupo_Input: string = "Grupo"
 
   /**@description Recebe os valores dos campos de imput*/
-  obj_Filds_Input = new objConteudoModel
+  obj_Filds_Input = new ConteudoModel
 
   constructor(
     private location: Location,

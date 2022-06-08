@@ -1,14 +1,16 @@
-<app-header [obj_Array_Itens]="obj_Array_Categorias" (Input_Emit_Value)="onFilter_Search($event)"></app-header>
+<app-header (Input_Emit_Value)="onFilter_Search($event)"></app-header>
 
-<div class="container bg-white bg-opacity-70 relative px-2 top-6 md:top-9 lg:top-14 pb-8 lg:pb-12">
+<div class="container bg-opacity-70 relative px-2 top-6 md:top-9 lg:top-14 pb-8 lg:pb-12">
     <div class="div-grid-title-add">
         <div class="div-title flex flex-col relative left-2 lg:left-2 lg:ml-2.5">
             <uni-title [ds_Titulo]="ds_Titulo"></uni-title>
         </div>
         <div class="flex flex-row gap-6 lg:gap-10 my-auto justify-end relative right-1 xl:mr-4 cursor-pointer">
-            <img class="behavior-button w-5 h-5 xl:w-7 xl:h-7 2xl:w-6 2xl:h-6" src="assets/icons/more-options-user.svg" routerLink="/categoria-adicionar">
-            <app-button-filter (b_Show_Modal)="Show_Modal($event)"></app-button-filter>
-            <img class="behavior-button w-6 h-6 xl:w-8 xl:h-8 2xl:w-7 2xl:h-7" src="assets/icons/refresh.svg" (click)="onClick_Search()">
+            <img class="behavior-button w-5 h-5 xl:w-7 xl:h-7 2xl:w-6 2xl:h-6" src="assets/icons/more-options-user.svg"
+                routerLink="/categoria-adicionar">
+            <app-button-filter class="hidden" (b_Show_Modal)="Show_Modal($event)"></app-button-filter>
+            <img class="behavior-button w-6 h-6 xl:w-8 xl:h-8 2xl:w-7 2xl:h-7" src="assets/icons/refresh.svg"
+                (click)="Search_Categories()">
         </div>
     </div>
     <div *ngIf="obj_Array_Categorias?.length != 0">
@@ -18,15 +20,42 @@
             <p class="font-semibold lg:text-right lg:mr-10">Editar</p>
         </div>
     </div>
-    <div class="top-6 relative flex flex-col gap-y-4" *ngFor="let iten of obj_Array_Categorias | filter: Input_Value">
+    <div class="top-6 relative flex flex-col">
 
-        <div class="rounded-lg mb-2 shadow-xl lg:h-14 w-full bg-white hover:bg-slate-100">
+        <cdk-virtual-scroll-viewport class="cdk-listagem-items overflow-auto lg:hidden rounded-lg mb-2 shadow-xl"
+            [itemSize]="40" minBufferPx="600" maxBufferPx="600">
+            <div class="bg-white bg-opacity-60 my-1"
+                *cdkVirtualFor="let item of obj_Array_Categorias | filter: Input_Value" (click)="Focus_Item(target)">
+                <div #target class="div-grid-name-arrow grid grid-cols-2 xl:grid-cols-1" (click)="Show_Item(item)">
+                    <p class="my-3 lg:my-auto ml-5 w-10/12 font-medium truncate">
+                        {{item.nome}}</p>
+                    <img class="my-auto xl:hidden {{item.show? 'img-rotation-arrow-down':''}}"
+                        src="assets/icons/arrow-up.svg">
+                </div>
+                <div class="pb-4 flex flex-col gap-y-1" *ngIf="item.show && b_Width == false">
+
+                    <div class="flex flex-row gap-x-3">
+                        <p class="ml-5 lg:text-center lg:relative font-semibold">ID:</p>
+                        <p class="text-center my-auto truncate">{{item.id}}</p>
+                    </div>
+                    <div class="flex flex-row gap-x-3 behavior-button" [routerLink]="['/categoria-editar', item.id]">
+                        <img class="reltive left-5 ml-5 mt-1 behavior-button w-4 h-4 lg:w-7 lg:h-7 my-auto cursor-pointer lg:mx-auto"
+                            src="assets/icons/edit.svg">
+                        <p>Editar</p>
+                    </div>
+                </div>
+            </div>
+        </cdk-virtual-scroll-viewport>
+
+        <div class="hidden lg:grid rounded-lg gap-y-4 mb-2 shadow-xl lg:h-14 w-full bg-white hover:bg-slate-100"
+            *ngFor="let item of obj_Array_Categorias | filter: Input_Value">
 
             <div class="lg:mb-0 grid grid-cols-3 div-grid-itens">
-                <p class="text-center my-auto lg:text-left lg:ml-10 lg:my-5 font-medium text-base">{{iten.id}}</p>
-                <p class="my-3 mx-auto text-center lg:text-center w-10/12 truncate lg:my-5 font-medium text-base">{{iten.nome}}</p>
+                <p class="text-center my-auto lg:text-left lg:ml-10 lg:my-5 font-medium text-base">{{item.id}}</p>
+                <p class="my-3 mx-auto text-center lg:text-center w-10/12 truncate lg:my-5 font-medium text-base">
+                    {{item.nome}}</p>
                 <img class="relative mx-auto lg:mr-14 behavior-button lg:w-5 lg:h-5 lg:my-5 my-auto cursor-pointer"
-                    src="assets/icons/edit.svg" [routerLink]="['/categoria-editar', iten.id]">
+                    src="assets/icons/edit.svg" [routerLink]="['/categoria-editar', item.id]">
             </div>
         </div>
     </div>
@@ -61,6 +90,6 @@
     </div>
 </app-modal>
 
-<div *ngIf="obj_Array_Categorias?.length == 0 || !obj_Array_Categorias">
+<div class="z-40" *ngIf="obj_Array_Categorias?.length == 0 || !obj_Array_Categorias">
     <animation-nothing-found></animation-nothing-found>
 </div>

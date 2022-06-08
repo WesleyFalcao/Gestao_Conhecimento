@@ -20,8 +20,8 @@ export class SugestoesService {
         return this.sugestoesRepository.Set_File_Suggestion(sugestao)
     }
 
-    Get_Files_Suggestion(){
-        return this.sugestoesRepository.Get_Files_Suggestion()
+    Get_Files_Suggestion(param){
+        return this.sugestoesRepository.Get_Files_Suggestion(param)
     }
 
     Get_Filter_Suggestion(filtersugestao){

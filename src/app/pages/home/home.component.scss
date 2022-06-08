@@ -19,6 +19,50 @@
     }
 }
 
+.container-list{
+    max-width: 300px;
+    margin: 0 auto;
+
+    @media (min-width: 540px) {
+        max-width: 400px;
+    }
+    @media (min-width: 768px) {
+        max-width: 550px;
+    }
+    @media (min-width: 900px) {
+        max-width: 650px;
+    }
+    @media (min-width: 1024px) {
+        max-width: 750px;
+    }
+    @media (min-width: 1280px) {
+        max-width: 1150px;
+    }
+    @media (min-width: 1536px) {
+        max-width: 1250px;
+    }
+    @media (min-width: 1636px) {
+        max-width: 1200px;
+    }
+    @media (min-width: 1780px) {
+        max-width: 1400px;
+    }
+
+    .div-grid-title{
+        grid-template-columns: 1fr 2fr 2fr 1.2fr 1fr;
+    }
+}
+
+.cdk-listagem-items{
+    height: 70vh;
+    @apply w-full overflow-y-auto rounded-lg;
+
+    @screen md{
+        height: 73vh;
+        @apply md:mt-12;   
+    }
+}
+
 .cards-itens{
     @apply items-center grid grid-cols-2 mx-auto gap-y-2 md:gap-y-0;
 

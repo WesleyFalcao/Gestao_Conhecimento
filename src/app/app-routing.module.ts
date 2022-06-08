@@ -19,6 +19,7 @@ import { SugestaoAdicionarComponent } from './pages/sugestoes/sugestao-adicionar
 import { SendSuggestionComponent } from './components/send-suggestion/send-suggestion.component';
 import { AuthGuard } from './guards/auth-guard';
 
+
 const routes: Routes = [
 
   { path: 'home', component: HomeComponent,

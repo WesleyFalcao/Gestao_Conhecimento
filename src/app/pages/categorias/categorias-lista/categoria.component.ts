@@ -1,4 +1,6 @@
-import { Component, NgZone, OnInit } from '@angular/core';
+import { CdkVirtualScrollViewport } from '@angular/cdk/scrolling';
+import { Component, HostListener, NgZone, OnInit, ViewChild } from '@angular/core';
+import { filter, map, pairwise, throttleTime } from 'rxjs';
 import { CategoriaModel } from 'src/app/models/categoria/categoria.model';
 import { SubjectService } from 'src/app/services/subject.service';
 import { CategoriaService } from '../categoria.service';
@@ -16,6 +18,15 @@ export class CategoriaComponent implements OnInit {
   /**@description Boolean para abrir e fechar o modal de filtro */
   b_Show_Filter: boolean = false
 
+  /**@description boolean que fica true acima de 1034px */
+  b_Width: boolean
+
+  /** @description Recebe true quando no  final do virtual scroll*/
+  b_Fim_Lista: boolean = false
+
+  /**@description recebe a largura atual da tela */
+  nr_Width: number
+
   /**@description Objeto com as propriedades de parâmetro para paginação */
   objCategoria = new CategoriaModel
 
@@ -23,7 +34,10 @@ export class CategoriaComponent implements OnInit {
   Input_Value: string
 
   /**@description Recebe o array de categorias */
-  obj_Array_Categorias: Array<any>
+  obj_Array_Categorias: Array<any> = []
+
+  /**@description Instância do virtual scroll */
+  @ViewChild(CdkVirtualScrollViewport) scroller: CdkVirtualScrollViewport
 
   constructor(
     private categoriaService: CategoriaService,
@@ -32,22 +46,74 @@ export class CategoriaComponent implements OnInit {
   ){}
 
   async ngOnInit() {
-    this.onClick_Search()
+    this.onResize()
+    this.Search_Categories()
   }
 
-  async onClick_Search(){
+  ngAfterViewInit(){
+    this.scroller.elementScrolled().pipe(
+      map(() => this.scroller.measureScrollOffset('bottom')),
+      pairwise(),
+      filter(([y1, y2]) => (y2 < y1 && y2 < 140)),
+      throttleTime(200)
+    ).subscribe(() => {
+      this.ngZone.run(async () => {
+        if (!this.b_Fim_Lista) {
+
+          this.objCategoria.nr_pagina++
+          this.Search_Categories();
+        }
+      });
+    })
+  }
+
+  async Search_Categories(){
     const responsecategorias = await this.categoriaService.Get_Categories_Paginator(this.objCategoria)
-    this.obj_Array_Categorias = responsecategorias.data.categorias
-    this.objCategoria.nr_registos = responsecategorias.data.categorias_aggregate.aggregate.count
+    if (responsecategorias.errors) {
+      this.subjectService.subject_Exibindo_Snackbar.next({ message: 'Não foi possível trazer a listagem' })
+    }
+    if (responsecategorias.data.categorias.length == 0) {
+      this.b_Fim_Lista = true
+    }
+    if(this.b_Width){
+      this.obj_Array_Categorias = responsecategorias.data.categorias
+      this.objCategoria.nr_registos = responsecategorias.data.categorias_aggregate.aggregate.count
+    }else{
+      this.obj_Array_Categorias = [...this.obj_Array_Categorias, ...responsecategorias.data.categorias]
+    }
+  }
+
+  @HostListener('window:resize')
+  onResize() {
+    this.nr_Width = window.innerWidth
+    if (this.nr_Width >= 1023) {
+      this.b_Width = true
+    } else {
+      this.b_Width = false
+    }
   }
 
   Close_Modal() {
     this.b_Show_Filter = false
   }
 
+  Focus_Item(el: HTMLElement) {
+    el.scrollIntoView();
+  }
+
   Filtrar() {
-    console.log(this.objCategoria)
     this.b_Show_Filter = false
+  }
+
+  Show_Item(item) {
+    item.show = !item.show
+    if (item.show) {
+      this.obj_Array_Categorias.forEach(fe => {
+        if (item.cd_usuario != fe.cd_usuario) {
+          fe.show = false
+        }
+      })
+    }
   }
 
   onFilter_Search(iten) {

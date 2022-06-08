@@ -1,22 +1,22 @@
-<app-header></app-header>
+<app-header (Input_Emit_Value)="onFilter_Search($event)"></app-header>
 
-<div class="container relative top-6 lg:top-14 px-12">
+<div class="container relative top-6 lg:top-14">
     <div class="grid grid-cols-2">
-        <div class="flex flex-col relative ">
+        <div class="pl-14 lg:pl-16 relative flex flex-col text-sm">
             <uni-title [ds_Titulo]="ds_Titulo"></uni-title>
         </div>
-        <div class="flex flex-row gap-6 lg:gap-10 my-auto justify-end relative right-1 xl:mr-4 cursor-pointer">
-            <app-button-filter (b_Show_Modal)="Show_Modal($event)"></app-button-filter>
-            <img class="behavior-button w-6 h-6 md:w-7 md:h-7" src="assets/icons/refresh.svg">
+        <div class="flex flex-row relative gap-8 md:gap-8 mt-10 lg:gap-10 mr-16 justify-self-end">
+            <app-button-filter class="cursor-pointer hidden" (b_Show_Modal)="Show_Modal($event)"></app-button-filter>
+            <img class="behavior-button cursor-pointer w-6 h-6 md:w-7 md:h-7" src="assets/icons/refresh.svg" (click)="Get_My_Estudies()">
         </div>
     </div>
-    <div class="grid grid-cols-1 lg:grid-cols-2 relative top-6 gap-y-6 md:gap-y-10 w-full pb-10 px-12 md:px-16  lg:gap-x-10 lg:top-6">
-        <div class="h-52 relative rounded-lg bg-unimed-white shadow-lg mx-auto border-l-8 border-l-unimed-green"
-            *ngFor="let estudo of Obj_Array_Meus_Estudos">
+    <div class="grid grid-cols-1 lg:grid-cols-2 relative top-6 gap-y-6 md:gap-y-10 w-full px-12 md:px-16 pb-10 lg:gap-x-10 lg:top-6">
+        <div class="h-52 relative rounded-lg bg-unimed-white shadow-lg border-l-8 border-l-unimed-green"
+            *ngFor="let estudo of Obj_Array_Meus_Estudos | filter: Input_Value">
             <div class="absolute div-aling-popover_card">
                 <app-popover [nm_Svg_Top]="nm_Svg_Top" [nm_Svg_Bottom]="nm_Svg_Bottom" [nm_Opcao_top]="nm_Opcao_top"
                     [nm_Opcao_bottom]="nm_Opcao_bottom" [b_Rotate_Triangle]="b_Rotate_Triangle"
-                    [b_Show_Popover]="b_Show_Popover" (onClick_Option_Top)="onClick_Option_Top()"
+                    [b_Show_Popover]="estudo.show" (onClick_Option_Top)="onClick_Option_Top()"
                     (onClick_Option_Bottom)="onClick_Option_Bottom($event)">
                 </app-popover>
             </div>
@@ -28,7 +28,7 @@
                 <div class="grid grid-cols-2 cursor-pointer absolute mt-4 gap-x-5 md:gap-x-6 right-3 md:right-6 lg:right-8"
                     *ngIf="b_User_Admin, else svgiten">
                     <img class="w-5 h-5 behavior-button cursor-pointer -mt-1" src="assets/icons/{{estudo.favorite?'star-with-no-background':'start-yellow'}}.svg" (click)="Start_Svg(estudo)">
-                    <div class="lg:w-10 relative mx-auto" (click)="b_Show_Popover = !b_Show_Popover">
+                    <div class="lg:w-10 relative mx-auto" (click)="Show_Popover(estudo)">
                         <img class="behavior-button cursor-pointer mx-auto" src="assets/icons/filter-three-points.svg">
                     </div>
                 </div>
@@ -50,65 +50,13 @@
                         {{estudo.conteudo.categoria.nm_categoria}}
                     </p>
                 </div>
-                <button
+                <button (click)="OnClick_Access(estudo)"
                     class="behavior-button w-32 h-10 absolute right-6 bottom-4 text-left pl-5 rounded-full bg-unimed-green text-unimed-white text-lg">
                     Acessar
                     <img class="w-4 h-4 absolute right-4 bottom-3" src="assets/icons/arrow-right-white.svg">
                 </button>
             </div>
         </div>
-        <!-- <div
-            class="calc-width h-52 relative rounded-lg bg-unimed-white shadow-lg mx-auto border-l-8 border-l-unimed-green">
-            <div class="absolute div-aling-popover_card">
-                <app-popover [nm_Svg_Top]="nm_Svg_Top" [nm_Svg_Bottom]="nm_Svg_Bottom" [nm_Opcao_top]="nm_Opcao_top"
-                    [nm_Opcao_bottom]="nm_Opcao_bottom" [b_Rotate_Triangle]="b_Rotate_Triangle"
-                    [b_Show_Popover]="b_Show_Popover" (onClick_Option_Top)="onClick_Option_Top()"
-                    (onClick_Option_Bottom)="onClick_Option_Bottom($event)">
-                </app-popover>
-            </div>
-            <div class="grid grid-cols-2 h-12">
-                <p
-                    class="my-auto font-semibold text-lg md:font-semibold pl-4 truncate w-44 md:w-60 text-unimed-darkgray">
-                    O mundo é lindo
-                </p>
-                <div class="grid grid-cols-2 cursor-pointer absolute mt-4 gap-x-5 md:gap-x-6 right-3 md:right-6 lg:right-8"
-                    *ngIf="b_User_Admin, else svgiten">
-                    <img class="w-5 h-5 behavior-button cursor-pointer -mt-1" src="{{nm_Start}}" (click)="Start_Svg()">
-                    <div class="lg:w-10 relative mx-auto" (click)="b_Show_Popover = !b_Show_Popover">
-                        <img class="behavior-button cursor-pointer mx-auto" src="assets/icons/filter-three-points.svg">
-                    </div>
-                </div>
-                <ng-template #svgiten>
-                    <img class="w-5 h-5 behavior-button cursor-pointer absolute right-6 lg:right-10 mt-4"
-                        src="{{nm_Start}}" (click)="Start_Svg()">
-                </ng-template>
-            </div>
-            <p
-                class="p-rows pt-2 my-auto font-medium xl:text-base pl-4 text-ellipsis whitespace-normal overflow-hidden">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Eum dolorum nostrum aperiam ea repellat error
-                rem vel iure et eos maiores adipisci officiis autem repellendus esse, corporis cumque! Aut, unde.Lorem
-                ipsum dolor sit amet consectetur adipisicing elit. Eum dolorum nostrum aperiam ea repellat error
-                rem vel iure et eos maiores adipisci officiis autem repellendus esse, corporis cumque! Aut, unde.Lorem
-                ipsum dolor sit amet consectetur adipisicing elit. Eum dolorum nostrum aperiam ea repellat error
-                rem vel iure et eos maiores adipisci officiis autem repellendus esse, corporis cumque! Aut, unde.
-            </p>
-
-            <div class="grid grid-cols-2">
-
-                <div
-                    class="hidden mt-7 md:flex flex-row font-semibold md:font-semibold truncate pl-4 text-unimed-darkgray">
-                    Grupo:
-                    <p class="relative ml-2 font-normal truncate">
-                        {{nm_Grupo}}
-                    </p>
-                </div>
-                <button
-                    class="behavior-button w-32 h-10 absolute right-6 bottom-4 text-left pl-5 rounded-full bg-unimed-green text-unimed-white text-lg">
-                    Acessar
-                    <img class="w-4 h-4 absolute right-4 bottom-3" src="assets/icons/arrow-right-white.svg">
-                </button>
-            </div>
-        </div> -->
     </div>
 
     <app-modal (b_Click_Sobreposicao)="Close_Modal()" class="{{b_Show_Filter?'':'hidden'}}">

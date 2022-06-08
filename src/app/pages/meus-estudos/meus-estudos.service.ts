@@ -13,6 +13,10 @@ export class MeusEstudosService {
         return this.meuestudosRepository.Get_My_Studies()
     }
 
+    Get_Cd_Studies(){
+        return this.meuestudosRepository.Get_Cd_Studies()
+    }
+
     Set_My_Study(estudo){
         return this.meuestudosRepository.Set_My_Study(estudo)
     }

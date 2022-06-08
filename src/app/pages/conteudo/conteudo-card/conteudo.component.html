@@ -1,26 +1,25 @@
-<app-header></app-header>
+<app-header (Input_Emit_Value)="onFilter_Search($event)"></app-header>
 
 <div class="container relative top-6 lg:top-14 px-12 lg:px-16">
     <div class="grid grid-cols-2">
         <div class="flex flex-col relative">
             <uni-title [ds_Titulo]="ds_Titulo"></uni-title>
         </div>
-        <div *ngIf="obj_Array_Conteudos != ''">
-            <div class="flex flex-row gap-6 lg:gap-10 mt-7 justify-end relative right-1 xl:mr-4 cursor-pointer">
-                <img class="behavior-button w-5 h-5 md:w-7 md:h-7 2xl:w-6 2xl:h-6" src="assets/icons/more-options-user.svg"
-                    routerLink="/conteudo-adicionar">
-                <app-button-filter (b_Show_Modal)="Show_Modal($event)"></app-button-filter>
-                <img class="behavior-button w-6 h-6 md:w-8 md:h-8 2xl:w-7 2xl:h-7" src="assets/icons/refresh.svg" (click)="onClick_Refresh()">
-            </div>
+        <div class="flex flex-row gap-6 lg:gap-10 mt-7 justify-end relative right-1 xl:mr-4 cursor-pointer">
+            <img class="behavior-button w-5 h-5 md:w-7 md:h-7 2xl:w-6 2xl:h-6" src="assets/icons/more-options-user.svg"
+                routerLink="/conteudo-adicionar">
+            <app-button-filter class="hidden" (b_Show_Modal)="Show_Modal($event)"></app-button-filter>
+            <img class="behavior-button w-6 h-6 md:w-8 md:h-8 2xl:w-7 2xl:h-7" src="assets/icons/refresh.svg"
+                (click)="onClick_Refresh()">
         </div>
     </div>
     <div class="grid grid-cols-1 lg:grid-cols-2 relative top-4 md:top-6 gap-y-8 lg:gap-x-8 w-full pb-10">
-        <div
-            class="h-52 inline-block relative rounded-lg bg-unimed-white shadow-lg border-l-8 border-l-unimed-green" *ngFor="let conteudo of obj_Array_Conteudos">
+        <div class="h-52 inline-block relative rounded-lg bg-unimed-white shadow-lg border-l-8 border-l-unimed-green"
+            *ngFor="let conteudo of obj_Array_Conteudos | filter: Input_Value">
             <div class="absolute div-aling-popover">
                 <app-popover [nm_Svg_Top]="nm_Svg_Top" [nm_Svg_Bottom]="nm_Svg_Bottom" [nm_Opcao_top]="nm_Opcao_top"
                     [nm_Opcao_bottom]="nm_Opcao_bottom" [b_Rotate_Triangle]="b_Rotate_Triangle"
-                    [b_Show_Popover]="b_Show_Popover" (onClick_Option_Top)="onClick_Option_Top()"
+                    [b_Show_Popover]="conteudo.show" (onClick_Option_Top)="onClick_Option_Top()"
                     (onClick_Option_Bottom)="onClick_Option_Bottom($event)">
                 </app-popover>
             </div>
@@ -30,16 +29,14 @@
                     {{conteudo.nm_titulo}}
                 </p>
                 <div class="grid grid-cols-2 cursor-pointer absolute mt-5 gap-x-5 md:gap-x-6 lg:gap-x-0 right-3 md:right-6 lg:right-1 xl:right-3"
-                    *ngIf="b_User_Admin, else svgiten">
-                    <img class="w-5 h-5 behavior-button cursor-pointer -mt-1" src="{{nm_Star}}" (click)="onClick_Favorite(conteudo)">
+                    *ngIf="b_User_Admin">
+                    <img class="w-5 h-5 behavior-button cursor-pointer -mt-1"
+                        src="assets/icons/{{conteudo.favorite?'start-yellow':'star-with-no-background'}}.svg"
+                        (click)="onClick_Favorite(conteudo)">
                     <div class="lg:w-10 relative mx-auto" (click)="Show_Popover(conteudo)">
                         <img class="behavior-button cursor-pointer mx-auto" src="assets/icons/filter-three-points.svg">
                     </div>
                 </div>
-                <ng-template #svgiten>
-                    <img class="w-5 h-5 behavior-button cursor-pointer absolute right-6 lg:right-10 mt-4"
-                        src="{{nm_Star}}" (click)="onClick_Favorite(conteudo)">
-                </ng-template>
             </div>
             <p
                 class="p-rows pt-2 my-auto font-medium xl:text-base pl-4 text-ellipsis whitespace-normal overflow-hidden">

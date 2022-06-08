@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
-import { objConteudoModel } from 'src/app/models/conteudo/conteudo.model';
+import { ConteudoModel } from 'src/app/models/conteudo/conteudo.model';
 import { LoginService } from 'src/app/services/login.service';
 import { SubjectService } from 'src/app/services/subject.service';
 import { MeusEstudosService } from '../../meus-estudos/meus-estudos.service';
@@ -15,7 +15,10 @@ import { ConteudoService } from '../conteudo.service';
 export class ConteudoComponent implements OnInit, OnDestroy {
 
   /**@description nome do label do primeiro input */
-  obj_Array_Conteudos
+  obj_Array_Conteudos: Array<any>
+
+  /**@description Array que vai conter os estudos de cada usuário */
+  obj_Array_Meus_Estudos: Array<any>
 
   /**@description nome do label do primeiro input */
   nm_Label_Input_Filter_1: string = "Título"
@@ -47,9 +50,6 @@ export class ConteudoComponent implements OnInit, OnDestroy {
   /**@description Boolean para exibir svg */
   b_User_Admin: boolean = true
 
-  /**@description Boolean para exibir popover */
-  b_Show_Popover: boolean = false
-
   /**@description define um comportamento diferente para o popover quando esta na tela de usuários */
   b_Rotate_Triangle: boolean = false
 
@@ -59,7 +59,7 @@ export class ConteudoComponent implements OnInit, OnDestroy {
   /**@description Contém da descrição do modal de alerta*/
   ds_Descricao: string = "Tem certeza que deseja excluir este conteúdo?"
 
-  /**@description Recebe o valor digitado pelo usuário no desktop */
+  /**@description Recebe o valor digitado pelo usuário na barra de pesquisa */
   Input_Value: string
 
   /**@description Objeto que recebe o conteudo dos inputs */
@@ -74,6 +74,12 @@ export class ConteudoComponent implements OnInit, OnDestroy {
   /**@description Recebe o parâmetro da rota */
   cd_Id_Param: number
 
+  /**@description Recebe o id do conteudo varitado pelo usuário */
+  cd_Favorite: number
+
+  /**@description Recebe o id de cada conteudo */
+  cd_Conteudo: number
+
   /**@description Recebe o Id do usuário logado */
   cd_User_Logged: any
 
@@ -87,7 +93,7 @@ export class ConteudoComponent implements OnInit, OnDestroy {
   subject_unsub: Subscription
 
   /**@description Recebe os campos dos conteudos */
-  objFilds = new objConteudoModel
+  objFilds = new ConteudoModel
 
   /**@description Recebe as informações do usuário para favoritar um conteúdo */
   objFavorite = { cd_usuario: null, cd_conteudo: "" }
@@ -102,8 +108,6 @@ export class ConteudoComponent implements OnInit, OnDestroy {
   ) {
   }
 
-  visible: boolean = false;
-
   async ngOnInit() {
     
     this.nm_User = this.loginService.Name_User_Logged()
@@ -115,6 +119,8 @@ export class ConteudoComponent implements OnInit, OnDestroy {
     const responseconteudo = await this.conteudoService.Get_Conteudo(this.cd_Id_Param)
     this.obj_Array_Conteudos = responseconteudo.data.conteudos
     this.ds_Titulo = this.obj_Array_Conteudos[0].categoria.nome
+
+    this.Get_My_Estudies()
   }
 
   async onClick_Favorite(conteudo) {
@@ -144,6 +150,23 @@ export class ConteudoComponent implements OnInit, OnDestroy {
     }
   }
 
+  async Get_My_Estudies() {
+    const responsemystudies = await this.meuestudosService.Get_Cd_Studies()
+    if (responsemystudies.errors) {
+      this.subject_service.subject_Exibindo_Snackbar.next({ message: 'Não foi possível trazer a listagem' })
+    }
+    this.obj_Array_Conteudos.forEach((iten)=>{
+      this.cd_Conteudo = iten.cd_conteudo
+      console.log("conteudo", this.cd_Conteudo)
+    })
+
+    this.obj_Array_Meus_Estudos = responsemystudies.data.estudos
+      this.obj_Array_Meus_Estudos.forEach((iten)=>{
+      this.cd_Favorite = iten.conteudo.cd_conteudo
+      console.log("favorito", this.cd_Favorite)
+    })
+  }
+
   onClick_Option_Top() {
     this.route.navigate(['/conteudo-editar', this.cd_Id_Conteudo])
     console.log(this.cd_Id_Param)
@@ -155,10 +178,14 @@ export class ConteudoComponent implements OnInit, OnDestroy {
     this.objDados.nm_Usuario = this.nm_User
     const responseacesso = await this.conteudoService.Set_Gravar_Dados(this.objDados)
     if (responseacesso.errors) {
-      this.subject_service.subject_Exibindo_Snackbar.next({ message: 'Não foi possível adicionar' })
+      this.subject_service.subject_Exibindo_Snackbar.next({ message: 'Não foi possível acessar' })
     } else {
-      window.location.href = conteudo.ds_link
+      window.open(conteudo.ds_link, "_blank")
     }
+  }
+  
+  onFilter_Search(iten) {
+    this.Input_Value = iten
   }
 
   onClick_Option_Bottom(event) {
@@ -172,18 +199,9 @@ export class ConteudoComponent implements OnInit, OnDestroy {
     this.onClick_Refresh()
   }
 
-  async Get_Favorites() {
-    const responsefavorites = await this.meuestudosService.Get_My_Studies()
-    console.log(responsefavorites)
-    if (responsefavorites.data.conteudo.length >= 1) {
-      this.b_Start = true
-    }
-    console.log("Get_Favorites", responsefavorites)
-  }
-
   Closed_Alert_Modal() {
     this.b_Confirmation_Show_Modal = false
-    this.b_Show_Popover = false
+    
   }
 
   async onClick_Refresh() {
@@ -205,10 +223,7 @@ export class ConteudoComponent implements OnInit, OnDestroy {
   }
 
   Show_Popover(conteudo) {
-    this.cd_Id_Conteudo = conteudo.cd_conteudo
-    console.log(this.cd_Id_Conteudo)
     conteudo.show = !conteudo.show
-    this.b_Show_Popover = conteudo.show
     if (conteudo.show) {
       this.obj_Array_Conteudos.forEach(fe => {
         if (conteudo.cd_conteudo != fe.cd_conteudo) {

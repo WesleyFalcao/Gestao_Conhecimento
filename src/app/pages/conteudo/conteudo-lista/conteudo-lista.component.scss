@@ -49,6 +49,16 @@
     }
 }
 
+.cdk-listagem-items{
+    height: 70vh;
+    @apply w-full overflow-y-auto rounded-lg;
+
+    @screen md{
+        height: 73vh;
+        @apply md:mt-12;   
+    }
+}
+
 .div-grid-itens{
     grid-template-columns: 0.5fr 1fr 0.5fr ;
 }

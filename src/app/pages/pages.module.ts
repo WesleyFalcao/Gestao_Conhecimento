@@ -39,7 +39,7 @@ import { ScrollingModule } from '@angular/cdk/scrolling';
     LoginComponent,
     ConteudoEditarListaComponent,
     SugestoesListaComponent,
-    SugestaoAdicionarComponent
+    SugestaoAdicionarComponent,
   ],
   imports: [
     CommonModule,

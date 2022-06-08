@@ -14,9 +14,6 @@ import { LoginService } from 'src/app/services/login.service';
 
 export class HeaderComponent implements OnInit {
 
-  /**@description Array que recebe o itens para serem filtrados */
-  @Input() obj_Array_Itens: any
-
   /**@description Boolean para remover a barra de pesquisa */
   @Input() b_Not_Search: boolean
 

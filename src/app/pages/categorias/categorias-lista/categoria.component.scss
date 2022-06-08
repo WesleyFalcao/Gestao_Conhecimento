@@ -32,6 +32,21 @@
     }
 }
 
+.cdk-listagem-items{
+    height: 70vh;
+    @apply w-full overflow-y-auto rounded-lg;
+
+    @screen md{
+        height: 73vh;
+        @apply md:mt-12;   
+    }
+}
+
+.img-rotation-arrow-down{
+    transform: rotateZ(-180deg);
+    transition: all 0.4s ease;
+}
+
 .div-grid-title-add{
     @apply grid grid-cols-2;
     grid-template-areas: 

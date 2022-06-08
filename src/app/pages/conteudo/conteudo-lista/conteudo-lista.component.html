@@ -1,6 +1,6 @@
-<app-header [obj_Array_Itens]="obj_Array_Conteudos" (Input_Emit_Value)="onFilter_Search($event)"></app-header>
+<app-header (Input_Emit_Value)="onFilter_Search($event)"></app-header>
 
-<div class="container bg-white bg-opacity-60 relative px-2 top-6 md:top-9 lg:top-14 pb-12">
+<div class="container lg:bg-white lg:bg-opacity-60 relative px-2 top-6 md:top-9 lg:top-14 pb-12">
     <div class="grid grid-cols-2">
         <div class="flex flex-col relative left-2 lg:left-2 lg:ml-2.5">
             <uni-title [ds_Titulo]="ds_Titulo"></uni-title>
@@ -8,8 +8,9 @@
         <div class="flex flex-row gap-6 lg:gap-10 my-auto justify-end relative right-1 xl:mr-4 cursor-pointer">
             <img class="behavior-button w-5 h-5 xl:w-7 xl:h-7 2xl:w-6 2xl:h-6" src="assets/icons/more-options-user.svg"
                 routerLink="/conteudo-adicionar">
-            <app-button-filter (b_Show_Modal)="Show_Modal($event)"></app-button-filter>
-            <img class="behavior-button w-6 h-6 xl:w-8 xl:h-8 2xl:w-7 2xl:h-7" src="assets/icons/refresh.svg" (click)="onClick_Search()">
+            <app-button-filter class="hidden" (b_Show_Modal)="Show_Modal($event)"></app-button-filter>
+            <img class="behavior-button w-6 h-6 xl:w-8 xl:h-8 2xl:w-7 2xl:h-7" src="assets/icons/refresh.svg"
+                (click)="Search_Conteudos()">
         </div>
     </div>
     <div *ngIf="obj_Array_Conteudos?.length != 0">
@@ -22,63 +23,75 @@
             <p class="lg:text-center font-semibold">Editar</p>
         </div>
     </div>
-    <div class="top-5 relative flex flex-col gap-y-4" *ngFor="let conteudo of obj_Array_Conteudos | filter: Input_Value">
-        <div *ngIf="b_Width == false">
-            <div
-                class="rounded-lg div-grid-title mb-2 shadow-xl lg:h-14 w-full lg:grid lg:grid-cols-6 bg-unimed-background">
+    <div class="top-5 relative flex flex-col">
 
-                <div class="div-grid-name-arrow grid grid-cols-2 xl:grid-cols-1" (click)="Show_Item(conteudo)">
+        <cdk-virtual-scroll-viewport class="cdk-listagem-items overflow-auto lg:hidden rounded-lg mb-2 shadow-xl"
+            [itemSize]="40" minBufferPx="600" maxBufferPx="600">
+            <div class="bg-white bg-opacity-60 my-1"
+                *cdkVirtualFor="let conteudo of obj_Array_Conteudos | filter: Input_Value" (click)="Focus_Item(target)">
+
+                <div #target class="div-grid-name-arrow grid grid-cols-2 xl:grid-cols-1" (click)="Show_Item(conteudo)">
                     <p class="my-3 lg:my-auto ml-5 w-10/12 truncate font-medium">
                         {{conteudo.nm_titulo}}</p>
                     <img class="my-auto xl:hidden {{conteudo.show? 'img-rotation-arrow-down':''}}"
                         src="assets/icons/arrow-up.svg">
                 </div>
-
-                <div class="pb-4 grid gap-y-2" *ngIf="conteudo.show && b_Width == false">
+                <div class="pb-4 flex flex-col gap-y-1" *ngIf="conteudo.show && b_Width == false">
 
                     <div class="flex flex-row gap-x-3">
-                        <p class="ml-5 lg:text-center lg:relative font-semibold">ID:</p>
-                        <p class="text-center my-auto truncate">{{conteudo.cd_conteudo}}</p>
+                        <p class="ml-5 lg:text-center font-semibold">ID:</p>
+                        <p class="lg:text-center my-auto w-4/12 truncate">{{conteudo.cd_conteudo}}</p>
                     </div>
                     <div class="flex flex-row gap-x-3">
                         <p class="ml-5 lg:text-center font-semibold">Usuário:</p>
-                        <p class="my-auto w-7/12 truncate">{{conteudo.ds_conteudo}}
+                        <p class="my-auto">{{conteudo.ds_conteudo}}
                         </p>
                     </div>
                     <div class="flex flex-row gap-x-3">
-                        <p class="ml-5 lg:text-center font-semibold">Perfil:</p>
-                        <p class=" my-auto w-8/12 truncate">{{conteudo.ds_link}}
+                        <p class="ml-5 lg:text-center font-semibold">Link:</p>
+                        <p class=" my-auto w-5/12 truncate">{{conteudo.ds_link}}
                         </p>
                     </div>
                     <div class="flex flex-row gap-x-3">
                         <p class="ml-5 lg:text-center font-semibold">Contegoria:</p>
-                        <p class="my-auto w-6/12 truncate">
+                        <p class="my-auto w-4/12 truncate">
                             {{conteudo.categoria.nm_categoria}}</p>
-
                     </div>
-                    <div class="flex flex-row gap-x-3 behavior-button">
+                    <div class="flex flex-row gap-x-3 behavior-button" [routerLink]="['/conteudo-editar', conteudo.cd_conteudo]">
                         <img class="reltive left-5 ml-5 mt-1 behavior-button w-4 h-4 lg:w-7 lg:h-7 my-auto cursor-pointer lg:mx-auto"
-                            src="assets/icons/edit.svg" [routerLink]="['/conteudo-editar', conteudo.cd_conteudo]">
+                            src="assets/icons/edit.svg">
                         <p>Editar</p>
                     </div>
                 </div>
             </div>
-        </div>
+        </cdk-virtual-scroll-viewport>
 
-        <div *ngIf="b_Width">
+        <div class="hidden lg:grid" *ngFor="let conteudo of obj_Array_Conteudos | filter: Input_Value">
             <div
                 class="rounded-lg div-grid-title shadow-xl mb-2 lg:h-14 w-full lg:grid lg:grid-cols-6 bg-white hover:bg-slate-100">
-                <p class="text-center my-auto text-ellipsis overflow-hidden whitespace-nowrap font-normal text-base">{{conteudo.cd_conteudo}}</p>
+                <p class="text-center my-auto text-ellipsis overflow-hidden whitespace-nowrap font-normal text-base">
+                    {{conteudo.cd_conteudo}}</p>
                 <p class="my-3 lg:my-auto ml-5 text-ellipsis overflow-hidden whitespace-nowrap font-normal text-base">
                     {{conteudo.nm_titulo}}</p>
-                <p class="text-center my-auto mx-auto text-ellipsis overflow-hidden whitespace-nowrap w-9/12 font-normal text-base">
+                <p
+                    class="text-center my-auto mx-auto text-ellipsis overflow-hidden whitespace-nowrap w-9/12 font-normal text-base">
                     {{conteudo.ds_conteudo}}</p>
-                <p class="text-center my-auto text-ellipsis overflow-hidden whitespace-nowrap font-normal text-base">{{conteudo.ds_link}}</p>
-                <p class="text-center my-auto text-ellipsis overflow-hidden whitespace-nowrap font-normal text-base">{{conteudo.categoria.nm_categoria}}</p>
+                <p class="text-center my-auto text-ellipsis overflow-hidden whitespace-nowrap font-normal text-base">
+                    {{conteudo.ds_link}}</p>
+                <p class="text-center my-auto text-ellipsis overflow-hidden whitespace-nowrap font-normal text-base">
+                    {{conteudo.categoria.nm_categoria}}</p>
                 <img class="behavior-button w-5 h-5 my-auto mx-auto cursor-pointer" src="assets/icons/edit.svg"
                     [routerLink]="['/conteudo-editar', conteudo.cd_conteudo]">
             </div>
         </div>
+    </div>
+</div>
+
+<div class="hidden lg:flex" *ngIf="obj_Array_Conteudos?.length != 0">
+    <div class="relative" style="width: 502px; margin: 10px auto 0; justify-content: center; display: flex; top: 50px;">
+        <uni-paginator (onPageChange)="Mudar_Pagina($event)" [nr_Pagina]="objConteudo.nr_pagina"
+            [nr_Por_Pagina]="objConteudo.page_lenght" [nr_Registros]="objConteudo.nr_registos">
+        </uni-paginator>
     </div>
 </div>
 
@@ -92,14 +105,11 @@
     </div>
     <div class="flex flex-col gap-y-2">
         <form>
-            <app-input [required]="true" label="Título" [(ngModel)]="objFilter.nm_Nome" id="nm_Nome" name="nm_Nome">
+            <app-input [required]="true" label="Título" [(ngModel)]="objConteudo.nm_titulo" id="nm_titulo"
+                name="nm_titulo">
             </app-input>
-            <app-input [required]="true" label="Descrição" [(ngModel)]="objFilter.nm_Usuario" id="nm_Usuario"
-                name="nm_Usuario"></app-input>
-            <app-input [required]="true" label="id" [(ngModel)]="objFilter.nm_Status" id="nm_Status" name="nm_Status">
-            </app-input>
-            <app-input [required]="true" label="Grupo" [(ngModel)]="objFilter.nm_Grupo" id="nm_Grupo" name="nm_Grupo">
-            </app-input>
+            <app-input [required]="true" label="Descrição" [(ngModel)]="objConteudo.ds_conteudo" id="ds_conteudo"
+                name="ds_conteudo"></app-input>
         </form>
     </div>
     <div class="flex flex-row mt-4 gap-x-4 mx-4">

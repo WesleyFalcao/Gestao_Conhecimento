@@ -8,7 +8,7 @@
         <div class="flex flex-row gap-6 lg:gap-10 my-auto justify-end relative right-1 xl:mr-4 cursor-pointer">
             <img class="behavior-button w-5 h-5 xl:w-7 xl:h-7 2xl:w-6 2xl:h-6" src="assets/icons/more-options-user.svg"
                 routerLink="/adicionar-usuario">
-            <app-button-filter (b_Show_Modal)="Show_Modal($event)"></app-button-filter>
+            <app-button-filter class="hidden" (b_Show_Modal)="Show_Modal($event)"></app-button-filter>
             <img class="behavior-button w-6 h-6 xl:w-8 xl:h-8 2xl:w-7 2xl:h-7" src="assets/icons/refresh.svg">
         </div>
     </div>
@@ -22,50 +22,49 @@
         <p class="lg:text-center font-semibold text-base">Editar</p>
     </div>
     <div class="top-5 relative flex flex-col">
-        <div class="lg:hidden">
-            <cdk-virtual-scroll-viewport
-                class="cdk-listagem-items overflow-auto rounded-lg div-grid-title mb-2 shadow-xl lg:h-14 w-full lg:grid lg:grid-cols-6"
-                [itemSize]="40" minBufferPx="600" maxBufferPx="600">
 
-                <div class="bg-unimed-background my-1" *cdkVirtualFor="let item of obj_Array_Usuarios | filter: Input_Value" (click)="Focus_Item(target)">
+        <cdk-virtual-scroll-viewport class="cdk-listagem-items overflow-auto lg:hidden rounded-lg mb-2 shadow-xl"
+            [itemSize]="20" minBufferPx="600" maxBufferPx="600">
 
-                    <div #target class="div-grid-name-arrow grid grid-cols-2 xl:grid-cols-1" (click)="Show_Item(item)">
-                        <p class="my-3 lg:my-auto ml-5 w-10/12 font-medium truncate">
-                            {{item.cd_login}}</p>
-                        <img class="my-auto xl:hidden {{item.show? 'img-rotation-arrow-down':''}}"
-                            src="assets/icons/arrow-up.svg">
+            <div class="bg-white bg-opacity-60 my-1"
+                *cdkVirtualFor="let item of obj_Array_Usuarios | filter: Input_Value" (click)="Focus_Item(target)">
+
+                <div #target class="div-grid-name-arrow grid grid-cols-2 xl:grid-cols-1" (click)="Show_Item(item)">
+                    <p class="my-3 lg:my-auto ml-5 w-10/12 font-medium truncate">
+                        {{item.cd_login}}</p>
+                    <img class="my-auto xl:hidden {{item.show? 'img-rotation-arrow-down':''}}"
+                        src="assets/icons/arrow-up.svg">
+                </div>
+                <div class="pb-4 flex flex-col gap-y-1" *ngIf="item.show && b_Width == false">
+
+                    <div class="flex flex-row gap-x-3">
+                        <p class="ml-5 lg:text-center font-semibold">ID:</p>
+                        <p class="text-center my-auto">{{item.cd_usuario}}</p>
                     </div>
-                    <div class="pb-4 flex flex-col gap-y-1" *ngIf="item.show && b_Width == false">
-
-                        <div class="flex flex-row gap-x-3">
-                            <p class="ml-5 lg:text-center lg:relative font-semibold">ID:</p>
-                            <p class="text-center my-auto truncate">{{item.cd_usuario}}</p>
-                        </div>
-                        <div class="flex flex-row gap-x-3">
-                            <p class="ml-5 lg:text-center font-semibold">Usuário:</p>
-                            <p class="lg:text-center my-auto w-7/12 truncate">{{item.nm_usuario}}
-                            </p>
-                        </div>
-                        <div class="flex flex-row gap-x-3">
-                            <p class="ml-5 lg:text-center font-semibold">Perfil:</p>
-                            <p class="lg:text-center my-auto w-8/12 truncate">{{item.perfil.role}}
-                            </p>
-                        </div>
-                        <div class="flex flex-row gap-x-3">
-                            <p class="ml-5 lg:text-center font-semibold">Status:</p>
-                            <p class="lg:text-center my-auto w-8/12 truncate">{{item.dt_bloqueio ==
-                                null?'Ativo':'Inativo'}}
-                            </p>
-                        </div>
-                        <div class="flex flex-row gap-x-3 behavior-button" [routerLink]="['/editar-usuario', item.cd_usuario]">
-                            <img class="reltive left-5 ml-5 mt-1 behavior-button w-4 h-4 lg:w-7 lg:h-7 my-auto cursor-pointer lg:mx-auto"
-                                src="assets/icons/edit.svg">
-                            <p>Editar</p>
-                        </div>
+                    <div class="flex flex-row gap-x-3">
+                        <p class="ml-5 lg:text-center font-semibold">Usuário:</p>
+                        <p class="lg:text-center my-auto w-7/12 truncate">{{item.nm_usuario}}
+                        </p>
+                    </div>
+                    <div class="flex flex-row gap-x-3">
+                        <p class="ml-5 lg:text-center font-semibold">Perfil:</p>
+                        <p class="lg:text-center my-auto w-8/12 truncate">{{item.perfil.role}}
+                        </p>
+                    </div>
+                    <div class="flex flex-row gap-x-3">
+                        <p class="ml-5 lg:text-center font-semibold">Status:</p>
+                        <p class="lg:text-center my-auto w-8/12 truncate">{{item.dt_bloqueio == null?'Ativo':'Inativo'}}
+                        </p>
+                    </div>
+                    <div class="flex flex-row gap-x-3 behavior-button"
+                        [routerLink]="['/editar-usuario', item.cd_usuario]">
+                        <img class="reltive left-5 ml-5 mt-1 behavior-button w-4 h-4 lg:w-7 lg:h-7 my-auto cursor-pointer lg:mx-auto"
+                            src="assets/icons/edit.svg">
+                        <p>Editar</p>
                     </div>
                 </div>
-            </cdk-virtual-scroll-viewport>
-        </div>
+            </div>
+        </cdk-virtual-scroll-viewport>
 
         <div class="hidden lg:flex" *ngFor="let item of obj_Array_Usuarios | filter: Input_Value">
             <div

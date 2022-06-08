@@ -25,6 +25,9 @@ export class SugestoesComponent implements OnInit {
   /**@description Number que vai receber o total de sugestões */
   nr_Total_Sugestoes: number
 
+  /**@description Recebe o valor digitado pelo usuário no desktop */
+  Input_Value: string
+
   /**@description Boolean para abrir e fechar o modal de filtro */
   b_Show_Filter: boolean = false
 
@@ -88,6 +91,10 @@ export class SugestoesComponent implements OnInit {
 
   Close_Modal() {
     this.b_Show_Filter = false
+  }
+
+  onFilter_Search(iten) {
+    this.Input_Value = iten
   }
 
   async Filter() {

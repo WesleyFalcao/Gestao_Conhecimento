@@ -30,6 +30,18 @@ export class MeusEstudosQuery {
     `
   }
 
+  Get_Cd_Studies(){
+    return `
+    query MyQuery {
+      estudos {
+        conteudo {
+          cd_conteudo
+        }
+      }
+    }    
+    `
+  }
+
   Set_My_Studies() {
     return `
     mutation ($cd_conteudo: Int) {

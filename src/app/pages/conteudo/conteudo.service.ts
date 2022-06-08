@@ -12,8 +12,12 @@ export class ConteudoService {
     ) {    
     }
 
-    Get_Conteudos() {
-        return this.conteudoRepository.Get_Conteudos()
+    Get_Conteudos(param) {
+        return this.conteudoRepository.Get_Conteudos(param)
+    }
+
+    Get_Conteudos_Filter(param, input){
+        return this.conteudoRepository.Get_Conteudos_Filter(param, input)
     }
 
     Get_Conteudo(param) {

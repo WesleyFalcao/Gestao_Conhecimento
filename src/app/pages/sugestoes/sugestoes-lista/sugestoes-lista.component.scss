@@ -29,8 +29,17 @@
 
     .div-grid-title{
         grid-template-columns: 0.5fr 2fr 2.5fr 1fr;
+    } 
+}
+
+.cdk-listagem-items{
+    height: 70vh;
+    @apply w-full overflow-y-auto rounded-lg;
+
+    @screen md{
+        height: 73vh;
+        @apply md:mt-12;   
     }
-  
 }
 
 .div-grid-title-itens{

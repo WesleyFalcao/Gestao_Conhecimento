@@ -20,10 +20,9 @@ export class UsuarioRepository {
   ) { }
 
   async Get_Usuarios(param: UsuarioParams){
-    console.log(param)
     this.subjectService.subject_Exibindo_Loading.next(true)
     const query = this.usuarioQuery.Get_Usuarios_Listagem_Paginacao()
-    const variables = { limit: param.page_lenght, offset: ((param.nr_pagina - 1)*param.page_lenght)}
+    const variables = { limit: param.page_lenght, offset: ((param.nr_pagina - 1) * param.page_lenght)}
     const response = await this.apiHasuraService._Execute(query, variables, this.httpOptions)
     this.subjectService.subject_Exibindo_Loading.next(false)
     return response
@@ -44,11 +43,11 @@ export class UsuarioRepository {
   }
 
   async Set_Add_Usuario(param){
+    
     const query = this.usuarioQuery.Set_Add_Usuario()
     const variables = {"nm_usuario": param.nm_usuario , "ds_senha": param.ds_senha , "b_login_ad": param.b_login_ad, "cd_login": param.cd_login, "cd_perfil": param.cd_perfil }
     const response = await this.apiHasuraService._Execute(query, variables, this.httpOptions)
     this.subjectService.subject_Exibindo_Loading.next(false)
-    console.log("response",response)
     return response
   }
 

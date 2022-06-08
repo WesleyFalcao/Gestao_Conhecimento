@@ -17,10 +17,29 @@ export class ConteudoRepository {
     private apiHasuraService: ApiHasuraService
   ) { }
 
-  async Get_Conteudos(){
+  async Get_Conteudos(param){
     this.subjectService.subject_Exibindo_Loading.next(true)
     const query = this.conteudoQuery.Get_Conteudo_Listagem()
-    const response = await this.apiHasuraService._Execute(query, this.httpOptions)
+    const variables = {limit: param.page_lenght, offset: ((param.nr_pagina - 1)*param.page_lenght)}
+    const response = await this.apiHasuraService._Execute(query,variables, this.httpOptions)
+    this.subjectService.subject_Exibindo_Loading.next(false)
+    return response
+  }
+
+  async Get_Conteudos_Filter(param, input){
+
+    this.subjectService.subject_Exibindo_Loading.next(true)
+    let where: any = {_or: []}
+
+    if(input != null && input != ""){
+      where._or.push({categoria: {nm_categoria: {_ilike: "%" + input + "%"}}}) 
+      where._or.push({nm_titulo: {_ilike: "%" + input + "%"}})
+      where._or.push({ds_conteudo: {_ilike: "%" + input + "%"}})
+    }
+    
+    const query = this.conteudoQuery.Get_Conteudos_Filter()
+    const variables = {where, limit: param.page_lenght, offset: ((param.nr_pagina - 1)*param.page_lenght)}
+    const response = await this.apiHasuraService._Execute(query, variables, this.httpOptions)
     this.subjectService.subject_Exibindo_Loading.next(false)
     return response
   }
@@ -77,7 +96,5 @@ export class ConteudoRepository {
     const response = await this.apiHasuraService._Execute(query, variables, this.httpOptions)
     this.subjectService.subject_Exibindo_Loading.next(false)
     return response
-  }
-
-  
+  }  
 }

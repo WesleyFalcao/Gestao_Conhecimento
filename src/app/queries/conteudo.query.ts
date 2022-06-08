@@ -12,22 +12,45 @@ export class ConteudoQuery {
 
   Get_Conteudo_Listagem() {
     return `
-    query MyQuery {
-      conteudos_aggregate(order_by: {nm_titulo: asc}) {
+    query ($limit: Int, $offset: Int) {
+      conteudos(order_by: {nm_titulo: asc}, offset: $offset, limit: $limit) {
+        nm_titulo
+        ds_link
+        ds_conteudo
+        cd_conteudo
+        cd_categoria
+        categoria {
+          cd_categoria
+          nm_categoria
+        }
+      }
+      conteudos_aggregate {
         aggregate {
           count
         }
-        nodes {
-          cd_conteudo
-          ds_conteudo
-          ds_link
-          nm_titulo
-          categoria {
-            nm_categoria
-          }
-        }
       }
     }           
+    `
+  }
+
+  Get_Conteudos_Filter(){
+    return `
+    query MyQuery($where: conteudos_bool_exp = {}, $limit: Int, $offset: Int) {
+      conteudos(where: $where, limit: $limit, offset: $offset) {
+        categoria {
+          nm_categoria
+        }
+        cd_conteudo
+        ds_conteudo
+        ds_link
+        nm_titulo
+      }
+      conteudos_aggregate {
+        aggregate {
+          count
+        }
+      }
+    }     
     `
   }
 
@@ -130,20 +153,12 @@ export class ConteudoQuery {
   Set_Gravar_Dados(){
     return `
     mutation ($cd_conteudo: Int, $nm_usuario: String) {
-      insert_acessos_one(object: {cd_conteudo: $cd_conteudo, nm_usuario: $nm_usuario}) {
-        conteudo {
-          cd_categoria
-          cd_conteudo
-          ds_conteudo
-          ds_link
-          nm_titulo
-          categoria {
-            cd_categoria
-            nm_categoria
-          }
+      insert_acessos(objects: {cd_conteudo: $cd_conteudo, nm_usuario:  $nm_usuario}) {
+        returning {
+          nm_usuario
         }
       }
-    }
+    }    
     `
   }
 }
