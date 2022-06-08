@@ -75,25 +75,29 @@ export class HomeComponent implements OnInit {
   ) { }
 
   async ngOnInit() {
+    this.onResize()
     this.nm_User = this.loginService.Name_User_Logged()
     const responsecategoria = await this.categoriaService.Get_Categories_List()
     this.obj_Array_Categoria = responsecategoria.data.categorias
   }
 
   ngAfterViewInit() {
-    this.scroller.elementScrolled().pipe(
-      map(() => this.scroller.measureScrollOffset('bottom')),
-      pairwise(),
-      filter(([y1, y2]) => (y2 < y1 && y2 < 140)),
-      throttleTime(200)
-    ).subscribe(() => {
-      this.ngZone.run(async () => {
-        if (!this.b_Fim_Lista) {
-          this.objConteudo.nr_pagina++
-          this.Search_Conteudos();
-        }
-      });
-    })
+   
+    if(!this.b_Width){
+      this.scroller.elementScrolled().pipe(
+        map(() => this.scroller.measureScrollOffset('bottom')),
+        pairwise(),
+        filter(([y1, y2]) => (y2 < y1 && y2 < 500)),
+        throttleTime(200)
+      ).subscribe(() => {
+        this.ngZone.run(async () => {
+          if (!this.b_Fim_Lista) {
+            this.objConteudo.nr_pagina++
+            this.Search_Conteudos();
+          }
+        });
+      })
+    }
   }
 
   @HostListener('window:resize')
@@ -102,8 +106,11 @@ export class HomeComponent implements OnInit {
     this.subjectService.subject_Width.next(this.nr_Width)
     if (this.nr_Width >= 768) {
       this.b_Show_Input = true
+      this.b_Width = true
     } else {
       this.b_Show_Input = false
+      this.b_Width = false
+      // this.objConteudo.page_lenght = 10
     }
   }
 
@@ -121,6 +128,8 @@ export class HomeComponent implements OnInit {
 
   Show_Item(conteudo) {
     conteudo.show = !conteudo.show
+
+    console.log(conteudo.show)
     if (conteudo.show) {
       this.obj_Array_Conteudos.forEach(fe => {
         if (conteudo.cd_conteudo != fe.cd_conteudo) {
@@ -147,16 +156,18 @@ export class HomeComponent implements OnInit {
 
   async Search_Conteudos() {
     const responseconteudo = await this.conteudoService.Get_Conteudos_Filter(this.objConteudo, this.Input_Value)
-    console.log("responseconteudo", responseconteudo)
+
     if (responseconteudo.errors) {
       this.subjectService.subject_Exibindo_Snackbar.next({ message: 'Não foi possível trazer a listagem' })
     }
+   
     if (responseconteudo.data.conteudos.length == 0) {
       this.b_Fim_Lista = true
     }
+    this.objConteudo.nr_registos = responseconteudo.data.conteudos_aggregate.aggregate.count
+   
     if (this.b_Width) {
       this.obj_Array_Conteudos = responseconteudo.data.conteudos
-      this.objConteudo.nr_registos = responseconteudo.data.conteudos_aggregate.aggregate.count
     }
     else {
       this.obj_Array_Conteudos = [...this.obj_Array_Conteudos, ...responseconteudo.data.conteudos]
@@ -179,7 +190,7 @@ export class HomeComponent implements OnInit {
 
   async Mudar_Pagina(nr_Pagina: number) {
     this.objConteudo.nr_pagina = nr_Pagina
-    const responseusuarios = await this.conteudoService.Get_Conteudos(this.objConteudo)
+    const responseusuarios = await this.conteudoService.Get_Conteudos_Filter(this.objConteudo, this.Input_Value)
     if (responseusuarios.errors) {
       this.subjectService.subject_Exibindo_Snackbar.next({ message: 'Não foi possível trazer a listagem' })
     } else {

@@ -63,6 +63,19 @@
     }
 }
 
+.div-grid-name-arrow{
+    grid-template-columns: 4fr 0.5fr;
+
+    @media (min-width: 768px) {
+        grid-template-columns: 5fr 0.4fr;
+    }
+}
+
+.img-rotation-arrow-down{
+    transform: rotateZ(-180deg);
+    transition: all 0.4s ease;
+}
+
 .cards-itens{
     @apply items-center grid grid-cols-2 mx-auto gap-y-2 md:gap-y-0;
 

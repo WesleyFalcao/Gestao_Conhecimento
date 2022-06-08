@@ -1,6 +1,6 @@
 <app-header (Input_Emit_Value)="onFilter_Search($event)" [b_Nao_Exibir_Voltar]="b_Nao_Exibir_Voltar"></app-header>
 
-<div *ngIf="Input_Value == null, else listagem" class="container mb-10 mt-8 lg:mt-10 mx-auto cards-itens">
+<div *ngIf="Input_Value == null, else listagem" class="container mb-10 mt-8 pb-10 lg:mt-10 mx-auto cards-itens">
     <div *ngFor="let categoria of obj_Array_Categoria | filter: Input_Value">
         <div class="card" [routerLink]="['/conteudo', categoria.id]" >
             <img class="icon-card pt-9" src="assets/icons/person-study.svg">
@@ -13,10 +13,11 @@
     <div>
         <div class="container-list lg:bg-white lg:bg-opacity-60 relative px-2 top-6 md:top-9 lg:top-14 pb-12">
             <div class="grid grid-cols-2">
-                <div class="flex flex-col relative left-2 lg:left-2 lg:ml-2.5">
+                <div class="flex relative left-2 lg:left-2 lg:ml-2.5">
                     <uni-title [ds_Titulo]="ds_Titulo"></uni-title>
                 </div>
             </div>
+            
             <div *ngIf="obj_Array_Conteudos?.length != 0">
                 <div class="hidden div-grid-title mt-8 lg:grid grid-cols-6">
                     <p class="lg:text-center ml-4 font-semibold">ID</p>
@@ -39,35 +40,35 @@
                             <img class="my-auto xl:hidden {{conteudo.show? 'img-rotation-arrow-down':''}}"
                                 src="assets/icons/arrow-up.svg">
                         </div>
-                        <div class="pb-4 flex flex-col gap-y-1" *ngIf="conteudo.show && b_Width == false">
+                        <div class="pb-4 flex flex-col gap-y-1" *ngIf="conteudo.show">
         
                             <div class="flex flex-row gap-x-3">
-                                <p class="ml-5 lg:text-center font-semibold">ID:</p>
-                                <p class="lg:text-center my-auto w-4/12 truncate">{{conteudo.cd_conteudo}}</p>
+                                <p class="ml-5 font-semibold">ID:</p>
+                                <p class="my-auto w-4/12 truncate">{{conteudo.cd_conteudo}}</p>
                             </div>
                             <div class="flex flex-row gap-x-3">
-                                <p class="ml-5 lg:text-center font-semibold">Usuário:</p>
+                                <p class="ml-5 font-semibold">Usuário:</p>
                                 <p class="my-auto">{{conteudo.ds_conteudo}}
                                 </p>
                             </div>
                             <div class="flex flex-row gap-x-3">
-                                <p class="ml-5 lg:text-center font-semibold">Link:</p>
+                                <p class="ml-5 font-semibold">Link:</p>
                                 <p class=" my-auto w-5/12 truncate">{{conteudo.ds_link}}
                                 </p>
                             </div>
                             <div class="flex flex-row gap-x-3">
-                                <p class="ml-5 lg:text-center font-semibold">Contegoria:</p>
+                                <p class="ml-5 font-semibold">Contegoria:</p>
                                 <p class="my-auto w-4/12 truncate">
                                     {{conteudo.categoria.nm_categoria}}</p>
                             </div>
                             <div class="flex flex-row gap-x-3 behavior-button" (click)="OnClick_Access(conteudo)">
         
-                                <p>Acessar</p>
+                                <p class="ml-5 text-center font-semibold text-unimed-green">Acessar</p>
                             </div>
                         </div>
                     </div>
                 </cdk-virtual-scroll-viewport>
-        
+                
                 <div class="hidden lg:grid" *ngFor="let conteudo of obj_Array_Conteudos | filter: Input_Value">
                     <div
                         class="rounded-lg div-grid-title border-l-8 border-l-unimed-green shadow-xl mb-2 lg:h-14 w-full lg:grid lg:grid-cols-6 bg-white hover:bg-slate-100">

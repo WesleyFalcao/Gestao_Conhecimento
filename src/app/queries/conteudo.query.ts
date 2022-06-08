@@ -33,9 +33,9 @@ export class ConteudoQuery {
     `
   }
 
-  Get_Conteudos_Filter(){
+  Get_Conteudos_Filter() {
     return `
-    query MyQuery($where: conteudos_bool_exp = {}, $limit: Int, $offset: Int) {
+    query ($where: conteudos_bool_exp, $limit: Int, $offset: Int) {
       conteudos(where: $where, limit: $limit, offset: $offset) {
         categoria {
           nm_categoria
@@ -45,16 +45,16 @@ export class ConteudoQuery {
         ds_link
         nm_titulo
       }
-      conteudos_aggregate {
+      conteudos_aggregate(where: $where) {
         aggregate {
           count
         }
       }
-    }     
+    }                 
     `
   }
 
-  Get_Conteudo_Edit(){
+  Get_Conteudo_Edit() {
     return `
     query ($cd_conteudo: Int) {
       conteudos(where: {cd_conteudo: {_eq: $cd_conteudo}}) {
@@ -71,8 +71,8 @@ export class ConteudoQuery {
     }    
     `
   }
-  
-  Get_Conteudos(){
+
+  Get_Conteudos() {
     return `
     query ($cd_conteudo: Int) {
       conteudos(where: {cd_categoria: {_eq: $cd_conteudo}}) {
@@ -90,7 +90,7 @@ export class ConteudoQuery {
     `
   }
 
-  Set_Add_Conteudo(){
+  Set_Add_Conteudo() {
     return `
     mutation ($nm_titulo: String, $ds_conteudo: String, $ds_link: String, $cd_categoria: Int) {
       insert_conteudos(objects: {nm_titulo: $nm_titulo, ds_conteudo: $ds_conteudo, ds_link: $ds_link, cd_categoria: $cd_categoria}) {
@@ -110,7 +110,7 @@ export class ConteudoQuery {
     `
   }
 
-  Set_Edit_User(){
+  Set_Edit_User() {
     return `
     mutation ($cd_conteudo: Int, $nm_titulo: String, $ds_conteudo: String, $ds_link: String, $cd_categoria: Int) {
       update_conteudos(where: {cd_conteudo: {_eq: $cd_conteudo}}, _set: {nm_titulo: $nm_titulo, ds_conteudo: $ds_conteudo, ds_link: $ds_link, cd_categoria: $cd_categoria}) {
@@ -130,7 +130,7 @@ export class ConteudoQuery {
     `
   }
 
-  Set_Delete_Conteudo(){
+  Set_Delete_Conteudo() {
     return `
     mutation ($cd_conteudo: Int) {
       delete_conteudos(where: {cd_conteudo: {_eq: $cd_conteudo}}) {
@@ -150,7 +150,7 @@ export class ConteudoQuery {
     `
   }
 
-  Set_Gravar_Dados(){
+  Set_Gravar_Dados() {
     return `
     mutation ($cd_conteudo: Int, $nm_usuario: String) {
       insert_acessos(objects: {cd_conteudo: $cd_conteudo, nm_usuario:  $nm_usuario}) {

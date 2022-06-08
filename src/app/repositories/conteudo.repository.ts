@@ -38,7 +38,7 @@ export class ConteudoRepository {
     }
     
     const query = this.conteudoQuery.Get_Conteudos_Filter()
-    const variables = {where, limit: param.page_lenght, offset: ((param.nr_pagina - 1)*param.page_lenght)}
+    const variables = {where, limit: param.page_lenght, offset: ((param.nr_pagina - 1) * param.page_lenght)}
     const response = await this.apiHasuraService._Execute(query, variables, this.httpOptions)
     this.subjectService.subject_Exibindo_Loading.next(false)
     return response
