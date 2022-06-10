@@ -36,7 +36,6 @@ export class SugestoesQuery {
         nm_titulo
         dt_sugestao
         dt_arquivamento
-        cd_usuario
         cd_sugestao
         ds_sugestao
       }
@@ -67,7 +66,6 @@ export class SugestoesQuery {
     query ($where:sugestoes_bool_exp) {
       sugestoes(where: $where) {
         cd_sugestao
-        cd_usuario
         ds_sugestao
         dt_arquivamento
         dt_sugestao
@@ -79,14 +77,9 @@ export class SugestoesQuery {
 
   Set_Add_Suggestion(){
     return `
-    mutation ($titulo: String, $descricao: String, $cd_usuario: String ) {
-      insert_sugestoes(objects: {nm_titulo: $titulo, ds_sugestao: $descricao, cd_usuario: $cd_usuario}) {
-        returning {
-          ds_sugestao
-          nm_titulo
-          cd_sugestao
-          cd_usuario
-        }
+    mutation ($titulo: String, $descricao: String) {
+      insert_sugestoes(objects: {nm_titulo: $titulo, ds_sugestao: $descricao}) {
+        affected_rows
       }
     }    
     `
@@ -101,7 +94,6 @@ export class SugestoesQuery {
         returning {
           dt_arquivamento
           cd_sugestao
-          cd_usuario
           nm_titulo
           dt_sugestao
           ds_sugestao

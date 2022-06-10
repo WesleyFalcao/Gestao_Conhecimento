@@ -40,11 +40,11 @@ export class CategoriaQuery {
   Get_Categories_List(){
     return `
     {
-      categorias(order_by: {nm_categoria: asc}) {
+      categorias(order_by: {nr_ordem: asc, nm_categoria: asc, }) {
         id: cd_categoria
         nome: nm_categoria
       }
-    }
+    }    
     `
   }
 

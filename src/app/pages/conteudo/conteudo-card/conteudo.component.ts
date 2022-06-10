@@ -18,7 +18,7 @@ export class ConteudoComponent implements OnInit, OnDestroy {
   obj_Array_Conteudos: Array<any>
 
   /**@description Array que vai conter os estudos de cada usuário */
-  obj_Array_Meus_Estudos: Array<any>
+  obj_Array_Meus_Estudos: Array<number>
 
   /**@description nome do label do primeiro input */
   nm_Label_Input_Filter_1: string = "Título"
@@ -60,7 +60,7 @@ export class ConteudoComponent implements OnInit, OnDestroy {
   ds_Descricao: string = "Tem certeza que deseja excluir este conteúdo?"
 
   /**@description Recebe o valor digitado pelo usuário na barra de pesquisa */
-  Input_Value: string
+  Input_Value: any
 
   /**@description Objeto que recebe o conteudo dos inputs */
   objFilter = { nm_Nome: "", nm_Usuario: "", nm_Status: "" }
@@ -86,6 +86,9 @@ export class ConteudoComponent implements OnInit, OnDestroy {
   /**@description Recebe o id do conteudo clicado */
   cd_Id_Conteudo: number
 
+  /**@description Recebe true caso o sumário for selecionado */
+  sn_Sumary: boolean = false
+
   /**@description Recebe o nome do usário que adicionou a sugestão */
   nm_User: string
 
@@ -109,23 +112,29 @@ export class ConteudoComponent implements OnInit, OnDestroy {
   }
 
   async ngOnInit() {
-    
+    const role_user = this.loginService.Name_Role()
+    if (role_user == "user") {
+      this.b_User_Admin = false
+    }
     this.nm_User = this.loginService.Name_User_Logged()
     this.subject_unsub = this.routerParam.params.subscribe((params: any) => {
       this.cd_Id_Param = params['id']
       this.cd_User_Logged = this.loginService.Id_User_Logged()
     })
 
-    const responseconteudo = await this.conteudoService.Get_Conteudo(this.cd_Id_Param)
-    this.obj_Array_Conteudos = responseconteudo.data.conteudos
-    this.ds_Titulo = this.obj_Array_Conteudos[0].categoria.nome
+    if (this.cd_Id_Param == 34) {
+      this.sn_Sumary = true
+      this.Get_Sumary()
+    }else{
+      this.Get_Contedos_From_Category()
+    }
     this.Get_My_Estudies()
   }
 
   async onClick_Favorite(conteudo) {
-    conteudo.favorite = !conteudo.favorite
+    conteudo.sn_favorito = !conteudo.sn_favorito
     this.b_Start = !this.b_Start
-    if (conteudo.favorite) {
+    if (conteudo.sn_favorito) {
       this.nm_Star = "assets/icons/start-yellow.svg"
       this.objFavorite.cd_usuario = this.cd_User_Logged
       this.objFavorite.cd_conteudo = conteudo.cd_conteudo
@@ -153,20 +162,10 @@ export class ConteudoComponent implements OnInit, OnDestroy {
     if (responsemystudies.errors) {
       this.subject_service.subject_Exibindo_Snackbar.next({ message: 'Não foi possível trazer a listagem' })
     }
-    this.obj_Array_Conteudos.forEach((iten)=>{
-      this.cd_Conteudo = iten.cd_conteudo
-      console.log(iten.cd_conteudo)
+    this.obj_Array_Meus_Estudos = responsemystudies.data.estudos.map(m => m.conteudo.cd_conteudo)
+    this.obj_Array_Conteudos.forEach((iten) => {
+      iten.sn_favorito = this.obj_Array_Meus_Estudos.filter(f => f == iten.cd_conteudo).length > 0
     })
-
-    this.obj_Array_Meus_Estudos = responsemystudies.data.estudos
-      this.obj_Array_Meus_Estudos.forEach((iten)=>{
-      this.cd_Favorite = iten.conteudo.cd_conteudo
-      console.log(this.cd_Favorite)
-    })
-  }
-
-  onClick_Option_Top() {
-    this.route.navigate(['/conteudo-editar', this.cd_Id_Conteudo])
   }
 
   async OnClick_Access(conteudo) {
@@ -180,29 +179,68 @@ export class ConteudoComponent implements OnInit, OnDestroy {
       window.open(conteudo.ds_link, "_blank")
     }
   }
-  
+
+  async Get_Contedos_From_Category() {
+    const responseconteudo = await this.conteudoService.Get_Conteudo(this.cd_Id_Param)
+    this.obj_Array_Conteudos = responseconteudo.data.conteudos
+    this.ds_Titulo = this.obj_Array_Conteudos[0].categoria.nome
+  }
+
+  onClick_Router(){
+    if(this.sn_Sumary){
+      this.route.navigate(['/sumario-adicionar'])
+    }else{
+      this.route.navigate(['/conteudo-adicionar'])
+    }
+  }
+
+  async Get_Sumary(){
+    const responsesumary = await this.conteudoService.Get_Sumary()
+    this.obj_Array_Conteudos = responsesumary.data.sumario
+    this.ds_Titulo = "Sumário"
+  }
+
   onFilter_Search(iten) {
     this.Input_Value = iten
   }
 
-  onClick_Option_Bottom(event) {
-    this.b_Confirmation_Show_Modal = event
+  onClick_Option_Top(conteudo) {
+    this.route.navigate(['/conteudo-editar', conteudo.cd_conteudo])
   }
 
-  async Set_Delete_Conteudo() {
-    const responsedeleteconteudo = await this.conteudoService.Set_Delete_Conteudo(this.cd_Id_Conteudo)
+  onClick_Option_Bottom(event, conteudo) {
+    this.b_Confirmation_Show_Modal = event
+    this.cd_Id_Conteudo = conteudo.cd_conteudo
+  }
+
+  async Set_Update_Conteudo() {
+    const responsedeleteconteudo = await this.conteudoService.Set_Update_Conteudo(this.cd_Id_Conteudo)
+    if (responsedeleteconteudo.errors) {
+      this.subject_service.subject_Exibindo_Snackbar.next({ message: 'Não foi possível deletar' })
+    }
+
+    else {
+      this.subject_service.subject_Exibindo_Snackbar.next({ message: 'Deletado com sucesso' })
+    }
     this.Closed_Alert_Modal()
     this.onClick_Refresh()
   }
 
   Closed_Alert_Modal() {
     this.b_Confirmation_Show_Modal = false
-    
+
   }
 
   async onClick_Refresh() {
-    const responseconteudo = await this.conteudoService.Get_Conteudo(this.cd_Id_Param)
-    this.obj_Array_Conteudos = responseconteudo.data.conteudos
+    if(this.sn_Sumary){
+      this.obj_Array_Conteudos = []
+      this.Input_Value = null
+      this.Get_Sumary()
+    }else{
+      this.obj_Array_Conteudos = []
+      this.Input_Value = null
+      this.Get_Contedos_From_Category()
+    }
   }
 
   Filtrar() {

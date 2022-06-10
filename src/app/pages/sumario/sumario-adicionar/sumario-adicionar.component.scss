@@ -1,5 +1,5 @@
 .container{
-    max-width: 330px;
+    max-width: 300px;
     margin: 0 auto;
 
     @media (min-width: 540px) {
@@ -26,26 +26,20 @@
     @media (min-width: 1780px) {
         max-width: 1300px;
     }
-
-    .div-grid-title{
-        grid-template-columns: 0.5fr 2fr 2.5fr 1fr;
-    } 
 }
 
-.cdk-listagem-items{
-    height: 70vh;
-    @apply w-full overflow-y-auto rounded-lg;
-
-    @screen md{
-        height: 73vh;
-        @apply md:mt-12;   
+.div-grid-group{
+    grid-template-columns: 1.3fr 1fr;
+    @media (min-width: 720px) {
+        grid-template-columns: 2fr 1fr;
     }
 }
 
-.div-grid-title-itens{
-    display: grid;
-    grid-template-columns: 2fr 1fr;
-    @apply md:grid-cols-2;
+.width-selection{
+    width: 97%;
+    @media (min-width: 720px) { 
+        width: 99%;
+    }
 }
 
 .behavior-button{
@@ -55,19 +49,10 @@
     }
 }
 
-.div-grid-itens{
-    grid-template-columns: 0.5fr 1fr 0.5fr ;
-}
+.div-calc-itens{
+    left: calc(100% - 23.4rem);
 
-.div-grid-name-arrow{
-    grid-template-columns: 4fr 0.5fr;
-
-    @media (min-width: 768px) {
-        grid-template-columns: 5fr 0.4fr;
+    @media (min-width: 720px) {
+        left: calc(50% - 43rem);
     }
-}
-
-.img-rotation-arrow-down{
-    transform: rotateZ(-180deg);
-    transition: all 0.4s ease;
 }

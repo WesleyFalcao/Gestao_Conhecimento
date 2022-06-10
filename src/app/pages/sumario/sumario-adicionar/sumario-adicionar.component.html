@@ -1,0 +1,30 @@
+<app-header [b_Not_Search]="b_Not_Search"></app-header>
+
+<div class="container lg:bg-white lg:bg-opacity-60 pb-12">
+    <div class="mt-5 lg:mt-10 xl:mt-14">
+        <div class="relative flex flex-col text-sm left-4 md:left-5">
+            <uni-title [ds_Titulo]="ds_Titulo"></uni-title>
+        </div>
+    </div>
+    <div class="mt-5 flex flex-col gap-y-3">
+        <div class="width-selection">
+            <selection-input [objArrayList]="obj_Array_Categorias" [nm_Label_Selection_Input]="nm_Label_Selection_Input"
+                [Iten_Select]="obj_Filds_Input.categoria" (Value_Select)="Value_Select($event)">
+            </selection-input>
+        </div>
+        <app-input [required]="true" label="Descrição" [(ngModel)]="obj_Filds_Input.ds_conteudo" id="ds_descricao"
+            name="ds_descricao">
+        </app-input>
+        <div class="lg:mt-4 flex flex-row w-full xl:w-6/12 px-4 gap-x-4 lg:gap-x-10 mx-auto">
+            <uni-button buttonClass="btn-primary" (click)="Set_Add_Sumary()">Salvar</uni-button>
+            <uni-button buttonClass="btn-outline" (click)="Back()">Voltar</uni-button>
+        </div>
+    </div>
+</div>
+
+<div *ngIf="Send_Sugestion_Animacao">
+    <app-send-suggestion></app-send-suggestion>
+</div>
+
+<alert-modal [ds_Descricao]="ds_Alert_Descricao" [b_Show_Alert_Modal]="b_Alert_Modal"
+    (b_Closed_Alert_Modal)="Closed_Alert_Modal()"></alert-modal>

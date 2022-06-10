@@ -50,7 +50,10 @@ export class MeusEstudosComponent implements OnInit {
   b_Confirmation_Show_Modal: boolean
 
   /**@description Recebe o valor digitado pelo usuário no desktop */
-  Input_Value: string
+  Input_Value: any
+
+  /**@description Recebe o id do conteudo clicado */
+  cd_Id_Conteudo: number
 
   /**@description Contém os dados do usuário que seram gravados */
   objDados = { cd_Conteudo: null, nm_Usuario: "" }
@@ -72,7 +75,7 @@ export class MeusEstudosComponent implements OnInit {
 
   constructor(
     private subject_service: SubjectService,
-    private router: Router,
+    private route: Router,
     private loginService: LoginService,
     private meuestudosService: MeusEstudosService,
     private eRef: ElementRef,
@@ -80,6 +83,10 @@ export class MeusEstudosComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    const role_user = this.loginService.Name_Role()
+    if (role_user == "user") {
+      this.b_User_Admin = false
+    }
     this.nm_User = this.loginService.Name_User_Logged()
     this.Get_My_Estudies()
   }
@@ -94,11 +101,13 @@ export class MeusEstudosComponent implements OnInit {
         this.subject_service.subject_Exibindo_Snackbar.next({ message: 'Não foi possível concluir a ação' })
       }
     } else {
-
-      this.subject_service.subject_Exibindo_Snackbar.next({ message: 'Desfavoritado com sucesso!' })
       const responseaddestudo = await this.meuestudosService.Delete_My_Study(estudo.conteudo.cd_conteudo)
-      if (responseaddestudo.erros) {
+      console.log(responseaddestudo)
+      if (responseaddestudo.errors) {
         this.subject_service.subject_Exibindo_Snackbar.next({ message: 'Não foi possível concluir a ação' })
+      } else {
+        this.subject_service.subject_Exibindo_Snackbar.next({ message: 'Desfavoritado com sucesso!' })
+        this.nm_Start = "assets/icons/star-with-no-background.svg"
       }
     }
   }
@@ -121,12 +130,15 @@ export class MeusEstudosComponent implements OnInit {
     this.Input_Value = iten
   }
 
-  onClick_Option_Top() {
-    this.router.navigate(['/conteudo-editar'])
+  onClick_Option_Top(conteudo) {
+    this.route.navigate(['/conteudo-editar', conteudo.conteudo.cd_conteudo])
+    this.cd_Id_Conteudo = conteudo.conteudo.cd_conteudo
   }
 
-  onClick_Option_Bottom(event) {
+  onClick_Option_Bottom(event, estudo) {
     this.b_Confirmation_Show_Modal = event
+    console.log()
+    this.cd_Id_Conteudo = estudo.conteudo.cd_conteudo
   }
 
   async OnClick_Access(estudo) {
@@ -142,7 +154,32 @@ export class MeusEstudosComponent implements OnInit {
 
   Closed_Alert_Modal() {
     this.b_Confirmation_Show_Modal = false
- 
+  }
+
+  async Set_Update_Conteudo() {
+    const responseaddestudo = await this.meuestudosService.Delete_My_Study(this.cd_Id_Conteudo)
+    console.log(responseaddestudo)
+    if (responseaddestudo.errors) {
+      this.subject_service.subject_Exibindo_Snackbar.next({ message: 'Não foi possível concluir a ação' })
+    } else {
+      this.nm_Start = "assets/icons/star-with-no-background.svg"
+    }
+    const responsedeleteconteudo = await this.conteudoService.Set_Update_Conteudo(this.cd_Id_Conteudo)
+    if (responsedeleteconteudo.errors) {
+      this.subject_service.subject_Exibindo_Snackbar.next({ message: 'Não foi possível deletar' })
+    }
+    else {
+      this.subject_service.subject_Exibindo_Snackbar.next({ message: 'Deletado com sucesso' })
+    }
+    console.log(responsedeleteconteudo)
+    this.Closed_Alert_Modal()
+    this.onClick_Refresh()
+  }
+
+  async onClick_Refresh() {
+    this.Obj_Array_Meus_Estudos = []
+    this.Input_Value = null
+    this.Get_My_Estudies()
   }
 
   Show_Modal(event) {

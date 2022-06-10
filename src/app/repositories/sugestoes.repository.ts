@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { SugestoesQuery } from '../queries/sugestoes.query';
+import { DateService } from '../services/date.service';
 import { ApiHasuraService } from '../services/hasura.service';
 import { SubjectService } from '../services/subject.service';
 
@@ -14,6 +15,7 @@ export class SugestoesRepository {
   constructor(
     private subjectService: SubjectService,
     private sugestoesQuery: SugestoesQuery,
+    private dateService: DateService,
     private apiHasuraService: ApiHasuraService,
   ) { }
 
@@ -57,7 +59,7 @@ export class SugestoesRepository {
   
   async Set_Add_Suggestion(addsugestion){
     const query = this.sugestoesQuery.Set_Add_Suggestion()
-    const variables = { titulo: addsugestion.nm_Titulo, descricao: addsugestion.nm_Descricao, cd_usuario: addsugestion.cd_Usuario}
+    const variables = { titulo: addsugestion.nm_Titulo, descricao: addsugestion.nm_Descricao }
     const response = await this.apiHasuraService._Execute(query, variables, this.httpOptions)
     return response
   }
@@ -70,14 +72,10 @@ export class SugestoesRepository {
   }
 
   async Set_File_Suggestion(sugestao: any) {
-    const data = new Date()
-    const dia = String(data.getDate()).padStart(2, '0')
-    const mes = String(data.getMonth() + 1).padStart(2, '0');
-    const ano = data.getFullYear();
-    const dataAtual = ano + '-' + mes + '-' + dia;
+    const currentdate = this.dateService.Get_Date()
     this.subjectService.subject_Exibindo_Loading.next(true)
     const query = this.sugestoesQuery.Set_File_Suggestion()
-    const variables = { data: dataAtual, cd_sugestao: sugestao }
+    const variables = { data: currentdate, cd_sugestao: sugestao }
     const response = await this.apiHasuraService._Execute(query, variables, this.httpOptions)
     this.subjectService.subject_Exibindo_Loading.next(false)
     return response

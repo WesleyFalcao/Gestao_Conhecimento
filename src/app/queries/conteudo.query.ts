@@ -90,6 +90,27 @@ export class ConteudoQuery {
     `
   }
 
+  Get_Sumary(){
+    return `
+    {
+      sumario(order_by: {nm_titulo: asc}) {
+        nm_titulo
+        ds_conteudo:ds_descricao
+      }
+    }    
+    `
+  }
+
+  Set_Sumary(){
+    return `
+    mutation ($ds_descricao: String, $nm_titulo: String ) {
+      insert_sumario(objects: {ds_descricao: $ds_descricao, nm_titulo: $nm_titulo}) {
+        affected_rows
+      }
+    }    
+    `
+  }
+
   Set_Add_Conteudo() {
     return `
     mutation ($nm_titulo: String, $ds_conteudo: String, $ds_link: String, $cd_categoria: Int) {
@@ -130,21 +151,11 @@ export class ConteudoQuery {
     `
   }
 
-  Set_Delete_Conteudo() {
+  Set_Update_Conteudo(){
     return `
-    mutation ($cd_conteudo: Int) {
-      delete_conteudos(where: {cd_conteudo: {_eq: $cd_conteudo}}) {
-        returning {
-          categoria {
-            cd_categoria
-            nm_categoria
-          }
-          cd_categoria
-          cd_conteudo
-          ds_conteudo
-          ds_link
-          nm_titulo
-        }
+    mutation ($cd_conteudo: Int, $dt_exclusao: date) {
+      update_conteudos(where: {cd_conteudo: {_eq: $cd_conteudo}}, _set: {dt_exclusao:  $dt_exclusao}) {
+        affected_rows
       }
     }
     `

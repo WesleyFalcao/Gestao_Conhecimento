@@ -28,6 +28,17 @@ export class ConteudoService {
         return this.conteudoRepository.Get_Conteudo_Edit(param)
     }
 
+    Get_Sumary(){
+        return this.conteudoRepository.Get_Sumary()
+    }
+
+    Set_Sumary(param){
+        if(param.categoria == "" || param.ds_conteudo == null || param.categoria == null ||param.ds_conteudo == ""){
+            return false
+        }
+        return this.conteudoRepository.Set_Sumary(param)
+    }
+
     Set_Edit_User(objparam, idconteudo){
 
         if(objparam.nm_titulo == "" || objparam.ds_conteudo == "" || objparam.ds_link == "" || objparam.categoria == ""){
@@ -43,11 +54,12 @@ export class ConteudoService {
         return this.conteudoRepository.Set_Add_Conteudo(param)
     }
 
-    Set_Delete_Conteudo(param){
-        return this.conteudoRepository.Set_Delete_Conteudo(param)
+    Set_Update_Conteudo(param){
+        return this.conteudoRepository.Set_Update_Conteudo(param)
     }
 
     Set_Gravar_Dados(param){
         return this.conteudoRepository.Set_Gravar_Dados(param)
     }
+
 }

@@ -21,6 +21,7 @@ import { SugestoesListaComponent } from './sugestoes/sugestoes-lista/sugestoes-l
 import { FilterModule } from '../pipes/filter/filter.module';
 import { SugestaoAdicionarComponent } from './sugestoes/sugestao-adicionar/sugestao-adicionar.component';
 import { ScrollingModule } from '@angular/cdk/scrolling';
+import { SumarioAdicionarComponent } from './sumario/sumario-adicionar/sumario-adicionar.component';
 
 @NgModule({
   declarations: [
@@ -34,6 +35,7 @@ import { ScrollingModule } from '@angular/cdk/scrolling';
     EditarUserComponent,
     HomeComponent,
     MeusEstudosComponent,
+    SumarioAdicionarComponent,
     SugestoesComponent,
     UsersComponent,
     LoginComponent,

@@ -1,13 +1,13 @@
 <app-header (Input_Emit_Value)="onFilter_Search($event)"></app-header>
 
-<div class="container relative top-6 lg:top-14 px-12 lg:px-16">
+<div class="container relative top-6 lg:top-14 px-8 md:px-12 lg:px-16">
     <div class="grid grid-cols-2">
         <div class="flex flex-col relative">
             <uni-title [ds_Titulo]="ds_Titulo"></uni-title>
         </div>
         <div class="flex flex-row gap-6 lg:gap-10 mt-7 justify-end relative right-1 xl:mr-4 cursor-pointer">
-            <img class="behavior-button w-5 h-5 md:w-7 md:h-7 2xl:w-6 2xl:h-6" src="assets/icons/more-options-user.svg"
-                routerLink="/conteudo-adicionar">
+            <img *ngIf="b_User_Admin" class="behavior-button w-5 h-5 md:w-7 md:h-7 2xl:w-6 2xl:h-6" src="assets/icons/more-options-user.svg"
+                (click)="onClick_Router()">
             <app-button-filter class="hidden" (b_Show_Modal)="Show_Modal($event)"></app-button-filter>
             <img class="behavior-button w-6 h-6 md:w-8 md:h-8 2xl:w-7 2xl:h-7" src="assets/icons/refresh.svg"
                 (click)="onClick_Refresh()">
@@ -16,11 +16,11 @@
     <div class="grid grid-cols-1 lg:grid-cols-2 relative top-4 md:top-6 gap-y-8 lg:gap-x-8 w-full pb-10">
         <div class="h-52 inline-block relative rounded-lg bg-unimed-white shadow-lg border-l-8 border-l-unimed-green"
             *ngFor="let conteudo of obj_Array_Conteudos | filter: Input_Value">
-            <div class="absolute div-aling-popover">
+            <div *ngIf="!sn_Sumary" class="absolute div-aling-popover">
                 <app-popover [nm_Svg_Top]="nm_Svg_Top" [nm_Svg_Bottom]="nm_Svg_Bottom" [nm_Opcao_top]="nm_Opcao_top"
                     [nm_Opcao_bottom]="nm_Opcao_bottom" [b_Rotate_Triangle]="b_Rotate_Triangle"
-                    [b_Show_Popover]="conteudo.show" (onClick_Option_Top)="onClick_Option_Top()"
-                    (onClick_Option_Bottom)="onClick_Option_Bottom($event)">
+                    [b_Show_Popover]="conteudo.show" (onClick_Option_Top)="onClick_Option_Top(conteudo)"
+                    (onClick_Option_Bottom)="onClick_Option_Bottom($event, conteudo)">
                 </app-popover>
             </div>
             <div class="div-grid-header-card h-12 w-full">
@@ -28,21 +28,21 @@
                     class="my-auto font-semibold text-lg md:font-semibold pl-4 text-ellipsis whitespace-nowrap overflow-hidden text-unimed-darkgray">
                     {{conteudo.nm_titulo}}
                 </p>
-                <div class="grid grid-cols-2 cursor-pointer absolute mt-5 gap-x-5 md:gap-x-6 lg:gap-x-0 right-3 md:right-6 lg:right-1 xl:right-8"
-                    *ngIf="b_User_Admin">
+                <div  *ngIf="!sn_Sumary" class="grid grid-cols-2 cursor-pointer absolute mt-5 gap-x-5 md:gap-x-6 lg:gap-x-0 right-3 md:right-6 lg:right-1 xl:right-8"
+                    >
                     <img class="w-5 h-5 behavior-button cursor-pointer -mt-1"
-                        src="assets/icons/{{conteudo.favorite?'start-yellow':'star-with-no-background'}}.svg"
+                        src="assets/icons/{{conteudo.sn_favorito?'start-yellow':'star-with-no-background'}}.svg"
                         (click)="onClick_Favorite(conteudo)">
-                    <div class="lg:w-10 relative mx-auto" (click)="Show_Popover(conteudo)">
+                    <div class="lg:w-10 relative mx-auto" (click)="Show_Popover(conteudo)" *ngIf="b_User_Admin">
                         <img class="behavior-button cursor-pointer mx-auto" src="assets/icons/filter-three-points.svg">
                     </div>
                 </div>
             </div>
             <p
-                class="p-rows pt-2 my-auto font-medium xl:text-base pl-4 text-ellipsis whitespace-normal overflow-hidden">
+                class="{{sn_Sumary? 'p-rows-sumary':'p-rows'}} pt-2 my-auto font-medium xl:text-base pl-4 text-ellipsis whitespace-normal overflow-hidden">
                 {{conteudo.ds_conteudo}}
             </p>
-            <button (click)="OnClick_Access(conteudo)"
+            <button *ngIf="!sn_Sumary" (click)="OnClick_Access(conteudo)"
                 class="behavior-button w-32 h-10 absolute right-6 bottom-4 text-left pl-5 rounded-full bg-unimed-green text-unimed-white text-lg">
                 Acessar
                 <img class="w-4 h-4 absolute right-4 bottom-3" src="assets/icons/arrow-right-white.svg">
@@ -50,7 +50,7 @@
         </div>
     </div>
     <alert-modal [ds_Descricao]="ds_Descricao" [b_Show_Alert_Modal]="b_Confirmation_Show_Modal"
-        (b_Closed_Alert_Modal)="Closed_Alert_Modal()" (b_Confirmed)="Set_Delete_Conteudo()"></alert-modal>
+        (b_Closed_Alert_Modal)="Closed_Alert_Modal()" (b_Confirmed)="Set_Update_Conteudo()"></alert-modal>
 </div>
 <app-modal (b_Click_Sobreposicao)="Close_Modal()" class="{{b_Show_Filter?'':'hidden'}}">
     <div class="grid grid-cols-2">

@@ -45,6 +45,7 @@ export class MeusEstudosRepository {
   }
 
   async Delete_My_Study(estudo){
+    console.log("estudo", estudo)
     this.subjectService.subject_Exibindo_Loading.next(true)
     const query = this.meusEstudosQuery.Delete_My_Study()
     const variables = {cd_conteudo: estudo}

@@ -18,6 +18,7 @@ import { UsersComponent } from './pages/usuario/usuarios-lista/usuarios-lista.co
 import { SugestaoAdicionarComponent } from './pages/sugestoes/sugestao-adicionar/sugestao-adicionar.component';
 import { SendSuggestionComponent } from './components/send-suggestion/send-suggestion.component';
 import { AuthGuard } from './guards/auth-guard';
+import { SumarioAdicionarComponent } from './pages/sumario/sumario-adicionar/sumario-adicionar.component';
 
 
 const routes: Routes = [
@@ -41,6 +42,10 @@ const routes: Routes = [
   },
   { path: 'conteudo-adicionar', component: ConteudoAdicionarComponent,
     data: {b_only_admin: true},
+    canActivate: [AuthGuard]  
+  },
+  { path: 'sumario-adicionar', component: SumarioAdicionarComponent,
+    // data: {b_only_admin: true},
     canActivate: [AuthGuard]  
   },
   { path: 'usuarios', component: UsersComponent,

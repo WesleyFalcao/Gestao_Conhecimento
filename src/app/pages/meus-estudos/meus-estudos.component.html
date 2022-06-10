@@ -7,7 +7,7 @@
         </div>
         <div class="flex flex-row relative gap-8 md:gap-8 mt-10 lg:gap-10 mr-16 justify-self-end">
             <app-button-filter class="cursor-pointer hidden" (b_Show_Modal)="Show_Modal($event)"></app-button-filter>
-            <img class="behavior-button cursor-pointer w-6 h-6 md:w-7 md:h-7" src="assets/icons/refresh.svg" (click)="Get_My_Estudies()">
+            <img class="behavior-button cursor-pointer w-6 h-6 md:w-7 md:h-7" src="assets/icons/refresh.svg" (click)="onClick_Refresh()">
         </div>
     </div>
     <div class="grid grid-cols-1 lg:grid-cols-2 relative top-6 gap-y-6 md:gap-y-10 w-full px-12 md:px-16 pb-10 lg:gap-x-10 lg:top-6">
@@ -16,8 +16,8 @@
             <div class="absolute div-aling-popover_card">
                 <app-popover [nm_Svg_Top]="nm_Svg_Top" [nm_Svg_Bottom]="nm_Svg_Bottom" [nm_Opcao_top]="nm_Opcao_top"
                     [nm_Opcao_bottom]="nm_Opcao_bottom" [b_Rotate_Triangle]="b_Rotate_Triangle"
-                    [b_Show_Popover]="estudo.show" (onClick_Option_Top)="onClick_Option_Top()"
-                    (onClick_Option_Bottom)="onClick_Option_Bottom($event)">
+                    [b_Show_Popover]="estudo.show" (onClick_Option_Top)="onClick_Option_Top(estudo)"
+                    (onClick_Option_Bottom)="onClick_Option_Bottom($event, estudo)">
                 </app-popover>
             </div>
             <div class="grid grid-cols-2 h-12">
@@ -84,7 +84,7 @@
     </app-modal>
 
     <alert-modal [ds_Descricao]="ds_Descricao" [b_Show_Alert_Modal]="b_Confirmation_Show_Modal"
-        (b_Closed_Alert_Modal)="Closed_Alert_Modal()"></alert-modal>
+        (b_Closed_Alert_Modal)="Closed_Alert_Modal()" (b_Confirmed)="Set_Update_Conteudo()"></alert-modal>
 </div>
 
 <div *ngIf="Obj_Array_Meus_Estudos?.length == 0 || !Obj_Array_Meus_Estudos">

@@ -25,7 +25,7 @@ export class SugestaoAdicionarComponent implements OnInit {
   b_Not_Search: boolean = true
 
   /**@description Recebe o nome do usário que adicionou a sugestão */
-  nm_User: string
+  cd_User: string
   
   /**@description Boolean mostra o modal de alerta */
   b_Alert_Modal: boolean = false
@@ -43,7 +43,7 @@ export class SugestaoAdicionarComponent implements OnInit {
     ) { }
 
   ngOnInit(): void {
-    this.nm_User = this.loginService.Name_User_Logged()
+    this.cd_User = this.loginService.Id_User_Logged()
   }
 
   Back(){
@@ -52,21 +52,24 @@ export class SugestaoAdicionarComponent implements OnInit {
   
   async Send_Sugestion(){
 
-    this.obj_Add_Suggestion.cd_Usuario = this.nm_User
+    this.obj_Add_Suggestion.cd_Usuario = this.cd_User
+    console.log(this.obj_Add_Suggestion.cd_Usuario)
  
     const responsesuggestion = await this.sugestaoService.Set_Add_Suggestion(this.obj_Add_Suggestion)
+    console.log(responsesuggestion)
     if(responsesuggestion == false){
       this.b_Alert_Modal = true
       this.ds_Alert_Descricao = "Todos os campos devem ser preenchidos!"  
+    }
+
+    if(responsesuggestion.errors){
+      this.subjectService.subject_Exibindo_Snackbar.next({ message: 'Não foi possível adicionar' })
     }
     else{
       this.Send_Sugestion_Animacao = true
       setTimeout(() => {
         this.Send_Sugestion_Animacao = !this.Send_Sugestion_Animacao
       }, 3000);   
-    }
-    if(responsesuggestion.errors){
-      this.subjectService.subject_Exibindo_Snackbar.next({ message: 'Não foi possível adicionar' })
     }
   }
 

@@ -68,7 +68,7 @@ export class SugestoesComponent implements OnInit {
   async File_Suggestion(item, index) {
     item.show = !item.show
     const responsefile = await this.sugestoesService.Set_File_Suggestion(item.cd_sugestao)
-
+    console.log("responsefile", responsefile)
     if (responsefile.data.update_sugestoes.returning.lenght != 1) {
       setTimeout(() => {
         this.subjectService.subject_Exibindo_Snackbar.next({ message: 'Arquivado com sucesso!' })
@@ -81,6 +81,7 @@ export class SugestoesComponent implements OnInit {
   }
 
   async onClick_Refresh() {
+
     this.obj_Array_Sugestoes = []
     this.Input_Value = null
     const reponsesugestoes = await this.sugestoesService.Get_Suggestions_Admin()
@@ -105,6 +106,7 @@ export class SugestoesComponent implements OnInit {
 
       this.subjectService.subject_Exibindo_Snackbar.next({ message: 'Não foi possível filtrar' })
     }else{
+
       this.obj_Array_Sugestoes = responsefilter.data.sugestoes
       this.b_Show_Filter = false
     } 
