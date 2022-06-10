@@ -1,4 +1,4 @@
-<app-header (Input_Emit_Value)="onFilter_Search($event)"></app-header>
+<app-header (Input_Emit_Value)="onFilter_Search($event)" [b_Input_Open]="b_Input_Open" [nm_Input]="Input_Value"></app-header>
 
 <div class="container lg:bg-white lg:bg-opacity-60 relative px-2 top-6 md:top-9 lg:top-14 pb-12">
     <div class="grid grid-cols-2">
@@ -10,57 +10,59 @@
                 routerLink="/conteudo-adicionar">
             <app-button-filter class="hidden" (b_Show_Modal)="Show_Modal($event)"></app-button-filter>
             <img class="behavior-button w-6 h-6 xl:w-8 xl:h-8 2xl:w-7 2xl:h-7" src="assets/icons/refresh.svg"
-                (click)="Search_Conteudos()">
+                (click)="onClick_Refresh()">
         </div>
     </div>
     <div *ngIf="obj_Array_Conteudos?.length != 0">
-        <div class="hidden div-grid-title mt-8 lg:grid grid-cols-6">
-            <p class="lg:text-center font-semibold">ID</p>
-            <p class="font-semibold lg:grid ml-5">Título</p>
-            <p class="lg:text-center font-semibold">Descrição</p>
-            <p class="lg:text-center font-semibold">Link</p>
-            <p class="lg:text-center font-semibold">Categoria</p>
-            <p class="lg:text-center font-semibold">Editar</p>
+        <div class="hidden mt-8 lg:grid grid-cols-6 {{b_User_Admin? 'div-grid-title':'div-grid-title-no-admin'}}">
+            <p class="lg:text-center font-semibold text-base">ID</p>
+            <p class="font-semibold text-base lg:grid ml-5">Título</p>
+            <p class="lg:text-center font-semibold text-base">Descrição</p>
+            <p class="lg:text-center font-semibold text-base">Link</p>
+            <p class="lg:text-center font-semibold text-base">Categoria</p>
+            <p class="lg:text-center font-semibold text-base {{b_User_Admin? '':'hidden'}}">Editar</p>
         </div>
     </div>
+    
     <div class="top-5 relative flex flex-col">
 
-        <cdk-virtual-scroll-viewport class="cdk-listagem-items overflow-auto lg:hidden rounded-lg mb-2 shadow-xl"
+        <cdk-virtual-scroll-viewport id="virtualscroll" class="cdk-listagem-items overflow-auto lg:hidden rounded-lg mb-2"
             [itemSize]="40" minBufferPx="600" maxBufferPx="600">
+
             <div class="bg-white bg-opacity-60 my-1"
                 *cdkVirtualFor="let conteudo of obj_Array_Conteudos | filter: Input_Value" (click)="Focus_Item(target)">
 
                 <div #target class="div-grid-name-arrow grid grid-cols-2 xl:grid-cols-1" (click)="Show_Item(conteudo)">
-                    <p class="my-3 lg:my-auto ml-5 w-10/12 truncate font-medium">
+                    <p class="my-3 ml-5 w-10/12 truncate font-medium">
                         {{conteudo.nm_titulo}}</p>
-                    <img class="my-auto xl:hidden {{conteudo.show? 'img-rotation-arrow-down':''}}"
+                    <img class="my-auto {{conteudo.show? 'img-rotation-arrow-down':''}}"
                         src="assets/icons/arrow-up.svg">
                 </div>
-                <div class="pb-4 flex flex-col gap-y-1" *ngIf="conteudo.show && b_Width == false">
+                <div class="pb-4 flex flex-col gap-y-2" *ngIf="conteudo.show">
 
                     <div class="flex flex-row gap-x-3">
-                        <p class="ml-5 lg:text-center font-semibold">ID:</p>
-                        <p class="lg:text-center my-auto w-4/12 truncate">{{conteudo.cd_conteudo}}</p>
+                        <p class="ml-5  font-semibold">ID:</p>
+                        <p class="my-auto truncate">{{conteudo.cd_conteudo}}</p>
                     </div>
                     <div class="flex flex-row gap-x-3">
-                        <p class="ml-5 lg:text-center font-semibold">Usuário:</p>
-                        <p class="my-auto">{{conteudo.ds_conteudo}}
+                        <p class="ml-5 font-semibold">Usuário:</p>
+                        <p class="my-auto w-8/12 truncate">{{conteudo.ds_conteudo}}
                         </p>
                     </div>
                     <div class="flex flex-row gap-x-3">
-                        <p class="ml-5 lg:text-center font-semibold">Link:</p>
-                        <p class=" my-auto w-5/12 truncate">{{conteudo.ds_link}}
-                        </p>
-                    </div>
-                    <div class="flex flex-row gap-x-3">
-                        <p class="ml-5 lg:text-center font-semibold">Contegoria:</p>
+                        <p class="ml-5 font-semibold">Contegoria:</p>
                         <p class="my-auto w-4/12 truncate">
                             {{conteudo.categoria.nm_categoria}}</p>
                     </div>
-                    <div class="flex flex-row gap-x-3 behavior-button" [routerLink]="['/conteudo-editar', conteudo.cd_conteudo]">
-                        <img class="reltive left-5 ml-5 mt-1 behavior-button w-4 h-4 lg:w-7 lg:h-7 my-auto cursor-pointer lg:mx-auto"
-                            src="assets/icons/edit.svg">
-                        <p>Editar</p>
+                    <div class="flex flex-row gap-x-3">
+                        <div class="gap-x-3 behavior-button rounded-full ml-5 bg-unimed-green" (click)="OnClick_Access(conteudo)">
+                            <p class="mx-2 font-semibold text-white">Acessar</p>
+                        </div>
+                        <div class="flex flex-row {{b_User_Admin? '':'hidden'}}" [routerLink]="['/conteudo-editar', conteudo.cd_conteudo]">
+                            <img class="reltive left-5 ml-5 mt-1 behavior-button w-4 h-4 lg:w-7 lg:h-7 my-auto cursor-pointer lg:mx-auto"
+                                src="assets/icons/edit.svg">
+                            <p class="ml-1 mt-0.5">Editar</p>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -68,7 +70,7 @@
 
         <div class="hidden lg:grid" *ngFor="let conteudo of obj_Array_Conteudos | filter: Input_Value">
             <div
-                class="rounded-lg div-grid-title shadow-xl mb-2 lg:h-14 w-full lg:grid lg:grid-cols-6 bg-white hover:bg-slate-100">
+                class="rounded-lg shadow-xl mb-2 lg:h-14 w-full lg:grid lg:grid-cols-6 bg-white hover:bg-slate-100 {{b_User_Admin? 'div-grid-title':'div-grid-title-no-admin'}}">
                 <p class="text-center my-auto text-ellipsis overflow-hidden whitespace-nowrap font-normal text-base">
                     {{conteudo.cd_conteudo}}</p>
                 <p class="my-3 lg:my-auto ml-5 text-ellipsis overflow-hidden whitespace-nowrap font-normal text-base">
@@ -80,7 +82,7 @@
                     {{conteudo.ds_link}}</p>
                 <p class="text-center my-auto text-ellipsis overflow-hidden whitespace-nowrap font-normal text-base">
                     {{conteudo.categoria.nm_categoria}}</p>
-                <img class="behavior-button w-5 h-5 my-auto mx-auto cursor-pointer" src="assets/icons/edit.svg"
+                <img class="{{b_User_Admin? '':'hidden'}} behavior-button w-5 h-5 my-auto mx-auto cursor-pointer" src="assets/icons/edit.svg"
                     [routerLink]="['/conteudo-editar', conteudo.cd_conteudo]">
             </div>
         </div>

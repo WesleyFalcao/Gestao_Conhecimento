@@ -1,6 +1,6 @@
 <app-header (Input_Emit_Value)="onFilter_Search($event)" [b_Nao_Exibir_Voltar]="b_Nao_Exibir_Voltar"></app-header>
 
-<div *ngIf="Input_Value == null, else listagem" class="container mb-10 mt-8 pb-10 lg:mt-10 mx-auto cards-itens">
+<div class="container mb-10 mt-8 pb-10 lg:mt-10 mx-auto cards-itens">
     <div *ngFor="let categoria of obj_Array_Categoria | filter: Input_Value">
         <div class="card" [routerLink]="['/conteudo', categoria.id]" >
             <img class="icon-card pt-9" src="assets/icons/person-study.svg">
@@ -9,7 +9,7 @@
     </div>
 </div>
 
-<ng-template #listagem>
+<!-- <ng-template #listagem>
     <div>
         <div class="container-list lg:bg-white lg:bg-opacity-60 relative px-2 top-6 md:top-9 lg:top-14 pb-12">
             <div class="grid grid-cols-2">
@@ -30,14 +30,14 @@
             <div class="top-5 relative flex flex-col">
         
                 <cdk-virtual-scroll-viewport class="cdk-listagem-items overflow-auto lg:hidden rounded-lg mb-2 shadow-xl"
-                    [itemSize]="40" minBufferPx="600" maxBufferPx="600">
+                    [itemSize]="20" minBufferPx="600" maxBufferPx="600">
                     <div class="bg-white bg-opacity-60 my-1"
                         *cdkVirtualFor="let conteudo of obj_Array_Conteudos | filter: Input_Value" (click)="Focus_Item(target)">
         
                         <div #target class="div-grid-name-arrow grid grid-cols-2 xl:grid-cols-1" (click)="Show_Item(conteudo)">
                             <p class="my-3 lg:my-auto ml-5 w-10/12 truncate font-medium">
                                 {{conteudo.nm_titulo}}</p>
-                            <img class="my-auto xl:hidden {{conteudo.show? 'img-rotation-arrow-down':''}}"
+                            <img class="my-auto {{conteudo.show? 'img-rotation-arrow-down':''}}"
                                 src="assets/icons/arrow-up.svg">
                         </div>
                         <div class="pb-4 flex flex-col gap-y-1" *ngIf="conteudo.show">
@@ -123,4 +123,4 @@
             <animation-nothing-found></animation-nothing-found>
         </div>
     </div>
-</ng-template>
+</ng-template> -->

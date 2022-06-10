@@ -36,7 +36,7 @@ export class ConteudoQuery {
   Get_Conteudos_Filter() {
     return `
     query ($where: conteudos_bool_exp, $limit: Int, $offset: Int) {
-      conteudos(where: $where, limit: $limit, offset: $offset) {
+      conteudos(where: $where, limit: $limit, offset: $offset, order_by: {nm_titulo: asc}) {
         categoria {
           nm_categoria
         }

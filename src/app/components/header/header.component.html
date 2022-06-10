@@ -21,7 +21,7 @@
 
                 <div class="hidden xl:flex h-8 border-0 relative top-9 border-l-2 border-gray-600"></div>
 
-                <input #search type="text" [formControl]="modelChanged"
+                <input #search type="text" [formControl]="modelChanged" [(ngModel)]="nm_Input"
                     class="my-6 bg-transparent {{b_Show_Input_Desktop? 'relative': 'hidden'}}"
                     placeholder="Pesquise...">
             </div>
@@ -117,8 +117,9 @@
     <header class="header-input">
         <img class="area-back w-6 h-6 md:w-8 md:h-8 relative mx-auto my-6 md:mt-10" src="{{nm_Src_Icon}}"
             (click)="Show_Input()">
+        
         <input #search type="text" class="area-input my-6 md:mt-10 md:text-lg bg-transparent"
-            [formControl]="modelChanged" placeholder="Pesquise...">
+            [formControl]="modelChanged" placeholder="Pesquise..." [(ngModel)]="nm_Input">
     </header>
 </ng-template>
 <div *ngIf="b_Show_Modal">

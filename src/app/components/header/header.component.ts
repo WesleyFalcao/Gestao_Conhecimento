@@ -2,9 +2,10 @@ import { Location } from '@angular/common';
 import { Component, ElementRef, EventEmitter, HostListener, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { Router } from '@angular/router';
-import { debounceTime, distinctUntilChanged, Subject } from 'rxjs';
+import { debounceTime, distinctUntilChanged, Subject, takeUntil } from 'rxjs';
 import { DataService } from 'src/app/services/data.service';
 import { LoginService } from 'src/app/services/login.service';
+import { SubjectService } from 'src/app/services/subject.service';
 
 @Component({
   selector: 'app-header',
@@ -19,6 +20,11 @@ export class HeaderComponent implements OnInit {
 
   /**@description Boolean retirar botão de voltar */
   @Input() b_Nao_Exibir_Voltar: boolean
+
+  /**@description Boolean de refresh */
+  @Input() b_Input_Open : boolean
+
+  @Input() nm_Input: string
 
   /**@description boolean para abrir ou fechar o popover */
   b_Show_Popover: boolean = false
@@ -41,7 +47,7 @@ export class HeaderComponent implements OnInit {
   /** @description Recebe a largura atual da tela */
   nr_Width: number
 
-  /**@description True quando o usuário logado for adimin */
+  /**@description True quando o usuário logado for admin */
   b_User_Admin: boolean = true
 
   /** @description Subject para destruir os subscribers */
@@ -54,7 +60,7 @@ export class HeaderComponent implements OnInit {
   @Output() Input_Emit_Value = new EventEmitter()
 
   /** @description Recebe o conteúdo digitado na barra de pesquisa  */
-  Input_Value: string
+  Input_Value: any = null
 
   /** @description Usado para o debounce */
   modelChanged = new FormControl()
@@ -63,23 +69,26 @@ export class HeaderComponent implements OnInit {
     private dataService: DataService,
     private location: Location,
     private route: Router,
+    private subjectService: SubjectService,
     private eRef: ElementRef,
     private loginService: LoginService
   ) { }
 
   ngOnInit() {
     const role_user = this.loginService.Name_Role()
-    if(role_user == "user"){
+    if (role_user == "user") {
       this.b_User_Admin = false
     }
     this.onResize()
     this.modelChanged.valueChanges.pipe(debounceTime(500), distinctUntilChanged()).subscribe(async (input) => {
       this.Input_Value = input
+      this.nm_Input = input
       this.Input_Emit_Value.emit(this.Input_Value)
     })
 
-    const teste = this.loginService.Name_Role()
-    console.log("tipo de usuário",teste)
+    if(this.b_Input_Open == true){
+      this.Show_Input() 
+    }
   }
 
   @HostListener('window:resize')
@@ -106,6 +115,7 @@ export class HeaderComponent implements OnInit {
 
     if (this.nr_Width < 1280) {
       this.b_Show_Logo = !this.b_Show_Logo
+      this.Input_Value = null
       this.b_Show_Input = !this.b_Show_Input
       if (this.b_Show_Input == true) {
         this.nm_Src_Icon = "assets/icons/arrow-left.svg"
@@ -131,7 +141,7 @@ export class HeaderComponent implements OnInit {
   Logout() {
     this.dataService.Limpar_Session();
     this.route.navigate(['']);
-  } 
+  }
 
   Back() {
     this.location.back();

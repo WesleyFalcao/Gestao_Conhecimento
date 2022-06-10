@@ -31,7 +31,7 @@ export class CategoriaComponent implements OnInit {
   objCategoria = new CategoriaModel
 
   /**@description Recebe o valor digitado pelo usuário no desktop */
-  Input_Value: string
+  Input_Value: any
 
   /**@description Recebe o array de categorias */
   obj_Array_Categorias: Array<any> = []
@@ -43,14 +43,14 @@ export class CategoriaComponent implements OnInit {
     private categoriaService: CategoriaService,
     private subjectService: SubjectService,
     private ngZone: NgZone
-  ){}
+  ) { }
 
   async ngOnInit() {
     this.onResize()
     this.Search_Categories()
   }
 
-  ngAfterViewInit(){
+  ngAfterViewInit() {
     this.scroller.elementScrolled().pipe(
       map(() => this.scroller.measureScrollOffset('bottom')),
       pairwise(),
@@ -67,7 +67,7 @@ export class CategoriaComponent implements OnInit {
     })
   }
 
-  async Search_Categories(){
+  async Search_Categories() {
     const responsecategorias = await this.categoriaService.Get_Categories_Paginator(this.objCategoria)
     if (responsecategorias.errors) {
       this.subjectService.subject_Exibindo_Snackbar.next({ message: 'Não foi possível trazer a listagem' })
@@ -75,10 +75,10 @@ export class CategoriaComponent implements OnInit {
     if (responsecategorias.data.categorias.length == 0) {
       this.b_Fim_Lista = true
     }
-    if(this.b_Width){
+    if (this.b_Width) {
       this.obj_Array_Categorias = responsecategorias.data.categorias
       this.objCategoria.nr_registos = responsecategorias.data.categorias_aggregate.aggregate.count
-    }else{
+    } else {
       this.obj_Array_Categorias = [...this.obj_Array_Categorias, ...responsecategorias.data.categorias]
     }
   }
@@ -90,6 +90,7 @@ export class CategoriaComponent implements OnInit {
       this.b_Width = true
     } else {
       this.b_Width = false
+      this.objCategoria.page_lenght = 30
     }
   }
 
@@ -120,6 +121,17 @@ export class CategoriaComponent implements OnInit {
     this.Input_Value = iten
   }
 
+  async onClick_Refresh() {
+    this.objCategoria.nr_pagina = 1
+    this.obj_Array_Categorias = []
+    this.Input_Value = null
+    this.b_Fim_Lista = !this.b_Fim_Lista
+    if (this.b_Width == false) {
+      document.getElementById('virtualscroll')?.scrollTo({ top: 0 })
+    }
+    this.Search_Categories()
+  }
+
   Show_Modal(event) {
     this.b_Show_Filter = event
   }
@@ -132,7 +144,7 @@ export class CategoriaComponent implements OnInit {
       this.subjectService.subject_Exibindo_Snackbar.next({ message: 'Não foi possível trazer a listagem' })
     } else {
       this.obj_Array_Categorias = responseusuarios.data.categorias
-      if(this.obj_Array_Categorias == undefined){
+      if (this.obj_Array_Categorias == undefined) {
         this.obj_Array_Categorias = []
       }
     }

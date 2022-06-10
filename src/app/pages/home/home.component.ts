@@ -1,5 +1,5 @@
 import { CdkVirtualScrollViewport } from '@angular/cdk/scrolling';
-import { Component, HostListener, NgZone, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { Component, HostListener, NgZone, OnChanges, OnDestroy, OnInit, SimpleChanges, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { filter, map, pairwise, Subject, takeUntil, throttleTime } from 'rxjs';
 import { ConteudoModel } from 'src/app/models/conteudo/conteudo.model';
@@ -14,6 +14,7 @@ import { ConteudoService } from '../conteudo/conteudo.service';
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss']
 })
+
 export class HomeComponent implements OnInit {
 
   /** @description Recebe o array de categorias */
@@ -67,9 +68,9 @@ export class HomeComponent implements OnInit {
   constructor(
     private subjectService: SubjectService,
     private categoriaService: CategoriaService,
-    private router: Router,
     private subject_service: SubjectService,
     private loginService: LoginService,
+    private route: Router,
     private conteudoService: ConteudoService,
     private ngZone: NgZone,
   ) { }
@@ -81,23 +82,25 @@ export class HomeComponent implements OnInit {
     this.obj_Array_Categoria = responsecategoria.data.categorias
   }
 
-  ngAfterViewInit() {
-   
-    if(!this.b_Width){
-      this.scroller.elementScrolled().pipe(
-        map(() => this.scroller.measureScrollOffset('bottom')),
-        pairwise(),
-        filter(([y1, y2]) => (y2 < y1 && y2 < 500)),
-        throttleTime(200)
-      ).subscribe(() => {
-        this.ngZone.run(async () => {
-          if (!this.b_Fim_Lista) {
-            this.objConteudo.nr_pagina++
-            this.Search_Conteudos();
-          }
-        });
-      })
-    }
+  AfterViewInit() {
+
+    // setTimeout(() => {
+    //   this.Search_Conteudos()
+    // });
+
+    // this.scroller.elementScrolled().pipe(
+    //   map(() => this.scroller.measureScrollOffset('bottom')),
+    //   pairwise(),
+    //   filter(([y1, y2]) => (y2 < y1 && y2 < 500)),
+    //   throttleTime(200)
+    // ).subscribe(() => {
+    //   this.ngZone.run(async () => {
+    //     if (!this.b_Fim_Lista) {
+    //       this.objConteudo.nr_pagina++
+    //       this.Search_Conteudos();
+    //     }
+    //   });
+    // })
   }
 
   @HostListener('window:resize')
@@ -110,7 +113,7 @@ export class HomeComponent implements OnInit {
     } else {
       this.b_Show_Input = false
       this.b_Width = false
-      // this.objConteudo.page_lenght = 10
+      // this.objConteudo.page_lenght = 30
     }
   }
 
@@ -128,8 +131,6 @@ export class HomeComponent implements OnInit {
 
   Show_Item(conteudo) {
     conteudo.show = !conteudo.show
-
-    console.log(conteudo.show)
     if (conteudo.show) {
       this.obj_Array_Conteudos.forEach(fe => {
         if (conteudo.cd_conteudo != fe.cd_conteudo) {
@@ -141,13 +142,9 @@ export class HomeComponent implements OnInit {
 
   onFilter_Search(iten) {
     this.Input_Value = iten
-    if (this.Input_Value == "") {
-      this.Input_Value = null
-      this.obj_Array_Conteudos = []
+    if (this.Input_Value != null) {
+      this.route.navigate(['/conteudo-lista'], {queryParams: {nm_searcch: this.Input_Value}})
     }
-    setTimeout(() => {
-      this.Search_Conteudos()
-    }, 100);
   }
 
   Filtrar() {
@@ -160,12 +157,13 @@ export class HomeComponent implements OnInit {
     if (responseconteudo.errors) {
       this.subjectService.subject_Exibindo_Snackbar.next({ message: 'Não foi possível trazer a listagem' })
     }
-   
+
     if (responseconteudo.data.conteudos.length == 0) {
       this.b_Fim_Lista = true
     }
+
     this.objConteudo.nr_registos = responseconteudo.data.conteudos_aggregate.aggregate.count
-   
+
     if (this.b_Width) {
       this.obj_Array_Conteudos = responseconteudo.data.conteudos
     }
@@ -177,10 +175,8 @@ export class HomeComponent implements OnInit {
   async OnClick_Access(conteudo) {
 
     this.objDados.cd_Conteudo = conteudo.cd_conteudo
-    console.log("estudo", conteudo)
     this.objDados.nm_Usuario = this.nm_User
     const responseacesso = await this.conteudoService.Set_Gravar_Dados(this.objDados)
-    console.log(responseacesso)
     if (responseacesso.errors) {
       this.subject_service.subject_Exibindo_Snackbar.next({ message: 'Não foi possível acessar' })
     } else {

@@ -79,7 +79,6 @@ export class ConteudoEditarComponent implements OnInit, OnDestroy {
 
     const responseconteudo = await this.conteudoService.Get_Conteudo_Edit(this.cd_Id_Param)
     this.obj_Filds_Input = responseconteudo.data.conteudos[0]
-    console.log(responseconteudo)
   }
 
   async Set_Edit_User() {

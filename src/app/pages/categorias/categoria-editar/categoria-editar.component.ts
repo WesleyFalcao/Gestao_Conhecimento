@@ -64,7 +64,6 @@ export class CategoriaEditarComponent implements OnInit, OnDestroy {
 
   async Set_Edit() {
     const responseedit = await this.categoriaService.Set_Edit_Category(this.nm_Categoria, this.cd_Id_Param)
-    console.log("nm_Categoria",this.nm_Categoria)
 
     if(responseedit == false){
       this.b_Alert_Modal = true

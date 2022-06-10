@@ -115,7 +115,6 @@ export class MeusEstudosComponent implements OnInit {
       this.subject_service.subject_Exibindo_Snackbar.next({ message: 'Não foi possível trazer a listagem' })
     }
     this.Obj_Array_Meus_Estudos = responsemystudies.data.estudos
-    console.log(this.Obj_Array_Meus_Estudos)
   }
 
   onFilter_Search(iten) {
@@ -131,12 +130,9 @@ export class MeusEstudosComponent implements OnInit {
   }
 
   async OnClick_Access(estudo) {
-
     this.objDados.cd_Conteudo = estudo.conteudo.cd_conteudo
-    console.log("estudo",estudo)
     this.objDados.nm_Usuario = this.nm_User
     const responseacesso = await this.conteudoService.Set_Gravar_Dados(this.objDados)
-    console.log(responseacesso)
     if (responseacesso.errors) {
       this.subject_service.subject_Exibindo_Snackbar.next({ message: 'Não foi possível acessar' })
     } else {
@@ -158,7 +154,6 @@ export class MeusEstudosComponent implements OnInit {
   }
 
   Filtrar() {
-    console.log(this.objFilter)
   }
 
   Show_Popover(estudo) {

@@ -15,10 +15,10 @@
     </div>
     <div *ngIf="obj_Array_Sugestoes_Arquivadas?.length != 0">
         <div class="hidden div-grid-title mt-8 lg:grid grid-cols-4">
-            <p class="font-semibold lg:grid ml-5 lg:pl-4">Id</p>
-            <p class="font-semibold lg:grid ml-5">Título</p>
-            <p class="lg:text-left font-semibold">Descrição</p>
-            <p class="lg:text-center font-semibold">Desarquivar</p>
+            <p class="font-semibold text-base lg:grid ml-5 lg:pl-4">Id</p>
+            <p class="font-semibold text-base lg:grid ml-5">Título</p>
+            <p class="lg:text-left font-semibold text-base">Descrição</p>
+            <p class="lg:text-center font-semibold text-base">Desarquivar</p>
         </div>
     </div>
     <div class="top-5 relative flex flex-col">
@@ -36,8 +36,8 @@
                 </div>
                 <div class="pb-4 flex flex-col gap-y-1" *ngIf="item.show && b_Width == false">
 
-                    <p class="ml-5 lg:text-center mb-1 lg:relative font-medium">Id: {{item.cd_sugestao}}</p>
-                    <p class="ml-5 lg:text-center mb-1 lg:relative font-medium">Descrição:</p>
+                    <p class="ml-5 lg:text-center mb-1 lg:relative font-semibold">Id: {{item.cd_sugestao}}</p>
+                    <p class="ml-5 lg:text-center mb-1 lg:relative font-semibold">Descrição:</p>
                     <div class="flex flex-row gap-x-3">
                         <p class="my-auto whitespace-normal text-left ml-5">{{item.ds_sugestao}}</p>
                     </div>
@@ -45,7 +45,7 @@
                         (click)="onClick_Unarchive(item.cd_sugestao, i)">
                         <img class="reltive left-5 ml-5 mt-1 behavior-button w-4 h-4 lg:w-7 lg:h-7 my-auto cursor-pointer lg:mx-auto"
                             src="assets/icons/undo.svg">
-                        <p class="font-medium">Desarquivar</p>
+                        <p class="font-semibold">Desarquivar</p>
                     </div>
                 </div>
             </div>

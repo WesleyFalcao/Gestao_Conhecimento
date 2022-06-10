@@ -95,6 +95,7 @@ export class SugestoesListaComponent implements OnInit {
       this.b_Width = true
     } else {
       this.b_Width = false
+      this.objSugestao.page_lenght = 30
     }
   }
 

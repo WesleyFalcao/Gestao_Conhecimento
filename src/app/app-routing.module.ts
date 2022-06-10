@@ -37,7 +37,6 @@ const routes: Routes = [
     canActivate: [AuthGuard]
   },
   { path: 'conteudo-lista', component: ConteudoEditarListaComponent,
-    data: {b_only_admin: true},
     canActivate: [AuthGuard]
   },
   { path: 'conteudo-adicionar', component: ConteudoAdicionarComponent,

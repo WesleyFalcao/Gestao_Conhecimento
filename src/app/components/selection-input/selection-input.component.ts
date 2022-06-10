@@ -53,7 +53,7 @@ export class SelectionInputComponent implements OnInit {
 
   Iten_Select_Modal(event: any){
     this.Iten_Select = event
-    console.log("this.Iten_Select",this.Iten_Select)
+    
     this.Value_Select.emit(event)
   }
 }

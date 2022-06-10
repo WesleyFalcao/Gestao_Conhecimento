@@ -119,7 +119,6 @@ export class ConteudoComponent implements OnInit, OnDestroy {
     const responseconteudo = await this.conteudoService.Get_Conteudo(this.cd_Id_Param)
     this.obj_Array_Conteudos = responseconteudo.data.conteudos
     this.ds_Titulo = this.obj_Array_Conteudos[0].categoria.nome
-
     this.Get_My_Estudies()
   }
 
@@ -131,7 +130,6 @@ export class ConteudoComponent implements OnInit, OnDestroy {
       this.objFavorite.cd_usuario = this.cd_User_Logged
       this.objFavorite.cd_conteudo = conteudo.cd_conteudo
       const responsefavorito = await this.meuestudosService.Set_My_Study(conteudo.cd_conteudo)
-      console.log(responsefavorito)
       if (responsefavorito.errors) {
         this.subject_service.subject_Exibindo_Snackbar.next({ message: 'Não foi possível favoritar' })
       } else {
@@ -157,19 +155,18 @@ export class ConteudoComponent implements OnInit, OnDestroy {
     }
     this.obj_Array_Conteudos.forEach((iten)=>{
       this.cd_Conteudo = iten.cd_conteudo
-      console.log("conteudo", this.cd_Conteudo)
+      console.log(iten.cd_conteudo)
     })
 
     this.obj_Array_Meus_Estudos = responsemystudies.data.estudos
       this.obj_Array_Meus_Estudos.forEach((iten)=>{
       this.cd_Favorite = iten.conteudo.cd_conteudo
-      console.log("favorito", this.cd_Favorite)
+      console.log(this.cd_Favorite)
     })
   }
 
   onClick_Option_Top() {
     this.route.navigate(['/conteudo-editar', this.cd_Id_Conteudo])
-    console.log(this.cd_Id_Param)
   }
 
   async OnClick_Access(conteudo) {
@@ -193,7 +190,6 @@ export class ConteudoComponent implements OnInit, OnDestroy {
   }
 
   async Set_Delete_Conteudo() {
-    console.log(this.cd_Id_Conteudo)
     const responsedeleteconteudo = await this.conteudoService.Set_Delete_Conteudo(this.cd_Id_Conteudo)
     this.Closed_Alert_Modal()
     this.onClick_Refresh()
@@ -210,7 +206,6 @@ export class ConteudoComponent implements OnInit, OnDestroy {
   }
 
   Filtrar() {
-    console.log(this.objFilter)
     this.b_Show_Filter = false
   }
 

@@ -26,7 +26,7 @@ export class SugestoesComponent implements OnInit {
   nr_Total_Sugestoes: number
 
   /**@description Recebe o valor digitado pelo usuário no desktop */
-  Input_Value: string
+  Input_Value: any
 
   /**@description Boolean para abrir e fechar o modal de filtro */
   b_Show_Filter: boolean = false
@@ -81,6 +81,8 @@ export class SugestoesComponent implements OnInit {
   }
 
   async onClick_Refresh() {
+    this.obj_Array_Sugestoes = []
+    this.Input_Value = null
     const reponsesugestoes = await this.sugestoesService.Get_Suggestions_Admin()
     this.obj_Array_Sugestoes = reponsesugestoes.data.sugestoes_aggregate.nodes
   }

@@ -52,7 +52,6 @@ export class UsuarioRepository {
   }
 
   async Set_Edit_Usuario(objparam){
-    console.log(objparam)
     const query = this.usuarioQuery.Set_Edit_Usuario()
     const variables = {"cd_usuario": objparam.cd_usuario, "b_login_ad": objparam.b_login_ad ,"cd_login": objparam.cd_login, "cd_perfil": objparam.cd_perfil, "ds_senha":objparam.ds_senha , "dt_bloqueio": objparam.dt_bloqueio}
     const response = await this.apiHasuraService._Execute(query, variables, this.httpOptions)

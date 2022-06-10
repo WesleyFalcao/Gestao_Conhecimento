@@ -1,7 +1,9 @@
 import { CdkVirtualScrollViewport } from '@angular/cdk/scrolling';
 import { Component, ElementRef, HostListener, NgZone, OnInit, ViewChild } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { filter, map, pairwise, throttleTime } from 'rxjs';
 import { ConteudoModel } from 'src/app/models/conteudo/conteudo.model';
+import { LoginService } from 'src/app/services/login.service';
 import { SubjectService } from 'src/app/services/subject.service';
 import { ConteudoService } from '../conteudo.service';
 
@@ -10,6 +12,7 @@ import { ConteudoService } from '../conteudo.service';
   templateUrl: './conteudo-lista.component.html',
   styleUrls: ['./conteudo-lista.component.scss']
 })
+
 export class ConteudoEditarListaComponent implements OnInit {
 
   /**@description Título da página */
@@ -21,36 +24,72 @@ export class ConteudoEditarListaComponent implements OnInit {
   /**@description boolean que fica true acima de 1034px */
   b_Width: boolean
 
+  /**@description Boolean de refresh */
+  b_Input_Open: boolean = false
+
   /** @description Recebe true quando no  final do virtual scroll*/
   b_Fim_Lista: boolean = false
 
   /**@description Recebe o valor digitado pelo usuário no desktop */
-  Input_Value: string
+  Input_Value: any
+
+  /**@description Contém os dados do usuário que seram gravados */
+  objDados = { cd_Conteudo: null, nm_Usuario: "" }
 
   /**@description Boolean para abrir e fechar o modal de filtro */
   b_Show_Filter: boolean = false
 
+  b_Exibir_Listagem: boolean
+
   /**@description Recebe o array de conteudos */
   obj_Array_Conteudos: Array<any> = []
+
+  /**@description Boolean que recebe true caso usuário for admin */
+  b_User_Admin: boolean = true
+
+  /**@description Recebe o nome do usário que adicionou a sugestão */
+  nm_User: string
 
   /**@description Objeto de conteduos*/
   objConteudo = new ConteudoModel
 
   /**@description Instância do virtual scroll */
-  @ViewChild (CdkVirtualScrollViewport) scroller: CdkVirtualScrollViewport
+  @ViewChild(CdkVirtualScrollViewport) scroller: CdkVirtualScrollViewport
 
   constructor(
     private conteudoService: ConteudoService,
     private subjectService: SubjectService,
-    private ngZone: NgZone
-  ) { }
-
-  async ngOnInit() {
-    this.Search_Conteudos()
-    this.onResize()
+    private ngZone: NgZone,
+    private loginService: LoginService,
+    private route: ActivatedRoute,
+  ) {
   }
 
-  ngAfterViewInit(){
+  async ngOnInit() {
+    const role = this.loginService.Name_Role()
+    console.log("role",role)
+    if(role == "trustee"){
+      this.b_User_Admin = true
+    }else{
+      this.b_User_Admin = false
+    }
+    this.nm_User = this.loginService.Name_User_Logged()
+    this.onResize()
+    this.route.queryParams.subscribe(param => this.Input_Value = param.nm_searcch)
+    if (this.Input_Value != null) {
+      this.ds_Titulo = "Resultados"
+      this.b_Input_Open = true
+    } else {
+      this.ds_Titulo = "Conteúdos"
+    }
+  }
+
+  ngAfterViewInit() {
+    if (this.Input_Value != null) {
+      setTimeout(() => {
+        this.Search_Conteudos()
+      });
+    }
     this.scroller.elementScrolled().pipe(
       map(() => this.scroller.measureScrollOffset('bottom')),
       pairwise(),
@@ -73,24 +112,60 @@ export class ConteudoEditarListaComponent implements OnInit {
       this.b_Width = true
     } else {
       this.b_Width = false
-      this.objConteudo.page_lenght = 30
+      this.objConteudo.page_lenght = 10
     }
   }
 
   async Search_Conteudos() {
-    const responseconteudo = await this.conteudoService.Get_Conteudos(this.objConteudo)
-    if(responseconteudo.errors){
-      this.subjectService.subject_Exibindo_Snackbar.next({ message: 'Não foi possível trazer a listagem' })
+    console.log("chamou")
+    if (this.Input_Value == null) {
+      const responseconteudo = await this.conteudoService.Get_Conteudos(this.objConteudo)
+      if (responseconteudo.errors) {
+        this.subjectService.subject_Exibindo_Snackbar.next({ message: 'Não foi possível trazer a listagem' })
+      }
+      if (responseconteudo.data.conteudos.length == 0) {
+        this.b_Fim_Lista = true
+      }
+      if (this.b_Width) {
+        this.obj_Array_Conteudos = responseconteudo.data.conteudos
+        this.objConteudo.nr_registos = responseconteudo.data.conteudos_aggregate.aggregate.count
+      }
+      else {
+        this.obj_Array_Conteudos = [...this.obj_Array_Conteudos, ...responseconteudo.data.conteudos]
+      }
+
+    } else {
+      const responseconteudo = await this.conteudoService.Get_Conteudos_Filter(this.objConteudo, this.Input_Value)
+      console.log("responseconteudo",responseconteudo)
+      if (responseconteudo.errors) {
+        this.subjectService.subject_Exibindo_Snackbar.next({ message: 'Não foi possível trazer a listagem' })
+      }
+      if (responseconteudo.data.conteudos.length == 0) {
+        this.b_Fim_Lista = true
+      }
+      if (this.b_Width) {
+        this.obj_Array_Conteudos = responseconteudo.data.conteudos
+        this.objConteudo.nr_registos = responseconteudo.data.conteudos_aggregate.aggregate.count
+      }
+      else {
+        this.obj_Array_Conteudos = [...this.obj_Array_Conteudos, ...responseconteudo.data.conteudos]
+      }
+      
+      if (this.obj_Array_Conteudos?.length == 0 && this.Input_Value != null) {
+        this.b_Exibir_Listagem = false
+      }
     }
-    if (responseconteudo.data.conteudos.length == 0) {
-      this.b_Fim_Lista = true
-    }
-    if(this.b_Width){
-      this.obj_Array_Conteudos = responseconteudo.data.conteudos
-      this.objConteudo.nr_registos = responseconteudo.data.conteudos_aggregate.aggregate.count
-    }
-    else{
-      this.obj_Array_Conteudos = [...this.obj_Array_Conteudos, ...responseconteudo.data.conteudos]
+  }
+
+  async OnClick_Access(conteudo) {
+
+    this.objDados.cd_Conteudo = conteudo.cd_conteudo
+    this.objDados.nm_Usuario = this.nm_User
+    const responseacesso = await this.conteudoService.Set_Gravar_Dados(this.objDados)
+    if (responseacesso.errors) {
+      this.subjectService.subject_Exibindo_Snackbar.next({ message: 'Não foi possível acessar' })
+    } else {
+      window.open(conteudo.ds_link, "_blank")
     }
   }
 
@@ -105,9 +180,23 @@ export class ConteudoEditarListaComponent implements OnInit {
     }
   }
 
-  onFilter_Search(iten) {
-    this.Input_Value = iten
+  onClick_Refresh() {
+    this.objConteudo.nr_pagina = 1
+    this.obj_Array_Conteudos = []
+    this.b_Fim_Lista = !this.b_Fim_Lista
+    if (this.b_Width == false) {
+      document.getElementById('virtualscroll')?.scrollTo({ top: 0 })
+    }
+    this.Input_Value = null
+    this.Search_Conteudos()
   }
+
+  async onFilter_Search(iten) {
+    this.Input_Value = null
+    this.Input_Value = iten
+    await this.Search_Conteudos()
+  }
+
   Focus_Item(el: HTMLElement) {
     el.scrollIntoView();
   }
@@ -127,13 +216,27 @@ export class ConteudoEditarListaComponent implements OnInit {
   /** @description Avança uma pagina */
   async Mudar_Pagina(nr_Pagina: number) {
     this.objConteudo.nr_pagina = nr_Pagina
-    const responseusuarios = await this.conteudoService.Get_Conteudos(this.objConteudo)
-    if (responseusuarios.errors) {
-      this.subjectService.subject_Exibindo_Snackbar.next({ message: 'Não foi possível trazer a listagem' })
+    if (this.Input_Value == null) {
+      const responseusuarios = await this.conteudoService.Get_Conteudos(this.objConteudo)
+
+      if (responseusuarios.errors) {
+        this.subjectService.subject_Exibindo_Snackbar.next({ message: 'Não foi possível trazer a listagem' })
+      } else {
+        this.obj_Array_Conteudos = responseusuarios.data.conteudos
+        if (this.obj_Array_Conteudos == undefined) {
+          this.obj_Array_Conteudos = []
+        }
+      }
     } else {
-      this.obj_Array_Conteudos = responseusuarios.data.conteudos
-      if (this.obj_Array_Conteudos == undefined) {
-        this.obj_Array_Conteudos = []
+      const responseusuarios = await this.conteudoService.Get_Conteudos_Filter(this.objConteudo, this.Input_Value)
+
+      if (responseusuarios.errors) {
+        this.subjectService.subject_Exibindo_Snackbar.next({ message: 'Não foi possível trazer a listagem' })
+      } else {
+        this.obj_Array_Conteudos = responseusuarios.data.conteudos
+        if (this.obj_Array_Conteudos == undefined) {
+          this.obj_Array_Conteudos = []
+        }
       }
     }
   }

@@ -123,6 +123,17 @@ export class UsersComponent implements OnInit {
     }
   }
 
+  onClick_Refresh() {
+    this.objUsuarios.nr_pagina = 1
+    this.obj_Array_Usuarios = []
+    this.b_Fim_Lista = !this.b_Fim_Lista
+    if (this.b_Width == false) {
+      document.getElementById('virtualscroll')?.scrollTo({ top: 0 })
+    }
+    this.Input_Value = ""
+    this.Search_User()
+  }
+
   Filtrar() {
     this.b_Show_Filter = false
   }
@@ -141,7 +152,7 @@ export class UsersComponent implements OnInit {
 
   async Search_User() {
     const responseusuarios = await this.usuarioService.Get_Usuarios(this.objUsuarios)
-    
+
     if (responseusuarios.errors) {
       this.subjectService.subject_Exibindo_Snackbar.next({ message: 'Não foi possível trazer a listagem' })
     }
@@ -152,7 +163,7 @@ export class UsersComponent implements OnInit {
     if (this.b_Width) {
       this.obj_Array_Usuarios = responseusuarios.data.usuarios
       this.objUsuarios.nr_registos = responseusuarios.data.usuarios_aggregate.aggregate.count
-      
+
     } else {
       this.obj_Array_Usuarios = [...this.obj_Array_Usuarios, ...responseusuarios.data.usuarios]
     }
@@ -166,7 +177,7 @@ export class UsersComponent implements OnInit {
       this.subjectService.subject_Exibindo_Snackbar.next({ message: 'Não foi possível trazer a listagem' })
     } else {
       this.obj_Array_Usuarios = responseusuarios.data.usuarios
-      if(this.obj_Array_Usuarios == undefined){
+      if (this.obj_Array_Usuarios == undefined) {
         this.obj_Array_Usuarios = []
       }
     }

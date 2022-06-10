@@ -29,7 +29,7 @@ export class ConteudoService {
     }
 
     Set_Edit_User(objparam, idconteudo){
-        console.log("objparam.nm_titulo", objparam.nm_titulo)
+
         if(objparam.nm_titulo == "" || objparam.ds_conteudo == "" || objparam.ds_link == "" || objparam.categoria == ""){
             return false
         }

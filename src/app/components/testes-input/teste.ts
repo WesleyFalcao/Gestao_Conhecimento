@@ -54,12 +54,12 @@ export class InputComponent implements ControlValueAccessor, OnInit {
         this.onChangeCallback(this.innerValue);
     }
     async evento(e) {
-        //console.log(e);
+        
         if (e == "blur") {
         } else if (e == "focus") {
             this.showDrop = true;
         } else if (e == "keyup") {
-            //console.log(this.value)
+            
             this.modelChanged.next(this.value);
         } else if (e == "keydown") {
         }

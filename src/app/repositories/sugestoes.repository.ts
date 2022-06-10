@@ -51,7 +51,6 @@ export class SugestoesRepository {
 
     const variables = {where}
     const response = await this.apiHasuraService._Execute(query, variables, this.httpOptions)
-    console.log("responsefilter",response)
     this.subjectService.subject_Exibindo_Loading.next(false)
     return response
   }

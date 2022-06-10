@@ -24,7 +24,6 @@ export class CategoriaRepository {
     const variables = { limit: param.page_lenght, offset: ((param.nr_pagina - 1)*param.page_lenght)}
     const response = await this.apiHasuraService._Execute(query, variables,this.httpOptions)
     this.subjectService.subject_Exibindo_Loading.next(false)
-    console.log(response)
     return response
   }
 
@@ -56,7 +55,6 @@ export class CategoriaRepository {
     const query = this.categoriaQuery.Set_Edit_Category()
     const variables = {"nm_categoria": nm_Categoria, "cd_categoria": cd_Id_Param}
     const response = await this.apiHasuraService._Execute(query, variables, this.httpOptions)
-    console.log("editado", response)
     return response
   }
 }

@@ -121,7 +121,6 @@ export class EditarUserComponent implements OnInit, OnDestroy {
 
   async Set_Edit_User() {
     const responseedituser = await this.usuarioService.Set_Edit_Usuario(this.obj_Filds_Input)
-    console.log(responseedituser)
     if (responseedituser == false) {
       this.b_Alert_Modal = true
       this.ds_Alert_Descricao = "Todos os campos devem ser preenchidos!"

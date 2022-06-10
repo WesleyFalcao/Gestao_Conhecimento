@@ -152,7 +152,5 @@ export function Get_Invalid_Controls(resourceForm: FormGroup, tempo: number = 50
             //     invalid.push({ nome: name, valor: resourceForm.controls[name].value, formControl: resourceForm.controls[name] });
             // }
         }
-
-        console.log(invalid)
     }, tempo)
 }

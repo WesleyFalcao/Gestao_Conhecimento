@@ -61,7 +61,6 @@ export class ConteudoAdicionarComponent implements OnInit {
 
   async Add_Content(){
     const responsecontent = await this.conteudoService.Set_Add_Conteudo(this.obj_Add_Content)
-    console.log("responsecontent", responsecontent)
     if(responsecontent == false){
       this.b_Alert_Modal = true
       this.ds_Alert_Descricao = "Todos os campos devem ser preenchidos!"  
