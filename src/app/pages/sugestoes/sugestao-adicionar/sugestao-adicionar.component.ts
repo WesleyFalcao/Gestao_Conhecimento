@@ -53,10 +53,8 @@ export class SugestaoAdicionarComponent implements OnInit {
   async Send_Sugestion(){
 
     this.obj_Add_Suggestion.cd_Usuario = this.cd_User
-    console.log(this.obj_Add_Suggestion.cd_Usuario)
  
     const responsesuggestion = await this.sugestaoService.Set_Add_Suggestion(this.obj_Add_Suggestion)
-    console.log(responsesuggestion)
     if(responsesuggestion == false){
       this.b_Alert_Modal = true
       this.ds_Alert_Descricao = "Todos os campos devem ser preenchidos!"  

@@ -19,73 +19,94 @@ import { SugestaoAdicionarComponent } from './pages/sugestoes/sugestao-adicionar
 import { SendSuggestionComponent } from './components/send-suggestion/send-suggestion.component';
 import { AuthGuard } from './guards/auth-guard';
 import { SumarioAdicionarComponent } from './pages/sumario/sumario-adicionar/sumario-adicionar.component';
-
+import { AnimationNotAllowedComponent } from './components/animation-not-allowed/animation-not-allowed.component';
 
 const routes: Routes = [
 
-  { path: 'home', component: HomeComponent,
+  {
+    path: 'home', component: HomeComponent,
     data: { animation: "HomePage" },
     canActivate: [AuthGuard],
   },
-  { path: 'meus-estudos', component: MeusEstudosComponent,
+  {
+    path: 'meus-estudos', component: MeusEstudosComponent,
     canActivate: [AuthGuard]
   },
-  { path: 'conteudo/:id', component: ConteudoComponent,
+  {
+    path: 'conteudo/:id', component: ConteudoComponent,
     canActivate: [AuthGuard]
   },
-  { path: 'conteudo-editar/:id', component: ConteudoEditarComponent,
-    data: {b_only_admin: true},
+  {
+    path: 'conteudo-editar/:id', component: ConteudoEditarComponent,
+    data: { b_only_admin: true },
     canActivate: [AuthGuard]
   },
-  { path: 'conteudo-lista', component: ConteudoEditarListaComponent,
+  {
+    path: 'conteudo-lista', component: ConteudoEditarListaComponent,
     canActivate: [AuthGuard]
   },
-  { path: 'conteudo-adicionar', component: ConteudoAdicionarComponent,
-    data: {b_only_admin: true},
-    canActivate: [AuthGuard]  
+  {
+    path: 'conteudo-adicionar', component: ConteudoAdicionarComponent,
+    data: { b_only_admin: true },
+    canActivate: [AuthGuard]
   },
-  { path: 'sumario-adicionar', component: SumarioAdicionarComponent,
-    // data: {b_only_admin: true},
-    canActivate: [AuthGuard]  
+  {
+    path: 'sumario-adicionar', component: SumarioAdicionarComponent,
+    data: { b_only_admin: true },
+    canActivate: [AuthGuard]
   },
-  { path: 'usuarios', component: UsersComponent,
-  data: {b_only_admin: true},
-  canActivate: [AuthGuard]  
+  {
+    path: 'usuarios', component: UsersComponent,
+    data: { b_only_admin: true },
+    canActivate: [AuthGuard]
   },
-  { path: 'adicionar-usuario', component: AdicionarUsersComponent,
-  data: {b_only_admin: true},
-  canActivate: [AuthGuard]
+  {
+    path: 'adicionar-usuario', component: AdicionarUsersComponent,
+    data: { b_only_admin: true },
+    canActivate: [AuthGuard]
   },
-  { path: 'editar-usuario/:id', component: EditarUserComponent,
-  data: {b_only_admin: true},
-  canActivate: [AuthGuard]  
+  {
+    path: 'editar-usuario/:id', component: EditarUserComponent,
+    data: { b_only_admin: true },
+    canActivate: [AuthGuard]
   },
-  { path: 'sugestoes', component: SugestoesComponent,
-  canActivate: [AuthGuard]  
+  {
+    path: 'sugestoes', component: SugestoesComponent,
+    canActivate: [AuthGuard]
   },
-  { path: 'sugestoes-lista', component: SugestoesListaComponent,
-  data: {b_only_admin: true},
-  canActivate: [AuthGuard] 
+  {
+    path: 'sugestoes-lista', component: SugestoesListaComponent,
+    data: { b_only_admin: true },
+    canActivate: [AuthGuard]
   },
-  { path: 'sugestao-adicionar', component: SugestaoAdicionarComponent,
-  canActivate: [AuthGuard]
+  {
+    path: 'sugestao-adicionar', component: SugestaoAdicionarComponent,
+    canActivate: [AuthGuard]
   },
-  { path: 'categorias', component: CategoriaComponent,
-  data: {b_only_admin: true},
-  canActivate: [AuthGuard]  
+  {
+    path: 'categorias', component: CategoriaComponent,
+    data: { b_only_admin: true },
+    canActivate: [AuthGuard]
   },
-  { path: 'categoria-adicionar', component: CategoriaAdicionarComponent,
-  data: {b_only_admin: true},
-  canActivate: [AuthGuard]
+  {
+    path: 'categoria-adicionar', component: CategoriaAdicionarComponent,
+    data: { b_only_admin: true },
+    canActivate: [AuthGuard]
   },
-  { path: 'categoria-editar/:id', component: CategoriaEditarComponent,
-  data: {b_only_admin: true},
-  canActivate: [AuthGuard]  
+  {
+    path: 'categoria-editar/:id', component: CategoriaEditarComponent,
+    data: { b_only_admin: true },
+    canActivate: [AuthGuard]
   },
-  { path: '', component: LoginComponent,
+  {
+    path: 'not-allowed', component: AnimationNotAllowedComponent,
+  },
+  {
+    path: '', component: LoginComponent,
     data: { animation: "LoginPage" },
   },
-  { path: '**', component: LoginComponent,
+  {
+    path: '**', component: AnimationNotAllowedComponent,
     data: { animation: "LoginPage" },
   },
 ];

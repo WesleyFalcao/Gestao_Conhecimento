@@ -5,9 +5,9 @@
 export const environment = {
   production: false,
   SESSION_NAME: "gestao-conhecimento",
-  CONS_URL_APIBASE: "",
-  CONS_URL_API_LOGIN: "http://localhost:3000/graphql",
-  CONS_URL_API_HASURA: "http://10.1.2.31:8088/v1/graphql"
+  // CONS_URL_API_LOGIN: "http://localhost:3000/graphql",
+  // CONS_URL_API_HASURA: "http://10.1.2.31:8088/v1/graphql"
+  CONS_URL_API: "https://homologacao.unimedsulcapixaba.coop.br/portal/gestao-do-conhecimento/api-graphql/v1/graphql"
 };
 
 /*

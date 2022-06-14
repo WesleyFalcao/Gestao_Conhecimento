@@ -33,9 +33,6 @@ export class LoginComponent implements OnInit {
     }
 
     ngOnInit() {
-        // if (this.dataService.Get_Session('token')) {
-        //     this.route.navigate(['/home']);
-        // }
     }
 
     Remover_Mascara(event?: any) {

@@ -5,6 +5,7 @@ import { ListModel } from 'src/app/models/arraylist/array-list';
 import { UsuarioParams } from 'src/app/models/usuario/usuario.model';
 import { SubjectService } from 'src/app/services/subject.service';
 import { UsuariosService } from '../usuarios.service';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-editar-user',
@@ -45,7 +46,7 @@ export class EditarUserComponent implements OnInit, OnDestroy {
   nm_Label_Selection_Input_Ativo: string = "Status"
 
   /**@description Nome do label do selection input */
-  nm_Label_Selection_Input_Usuario: string = "Logar com usuário do computador?"
+  nm_Label_Selection_Input_Usuario: string = "Logar com usuário AD?"
 
   /**@description Nome do label do input */
   nm_Label_Input_Usuario: string = "Nome de usuário"
@@ -73,6 +74,7 @@ export class EditarUserComponent implements OnInit, OnDestroy {
 
   constructor(
     private route: ActivatedRoute,
+    private location: Location,
     private usuarioService: UsuariosService,
     private subjectService: SubjectService,
   ) { }
@@ -118,6 +120,11 @@ export class EditarUserComponent implements OnInit, OnDestroy {
   Closed_Alert_Modal() {
     this.b_Alert_Modal = false
   }
+
+  Back() {
+    this.location.back();
+  }
+
 
   async Set_Edit_User() {
     const responseedituser = await this.usuarioService.Set_Edit_Usuario(this.obj_Filds_Input)

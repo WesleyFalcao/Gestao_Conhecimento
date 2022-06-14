@@ -53,6 +53,9 @@ export class ConteudoEditarListaComponent implements OnInit {
   /**@description Objeto de conteduos*/
   objConteudo = new ConteudoModel
 
+  /**@description Recebe a resposata das queries de conteudos*/
+  obj_Array_Response: any
+
   /**@description Instância do virtual scroll */
   @ViewChild(CdkVirtualScrollViewport) scroller: CdkVirtualScrollViewport
 
@@ -67,10 +70,9 @@ export class ConteudoEditarListaComponent implements OnInit {
 
   async ngOnInit() {
     const role = this.loginService.Name_Role()
-    console.log("role",role)
-    if(role == "trustee"){
+    if (role == "trustee") {
       this.b_User_Admin = true
-    }else{
+    } else {
       this.b_User_Admin = false
     }
     this.nm_User = this.loginService.Name_User_Logged()
@@ -117,43 +119,27 @@ export class ConteudoEditarListaComponent implements OnInit {
   }
 
   async Search_Conteudos() {
-    console.log("chamou")
-    if (this.Input_Value == null) {
-      const responseconteudo = await this.conteudoService.Get_Conteudos(this.objConteudo)
-      if (responseconteudo.errors) {
-        this.subjectService.subject_Exibindo_Snackbar.next({ message: 'Não foi possível trazer a listagem' })
-      }
-      if (responseconteudo.data.conteudos.length == 0) {
-        this.b_Fim_Lista = true
-      }
-      if (this.b_Width) {
-        this.obj_Array_Conteudos = responseconteudo.data.conteudos
-        this.objConteudo.nr_registos = responseconteudo.data.conteudos_aggregate.aggregate.count
-      }
-      else {
-        this.obj_Array_Conteudos = [...this.obj_Array_Conteudos, ...responseconteudo.data.conteudos]
-      }
 
+    if (this.Input_Value == null) {
+      this.obj_Array_Response = await this.conteudoService.Get_Conteudos(this.objConteudo)
     } else {
-      const responseconteudo = await this.conteudoService.Get_Conteudos_Filter(this.objConteudo, this.Input_Value)
-      console.log("responseconteudo",responseconteudo)
-      if (responseconteudo.errors) {
-        this.subjectService.subject_Exibindo_Snackbar.next({ message: 'Não foi possível trazer a listagem' })
-      }
-      if (responseconteudo.data.conteudos.length == 0) {
-        this.b_Fim_Lista = true
-      }
-      if (this.b_Width) {
-        this.obj_Array_Conteudos = responseconteudo.data.conteudos
-        this.objConteudo.nr_registos = responseconteudo.data.conteudos_aggregate.aggregate.count
-      }
-      else {
-        this.obj_Array_Conteudos = [...this.obj_Array_Conteudos, ...responseconteudo.data.conteudos]
-      }
-      
-      if (this.obj_Array_Conteudos?.length == 0 && this.Input_Value != null) {
-        this.b_Exibir_Listagem = false
-      }
+      this.obj_Array_Response = await this.conteudoService.Get_Conteudos_Filter(this.objConteudo, this.Input_Value)
+    }
+    if (this.obj_Array_Response.errors) {
+      this.subjectService.subject_Exibindo_Snackbar.next({ message: 'Não foi possível trazer a listagem' })
+    }
+    if (this.obj_Array_Response.data.conteudos.length == 0) {
+      this.b_Fim_Lista = true
+    }
+    if (this.b_Width) {
+      this.obj_Array_Conteudos = this.obj_Array_Response.data.conteudos
+      this.objConteudo.nr_registos = this.obj_Array_Response.data.conteudos_aggregate.aggregate.count
+    }
+    else {
+      this.obj_Array_Conteudos = [...this.obj_Array_Conteudos, ...this.obj_Array_Response.data.conteudos]
+    }
+    if (this.obj_Array_Conteudos?.length == 0 && this.Input_Value != null) {
+      this.b_Exibir_Listagem = false
     }
   }
 

@@ -27,7 +27,7 @@ export class UsuarioRepository {
     this.subjectService.subject_Exibindo_Loading.next(false)
     return response
   }
-  
+ 
   async Get_Usuario(param){
     const query = this.usuarioQuery.Get_Usuario()
     const variables = {"cd_usuario": param}

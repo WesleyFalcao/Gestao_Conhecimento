@@ -16,9 +16,6 @@ export class SugestoesComponent implements OnInit {
   /**@description Título da página */
   ds_Titulo: string = "Sugestões"
 
-  /**@description Number que vai receber o número de sugestões cadastradas pelo usuário */
-  nr_Minhas_Sugestoes: number = 0
-
   /**@description True quando o usuário logado for adimin */
   b_User_Admin: boolean = false
 
@@ -68,7 +65,6 @@ export class SugestoesComponent implements OnInit {
   async File_Suggestion(item, index) {
     item.show = !item.show
     const responsefile = await this.sugestoesService.Set_File_Suggestion(item.cd_sugestao)
-    console.log("responsefile", responsefile)
     if (responsefile.data.update_sugestoes.returning.lenght != 1) {
       setTimeout(() => {
         this.subjectService.subject_Exibindo_Snackbar.next({ message: 'Arquivado com sucesso!' })

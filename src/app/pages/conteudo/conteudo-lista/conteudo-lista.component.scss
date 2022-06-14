@@ -45,6 +45,15 @@
     transition-property: transform;
 }
 
+.p-rows{
+    width: calc(100% - 30px);
+    overflow: hidden; 
+    text-overflow: ellipsis; 
+    display: -webkit-box;
+    -webkit-line-clamp: 5; 
+    -webkit-box-orient: vertical;
+}
+
 .behavior-button{
     &:active {
         transform: scale(0.92);

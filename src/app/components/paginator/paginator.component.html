@@ -29,13 +29,13 @@
         (click)="Ir_Pagina(objArrayPaginasExibidas[4])">
         {{ objArrayPaginasExibidas[4] }} </div>
 
-    <div *ngIf="nr_Quantidade_Pagina > 5" class="counter" nz-button nz-popover nzPopoverTrigger="hover"
+    <div *ngIf="nr_Quantidade_Pagina > 5" class="counter " nz-button nz-popover nzPopoverTrigger="hover"
         [nzPopoverContent]="contentTemplate">
         ...
     </div>
 
     <ng-template #contentTemplate>
-        <div class="div-paginas flex flex-row">
+        <div class="div-paginas grid grid-cols-4">
             <div class="gap-x-4" *ngFor="let pagina of objArrayPaginas"
                 [ngClass]="'div-paginator-pagina ' + (nr_Pagina == pagina ? 'selecionado' : '')"
                 (click)="Ir_Pagina(pagina)">

@@ -15,7 +15,7 @@ export class UsuariosService {
     Get_Usuarios(param) {
         return this.usuariosRepository.Get_Usuarios(param)
     }
-
+    
     Get_Usuario(param){
         return this.usuariosRepository.Get_Usuario(param)
     }

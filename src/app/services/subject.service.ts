@@ -24,5 +24,4 @@ export class SubjectService {
 
     /** @description Subject que controla o Appbar */
     subject_Exibir_Not_Found = new BehaviorSubject(false);
-
 }

@@ -47,7 +47,7 @@ export class ApiHasuraService {
         // Retorna o promise
         return this.http
             .post<any>(
-                environment.CONS_URL_API_HASURA,
+                environment.CONS_URL_API,
                 objBody,
                 this.httpOptions
             )

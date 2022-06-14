@@ -40,19 +40,19 @@
                 </div>
                 <div class="pb-4 flex flex-col gap-y-2" *ngIf="conteudo.show">
 
-                    <div class="flex flex-row gap-x-3">
-                        <p class="ml-5  font-semibold">ID:</p>
-                        <p class="my-auto truncate">{{conteudo.cd_conteudo}}</p>
-                    </div>
-                    <div class="flex flex-row gap-x-3">
-                        <p class="ml-5 font-semibold">Usuário:</p>
-                        <p class="my-auto w-8/12 truncate">{{conteudo.ds_conteudo}}
-                        </p>
-                    </div>
+                    
                     <div class="flex flex-row gap-x-3">
                         <p class="ml-5 font-semibold">Contegoria:</p>
                         <p class="my-auto w-4/12 truncate">
                             {{conteudo.categoria.nm_categoria}}</p>
+                    </div>
+                    <div class="flex flex-row gap-x-3">
+                        <p class="ml-5 font-semibold">Descrição:</p>
+                    </div>
+                    <p class="my-auto ml-6 p-rows">{{conteudo.ds_conteudo}}</p>
+                    <div class="flex flex-row gap-x-3">
+                        <p class="ml-5  font-semibold">ID:</p>
+                        <p class="my-auto truncate">{{conteudo.cd_conteudo}}</p>
                     </div>
                     <div class="flex flex-row gap-x-3">
                         <div class="gap-x-3 behavior-button rounded-full ml-5 bg-unimed-green" (click)="OnClick_Access(conteudo)">

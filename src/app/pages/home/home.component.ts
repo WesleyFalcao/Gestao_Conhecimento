@@ -82,26 +82,6 @@ export class HomeComponent implements OnInit {
     this.obj_Array_Categoria = responsecategoria.data.categorias
   }
 
-  AfterViewInit() {
-
-    // setTimeout(() => {
-    //   this.Search_Conteudos()
-    // });
-
-    // this.scroller.elementScrolled().pipe(
-    //   map(() => this.scroller.measureScrollOffset('bottom')),
-    //   pairwise(),
-    //   filter(([y1, y2]) => (y2 < y1 && y2 < 500)),
-    //   throttleTime(200)
-    // ).subscribe(() => {
-    //   this.ngZone.run(async () => {
-    //     if (!this.b_Fim_Lista) {
-    //       this.objConteudo.nr_pagina++
-    //       this.Search_Conteudos();
-    //     }
-    //   });
-    // })
-  }
 
   @HostListener('window:resize')
   onResize() {
@@ -113,7 +93,6 @@ export class HomeComponent implements OnInit {
     } else {
       this.b_Show_Input = false
       this.b_Width = false
-      // this.objConteudo.page_lenght = 30
     }
   }
 

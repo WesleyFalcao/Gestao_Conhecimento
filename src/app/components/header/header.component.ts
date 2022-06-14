@@ -139,7 +139,7 @@ export class HeaderComponent implements OnInit {
   }
 
   Logout() {
-    this.dataService.Limpar_Session();
+    this.dataService.Limpar_Local()
     this.route.navigate(['']);
   }
 

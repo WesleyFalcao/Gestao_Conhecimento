@@ -57,6 +57,7 @@ export class UsersComponent implements OnInit {
   /**@description Objeto que recebe os valores de cada coluna */
   objUsuarios = new UsuarioParams
 
+
   @ViewChild(CdkVirtualScrollViewport) scroller: CdkVirtualScrollViewport
 
   constructor(

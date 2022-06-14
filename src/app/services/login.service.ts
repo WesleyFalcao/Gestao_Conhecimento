@@ -32,7 +32,8 @@ export class LoginService {
 
     constructor(
         private dataService: DataService,
-        private apollo: Apollo, private data: DataService,
+        private apollo: Apollo,
+        private data: DataService,
         private http: HttpClient,
         private route: Router,
         private subjectService: SubjectService,
@@ -44,51 +45,59 @@ export class LoginService {
         // Retorna o promise
         return this.http
             .post<any>(
-                environment.CONS_URL_API_LOGIN,
+                environment.CONS_URL_API,
                 objBody,
                 this.httpOptions
             )
-        .toPromise();
+            .toPromise();
     }
 
     async Set_Login(objLogin: LoginParams) {
-        let res = await this._Execute(QUERY_LOGIN, objLogin)
-        if (res.data.login.sucesso) {
-            this.b_User_Authenticated = true
-            this.dataService.Set_Local("token", res.data.login.accessToken)
-            this.route.navigate(['/home']).then(() => {
-                // setTimeout(() => this.subjectService.subject_Exibindo_Bar.next(true));
-            });
-        } else {
-            this.subjectService.subject_Exibindo_Snackbar.next({ message: (res.data.login.mensagem) })
+        try {
+            let res = await this._Execute(QUERY_LOGIN, objLogin)
+           
+            if (res.data.login.sucesso) {
+                this.b_User_Authenticated = true
+                this.dataService.Set_Local("token", res.data.login.accessToken)
+                this.route.navigate(['/home'])
+            } else {
+                this.subjectService.subject_Exibindo_Snackbar.next({ message: (res.data.login.mensagem) })
+            }
+        } catch {
+            this.data.Limpar_Local()
+            this.subjectService.subject_Exibindo_Loading.next(false)
+            this.subjectService.subject_Exibindo_Snackbar.next({ message: ("Não é possível acessar no momento") })
         }
     }
 
-    Token_Expired(){
+    Token_Expired() {
         const token = this.dataService.Get_Local("token")
         return this.helper.isTokenExpired(token);
     }
 
-    Date_Expiration_Token(){
+    Date_Expiration_Token() {
         const token = this.dataService.Get_Local("token")
         return this.helper.getTokenExpirationDate(token)
-    }   
+    }
 
-    Name_User_Logged(){
+    Name_User_Logged() {
         const token = this.dataService.Get_Local("token")
         const user = this.helper.decodeToken(token)
         return user.id
     }
 
-    Id_User_Logged(){
+    Id_User_Logged() {
         const token = this.dataService.Get_Local("token")
         const id_user = this.helper.decodeToken(token)
         return (id_user["https://hasura.io/jwt/claims"])["x-hasura-user-id"]
     }
 
-    Name_Role(){
+    Name_Role() {
         const token = this.dataService.Get_Local("token")
-        const role = this.helper.decodeToken(token)
+        if (token == '{}') {
+            return false
+        }
+        const role = this.helper?.decodeToken(token)
         return (role["https://hasura.io/jwt/claims"])["x-hasura-default-role"]
     }
 }

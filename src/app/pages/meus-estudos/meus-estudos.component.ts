@@ -102,7 +102,6 @@ export class MeusEstudosComponent implements OnInit {
       }
     } else {
       const responseaddestudo = await this.meuestudosService.Delete_My_Study(estudo.conteudo.cd_conteudo)
-      console.log(responseaddestudo)
       if (responseaddestudo.errors) {
         this.subject_service.subject_Exibindo_Snackbar.next({ message: 'Não foi possível concluir a ação' })
       } else {
@@ -137,7 +136,6 @@ export class MeusEstudosComponent implements OnInit {
 
   onClick_Option_Bottom(event, estudo) {
     this.b_Confirmation_Show_Modal = event
-    console.log()
     this.cd_Id_Conteudo = estudo.conteudo.cd_conteudo
   }
 
@@ -158,7 +156,6 @@ export class MeusEstudosComponent implements OnInit {
 
   async Set_Update_Conteudo() {
     const responseaddestudo = await this.meuestudosService.Delete_My_Study(this.cd_Id_Conteudo)
-    console.log(responseaddestudo)
     if (responseaddestudo.errors) {
       this.subject_service.subject_Exibindo_Snackbar.next({ message: 'Não foi possível concluir a ação' })
     } else {
@@ -171,7 +168,6 @@ export class MeusEstudosComponent implements OnInit {
     else {
       this.subject_service.subject_Exibindo_Snackbar.next({ message: 'Deletado com sucesso' })
     }
-    console.log(responsedeleteconteudo)
     this.Closed_Alert_Modal()
     this.onClick_Refresh()
   }

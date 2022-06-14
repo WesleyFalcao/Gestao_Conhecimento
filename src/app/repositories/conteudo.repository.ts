@@ -73,7 +73,6 @@ export class ConteudoRepository {
   }
 
   async Set_Sumary(param){
-    console.log("param",param)
     this.subjectService.subject_Exibindo_Loading.next(true)
     const query = this.conteudoQuery.Set_Sumary()
     const variables = {ds_descricao: param.categoria.nome, nm_titulo: param.ds_conteudo}
