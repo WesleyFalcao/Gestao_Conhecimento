@@ -48,7 +48,8 @@ export class ConteudoAdicionarComponent implements OnInit {
 
   async ngOnInit() {
     const responsecategories = await this.categoriaService.Get_Categories_List()
-    this.obj_Array_Categorias = responsecategories.data.categorias
+    const filtersumary = responsecategories.data.categorias.filter(iten => iten.id != 34)
+    this.obj_Array_Categorias = filtersumary
   }
 
   Closed_Alert_Modal() {

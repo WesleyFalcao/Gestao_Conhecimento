@@ -15,7 +15,11 @@ export class UsuariosService {
     Get_Usuarios(param) {
         return this.usuariosRepository.Get_Usuarios(param)
     }
-    
+
+    Get_Usuarios_Filter(param, inputfilter){
+        return this.usuariosRepository.Get_Usuarios_Filter(param, inputfilter)
+    }
+
     Get_Usuario(param){
         return this.usuariosRepository.Get_Usuario(param)
     }
@@ -26,6 +30,10 @@ export class UsuariosService {
 
     Set_Add_Usuario(param){
         
+        if(param.b_login_ad == null || param.cd_login == null){
+            return false
+        }
+
         if(param.b_login_ad == false && param.cd_login == null){
             return false
         }
@@ -44,9 +52,9 @@ export class UsuariosService {
         }
 
         if(param.b_login_ad == true){
-            param.ds_senha = null
+            param.ds_senha = ""
         }
-        
+      
         return this.usuariosRepository.Set_Add_Usuario(param)
     }
 
@@ -56,6 +64,10 @@ export class UsuariosService {
         }
         if(objparam.b_login_ad == false && objparam.ds_senha == ""){
             return false
+        }
+        if(objparam.ds_senha != null){
+            const md5 = new Md5();
+            objparam.ds_senha = md5.appendStr(objparam.ds_senha).end()
         }
         return this.usuariosRepository.Set_Edit_Usuario(objparam)
     }

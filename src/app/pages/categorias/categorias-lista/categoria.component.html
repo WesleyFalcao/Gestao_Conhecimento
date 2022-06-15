@@ -22,12 +22,12 @@
     </div>
     <div class="top-6 relative flex flex-col">
 
-        <cdk-virtual-scroll-viewport id="virtualscroll" class="cdk-listagem-items overflow-auto lg:hidden rounded-lg mb-2 shadow-xl"
+        <cdk-virtual-scroll-viewport id="virtualscroll" class="cdk-listagem-items {{obj_Array_Categorias.length == 0? 'hidden':''}} overflow-auto lg:hidden rounded-lg mb-2"
             [itemSize]="40" minBufferPx="600" maxBufferPx="600">
-            <div class="bg-white bg-opacity-60 my-1"
+            <div class="bg-white bg-opacity-60 my-1 {{item.show?'bg-green-50':''}}"
                 *cdkVirtualFor="let item of obj_Array_Categorias | filter: Input_Value" (click)="Focus_Item(target)">
                 <div #target class="div-grid-name-arrow grid grid-cols-2 xl:grid-cols-1" (click)="Show_Item(item)">
-                    <p class="my-3 lg:my-auto ml-5 w-10/12 font-medium truncate">
+                    <p class="my-3 lg:my-auto ml-5 w-10/12 font-medium truncate {{item.show?'font-bold':''}}">
                         {{item.nome}}</p>
                     <img class="my-auto xl:hidden {{item.show? 'img-rotation-arrow-down':''}}"
                         src="assets/icons/arrow-up.svg">

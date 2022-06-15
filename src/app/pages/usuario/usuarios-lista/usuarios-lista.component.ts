@@ -43,7 +43,7 @@ export class UsersComponent implements OnInit {
   b_Show_Filter: boolean = false
 
   /**@description Recebe o valor digitado pelo usuário no desktop */
-  Input_Value: string
+  Input_Value: any
 
   /** @description Index da Página */
   nr_Pagina = 1
@@ -57,6 +57,8 @@ export class UsersComponent implements OnInit {
   /**@description Objeto que recebe os valores de cada coluna */
   objUsuarios = new UsuarioParams
 
+  /**@description Recebe a resposata das queries de usuários*/
+  obj_Array_Response: any
 
   @ViewChild(CdkVirtualScrollViewport) scroller: CdkVirtualScrollViewport
 
@@ -105,6 +107,10 @@ export class UsersComponent implements OnInit {
 
   onFilter_Search(iten) {
     this.Input_Value = iten
+    if(this.Input_Value != null){
+
+      this.Search_User()
+    }
   }
 
   Value_Select_Status(iten) {
@@ -131,7 +137,7 @@ export class UsersComponent implements OnInit {
     if (this.b_Width == false) {
       document.getElementById('virtualscroll')?.scrollTo({ top: 0 })
     }
-    this.Input_Value = ""
+    this.Input_Value = null
     this.Search_User()
   }
 
@@ -152,21 +158,27 @@ export class UsersComponent implements OnInit {
   }
 
   async Search_User() {
-    const responseusuarios = await this.usuarioService.Get_Usuarios(this.objUsuarios)
 
-    if (responseusuarios.errors) {
+    if(this.Input_Value == null){
+      this.obj_Array_Response = await this.usuarioService.Get_Usuarios(this.objUsuarios)
+
+    }else{
+      this.obj_Array_Response = await this.usuarioService.Get_Usuarios_Filter(this.objUsuarios, this.Input_Value)
+    }
+
+    if (this.obj_Array_Response.errors) {
       this.subjectService.subject_Exibindo_Snackbar.next({ message: 'Não foi possível trazer a listagem' })
     }
 
-    if (responseusuarios.data.usuarios.length == 0) {
+    if (this.obj_Array_Response.data.usuarios.length == 0) {
       this.b_Fim_Lista = true
     }
     if (this.b_Width) {
-      this.obj_Array_Usuarios = responseusuarios.data.usuarios
-      this.objUsuarios.nr_registos = responseusuarios.data.usuarios_aggregate.aggregate.count
+      this.obj_Array_Usuarios = this.obj_Array_Response.data.usuarios
+      this.objUsuarios.nr_registos = this.obj_Array_Response.data.usuarios_aggregate.aggregate.count
 
     } else {
-      this.obj_Array_Usuarios = [...this.obj_Array_Usuarios, ...responseusuarios.data.usuarios]
+      this.obj_Array_Usuarios = [...this.obj_Array_Usuarios, ...this.obj_Array_Response.data.usuarios]
     }
   }
 

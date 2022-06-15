@@ -75,7 +75,8 @@ export class ConteudoEditarComponent implements OnInit, OnDestroy {
     })
 
     const responsecategories = await this.categoriaService.Get_Categories_List()
-    this.obj_Array_Categorias = responsecategories.data.categorias
+    const filtersumary = responsecategories.data.categorias.filter(iten => iten.id != 34)
+    this.obj_Array_Categorias = filtersumary
 
     const responseconteudo = await this.conteudoService.Get_Conteudo_Edit(this.cd_Id_Param)
     this.obj_Filds_Input = responseconteudo.data.conteudos[0]

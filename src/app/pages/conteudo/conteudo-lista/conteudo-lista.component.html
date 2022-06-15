@@ -26,21 +26,20 @@
     
     <div class="top-5 relative flex flex-col">
 
-        <cdk-virtual-scroll-viewport id="virtualscroll" class="cdk-listagem-items overflow-auto lg:hidden rounded-lg mb-2"
+        <cdk-virtual-scroll-viewport id="virtualscroll" class="cdk-listagem-items {{obj_Array_Conteudos.length == 0? 'hidden':''}} overflow-auto lg:hidden rounded-lg mb-2"
             [itemSize]="40" minBufferPx="600" maxBufferPx="600">
 
-            <div class="bg-white bg-opacity-60 my-1"
+            <div class="bg-white bg-opacity-60 my-1 {{conteudo.show?'bg-green-50':''}}"
                 *cdkVirtualFor="let conteudo of obj_Array_Conteudos | filter: Input_Value" (click)="Focus_Item(target)">
 
                 <div #target class="div-grid-name-arrow grid grid-cols-2 xl:grid-cols-1" (click)="Show_Item(conteudo)">
-                    <p class="my-3 ml-5 w-10/12 truncate font-medium">
+                    <p class="my-3 ml-5 w-10/12 truncate font-medium {{conteudo.show?'font-bold':''}}">
                         {{conteudo.nm_titulo}}</p>
                     <img class="my-auto {{conteudo.show? 'img-rotation-arrow-down':''}}"
                         src="assets/icons/arrow-up.svg">
                 </div>
                 <div class="pb-4 flex flex-col gap-y-2" *ngIf="conteudo.show">
 
-                    
                     <div class="flex flex-row gap-x-3">
                         <p class="ml-5 font-semibold">Contegoria:</p>
                         <p class="my-auto w-4/12 truncate">
@@ -49,14 +48,14 @@
                     <div class="flex flex-row gap-x-3">
                         <p class="ml-5 font-semibold">Descrição:</p>
                     </div>
-                    <p class="my-auto ml-6 p-rows">{{conteudo.ds_conteudo}}</p>
+                    <p class="my-auto ml-6 p-rows pr-6">{{conteudo.ds_conteudo}}</p>
                     <div class="flex flex-row gap-x-3">
-                        <p class="ml-5  font-semibold">ID:</p>
+                        <p class="ml-5 font-semibold">ID:</p>
                         <p class="my-auto truncate">{{conteudo.cd_conteudo}}</p>
                     </div>
                     <div class="flex flex-row gap-x-3">
                         <div class="gap-x-3 behavior-button rounded-full ml-5 bg-unimed-green" (click)="OnClick_Access(conteudo)">
-                            <p class="mx-2 font-semibold text-white">Acessar</p>
+                            <p class="mx-8 my-1 font-semibold text-white">Acessar</p>
                         </div>
                         <div class="flex flex-row {{b_User_Admin? '':'hidden'}}" [routerLink]="['/conteudo-editar', conteudo.cd_conteudo]">
                             <img class="reltive left-5 ml-5 mt-1 behavior-button w-4 h-4 lg:w-7 lg:h-7 my-auto cursor-pointer lg:mx-auto"

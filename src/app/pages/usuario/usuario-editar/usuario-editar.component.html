@@ -7,11 +7,11 @@
     <div class="grid grid-cols-1 gap-y-4 xl:gap-y-0 2xl:mb-10">
         <div class="flex flex-col gap-y-4">
             <div class="-mt-3 pr-3">
-                <selection-input [nm_Label_Selection_Input]="nm_Label_Selection_Input_Usuario"
+                <selection-input [Iten_Select]="obj_Selection_Input.sn_login_ad" [nm_Label_Selection_Input]="nm_Label_Selection_Input_Usuario"
                     [objArrayList]="objArrayUsuarioAd" (Value_Select)="Value_Select_AD($event)"></selection-input>
             </div>
-            <app-input [required]="true" label="Usuario" [(ngModel)]="obj_Filds_Input.cd_login" id="nm_usuario"
-                name="nm_usuario">
+            <app-input [required]="true" label="Usuario" [(ngModel)]="obj_Filds_Input.cd_login" id="cd_login"
+                name="cd_login">
             </app-input>
             <div *ngIf="!obj_Filds_Input.b_login_ad">
                 <app-input [required]="true" label="Nova senha" [(ngModel)]="obj_Filds_Input.ds_senha" id="ds_senha"
@@ -19,11 +19,11 @@
                 </app-input>
             </div>
             <div class="-mt-3 pr-3">
-                <selection-input [nm_Label_Selection_Input]="nm_Label_Selection_Input_Ativo"
+                <selection-input [Iten_Select]="obj_Selection_Input.nm_bloqueio" [nm_Label_Selection_Input]="nm_Label_Selection_Input_Ativo"
                     [objArrayList]="objArrayStatus" (Value_Select)="Value_Select_Status($event)"></selection-input>
             </div>
             <div class="-mt-3 pr-3">
-                <selection-input [nm_Label_Selection_Input]="nm_Label_Selection_Input_Perfil"
+                <selection-input [Iten_Select]="obj_Selection_Input.nm_perfil" [nm_Label_Selection_Input]="nm_Label_Selection_Input_Perfil"
                     [objArrayList]="objArrayPerfil" (Value_Select)="Value_Select_Perfil($event)"></selection-input>
             </div>
         </div>

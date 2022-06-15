@@ -10,9 +10,8 @@ import { AnimationOptions } from 'ngx-lottie';
 export class AnimationNothingFoundComponent {
 
   options: AnimationOptions = {
-    path: '/assets/animations/nothing-fund-lupa.json',
+    path: 'assets/animations/nothing-fund-lupa.json',
   };
 
   animationCreated(animationItem: AnimationItem): void {}
-
 }

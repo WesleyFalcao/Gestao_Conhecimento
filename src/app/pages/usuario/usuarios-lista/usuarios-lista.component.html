@@ -1,6 +1,6 @@
 <app-header (Input_Emit_Value)="onFilter_Search($event)"></app-header>
 
-<div class="container lg:bg-white lg:bg-opacity-60 relative px-2 top-6 md:top-9 lg:top-14 pb-6">
+<div class="container relative px-2 top-6 md:top-9 lg:top-14 pb-6 {{obj_Array_Usuarios.length == 0? '':'lg:bg-white lg:bg-opacity-60'}}">
     <div class="grid grid-cols-2">
         <div class="flex flex-col relative left-2 lg:left-2 lg:ml-2.5">
             <uni-title [ds_Titulo]="ds_Titulo"></uni-title>
@@ -23,16 +23,16 @@
     </div>
     <div class="top-5 relative flex flex-col">
 
-        <cdk-virtual-scroll-viewport id="virtualscroll" class="cdk-listagem-items overflow-auto lg:hidden rounded-lg mb-2 shadow-xl"
+        <cdk-virtual-scroll-viewport id="virtualscroll" class="cdk-listagem-items {{obj_Array_Usuarios.length == 0? 'hidden':''}} overflow-auto lg:hidden rounded-lg mb-2"
             [itemSize]="20" minBufferPx="600" maxBufferPx="600">
 
-            <div class="bg-white bg-opacity-60 my-1"
+            <div class="bg-white bg-opacity-60 my-1 {{item.show?'bg-green-50':''}}"
                 *cdkVirtualFor="let item of obj_Array_Usuarios | filter: Input_Value" (click)="Focus_Item(target)">
 
                 <div #target class="div-grid-name-arrow grid grid-cols-2 xl:grid-cols-1" (click)="Show_Item(item)">
-                    <p class="my-3 ml-5 w-10/12 font-medium truncate">
+                    <p class="my-3 ml-5 w-10/12 font-medium truncate {{item.show?'font-bold':''}}">
                         {{item.cd_login}}</p>
-                    <img class="my-auto {{item.show? 'img-rotation-arrow-down':''}}"
+                    <img class="my-auto"
                         src="assets/icons/arrow-up.svg">
                 </div>
                 <div class="pb-4 flex flex-col gap-y-1" *ngIf="item.show">
@@ -40,11 +40,6 @@
                     <div class="flex flex-row gap-x-3">
                         <p class="ml-5 font-semibold">ID:</p>
                         <p class="text-center my-auto">{{item.cd_usuario}}</p>
-                    </div>
-                    <div class="flex flex-row gap-x-3">
-                        <p class="ml-5 font-semibold">Usuário:</p>
-                        <p class="my-auto w-7/12 truncate">{{item.nm_usuario}}
-                        </p>
                     </div>
                     <div class="flex flex-row gap-x-3">
                         <p class="ml-5 font-semibold">Perfil:</p>

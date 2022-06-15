@@ -69,6 +69,7 @@ export class CategoriaComponent implements OnInit {
 
   async Search_Categories() {
     const responsecategorias = await this.categoriaService.Get_Categories_Paginator(this.objCategoria)
+  
     if (responsecategorias.errors) {
       this.subjectService.subject_Exibindo_Snackbar.next({ message: 'Não foi possível trazer a listagem' })
     }

@@ -31,7 +31,7 @@ export class SugestoesListaComponent implements OnInit {
   b_Width: boolean
 
   /**@description Recebe o valor digitado pelo usuário*/
-  Input_Value: string
+  Input_Value: any
 
   /** @description Recebe true quando no  final do virtual scroll*/
   b_Fim_Lista: boolean = false
@@ -114,6 +114,17 @@ export class SugestoesListaComponent implements OnInit {
     this.b_Confirmation_Show_Modal = true
     this.cd_Sugestao = iten
     this.cd_Index = index
+  }
+
+  async onClick_Refresh() {
+    this.objSugestao.nr_pagina = 1
+    this.obj_Array_Sugestoes_Arquivadas = []
+    this.Input_Value = null
+    this.b_Fim_Lista = !this.b_Fim_Lista
+    if (this.b_Width == false) {
+      document.getElementById('virtualscroll')?.scrollTo({ top: 0 })
+    }
+    this.Search_Sugestoes()
   }
 
   async Unarchive() {

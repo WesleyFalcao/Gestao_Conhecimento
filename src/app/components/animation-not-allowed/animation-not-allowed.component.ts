@@ -11,7 +11,7 @@ import { Router } from '@angular/router';
 export class AnimationNotAllowedComponent {
 
   options: AnimationOptions = {
-    path: '/assets/animations/not-allowed.json',
+    path: 'assets/animations/not-allowed.json',
   };
 
   constructor(

@@ -55,7 +55,6 @@ export class LoginService {
     async Set_Login(objLogin: LoginParams) {
         try {
             let res = await this._Execute(QUERY_LOGIN, objLogin)
-           
             if (res.data.login.sucesso) {
                 this.b_User_Authenticated = true
                 this.dataService.Set_Local("token", res.data.login.accessToken)

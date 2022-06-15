@@ -40,8 +40,7 @@ export class ConteudoService {
     }
 
     Set_Edit_User(objparam, idconteudo){
-
-        if(objparam.nm_titulo == "" || objparam.ds_conteudo == "" || objparam.ds_link == "" || objparam.categoria == ""){
+        if(objparam.nm_titulo == "" || objparam.ds_conteudo == "" || objparam.ds_link == "" || objparam.categoria == null ){
             return false
         }
         return this.conteudoRepository.Set_Edit_User(objparam,idconteudo)
@@ -61,5 +60,4 @@ export class ConteudoService {
     Set_Gravar_Dados(param){
         return this.conteudoRepository.Set_Gravar_Dados(param)
     }
-
 }

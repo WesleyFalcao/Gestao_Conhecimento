@@ -63,15 +63,23 @@ export class AdicionarUsersComponent implements OnInit {
   }
 
   Value_Select_Perfil(event) {
-    this.obj_Usuario.cd_perfil = event.id
+    if(event == null){
+      this.obj_Usuario.cd_perfil = event
+    }else{
+      this.obj_Usuario.cd_perfil = event.id
+    }
   }
 
   Value_Select_AD(event) {
+    if(event == null){
+      this.obj_Usuario.b_login_ad = event
+    }
     if (event.nome == "Não") {
       this.obj_Usuario.b_login_ad = false
 
     } else {
       this.obj_Usuario.b_login_ad = true
+      this.obj_Usuario.ds_senha = ""
     }
   }
 

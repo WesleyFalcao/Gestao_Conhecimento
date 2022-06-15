@@ -37,7 +37,7 @@ export class EditarUserComponent implements OnInit, OnDestroy {
   b_Not_Search: boolean = true
 
   /**@description Nome do label do selection input */
-  ds_Titulo: string = "Editar Usuário"
+  ds_Titulo: string = "Editar usuário"
 
   /**@description Nome do label do selection input */
   nm_Label_Selection_Input_Perfil: string = "Perfil"
@@ -71,6 +71,19 @@ export class EditarUserComponent implements OnInit, OnDestroy {
 
   /**@description Recebe os valores de cada input */
   obj_Filds_Input = new UsuarioParams
+
+  /**@description objeto que passa os valores de inicialização para os campos de input */
+  obj_Selection_Input = {
+    sn_login_ad: {
+      nome: "" 
+    },
+    nm_bloqueio: {
+      nome: ""
+    },
+    nm_perfil: {
+      nome: ""
+    }
+  }
 
   constructor(
     private route: ActivatedRoute,
@@ -115,6 +128,7 @@ export class EditarUserComponent implements OnInit, OnDestroy {
 
     const responseperfil = await this.usuarioService.Get_Perfil_Usuario()
     this.objArrayPerfil = responseperfil.data.perfis
+    this.Insert_Values_Selection_Input()
   }
 
   Closed_Alert_Modal() {
@@ -124,7 +138,6 @@ export class EditarUserComponent implements OnInit, OnDestroy {
   Back() {
     this.location.back();
   }
-
 
   async Set_Edit_User() {
     const responseedituser = await this.usuarioService.Set_Edit_Usuario(this.obj_Filds_Input)
@@ -145,6 +158,23 @@ export class EditarUserComponent implements OnInit, OnDestroy {
         this.Send_Sugestion_Animacao = !this.Send_Sugestion_Animacao
       }, 3000);
     }
+  }
+
+  Insert_Values_Selection_Input(){
+    if(this.obj_Filds_Input.b_login_ad == false){
+      this.obj_Selection_Input.sn_login_ad.nome = "Não"
+    }else{
+      this.obj_Selection_Input.sn_login_ad.nome = "Sim"
+    }
+
+    if(this.obj_Filds_Input.dt_bloqueio == null){
+      this.obj_Selection_Input.nm_bloqueio.nome = "Ativo"
+    }else{
+      this.obj_Selection_Input.nm_bloqueio.nome = "Inativo"
+    }
+
+    this.obj_Selection_Input.nm_perfil.nome = this.obj_Filds_Input.perfil.nm_perfil
+    console.log(this.obj_Selection_Input)
   }
 
   ngOnDestroy() {

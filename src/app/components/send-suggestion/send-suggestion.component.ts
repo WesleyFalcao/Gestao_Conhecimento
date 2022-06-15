@@ -18,7 +18,7 @@ export class SendSuggestionComponent implements OnInit {
   Show_Animation: boolean
 
   options: AnimationOptions = {
-    path: '/assets/animations/sugestao-enviada.json',
+    path: 'assets/animations/sugestao-enviada.json',
   };
 
   animationCreated( animationItem: AnimationItem ): void { }

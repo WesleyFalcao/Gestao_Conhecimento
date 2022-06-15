@@ -18,7 +18,7 @@ export class SelectionInputComponent implements OnInit {
   /** @description Array que recebe a listagem */
   @Input() objArrayList: Array<ListModel>
 
-  /** @description Recebe o valor que é selecionado pelo usuário no madal */
+  /** @description Recebe o valor que é selecionado pelo usuário no modal */
   @Input() Iten_Select: any
 
   /** @description Emite o valor selecionado pelo usuário no madal */
@@ -44,6 +44,7 @@ export class SelectionInputComponent implements OnInit {
     // this.control.setValue(null)
     // this.control_Aux.setValue(null)
     this.Iten_Select = null
+    this.Value_Select.emit(null)
   }
 
   Closed_Modal(event: any){
@@ -52,8 +53,7 @@ export class SelectionInputComponent implements OnInit {
   }
 
   Iten_Select_Modal(event: any){
-    this.Iten_Select = event
-    
+    this.Iten_Select = event   
     this.Value_Select.emit(event)
   }
 }

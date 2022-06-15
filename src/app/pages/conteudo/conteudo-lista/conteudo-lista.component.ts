@@ -114,7 +114,7 @@ export class ConteudoEditarListaComponent implements OnInit {
       this.b_Width = true
     } else {
       this.b_Width = false
-      this.objConteudo.page_lenght = 10
+      this.objConteudo.page_lenght = 30
     }
   }
 
@@ -180,7 +180,8 @@ export class ConteudoEditarListaComponent implements OnInit {
   async onFilter_Search(iten) {
     this.Input_Value = null
     this.Input_Value = iten
-    await this.Search_Conteudos()
+    this.Search_Conteudos()
+
   }
 
   Focus_Item(el: HTMLElement) {

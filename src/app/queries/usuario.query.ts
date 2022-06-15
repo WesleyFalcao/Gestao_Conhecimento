@@ -92,6 +92,31 @@ export class UsuarioQuery {
     `
   }
 
+  Get_Usuarios_Filter(){
+    return `
+    query ($where: usuarios_bool_exp, $limit: Int, $offset: Int) {
+      usuarios(where: $where, limit: $limit, offset: $offset) {
+        perfil {
+          role
+          nm_perfil
+          cd_perfil
+        }
+        nm_usuario
+        dt_bloqueio
+        cd_usuario
+        cd_perfil
+        cd_login
+        b_login_ad
+      }
+      usuarios_aggregate {
+        aggregate {
+          count
+        }
+      }
+    }
+    `
+  }
+
   Set_Add_Usuario() {
     return `
     mutation ($nm_usuario: String,  $b_login_ad: Boolean, $cd_login: String, $cd_perfil: Int, $ds_senha: String ) {

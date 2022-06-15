@@ -2,6 +2,7 @@ import { CdkVirtualScrollViewport } from '@angular/cdk/scrolling';
 import { Component, HostListener, NgZone, OnChanges, OnDestroy, OnInit, SimpleChanges, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { filter, map, pairwise, Subject, takeUntil, throttleTime } from 'rxjs';
+import { CategoriaModel } from 'src/app/models/categoria/categoria.model';
 import { ConteudoModel } from 'src/app/models/conteudo/conteudo.model';
 import { HomeRepository } from 'src/app/repositories/home.repository';
 import { LoginService } from 'src/app/services/login.service';
@@ -18,22 +19,10 @@ import { ConteudoService } from '../conteudo/conteudo.service';
 export class HomeComponent implements OnInit {
 
   /** @description Recebe o array de categorias */
-  obj_Array_Categoria
-
-  /**@description Título da página */
-  ds_Titulo: string = "Resultados"
+  obj_Array_Categoria: Array<any> = []
 
   /**@description Recebe o array de conteudos */
   obj_Array_Conteudos: Array<any> = []
-
-  /** @description String que armazena o caminho do SVG */
-  nm_Src_Icon: string = "assets/icons/search-glass-black.svg"
-
-  /** @description Boolean para exibit ou não a barra de input */
-  b_Show_Input: boolean
-
-  /**@description Boolean para abrir e fechar o modal de filtro */
-  b_Show_Filter: boolean = false
 
   /**@description Recebe o valor digitado pelo usuário no desktop */
   Input_Value: any
@@ -44,17 +33,11 @@ export class HomeComponent implements OnInit {
   /**@description boolean que fica true acima de 1034px */
   b_Width: boolean
 
-  /** @description Recebe true quando no  final do virtual scroll*/
-  b_Fim_Lista: boolean = false
-
-  /**@description Contém os dados do usuário que seram gravados */
-  objDados = { cd_Conteudo: null, nm_Usuario: "" }
-
   /**@description Recebe o nome do usário que adicionou a sugestão */
   nm_User: string
 
-  /**@description Objeto de conteduos*/
-  objConteudo = new ConteudoModel
+  /**@description Objeto com as propriedades de parâmetro para paginação */
+  objCategoria = new CategoriaModel
 
   /** @description Subject para destruir os subscribers */
   subject_unsub = new Subject()
@@ -68,11 +51,8 @@ export class HomeComponent implements OnInit {
   constructor(
     private subjectService: SubjectService,
     private categoriaService: CategoriaService,
-    private subject_service: SubjectService,
     private loginService: LoginService,
     private route: Router,
-    private conteudoService: ConteudoService,
-    private ngZone: NgZone,
   ) { }
 
   async ngOnInit() {
@@ -82,40 +62,14 @@ export class HomeComponent implements OnInit {
     this.obj_Array_Categoria = responsecategoria.data.categorias
   }
 
-
   @HostListener('window:resize')
   onResize() {
     this.nr_Width = window.innerWidth
     this.subjectService.subject_Width.next(this.nr_Width)
     if (this.nr_Width >= 768) {
-      this.b_Show_Input = true
       this.b_Width = true
     } else {
-      this.b_Show_Input = false
       this.b_Width = false
-    }
-  }
-
-  Show_Modal(event) {
-    this.b_Show_Filter = event
-  }
-
-  Close_Modal() {
-    this.b_Show_Filter = false
-  }
-
-  Focus_Item(el: HTMLElement) {
-    el.scrollIntoView();
-  }
-
-  Show_Item(conteudo) {
-    conteudo.show = !conteudo.show
-    if (conteudo.show) {
-      this.obj_Array_Conteudos.forEach(fe => {
-        if (conteudo.cd_conteudo != fe.cd_conteudo) {
-          fe.show = false
-        }
-      })
     }
   }
 
@@ -123,56 +77,6 @@ export class HomeComponent implements OnInit {
     this.Input_Value = iten
     if (this.Input_Value != null) {
       this.route.navigate(['/conteudo-lista'], {queryParams: {nm_searcch: this.Input_Value}})
-    }
-  }
-
-  Filtrar() {
-    this.b_Show_Filter = false
-  }
-
-  async Search_Conteudos() {
-    const responseconteudo = await this.conteudoService.Get_Conteudos_Filter(this.objConteudo, this.Input_Value)
-
-    if (responseconteudo.errors) {
-      this.subjectService.subject_Exibindo_Snackbar.next({ message: 'Não foi possível trazer a listagem' })
-    }
-
-    if (responseconteudo.data.conteudos.length == 0) {
-      this.b_Fim_Lista = true
-    }
-
-    this.objConteudo.nr_registos = responseconteudo.data.conteudos_aggregate.aggregate.count
-
-    if (this.b_Width) {
-      this.obj_Array_Conteudos = responseconteudo.data.conteudos
-    }
-    else {
-      this.obj_Array_Conteudos = [...this.obj_Array_Conteudos, ...responseconteudo.data.conteudos]
-    }
-  }
-
-  async OnClick_Access(conteudo) {
-
-    this.objDados.cd_Conteudo = conteudo.cd_conteudo
-    this.objDados.nm_Usuario = this.nm_User
-    const responseacesso = await this.conteudoService.Set_Gravar_Dados(this.objDados)
-    if (responseacesso.errors) {
-      this.subject_service.subject_Exibindo_Snackbar.next({ message: 'Não foi possível acessar' })
-    } else {
-      window.open(conteudo.ds_link, "_blank")
-    }
-  }
-
-  async Mudar_Pagina(nr_Pagina: number) {
-    this.objConteudo.nr_pagina = nr_Pagina
-    const responseusuarios = await this.conteudoService.Get_Conteudos_Filter(this.objConteudo, this.Input_Value)
-    if (responseusuarios.errors) {
-      this.subjectService.subject_Exibindo_Snackbar.next({ message: 'Não foi possível trazer a listagem' })
-    } else {
-      this.obj_Array_Conteudos = responseusuarios.data.conteudos
-      if (this.obj_Array_Conteudos == undefined) {
-        this.obj_Array_Conteudos = []
-      }
     }
   }
 }

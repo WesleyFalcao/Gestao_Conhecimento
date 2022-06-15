@@ -10,7 +10,7 @@
             class="flex flex-row gap-6 lg:gap-10 my-auto justify-end relative right-1 xl:mr-4 cursor-pointer {{obj_Array_Sugestoes_Arquivadas?.length != 0?'':'hidden'}}">
             <app-button-filter class="hidden" (b_Show_Modal)="Show_Modal($event)"></app-button-filter>
             <img class="behavior-button w-6 h-6 xl:w-8 xl:h-8 2xl:w-7 2xl:h-7" src="assets/icons/refresh.svg"
-                (click)="Search_Sugestoes()">
+                (click)="onClick_Refresh()">
         </div>
     </div>
     <div *ngIf="obj_Array_Sugestoes_Arquivadas?.length != 0">
@@ -23,9 +23,9 @@
     </div>
     <div class="top-5 relative flex flex-col">
 
-        <cdk-virtual-scroll-viewport class="cdk-listagem-items overflow-auto lg:hidden rounded-lg mb-2"
+        <cdk-virtual-scroll-viewport id="virtualscroll" class="cdk-listagem-items {{obj_Array_Sugestoes_Arquivadas.length == 0? 'hidden':''}} overflow-auto lg:hidden rounded-lg mb-2"
             [itemSize]="40" minBufferPx="600" maxBufferPx="600">
-            <div class="bg-white bg-opacity-60 my-1"
+            <div class="bg-white bg-opacity-60 my-1 {{item.show?'bg-green-50':''}}"
                 *cdkVirtualFor="let item of obj_Array_Sugestoes_Arquivadas | filter: Input_Value, let i = index" (click)="Focus_Item(target)">
 
                 <div #target class="div-grid-name-arrow grid grid-cols-2 xl:grid-cols-1" (click)="Show_Itens(item)">
