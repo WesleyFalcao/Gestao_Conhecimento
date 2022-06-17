@@ -1,4 +1,5 @@
-<app-header (Input_Emit_Value)="onFilter_Search($event)" [b_Input_Open]="b_Input_Open" [nm_Input]="Input_Value"></app-header>
+<app-header (Input_Emit_Value)="onFilter_Search($event)" [b_Input_Open]="b_Input_Open" [nm_Input]="Input_Value">
+</app-header>
 
 <div class="container lg:bg-white lg:bg-opacity-60 relative px-2 top-6 md:top-9 lg:top-14 pb-12">
     <div class="grid grid-cols-2">
@@ -6,8 +7,8 @@
             <uni-title [ds_Titulo]="ds_Titulo"></uni-title>
         </div>
         <div class="flex flex-row gap-6 lg:gap-10 my-auto justify-end relative right-1 xl:mr-4 cursor-pointer">
-            <img class="behavior-button w-5 h-5 xl:w-7 xl:h-7 2xl:w-6 2xl:h-6 {{b_User_Admin? '':'hidden'}}" src="assets/icons/more-options-user.svg"
-                routerLink="/conteudo-adicionar">
+            <img class="behavior-button w-5 h-5 xl:w-7 xl:h-7 2xl:w-6 2xl:h-6 {{b_User_Admin? '':'hidden'}}"
+                src="assets/icons/more-options-user.svg" routerLink="/conteudo-adicionar">
             <app-button-filter class="hidden" (b_Show_Modal)="Show_Modal($event)"></app-button-filter>
             <img class="behavior-button w-6 h-6 xl:w-8 xl:h-8 2xl:w-7 2xl:h-7" src="assets/icons/refresh.svg"
                 (click)="onClick_Refresh()">
@@ -18,15 +19,16 @@
             <p class="lg:text-center font-semibold text-base">ID</p>
             <p class="font-semibold text-base lg:grid ml-5">Título</p>
             <p class="lg:text-center font-semibold text-base">Descrição</p>
-            <p class="lg:text-center font-semibold text-base">Link</p>
             <p class="lg:text-center font-semibold text-base">Categoria</p>
+            <p class="lg:text-center font-semibold text-base">Acessar</p>
             <p class="lg:text-center font-semibold text-base {{b_User_Admin? '':'hidden'}}">Editar</p>
         </div>
     </div>
-    
+
     <div class="top-5 relative flex flex-col">
 
-        <cdk-virtual-scroll-viewport id="virtualscroll" class="cdk-listagem-items {{obj_Array_Conteudos.length == 0? 'hidden':''}} overflow-auto lg:hidden rounded-lg mb-2"
+        <cdk-virtual-scroll-viewport id="virtualscroll"
+            class="cdk-listagem-items {{obj_Array_Conteudos.length == 0? 'hidden':''}} overflow-auto lg:hidden rounded-lg mb-2"
             [itemSize]="40" minBufferPx="600" maxBufferPx="600">
 
             <div class="bg-white bg-opacity-60 my-1 {{conteudo.show?'bg-green-50':''}}"
@@ -54,10 +56,12 @@
                         <p class="my-auto truncate">{{conteudo.cd_conteudo}}</p>
                     </div>
                     <div class="flex flex-row gap-x-3">
-                        <div class="gap-x-3 behavior-button rounded-full ml-5 bg-unimed-green" (click)="OnClick_Access(conteudo)">
+                        <div class="gap-x-3 behavior-button rounded-full ml-5 bg-unimed-green"
+                            (click)="OnClick_Access(conteudo)">
                             <p class="mx-8 my-1 font-semibold text-white">Acessar</p>
                         </div>
-                        <div class="flex flex-row {{b_User_Admin? '':'hidden'}}" [routerLink]="['/conteudo-editar', conteudo.cd_conteudo]">
+                        <div class="flex flex-row {{b_User_Admin? '':'hidden'}}"
+                            [routerLink]="['/conteudo-editar', conteudo.cd_conteudo]">
                             <img class="reltive left-5 ml-5 mt-1 behavior-button w-4 h-4 lg:w-7 lg:h-7 my-auto cursor-pointer lg:mx-auto"
                                 src="assets/icons/edit.svg">
                             <p class="ml-1 mt-0.5">Editar</p>
@@ -78,11 +82,11 @@
                     class="text-center my-auto mx-auto text-ellipsis overflow-hidden whitespace-nowrap w-9/12 font-normal text-base">
                     {{conteudo.ds_conteudo}}</p>
                 <p class="text-center my-auto text-ellipsis overflow-hidden whitespace-nowrap font-normal text-base">
-                    {{conteudo.ds_link}}</p>
-                <p class="text-center my-auto text-ellipsis overflow-hidden whitespace-nowrap font-normal text-base">
                     {{conteudo.categoria.nm_categoria}}</p>
-                <img class="{{b_User_Admin? '':'hidden'}} behavior-button w-5 h-5 my-auto mx-auto cursor-pointer" src="assets/icons/edit.svg"
-                    [routerLink]="['/conteudo-editar', conteudo.cd_conteudo]">
+                <p class="text-center my-auto text-ellipsis cursor-pointer overflow-hidden whitespace-nowrap text-unimed-green font-semibold text-base" (click)="OnClick_Access(conteudo)">
+                    Acessar</p>
+                <img class="{{b_User_Admin? '':'hidden'}} behavior-button w-5 h-5 my-auto mx-auto cursor-pointer"
+                    src="assets/icons/edit.svg" [routerLink]="['/conteudo-editar', conteudo.cd_conteudo]">
             </div>
         </div>
     </div>
