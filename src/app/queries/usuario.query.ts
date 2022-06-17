@@ -52,7 +52,6 @@ export class UsuarioQuery {
         }
       }
     }
-       
     `
   }
 
@@ -141,8 +140,8 @@ export class UsuarioQuery {
 
   Set_Edit_Usuario(){
     return `
-    mutation ($cd_usuario: Int, $b_login_ad: Boolean, $cd_login: String, $cd_perfil: Int, $ds_senha: String, $dt_bloqueio: date) {
-      update_usuarios(where: {cd_usuario: {_eq: $cd_usuario}}, _set: {b_login_ad: $b_login_ad, cd_login: $cd_login, cd_perfil: $cd_perfil, ds_senha: $ds_senha, dt_bloqueio: $dt_bloqueio}) {
+    mutation ($_set: usuarios_set_input, $cd_usuario: Int) {
+      update_usuarios(where: {cd_usuario: {_eq: $cd_usuario}}, _set: $_set) {
         returning {
           perfil {
             role
@@ -156,7 +155,7 @@ export class UsuarioQuery {
           b_login_ad
         }
       }
-    }    
+    }        
     `
   }
 }

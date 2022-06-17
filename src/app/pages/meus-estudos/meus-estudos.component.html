@@ -20,12 +20,12 @@
                     (onClick_Option_Bottom)="onClick_Option_Bottom($event, estudo)">
                 </app-popover>
             </div>
-            <div class="grid grid-cols-2 h-12">
+            <div class="div-grid-header-card h-12 w-full">
                 <p
-                    class="my-auto font-semibold text-lg md:font-semibold pl-4 truncate w-44 md:w-60 text-unimed-darkgray">
+                    class="my-auto font-semibold text-lg md:font-semibold pl-4 truncate text-unimed-darkgray">
                     {{estudo.conteudo.nm_titulo}}
                 </p>
-                <div class="grid grid-cols-2 cursor-pointer absolute mt-4 gap-x-5 md:gap-x-6 right-3 md:right-6 lg:right-8"
+                <div class="grid grid-cols-2 cursor-pointer absolute mt-4 gap-x-5 md:gap-x-1 right-3 md:right-1 xl:right-4"
                     *ngIf="b_User_Admin, else svgiten">
                     <img class="w-5 h-5 behavior-button cursor-pointer -mt-1" src="assets/icons/{{estudo.favorite?'star-with-no-background':'start-yellow'}}.svg" (click)="Start_Svg(estudo)">
                     <div class="lg:w-10 relative mx-auto" (click)="Show_Popover(estudo)">

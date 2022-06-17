@@ -125,6 +125,7 @@ export class ConteudoEditarListaComponent implements OnInit {
     } else {
       this.obj_Array_Response = await this.conteudoService.Get_Conteudos_Filter(this.objConteudo, this.Input_Value)
     }
+    console.log(this.obj_Array_Response)
     if (this.obj_Array_Response.errors) {
       this.subjectService.subject_Exibindo_Snackbar.next({ message: 'Não foi possível trazer a listagem' })
     }

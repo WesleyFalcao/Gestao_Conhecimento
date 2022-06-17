@@ -36,6 +36,11 @@
     }
 }
 
+.div-grid-header-card{
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+}
+
 .div-aling-popover_filter {
 
     left: calc(100% - 11.4rem);

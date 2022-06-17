@@ -109,7 +109,7 @@
 
 .div-aling-item-card{
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 2.5fr 1fr;  
 }
 
 .p-rows{
@@ -117,11 +117,8 @@
     overflow: hidden; 
     text-overflow: ellipsis; 
     display: -webkit-box;
-    -webkit-line-clamp: 5; 
+    -webkit-line-clamp: 4; 
     -webkit-box-orient: vertical;
-    @media (min-width: 1536px) {
-        -webkit-line-clamp: 4;
-    }
 }
 
 .button-comportamento{

@@ -72,6 +72,9 @@ export class EditarUserComponent implements OnInit, OnDestroy {
   /**@description Recebe os valores de cada input */
   obj_Filds_Input = new UsuarioParams
 
+  /**@description boolean para mostrar ou não a senha */
+  b_Exibir_Password: boolean = false;
+
   /**@description objeto que passa os valores de inicialização para os campos de input */
   obj_Selection_Input = {
     sn_login_ad: {
@@ -112,7 +115,6 @@ export class EditarUserComponent implements OnInit, OnDestroy {
       const ano = data.getFullYear();
       const dataAtual = ano + '-' + mes + '-' + dia;
       this.obj_Filds_Input.dt_bloqueio = dataAtual
-
     } else {
       this.obj_Filds_Input.dt_bloqueio = null
     }
@@ -151,11 +153,11 @@ export class EditarUserComponent implements OnInit, OnDestroy {
       this.obj_Filds_Input.ds_senha = null
     }
     if (responseedituser.data.update_usuarios.returning.length) {
-
       this.obj_Filds_Input.ds_senha = null
       this.Send_Sugestion_Animacao = true
       setTimeout(() => {
         this.Send_Sugestion_Animacao = !this.Send_Sugestion_Animacao
+        this.Back()
       }, 3000);
     }
   }
@@ -174,7 +176,6 @@ export class EditarUserComponent implements OnInit, OnDestroy {
     }
 
     this.obj_Selection_Input.nm_perfil.nome = this.obj_Filds_Input.perfil.nm_perfil
-    console.log(this.obj_Selection_Input)
   }
 
   ngOnDestroy() {

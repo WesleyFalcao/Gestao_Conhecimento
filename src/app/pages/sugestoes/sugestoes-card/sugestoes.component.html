@@ -46,7 +46,7 @@
             *ngFor="let sugestao of obj_Array_Sugestoes | filter: Input_Value; let i = index">
             <div class="div-aling-item-card h-12">
                 <p
-                    class="my-auto font-semibold text-lg md:font-semibold pl-4 text-ellipsis w-60 whitespace-nowrap overflow-hidden text-unimed-darkgray">
+                    class="my-auto font-semibold text-lg md:font-semibold pl-4 text-ellipsis whitespace-nowrap overflow-hidden text-unimed-darkgray">
                     {{sugestao.nm_titulo}}
                 </p>
                 <div class="flex flex-row" *ngIf="b_User_Admin">

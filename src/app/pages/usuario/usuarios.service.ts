@@ -52,7 +52,7 @@ export class UsuariosService {
         }
 
         if(param.b_login_ad == true){
-            param.ds_senha = ""
+            param.ds_senha = null
         }
       
         return this.usuariosRepository.Set_Add_Usuario(param)
@@ -60,10 +60,16 @@ export class UsuariosService {
 
     Set_Edit_Usuario(objparam){
         if(objparam.b_login_ad == false && objparam.ds_senha == null){
+            delete objparam.ds_senha
+        }
+        if(objparam.nm_usuario == null || objparam.nm_usuario == ""){
             return false
         }
         if(objparam.b_login_ad == false && objparam.ds_senha == ""){
             return false
+        }
+        if(objparam.b_login_ad == true){
+            objparam.ds_senha = undefined
         }
         if(objparam.ds_senha != null){
             const md5 = new Md5();

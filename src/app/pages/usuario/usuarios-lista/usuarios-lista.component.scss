@@ -96,3 +96,8 @@
         @apply md:mt-12;   
     }
 }
+
+.img-rotation-arrow-down{
+    transform: rotateZ(-180deg);
+    transition: all 0.4s ease;
+}

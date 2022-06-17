@@ -6,7 +6,7 @@
         <uni-title  [ds_Titulo]="ds_Titulo"></uni-title>
     </div>
     <div class="top-6 relative flex flex-col gap-y-4">
-        <app-input [required]="true" label="Categoria" [(ngModel)]="nm_Categoria" id="nm_Categoria" name="nm_Categoria">
+        <app-input [required]="true" label="Nome" [(ngModel)]="nm_Categoria" id="nm_Categoria" name="nm_Categoria">
         </app-input>
         <div class="lg:mt-4 flex flex-row w-full xl:w-6/12 px-4 gap-x-4 lg:gap-x-10 mx-auto">
             <uni-button buttonClass="btn-primary" (click)="Send_Category()">Salvar</uni-button>
