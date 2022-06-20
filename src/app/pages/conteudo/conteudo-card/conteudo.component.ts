@@ -38,14 +38,8 @@ export class ConteudoComponent implements OnInit, OnDestroy {
   /**@description como o nome da opção que aparece por baixo no popover */
   nm_Opcao_bottom: string = "Excluir"
 
-  /**@description Boolean para exibir svg de okay no check-box */
-  b_Start: boolean = false
-
   /**@description Titulo da página */
   ds_Titulo: string = ""
-
-  /**@description String para armazenar o caminho do svg */
-  nm_Star: string = "assets/icons/star-with-no-background.svg"
 
   /**@description Boolean para exibir svg */
   b_User_Admin: boolean = true
@@ -98,9 +92,6 @@ export class ConteudoComponent implements OnInit, OnDestroy {
   /**@description Recebe os campos dos conteudos */
   objFilds = new ConteudoModel
 
-  /**@description Recebe as informações do usuário para favoritar um conteúdo */
-  objFavorite = { cd_usuario: null, cd_conteudo: "" }
-
   constructor(
     private route: Router,
     private routerParam: ActivatedRoute,
@@ -133,21 +124,14 @@ export class ConteudoComponent implements OnInit, OnDestroy {
 
   async onClick_Favorite(conteudo) {
     conteudo.sn_favorito = !conteudo.sn_favorito
-    this.b_Start = !this.b_Start
     if (conteudo.sn_favorito) {
-      this.nm_Star = "assets/icons/start-yellow.svg"
-      this.objFavorite.cd_usuario = this.cd_User_Logged
-      this.objFavorite.cd_conteudo = conteudo.cd_conteudo
       const responsefavorito = await this.meuestudosService.Set_My_Study(conteudo.cd_conteudo)
       if (responsefavorito.errors) {
         this.subject_service.subject_Exibindo_Snackbar.next({ message: 'Não foi possível favoritar' })
       } else {
-        this.subject_service.subject_Exibindo_Snackbar.next({ message: 'Favoritado com sucesso' })
+        this.subject_service.subject_Exibindo_Snackbar.next({ message: 'Favoritado com sucesso!' })
       }
     } else {
-      this.nm_Star = "assets/icons/star-with-no-background.svg"
-      this.objFavorite.cd_usuario = this.cd_User_Logged
-      this.objFavorite.cd_conteudo = conteudo.cd_conteudo
       const responsedesfavoritar = await this.meuestudosService.Delete_My_Study(conteudo.cd_conteudo)
       if (responsedesfavoritar.erros) {
         this.subject_service.subject_Exibindo_Snackbar.next({ message: 'Não foi possível desfavoritar' })
@@ -162,10 +146,7 @@ export class ConteudoComponent implements OnInit, OnDestroy {
     if (responsemystudies.errors) {
       this.subject_service.subject_Exibindo_Snackbar.next({ message: 'Não foi possível trazer a listagem' })
     }
-    this.obj_Array_Meus_Estudos = responsemystudies.data.estudos.map(m => m.conteudo.cd_conteudo)
-    this.obj_Array_Conteudos.forEach((iten) => {
-      iten.sn_favorito = this.obj_Array_Meus_Estudos.filter(f => f == iten.cd_conteudo).length > 0
-    })
+    this.Set_Star_Yellow(responsemystudies)
   }
 
   async OnClick_Access(conteudo) {
@@ -213,6 +194,13 @@ export class ConteudoComponent implements OnInit, OnDestroy {
     this.cd_Id_Conteudo = conteudo.cd_conteudo
   }
 
+  Set_Star_Yellow(responsemystudies){
+    this.obj_Array_Meus_Estudos = responsemystudies.data.estudos.map(m => m.conteudo.cd_conteudo)
+    this.obj_Array_Conteudos.forEach((iten) => {
+      iten.sn_favorito = this.obj_Array_Meus_Estudos.filter(f => f == iten.cd_conteudo).length > 0
+    })
+  }
+
   async Set_Update_Conteudo() {
     const responsedeleteconteudo = await this.conteudoService.Set_Update_Conteudo(this.cd_Id_Conteudo)
     if (responsedeleteconteudo.errors) {
@@ -232,6 +220,7 @@ export class ConteudoComponent implements OnInit, OnDestroy {
   }
 
   async onClick_Refresh() {
+    console.log(this.obj_Array_Conteudos)
     if(this.sn_Sumary){
       this.obj_Array_Conteudos = []
       this.Input_Value = null
@@ -239,7 +228,9 @@ export class ConteudoComponent implements OnInit, OnDestroy {
     }else{
       this.obj_Array_Conteudos = []
       this.Input_Value = null
+      this.obj_Array_Conteudos.forEach((conteudo)=> conteudo.sn_favorito = conteudo.sn_favorito = true)
       this.Get_Contedos_From_Category()
+      
     }
   }
 

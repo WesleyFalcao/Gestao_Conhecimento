@@ -19,9 +19,6 @@ export class MeusEstudosComponent implements OnInit {
   /**@description Array que vai conter os estudos de cada usuário */
   Obj_Array_Meus_Estudos: Array<any>
 
-  /**@description String para armazenar o caminho do svg */
-  nm_Start: string = "assets/icons/start-yellow.svg"
-
   /**@description Boolean para exibir svg */
   b_User_Admin: boolean = true
 
@@ -92,21 +89,20 @@ export class MeusEstudosComponent implements OnInit {
   }
 
   async Start_Svg(estudo) {
-    estudo.favorite = !estudo.favorite
-    if (!estudo.favorite) {
-
-      this.subject_service.subject_Exibindo_Snackbar.next({ message: 'Favoritado com sucesso!' })
-      const responsedeleteestudo = await this.meuestudosService.Set_My_Study(estudo.conteudo.cd_conteudo)
-      if (responsedeleteestudo.erros) {
+    console.log("estudo",estudo)
+    estudo.sn_favorito = !estudo.sn_favorito
+    if (estudo.sn_favorito) {
+      const responsefavorite = await this.meuestudosService.Set_My_Study(estudo.conteudo.cd_conteudo)
+      if (responsefavorite.erros) {
         this.subject_service.subject_Exibindo_Snackbar.next({ message: 'Não foi possível concluir a ação' })
       }
+      this.subject_service.subject_Exibindo_Snackbar.next({ message: 'Favoritado com sucesso!' })
     } else {
       const responseaddestudo = await this.meuestudosService.Delete_My_Study(estudo.conteudo.cd_conteudo)
       if (responseaddestudo.errors) {
         this.subject_service.subject_Exibindo_Snackbar.next({ message: 'Não foi possível concluir a ação' })
       } else {
         this.subject_service.subject_Exibindo_Snackbar.next({ message: 'Desfavoritado com sucesso!' })
-        this.nm_Start = "assets/icons/star-with-no-background.svg"
       }
     }
   }
@@ -119,7 +115,9 @@ export class MeusEstudosComponent implements OnInit {
 
   async Get_My_Estudies() {
     const responsemystudies = await this.meuestudosService.Get_My_Studies()
-    if (responsemystudies.errors) {
+    console.log("responsemystudies",responsemystudies.data.estudos[0])
+    responsemystudies.data.estudos.forEach((item)=> item.sn_favorito = item.sn_favorito = true)
+    if (responsemystudies.errors){
       this.subject_service.subject_Exibindo_Snackbar.next({ message: 'Não foi possível trazer a listagem' })
     }
     this.Obj_Array_Meus_Estudos = responsemystudies.data.estudos
@@ -158,8 +156,6 @@ export class MeusEstudosComponent implements OnInit {
     const responseaddestudo = await this.meuestudosService.Delete_My_Study(this.cd_Id_Conteudo)
     if (responseaddestudo.errors) {
       this.subject_service.subject_Exibindo_Snackbar.next({ message: 'Não foi possível concluir a ação' })
-    } else {
-      this.nm_Start = "assets/icons/star-with-no-background.svg"
     }
     const responsedeleteconteudo = await this.conteudoService.Set_Update_Conteudo(this.cd_Id_Conteudo)
     if (responsedeleteconteudo.errors) {

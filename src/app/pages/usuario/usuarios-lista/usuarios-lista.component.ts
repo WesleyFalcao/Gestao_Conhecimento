@@ -74,6 +74,7 @@ export class UsersComponent implements OnInit {
 
   ngAfterViewInit() {
     this.onResize()
+
     setTimeout(() => {
       this.Search_User()
     });
@@ -107,7 +108,7 @@ export class UsersComponent implements OnInit {
 
   onFilter_Search(iten) {
     this.Input_Value = iten
-    if(this.Input_Value != null){
+    if (this.Input_Value != null) {
 
       this.Search_User()
     }
@@ -159,13 +160,13 @@ export class UsersComponent implements OnInit {
 
   async Search_User() {
 
-    if(this.Input_Value == null){
+    if (this.Input_Value == null) {
       this.obj_Array_Response = await this.usuarioService.Get_Usuarios(this.objUsuarios)
 
-    }else{
+    } else {
       this.obj_Array_Response = await this.usuarioService.Get_Usuarios_Filter(this.objUsuarios, this.Input_Value)
     }
-
+    
     if (this.obj_Array_Response.errors) {
       this.subjectService.subject_Exibindo_Snackbar.next({ message: 'Não foi possível trazer a listagem' })
     }

@@ -15,13 +15,13 @@ export class AnimationNotAllowedComponent {
   };
 
   constructor(
-    private route: Router
+    private route: Router,
     ){
   }
   
   animationCreated(animationItem: AnimationItem): void {}
 
-  Back() { 
+  Back_Home() {
     this.route.navigate(['/home'])
   }
 }

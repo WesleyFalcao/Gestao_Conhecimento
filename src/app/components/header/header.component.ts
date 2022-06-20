@@ -24,6 +24,7 @@ export class HeaderComponent implements OnInit {
   /**@description Boolean de refresh */
   @Input() b_Input_Open : boolean
 
+  /**@description Contém o valor do input */
   @Input() nm_Input: string
 
   /**@description boolean para abrir ou fechar o popover */

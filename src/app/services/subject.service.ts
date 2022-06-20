@@ -14,7 +14,7 @@ export class SubjectService {
     subject_Exibindo_Bar = new BehaviorSubject(false);
 
     /** @description Subject que controla o Snackbar */
-    subject_Exibindo_Snackbar = new BehaviorSubject<ISnackbar>({ message: "", milliseconds: 3000 });
+    subject_Exibindo_Snackbar = new BehaviorSubject<ISnackbar>({ message: "", milliseconds: 1000 });
 
     /** @description Subject que controla o Loading */
     subject_Exibindo_Loading = new BehaviorSubject(false);

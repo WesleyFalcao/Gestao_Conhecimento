@@ -66,16 +66,16 @@
     top: calc(50% - 11.3rem);
 
     @media (min-width: 768px) {
-        left: calc(100% - 5.2rem);
+        left: calc(100% - 4.7rem);
     }
 
     @media (min-width: 1024px) {
-        left: calc(100% - 6.3rem);
+        left: calc(100% - 5.3rem);
         top: calc(50% - 11.3rem);
     }
 
     @media (min-width: 1200px) {
-        left: calc(100% - 6.2rem);
+        left: calc(100% - 5.2rem);
         top: calc(50% - 11.3rem);
     }
 }

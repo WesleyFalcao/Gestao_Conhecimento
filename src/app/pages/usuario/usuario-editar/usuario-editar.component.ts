@@ -152,6 +152,7 @@ export class EditarUserComponent implements OnInit, OnDestroy {
       this.subjectService.subject_Exibindo_Snackbar.next({ message: 'Não foi possível adicionar' })
       this.obj_Filds_Input.ds_senha = null
     }
+    
     if (responseedituser.data.update_usuarios.returning.length) {
       this.obj_Filds_Input.ds_senha = null
       this.Send_Sugestion_Animacao = true

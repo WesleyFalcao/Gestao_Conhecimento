@@ -60,6 +60,7 @@ export class LoginService {
                 this.dataService.Set_Local("token", res.data.login.accessToken)
                 this.route.navigate(['/home'])
             } else {
+                
                 this.subjectService.subject_Exibindo_Snackbar.next({ message: (res.data.login.mensagem) })
             }
         } catch {
@@ -96,6 +97,7 @@ export class LoginService {
         if (token == '{}') {
             return false
         }
+
         const role = this.helper?.decodeToken(token)
         return (role["https://hasura.io/jwt/claims"])["x-hasura-default-role"]
     }

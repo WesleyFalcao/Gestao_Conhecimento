@@ -56,7 +56,7 @@ export class SnackbarComponent implements OnInit {
         }
     }
 
-    timer(message: string, milliseconds: number = 3000) {
+    timer(message: string, milliseconds: number = 2000) {
         this.b_Exibindo_Snackbar = true
 
         setTimeout(() => {
