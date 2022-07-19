@@ -1,6 +1,3 @@
-
-
-
 <app-header (Input_Emit_Value)="onFilter_Search($event)"></app-header>
 
 <div class="container relative top-6 lg:top-14">
@@ -10,13 +7,12 @@
         </div>
         <div class="flex flex-row relative gap-8 md:gap-8 mt-10 lg:gap-10 mr-16 justify-self-end">
             <app-button-filter class="cursor-pointer hidden" (b_Show_Modal)="Show_Modal($event)"></app-button-filter>
-            <img class="behavior-button cursor-pointer w-4 h-5 md:w-4 md:h-6" src="assets/icons/X.svg" (click)="onClick_Clear_Study()">
             <img class="behavior-button cursor-pointer w-6 h-6 md:w-7 md:h-7" src="assets/icons/refresh.svg" (click)="onClick_Refresh()">
         </div>
     </div>
     <div class="grid grid-cols-1 lg:grid-cols-2 relative top-6 gap-y-6 md:gap-y-10 w-full px-12 md:px-16 pb-10 lg:gap-x-10 lg:top-6">
         <div class="h-52 relative rounded-lg bg-unimed-white shadow-lg border-l-8 border-l-unimed-green"
-            *ngFor="let estudo of obj_Array_Conteudos | filter: Input_Value">
+            *ngFor="let estudo of obj_Array_Favoritos | filter: Input_Value">
             <div class="absolute div-aling-popover_card">
                 <app-popover [nm_Svg_Top]="nm_Svg_Top" [nm_Svg_Bottom]="nm_Svg_Bottom" [nm_Opcao_top]="nm_Opcao_top"
                     [nm_Opcao_bottom]="nm_Opcao_bottom" [b_Rotate_Triangle]="b_Rotate_Triangle"
@@ -27,9 +23,9 @@
             <div class="div-grid-header-card h-12 w-full">
                 <p
                     class="my-auto font-semibold text-lg md:font-semibold pl-4 truncate text-unimed-darkgray">
-                    {{estudo.nm_titulo}}
+                    {{estudo.conteudo.nm_titulo}}
                 </p>
-                <div class="grid grid-cols-2 cursor-pointer absolute mt-4 gap-x-5 lg:gap-x-0 right-3 md:right-4 xl:right-4 xl:gap-x-2"
+                <div class="grid grid-cols-2 cursor-pointer absolute mt-4 gap-x-5 right-3 md:right-4 xl:right-4 xl:gap-x-2"
                     >
                     <img class="w-5 h-5 behavior-button cursor-pointer -mt-1" src="assets/icons/{{estudo.sn_favorito?'start-yellow':'star-with-no-background'}}.svg" (click)="Start_Svg(estudo)">
                     <div class="lg:w-10 relative mx-auto" (click)="Show_Popover(estudo)" *ngIf="b_User_Admin">
@@ -39,7 +35,7 @@
             </div>
             <p
                 class="p-rows pt-2 my-auto font-medium xl:text-base pl-4 text-ellipsis whitespace-normal overflow-hidden">
-                {{estudo.ds_conteudo}}
+                {{estudo.conteudo.ds_conteudo}}
             </p>
 
             <div class="grid grid-cols-2">
@@ -47,7 +43,7 @@
                     class="hidden mt-7 md:flex flex-row font-semibold md:font-semibold truncate pl-4 text-unimed-darkgray">
                     Categoria:
                     <p class="relative ml-2 font-normal truncate">
-                        {{estudo.categoria.nome}}
+                        {{estudo.conteudo.categoria.nm_categoria}}
                     </p>
                 </div>
                 <button (click)="onClick_Access(estudo)"
@@ -58,6 +54,7 @@
             </div>
         </div>
     </div>
+
     <app-modal (b_Click_Sobreposicao)="Close_Modal()" class="{{b_Show_Filter?'':'hidden'}}">
         <div class="grid grid-cols-2">
             <div class="flex flex-col relative left-2 lg:left-2 pb-4 lg:ml-2.5 -mt-4">
@@ -86,6 +83,6 @@
         (b_Closed_Alert_Modal)="Closed_Alert_Modal()" (b_Confirmed)="Set_Update_Conteudo()"></alert-modal>
 </div>
 
-<div *ngIf="obj_Array_Conteudos?.length == 0 || !obj_Array_Conteudos">
+<div *ngIf="obj_Array_Favoritos?.length == 0 || !obj_Array_Favoritos">
     <animation-nothing-found></animation-nothing-found>
 </div>

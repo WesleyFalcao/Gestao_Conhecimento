@@ -53,7 +53,7 @@ export function playerFactory() {
     SendSuggestionComponent,
     Input2Component,
     ModalComponent,
-    AnimationNotAllowedComponent,
+    AnimationNotAllowedComponent,  
   ],
   imports: [
     CommonModule,

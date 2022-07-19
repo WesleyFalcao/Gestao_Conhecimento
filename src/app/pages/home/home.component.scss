@@ -71,11 +71,6 @@
     }
 }
 
-.img-rotation-arrow-down{
-    transform: rotateZ(-180deg);
-    transition: all 0.4s ease;
-}
-
 .cards-itens{
     @apply items-center grid grid-cols-2 mx-auto gap-y-2 md:gap-y-0;
 

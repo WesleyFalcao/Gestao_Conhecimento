@@ -1,0 +1,112 @@
+.icon-card {
+    @apply mx-auto mt-8;
+}
+
+.acao {
+    min-width: 200px;
+    color: black;
+    height: 40px;
+    border-bottom: 1px solid #dedede;
+    line-height: 40px;
+    cursor: pointer
+}
+
+
+.container {
+    max-width: 670px;
+    margin: 0 auto;
+
+    max-width: 670px;
+    margin: 0 auto;
+    
+    @media (min-width: 1024px) {
+        max-width: 850px;
+    }
+    @media (min-width: 1280px) {
+        max-width: 1250px;
+    }
+    @media (min-width: 1536px) {
+        max-width: 1322px;
+    }
+    @media (min-width: 1636px) {
+        max-width: 1300px;
+    }
+    @media (min-width: 1780px) {
+        max-width: 1400px;
+    }
+}
+
+.div-grid-header-card{
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+}
+
+.div-aling-popover_filter {
+
+    left: calc(100% - 11.4rem);
+    top: calc(50% - 14.3rem);
+
+    @media (min-width: 768px) {
+        left: calc(100% - 12rem);
+    }
+
+    @media (min-width: 1024px) {
+        left: calc(100% - 13.3rem);
+        top: calc(50% - 6.3rem);
+    }
+
+    @media (min-width: 1200px) {
+        left: calc(100% - 13.7rem);
+        top: calc(50% - 6.3rem);
+    }
+}
+
+.div-aling-popover_card {
+    left: calc(100% - 4.4rem);
+    top: calc(50% - 11.3rem);
+
+    @media (min-width: 768px) {
+        left: calc(100% - 4.7rem);
+    }
+
+    @media (min-width: 1024px) {
+        left: calc(100% - 5.3rem);
+        top: calc(50% - 11.3rem);
+    }
+
+    @media (min-width: 1200px) {
+        left: calc(100% - 5.2rem);
+        top: calc(50% - 11.3rem);
+    }
+}
+
+.div-hidden-card {
+    animation: hidden-card 2s ease-in-out;
+
+    @keyframes hidden-card {
+        to {
+            opacity: 0;
+        }
+
+        from {
+            opacity: 1;
+            display: hidden;
+        }
+    }
+}
+
+.p-rows {
+    width: calc(100% - 30px);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+}
+
+.behavior-button {
+    &:active {
+        transform: scale(0.92);
+        transition-duration: 280ms;
+    }
+}

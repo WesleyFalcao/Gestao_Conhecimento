@@ -49,6 +49,11 @@
                         <img class="w-4 h-4" src="assets/icons/category.svg">
                         <span class="text-sm">Categorias</span>
                     </div>
+                    <div class="relative mt-3 flex flex-row gap-x-3 cursor-pointer behavior-button"
+                        (click)="onClick_Report()">
+                        <img class="w-4 h-4" src="assets/icons/report.svg">
+                        <span class="text-sm">Relatório</span>
+                    </div>
                 </div>
             </div>
             <div class="{{b_Show_Modal && b_User_Admin?'flex':'hidden'}}">
@@ -84,7 +89,7 @@
                 </div>
             </div>
             <div
-                class="{{b_User_Admin == false && b_Show_Modal == false? 'position-itens-no-adm flex gap-x-16':''}} {{b_Show_Modal == true?'grid gap-y-4 md:gap-y-7':''}} {{b_User_Admin == true && b_Show_Modal == false? 'position-itens-adm flex gap-x-16':''}}">
+                class="{{b_User_Admin == false && b_Show_Modal == false? 'position-itens-no-adm flex gap-x-16':''}} {{b_Show_Modal == true?'grid gap-y-4 md:gap-y-7':''}} {{b_User_Admin == true && b_Show_Modal == false? 'position-itens-adm flex gap-x-14':''}}">
                 <div class="flex flex-row xl:flex-col xl:text-center xl:justify-center 3xl:mt-1 cursor-pointer iten-behavior {{b_User_Admin?'':'hidden'}} {{b_Show_Input_Desktop?'flex flex-row': 'hidden'}}"
                     (click)="b_Show_Popover = !b_Show_Popover">
                     <img class="img-width-users my-1 xl:my-0 3xl:w-9 3xl:h-9 xl:mx-auto"
@@ -92,11 +97,16 @@
                     <p class="text-xs my-auto pl-0.5 xl:my-0 xl:pl-0">Cadastros</p>
                 </div>
                 <div class="flex flex-row xl:flex-col xl:text-center xl:justify-center 3xl:mt-1 cursor-pointer iten-behavior {{b_Show_Input_Desktop?'flex flex-row': ''}}"
+                    routerLink="/favoritos">
+                    <img class="img-width-my-study my-1 xl:my-0 3xl:w-7 3xl:h-7 xl:mx-auto"
+                        src="assets/icons/star-green.svg">
+                    <p class="text-xs md:text-lg xl:text-xs my-auto pl-0.5 xl:my-0 xl:pl-0 whitespace-nowrap">Favoritos
+                </div>
+                <div class="flex flex-row xl:flex-col xl:text-center xl:justify-center 3xl:mt-1 cursor-pointer iten-behavior {{b_Show_Input_Desktop?'flex flex-row': ''}}"
                     routerLink="/meus-estudos">
                     <img class="img-width-my-study my-1 xl:my-0 3xl:w-7 3xl:h-7 xl:mx-auto"
                         src="assets/icons/my-studies.svg">
-                    <p class="text-xs md:text-lg xl:text-xs my-auto pl-0.5 xl:my-0 xl:pl-0 whitespace-nowrap">Meus
-                        estudos</p>
+                    <p class="text-xs md:text-lg xl:text-xs my-auto pl-0.5 xl:my-0 xl:pl-0 whitespace-nowrap">Meus estudos
                 </div>
                 <div class="flex flex-row xl:flex-col xl:text-center xl:justify-center 3xl:mt-1 cursor-pointer iten-behavior {{b_Show_Input_Desktop?'flex flex-row': ''}}"
                     routerLink="/sugestoes">

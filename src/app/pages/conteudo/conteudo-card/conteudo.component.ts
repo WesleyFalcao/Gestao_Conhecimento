@@ -12,13 +12,14 @@ import { ConteudoService } from '../conteudo.service';
   templateUrl: './conteudo.component.html',
   styleUrls: ['./conteudo.component.scss']
 })
+
 export class ConteudoComponent implements OnInit, OnDestroy {
 
   /**@description nome do label do primeiro input */
   obj_Array_Conteudos: Array<any>
 
-  /**@description Array que vai conter os estudos de cada usuário */
-  obj_Array_Meus_Estudos: Array<number>
+  /**@description Array que vai conter os favoritos de cada usuário */
+  obj_Array_Meus_Favoritos: Array<number>
 
   /**@description nome do label do primeiro input */
   nm_Label_Input_Filter_1: string = "Título"
@@ -63,7 +64,7 @@ export class ConteudoComponent implements OnInit, OnDestroy {
   b_Show_Filter: boolean = false
 
   /**@description Contém os dados do usuário que seram gravados */
-  objDados = { cd_Conteudo: null, nm_Usuario: "" }
+  objDados = { cd_Conteudo: null, cd_Usuario: null }
 
   /**@description Recebe o parâmetro da rota */
   cd_Id_Param: number
@@ -83,9 +84,6 @@ export class ConteudoComponent implements OnInit, OnDestroy {
   /**@description Recebe true caso o sumário for selecionado */
   sn_Sumary: boolean = false
 
-  /**@description Recebe o nome do usário que adicionou a sugestão */
-  nm_User: string
-
   /**@description Recebe o parâmetro da rota */
   subject_unsub: Subscription
 
@@ -97,7 +95,7 @@ export class ConteudoComponent implements OnInit, OnDestroy {
     private routerParam: ActivatedRoute,
     private loginService: LoginService,
     private subject_service: SubjectService,
-    private meuestudosService: MeusEstudosService,
+    private myfavorites: MeusEstudosService,
     private conteudoService: ConteudoService
   ) {
   }
@@ -107,7 +105,6 @@ export class ConteudoComponent implements OnInit, OnDestroy {
     if (role_user == "user") {
       this.b_User_Admin = false
     }
-    this.nm_User = this.loginService.Name_User_Logged()
     this.subject_unsub = this.routerParam.params.subscribe((params: any) => {
       this.cd_Id_Param = params['id']
       this.cd_User_Logged = this.loginService.Id_User_Logged()
@@ -119,20 +116,20 @@ export class ConteudoComponent implements OnInit, OnDestroy {
     }else{
       this.Get_Contedos_From_Category()
     }
-    this.Get_My_Estudies()
+    this.Get_My_Favorites()
   }
 
   async onClick_Favorite(conteudo) {
     conteudo.sn_favorito = !conteudo.sn_favorito
     if (conteudo.sn_favorito) {
-      const responsefavorito = await this.meuestudosService.Set_My_Study(conteudo.cd_conteudo)
+      const responsefavorito = await this.myfavorites.Set_My_Study(conteudo.cd_conteudo)
       if (responsefavorito.errors) {
         this.subject_service.subject_Exibindo_Snackbar.next({ message: 'Não foi possível favoritar' })
       } else {
         this.subject_service.subject_Exibindo_Snackbar.next({ message: 'Favoritado com sucesso!' })
       }
     } else {
-      const responsedesfavoritar = await this.meuestudosService.Delete_My_Study(conteudo.cd_conteudo)
+      const responsedesfavoritar = await this.myfavorites.Delete_My_Study(conteudo.cd_conteudo)
       if (responsedesfavoritar.erros) {
         this.subject_service.subject_Exibindo_Snackbar.next({ message: 'Não foi possível desfavoritar' })
       } else {
@@ -141,18 +138,19 @@ export class ConteudoComponent implements OnInit, OnDestroy {
     }
   }
 
-  async Get_My_Estudies() {
-    const responsemystudies = await this.meuestudosService.Get_Cd_Studies()
-    if (responsemystudies.errors) {
-      this.subject_service.subject_Exibindo_Snackbar.next({ message: 'Não foi possível trazer a listagem' })
+  async Get_My_Favorites() {
+    const responsefavorites = await this.myfavorites.Get_My_Favorites()
+    console.log("responsemystudies",responsefavorites)
+    if (responsefavorites.errors) {
+      this.subject_service.subject_Exibindo_Snackbar.next({ message: 'Não foi possível trazer os favoritos' })
     }
-    this.Set_Star_Yellow(responsemystudies)
+    this.Set_Star_Yellow(responsefavorites)
   }
 
   async OnClick_Access(conteudo) {
 
     this.objDados.cd_Conteudo = conteudo.cd_conteudo
-    this.objDados.nm_Usuario = this.nm_User
+    this.objDados.cd_Usuario = this.cd_User_Logged
     const responseacesso = await this.conteudoService.Set_Gravar_Dados(this.objDados)
     if (responseacesso.errors) {
       this.subject_service.subject_Exibindo_Snackbar.next({ message: 'Não foi possível acessar' })
@@ -194,10 +192,10 @@ export class ConteudoComponent implements OnInit, OnDestroy {
     this.cd_Id_Conteudo = conteudo.cd_conteudo
   }
 
-  Set_Star_Yellow(responsemystudies){
-    this.obj_Array_Meus_Estudos = responsemystudies.data.estudos.map(m => m.conteudo.cd_conteudo)
+  Set_Star_Yellow(responsefavorites){
+    this.obj_Array_Meus_Favoritos = responsefavorites.data.favoritos.map(m => m.conteudo.cd_conteudo)
     this.obj_Array_Conteudos.forEach((iten) => {
-      iten.sn_favorito = this.obj_Array_Meus_Estudos.filter(f => f == iten.cd_conteudo).length > 0
+      iten.sn_favorito = this.obj_Array_Meus_Favoritos.filter(f => f == iten.cd_conteudo).length > 0
     })
   }
 
@@ -216,11 +214,9 @@ export class ConteudoComponent implements OnInit, OnDestroy {
 
   Closed_Alert_Modal() {
     this.b_Confirmation_Show_Modal = false
-
   }
 
   async onClick_Refresh() {
-    console.log(this.obj_Array_Conteudos)
     if(this.sn_Sumary){
       this.obj_Array_Conteudos = []
       this.Input_Value = null
@@ -229,8 +225,7 @@ export class ConteudoComponent implements OnInit, OnDestroy {
       this.obj_Array_Conteudos = []
       this.Input_Value = null
       this.obj_Array_Conteudos.forEach((conteudo)=> conteudo.sn_favorito = conteudo.sn_favorito = true)
-      this.Get_Contedos_From_Category()
-      
+      this.Get_Contedos_From_Category()    
     }
   }
 

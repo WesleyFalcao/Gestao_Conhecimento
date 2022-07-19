@@ -152,12 +152,19 @@ export class HeaderComponent implements OnInit {
     this.route.navigate(['/usuarios'])
     this.b_Show_Popover = false
   }
+
   onClick_Conteudos() {
     this.route.navigate(['/conteudo-lista'])
     this.b_Show_Popover = false
   }
+
   onClick_Categorias() {
     this.route.navigate(['/categorias'])
+    this.b_Show_Popover = false
+  }
+
+  onClick_Report() {
+    this.route.navigate(['/report'])
     this.b_Show_Popover = false
   }
 

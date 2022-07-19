@@ -34,7 +34,7 @@ export class ConteudoEditarListaComponent implements OnInit {
   Input_Value: any
 
   /**@description Contém os dados do usuário que seram gravados */
-  objDados = { cd_Conteudo: null, nm_Usuario: "" }
+  objDados = { cd_Conteudo: null, cd_Usuario: null }
 
   /**@description Boolean para abrir e fechar o modal de filtro */
   b_Show_Filter: boolean = false
@@ -47,8 +47,8 @@ export class ConteudoEditarListaComponent implements OnInit {
   /**@description Boolean que recebe true caso usuário for admin */
   b_User_Admin: boolean = true
 
-  /**@description Recebe o nome do usário que adicionou a sugestão */
-  nm_User: string
+  /**@description Recebe o Id do usuário logado */
+  cd_User_Logged: any
 
   /**@description Objeto de conteduos*/
   objConteudo = new ConteudoModel
@@ -75,7 +75,7 @@ export class ConteudoEditarListaComponent implements OnInit {
     } else {
       this.b_User_Admin = false
     }
-    this.nm_User = this.loginService.Name_User_Logged()
+    this.cd_User_Logged = this.loginService.Id_User_Logged()
     this.onResize()
     this.route.queryParams.subscribe(param => this.Input_Value = param.nm_searcch)
     if (this.Input_Value != null) {
@@ -84,13 +84,12 @@ export class ConteudoEditarListaComponent implements OnInit {
     } else {
       this.ds_Titulo = "Conteúdos"
     }
+    this.Search_Conteudos()
   }
 
   ngAfterViewInit() {
     if (this.Input_Value != null) {
-      setTimeout(() => {
-        this.Search_Conteudos()
-      });
+      this.Search_Conteudos()
     }
     this.scroller.elementScrolled().pipe(
       map(() => this.scroller.measureScrollOffset('bottom')),
@@ -125,7 +124,6 @@ export class ConteudoEditarListaComponent implements OnInit {
     } else {
       this.obj_Array_Response = await this.conteudoService.Get_Conteudos_Filter(this.objConteudo, this.Input_Value)
     }
-    console.log(this.obj_Array_Response)
     if (this.obj_Array_Response.errors) {
       this.subjectService.subject_Exibindo_Snackbar.next({ message: 'Não foi possível trazer a listagem' })
     }
@@ -144,10 +142,18 @@ export class ConteudoEditarListaComponent implements OnInit {
     }
   }
 
+  async onFilter_Search(iten) {
+    this.Input_Value = null
+    this.Input_Value = iten
+    if (iten != null) {
+      this.Search_Conteudos()
+    }
+  }
+
   async OnClick_Access(conteudo) {
 
     this.objDados.cd_Conteudo = conteudo.cd_conteudo
-    this.objDados.nm_Usuario = this.nm_User
+    this.objDados.cd_Usuario = this.cd_User_Logged
     const responseacesso = await this.conteudoService.Set_Gravar_Dados(this.objDados)
     if (responseacesso.errors) {
       this.subjectService.subject_Exibindo_Snackbar.next({ message: 'Não foi possível acessar' })
@@ -176,13 +182,6 @@ export class ConteudoEditarListaComponent implements OnInit {
     }
     this.Input_Value = null
     this.Search_Conteudos()
-  }
-
-  async onFilter_Search(iten) {
-    this.Input_Value = null
-    this.Input_Value = iten
-    this.Search_Conteudos()
-
   }
 
   Focus_Item(el: HTMLElement) {

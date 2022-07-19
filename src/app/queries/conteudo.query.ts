@@ -33,6 +33,25 @@ export class ConteudoQuery {
     `
   }
 
+  Get_Conteudo_Meus_Estudos() {
+    return `
+    query ($cd_conteudo: Int) {
+      conteudos(where: {cd_conteudo: {_eq: $cd_conteudo}, _and: {dt_exclusao: {_is_null: true}}}) {
+        cd_categoria
+        cd_conteudo
+        ds_conteudo
+        ds_link
+        nm_titulo
+        dt_exclusao
+        categoria {
+          id: cd_categoria
+          nome: nm_categoria
+        }
+      }
+    }
+    `
+  }
+
   Get_Conteudos_Filter() {
     return `
     query ($where: conteudos_bool_exp, $limit: Int, $offset: Int) {
@@ -51,6 +70,68 @@ export class ConteudoQuery {
         }
       }
     }                 
+    `
+  }
+
+  Get_Conteudos_Filter_Report() {
+    return `
+    query ($where: acessos_bool_exp, $limit: Int, $offset: Int) {
+      acessos(where: $where, limit: $limit, offset: $offset) {
+        conteudo {
+          cd_categoria
+          cd_conteudo
+          ds_conteudo
+          ds_link
+          nm_titulo
+          dt_exclusao
+          categoria {
+            nm_categoria
+          }
+        }
+        dt_acesso
+        cd_conteudo_acesso
+        cd_usuario
+        usuario {
+          cd_login
+        }
+      }
+      acessos_aggregate(where: $where) {
+        aggregate {
+          count
+        }
+      }
+    }
+    `
+  }
+
+  Get_Conteudos_Report_Pagination() {
+    return `
+    query ($limit: Int, $offset: Int) {
+      acessos(limit: $limit, offset: $offset) {
+        conteudo {
+          cd_categoria
+          cd_conteudo
+          ds_conteudo
+          ds_link
+          nm_titulo
+          dt_exclusao
+          categoria {
+            nm_categoria
+          }
+        }
+        dt_acesso
+        cd_conteudo_acesso
+        cd_usuario
+        usuario {
+          cd_login
+        }
+      }
+      acessos_aggregate{
+        aggregate {
+          count
+        }
+      }
+    }
     `
   }
 
@@ -90,7 +171,7 @@ export class ConteudoQuery {
     `
   }
 
-  Get_Sumary(){
+  Get_Sumary() {
     return `
     {
       sumario(order_by: {nm_titulo: asc}) {
@@ -101,7 +182,7 @@ export class ConteudoQuery {
     `
   }
 
-  Set_Sumary(){
+  Set_Sumary() {
     return `
     mutation ($ds_descricao: String, $nm_titulo: String ) {
       insert_sumario(objects: {ds_descricao: $ds_descricao, nm_titulo: $nm_titulo}) {
@@ -151,7 +232,7 @@ export class ConteudoQuery {
     `
   }
 
-  Set_Update_Conteudo(){
+  Set_Update_Conteudo() {
     return `
     mutation ($cd_conteudo: Int, $dt_exclusao: date) {
       update_conteudos(where: {cd_conteudo: {_eq: $cd_conteudo}}, _set: {dt_exclusao:  $dt_exclusao}) {
@@ -163,10 +244,10 @@ export class ConteudoQuery {
 
   Set_Gravar_Dados() {
     return `
-    mutation ($cd_conteudo: Int, $nm_usuario: String) {
-      insert_acessos(objects: {cd_conteudo: $cd_conteudo, nm_usuario:  $nm_usuario}) {
+    mutation ($cd_conteudo: Int, $cd_usuario: Int) {
+      insert_acessos(objects: {cd_conteudo: $cd_conteudo, cd_usuario: $cd_usuario}) {
         returning {
-          nm_usuario
+          cd_usuario
         }
       }
     }    

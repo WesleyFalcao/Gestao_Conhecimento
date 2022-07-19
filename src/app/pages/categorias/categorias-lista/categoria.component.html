@@ -29,7 +29,7 @@
                 <div #target class="div-grid-name-arrow grid grid-cols-2 xl:grid-cols-1" (click)="Show_Item(item)">
                     <p class="my-3 lg:my-auto ml-5 w-10/12 font-medium truncate {{item.show?'font-bold':''}}">
                         {{item.nome}}</p>
-                    <img class="my-auto xl:hidden {{item.show? 'img-rotation-arrow-down':''}}"
+                    <img class="my-auto xl:hidden {{item.show? 'img-rotation-arrow-down':'img-rotation-arrow-up'}}"
                         src="assets/icons/arrow-up.svg">
                 </div>
                 <div class="pb-4 flex flex-col gap-y-1" *ngIf="item.show && b_Width == false">

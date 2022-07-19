@@ -66,6 +66,11 @@
     transition: all 0.4s ease;
 }
 
+.img-rotation-arrow-up{
+    transform: rotateZ(0deg);
+    transition: all 0.4s ease;
+}
+
 .div-modal-sobreposicao{
     @apply fixed inset-0 z-20 bg-black opacity-70 cursor-pointer;
 }

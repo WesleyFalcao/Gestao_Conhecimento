@@ -10,10 +10,10 @@ export class MeusEstudosQuery {
   ) {
   }
 
-  Get_My_Studies() {
+  Get_My_Favorites() {
     return `
     query {
-      estudos {
+      favoritos {
         conteudo {
           cd_conteudo
           ds_conteudo
@@ -30,13 +30,73 @@ export class MeusEstudosQuery {
     `
   }
 
-  Get_Cd_Studies(){
+  Get_My_Studies() {
     return `
-    query MyQuery {
-      estudos {
+    {
+      acessos(where: {dt_exclusao: {_is_null: true}, _and: {conteudo: {dt_exclusao: {_is_null: true}}}}) {
         conteudo {
+          cd_categoria
           cd_conteudo
+          ds_conteudo
+          ds_link
+          nm_titulo
+          dt_exclusao
+          categoria {
+            nm_categoria
+          }
         }
+        dt_acesso
+        cd_usuario
+        usuario {
+          cd_login
+        }
+      }
+      acessos_aggregate {
+        aggregate {
+          count
+        }
+      }
+    }
+    
+    `
+  }
+
+  Get_My_Studies_Pagination() {
+    return `
+    query ($limit: Int, $offset: Int) {
+      acessos(limit: $limit, offset: $offset, where: {conteudo: {dt_exclusao: {_is_null: true}}}) {
+        conteudo {
+          cd_categoria
+          cd_conteudo
+          ds_conteudo
+          ds_link
+          nm_titulo
+          dt_exclusao
+          categoria {
+            nm_categoria
+          }
+        }
+        dt_acesso
+        cd_conteudo_acesso
+        cd_usuario
+        usuario {
+          cd_login
+        }
+      }
+      acessos_aggregate {
+        aggregate {
+          count
+        }
+      }
+    }       
+    `
+  }
+
+  Set_Clear_My_Studies() {
+    return `
+    mutation ($data: date, $cd_usuario: Int) {
+      update_acessos(where: {cd_usuario: {_eq: $cd_usuario}}, _set: {dt_exclusao: $data}) {
+        affected_rows
       }
     }    
     `
@@ -45,17 +105,17 @@ export class MeusEstudosQuery {
   Set_My_Studies() {
     return `
     mutation ($cd_conteudo: Int) {
-      insert_estudos(objects: {cd_conteudo: $cd_conteudo}) {
+      insert_favoritos(objects: {cd_conteudo: $cd_conteudo}) {
         affected_rows
       }
     }        
     `
   }
 
-  Delete_My_Study(){
+  Delete_My_Study() {
     return `
     mutation ($cd_conteudo: Int) {
-      delete_estudos(where: {conteudo: {cd_conteudo: {_eq: $cd_conteudo}}}) {
+      delete_favoritos(where: {conteudo: {cd_conteudo: {_eq: $cd_conteudo}}}) {
         affected_rows
         returning {
           conteudo {

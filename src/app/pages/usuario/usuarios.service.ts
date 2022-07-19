@@ -54,6 +54,9 @@ export class UsuariosService {
         if(param.b_login_ad == true){
             param.ds_senha = null
         }
+        if(param.nm_usuario == null || param.nm_usuario == ""){
+            return false
+        }
       
         return this.usuariosRepository.Set_Add_Usuario(param)
     }

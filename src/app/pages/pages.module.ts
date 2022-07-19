@@ -10,7 +10,7 @@ import { ConteudoAdicionarComponent } from './conteudo/conteudo-adicionar/conteu
 import { ConteudoEditarComponent } from './conteudo/conteudo-editar/conteudo-editar.component';
 import { EditarUserComponent } from './usuario/usuario-editar/usuario-editar.component';
 import { HomeComponent } from './home/home.component';
-import { MeusEstudosComponent } from './meus-estudos/meus-estudos.component';
+import { FavoritosComponent } from './favoritos/favoritos.component';
 import { SugestoesComponent } from './sugestoes/sugestoes-card/sugestoes.component';
 import { UsersComponent } from './usuario/usuarios-lista/usuarios-lista.component';
 import { LoginComponent } from './login/login.component';
@@ -22,6 +22,9 @@ import { FilterModule } from '../pipes/filter/filter.module';
 import { SugestaoAdicionarComponent } from './sugestoes/sugestao-adicionar/sugestao-adicionar.component';
 import { ScrollingModule } from '@angular/cdk/scrolling';
 import { SumarioAdicionarComponent } from './sumario/sumario-adicionar/sumario-adicionar.component';
+import { MeusEstudosComponent } from './meus-estudos/meus-estudos.component';
+import { GeneratorReportComponent } from './generator-report/generator-report.component';
+import { FormatDatePipe } from '../pipes/format-date.pipe';
 
 @NgModule({
   declarations: [
@@ -35,6 +38,7 @@ import { SumarioAdicionarComponent } from './sumario/sumario-adicionar/sumario-a
     EditarUserComponent,
     HomeComponent,
     MeusEstudosComponent,
+    FavoritosComponent,
     SumarioAdicionarComponent,
     SugestoesComponent,
     UsersComponent,
@@ -42,6 +46,8 @@ import { SumarioAdicionarComponent } from './sumario/sumario-adicionar/sumario-a
     ConteudoEditarListaComponent,
     SugestoesListaComponent,
     SugestaoAdicionarComponent,
+    GeneratorReportComponent,
+    FormatDatePipe
   ],
   imports: [
     CommonModule,
@@ -53,15 +59,18 @@ import { SumarioAdicionarComponent } from './sumario/sumario-adicionar/sumario-a
     FilterModule
   ],
   exports:[
+    FormatDatePipe,
+    GeneratorReportComponent,
     AdicionarUsersComponent,
     CategoriaComponent,
     CategoriaAdicionarComponent,
     ConteudoComponent,
+    MeusEstudosComponent,
     ConteudoAdicionarComponent,
     ConteudoEditarComponent,
     EditarUserComponent,
     HomeComponent,
-    MeusEstudosComponent,
+    FavoritosComponent,
     SugestoesComponent,
     UsersComponent,
     LoginComponent,

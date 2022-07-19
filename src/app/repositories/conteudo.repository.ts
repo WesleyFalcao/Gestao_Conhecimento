@@ -45,6 +45,34 @@ export class ConteudoRepository {
     this.subjectService.subject_Exibindo_Loading.next(false)
     return response
   }
+
+  async Get_Conteudos_Filter_Report(param, input){
+
+    this.subjectService.subject_Exibindo_Loading.next(true)
+    let where: any = {_or: []}
+
+    if(input != null && input != ""){
+      where._or.push({conteudo: {categoria: {nm_categoria: {_ilike: "%" + input + "%"}}}}) 
+      where._or.push({conteudo: {nm_titulo: {_ilike: "%" + input + "%"}}}) 
+      where._or.push({usuario: {cd_login: {_ilike: "%" + input + "%"}}})
+    }
+    
+    const query = this.conteudoQuery.Get_Conteudos_Filter_Report()
+    const variables = {where, limit: param.page_lenght, offset: ((param.nr_pagina - 1) * param.page_lenght)}
+    const response = await this.apiHasuraService._Execute(query, variables, this.httpOptions)
+    this.subjectService.subject_Exibindo_Loading.next(false)
+    return response
+  }
+
+  async Get_Conteudos_Report_Pagination(param){
+
+    this.subjectService.subject_Exibindo_Loading.next(true)
+    const query = this.conteudoQuery.Get_Conteudos_Report_Pagination()
+    const variables = {limit: param.page_lenght, offset: ((param.nr_pagina - 1) * param.page_lenght)}
+    const response = await this.apiHasuraService._Execute(query, variables, this.httpOptions)
+    this.subjectService.subject_Exibindo_Loading.next(false)
+    return response
+  }
   
   async Get_Conteudo(param){
     this.subjectService.subject_Exibindo_Loading.next(true)
@@ -54,6 +82,16 @@ export class ConteudoRepository {
     this.subjectService.subject_Exibindo_Loading.next(false)
     return response
   }
+
+  async Get_Conteudo_Meus_Estudos(param){
+    this.subjectService.subject_Exibindo_Loading.next(true)
+    const query = this.conteudoQuery.Get_Conteudo_Meus_Estudos()
+    const variables = {cd_conteudo: param }
+    const response = await this.apiHasuraService._Execute(query, variables, this.httpOptions)
+    this.subjectService.subject_Exibindo_Loading.next(false)
+    return response
+  }
+
 
   async Get_Conteudo_Edit(param){
     this.subjectService.subject_Exibindo_Loading.next(true)
@@ -113,7 +151,7 @@ export class ConteudoRepository {
   async Set_Gravar_Dados(param){
     this.subjectService.subject_Exibindo_Loading.next(true)
     const query = this.conteudoQuery.Set_Gravar_Dados()
-    const variables = {cd_conteudo: param.cd_Conteudo, nm_usuario: param.nm_Usuario }
+    const variables = {cd_conteudo: param.cd_Conteudo, cd_usuario: param.cd_Usuario }
     const response = await this.apiHasuraService._Execute(query, variables, this.httpOptions)
     this.subjectService.subject_Exibindo_Loading.next(false)
     return response

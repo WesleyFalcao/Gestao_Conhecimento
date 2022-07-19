@@ -70,7 +70,6 @@ export class UsuarioRepository {
   async Set_Edit_Usuario(objparam) {
     let cd_usuario = objparam.cd_usuario
     let _set: any = objparam
-    console.log("_set",_set)
     delete _set.cd_usuario
     delete _set.perfil
     const query = this.usuarioQuery.Set_Edit_Usuario()

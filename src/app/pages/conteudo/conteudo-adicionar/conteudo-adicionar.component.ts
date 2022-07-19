@@ -15,6 +15,9 @@ export class ConteudoAdicionarComponent implements OnInit {
   /** @description Array de grupos */
   obj_Array_Categorias: Array<ListModel>
 
+  /** @description recebe o icone selecionado pelo usuário */
+  obj_Icon_Select: File
+
   /**@description Boolean para controlar a animação */
   Send_Sugestion_Animacao: boolean = false
 
@@ -76,5 +79,18 @@ export class ConteudoAdicionarComponent implements OnInit {
     if(responsecontent.errors){
       this.subjectService.subject_Exibindo_Snackbar.next({ message: 'Não foi possível adicionar' })
     }
+  }
+
+  Get_Icon(event){
+    console.log(event)
+    if(event.target.files && event.target.files[0]){
+      this.obj_Icon_Select = event.target.files[0]
+      console.log("obj_Icon_Select",this.obj_Icon_Select)
+    }
+  }
+
+  Upload_Icon(){
+    const formData = new FormData()
+    formData.append('image', this.obj_Icon_Select, this.obj_Icon_Select.name)
   }
 }

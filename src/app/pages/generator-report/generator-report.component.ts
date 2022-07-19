@@ -1,21 +1,20 @@
-import { Component, ElementRef, EventEmitter, HostListener, Input, NgZone, OnInit, Output, ViewChild } from '@angular/core';
-import { ListModel } from 'src/app/models/arraylist/array-list';
 import { CdkVirtualScrollViewport } from '@angular/cdk/scrolling';
-import { UsuarioParams } from 'src/app/models/usuario/usuario.model';
-import { UsuarioFilter } from 'src/app/models/usuario/usuariofilter.model';
-import { UsuarioRepository } from 'src/app/repositories/usuario.repository';
+import { Component, ElementRef, HostListener, NgZone, OnInit, ViewChild } from '@angular/core';
+import { filter, map, pairwise, throttleTime } from 'rxjs';
+import { ListModel } from 'src/app/models/arraylist/array-list';
+import { ReportModel } from 'src/app/models/usuario/report.model';
+import { ConteudoService } from 'src/app/pages/conteudo/conteudo.service';
+import { MeusEstudosService } from 'src/app/pages/meus-estudos/meus-estudos.service';
 import { LoginService } from 'src/app/services/login.service';
 import { SubjectService } from 'src/app/services/subject.service';
-import { UsuariosService } from '../usuarios.service';
-import { filter, map, pairwise, throttleTime } from 'rxjs';
+import { UsuariosService } from '../usuario/usuarios.service';
 
 @Component({
-  selector: 'app-users',
-  templateUrl: './usuarios-lista.component.html',
-  styleUrls: ['./usuarios-lista.component.scss']
+  selector: 'app-generator-report',
+  templateUrl: './generator-report.component.html',
+  styleUrls: ['./generator-report.component.scss']
 })
-
-export class UsersComponent implements OnInit {
+export class GeneratorReportComponent implements OnInit {
 
   /**@description recebe o array de status */
   objArrayStatus: Array<ListModel> = [
@@ -37,7 +36,7 @@ export class UsersComponent implements OnInit {
   nm_Label_Selection: string = "Status"
 
   /**@description Título da página */
-  ds_Titulo: string = "Usuários"
+  ds_Titulo: string = "Relatório de acessos"
 
   /**@description Boolean para abrir e fechar o modal de filtro */
   b_Show_Filter: boolean = false
@@ -55,10 +54,19 @@ export class UsersComponent implements OnInit {
   obj_Array_Usuarios: any[] = []
 
   /**@description Objeto que recebe os valores de cada coluna */
-  objUsuarios = new UsuarioParams
+  obj_Report = new ReportModel
 
-  /**@description Recebe a resposata das queries de usuários*/
+  /**@description Recebe a resposata das queries de relatório*/
   obj_Array_Response: any
+
+  /**@description Array que vai conter os conteúdos acessados pelo usuário */
+  obj_Array_Acessos_Conteudos: any = []
+
+  obj_Array_Titles: any = ["id do conteúdo", "titulo do conteúdo", "categoria", "data/hora", "usuario/acesso"]
+
+  teste
+
+  @ViewChild('content', { static: false }) element: ElementRef
 
   @ViewChild(CdkVirtualScrollViewport) scroller: CdkVirtualScrollViewport
 
@@ -66,17 +74,21 @@ export class UsersComponent implements OnInit {
     private usuarioService: UsuariosService,
     private loginService: LoginService,
     private subjectService: SubjectService,
-    private ngZone: NgZone
+    private meuestudosService: MeusEstudosService,
+    private subject_service: SubjectService,
+    private conteudoService: ConteudoService,
+    private ngZone: NgZone,
   ) { }
 
-  async ngOnInit() {
+  ngOnInit(): void {
+
   }
 
   ngAfterViewInit() {
     this.onResize()
 
     setTimeout(() => {
-      this.Search_User()
+      this.Get_info_Conteudos()
     });
 
     this.scroller.elementScrolled().pipe(
@@ -88,8 +100,8 @@ export class UsersComponent implements OnInit {
       this.ngZone.run(async () => {
         if (!this.b_Fim_Lista) {
 
-          this.objUsuarios.nr_pagina++
-          this.Search_User();
+          this.obj_Report.nr_pagina++
+          this.Get_info_Conteudos();
         }
       });
     })
@@ -102,21 +114,27 @@ export class UsersComponent implements OnInit {
       this.b_Width = true
     } else {
       this.b_Width = false
-      this.objUsuarios.page_lenght = 30
+      this.obj_Report.page_lenght = 30
     }
   }
+
+  // on_Generate_Report() {
+
+  //   this.Get_info_Conteudos()
+
+  //   let pdf = new jsPDF('p', 'pt', 'a4');
+  //   pdf.html(this.element.nativeElement, {
+  //     callback: (pdf) => {
+  //       pdf.save("relatorio-acessos-gestao-conhecimento.pdf")
+  //     }
+  //   })
+  // }
 
   onFilter_Search(iten) {
     this.Input_Value = iten
     if (this.Input_Value != null) {
 
-      this.Search_User()
-    }
-  }
-
-  Value_Select_Status(iten) {
-    if (iten.nome == "Ativo") {
-      this.objUsuarios.dt_bloqueio = null
+      this.Get_info_Conteudos()
     }
   }
 
@@ -132,17 +150,18 @@ export class UsersComponent implements OnInit {
   }
 
   onClick_Refresh() {
-    this.objUsuarios.nr_pagina = 1
+
+    this.obj_Report.nr_pagina = 1
     this.obj_Array_Usuarios = []
     this.b_Fim_Lista = !this.b_Fim_Lista
     if (this.b_Width == false) {
       document.getElementById('virtualscroll')?.scrollTo({ top: 0 })
     }
     this.Input_Value = null
-    this.Search_User()
+    this.Get_info_Conteudos()
   }
 
-  Filtrar() {
+  async Filtrar() {
     this.b_Show_Filter = false
   }
 
@@ -158,43 +177,48 @@ export class UsersComponent implements OnInit {
     this.b_Show_Filter = event
   }
 
-  async Search_User() {
+  async Get_info_Conteudos() {
 
-    if (this.Input_Value == null) {
-      this.obj_Array_Response = await this.usuarioService.Get_Usuarios(this.objUsuarios)
-      console.log("Response User", this.obj_Array_Response)
+    if (this.Input_Value == null || this.Input_Value == "") {
+
+      this.obj_Array_Response = await this.meuestudosService.Get_My_Studies_Pagination(this.obj_Report)
+      console.log("this.obj_Array_Response",this.obj_Array_Response )
 
     } else {
-      this.obj_Array_Response = await this.usuarioService.Get_Usuarios_Filter(this.objUsuarios, this.Input_Value)
-    }
-    
-    if (this.obj_Array_Response.errors) {
-      this.subjectService.subject_Exibindo_Snackbar.next({ message: 'Não foi possível trazer a listagem' })
+
+      this.obj_Array_Response = await this.conteudoService.Get_Conteudos_Filter_Report(this.obj_Report, this.Input_Value)
     }
 
-    if (this.obj_Array_Response.data.usuarios.length == 0) {
+    if (this.obj_Array_Response.errors) {
+
+      this.subject_service.subject_Exibindo_Snackbar.next({ message: 'Não foi possível trazer a listagem' })
+    }
+
+    if (this.obj_Array_Response.length == 0) {
       this.b_Fim_Lista = true
     }
-    if (this.b_Width) {
-      this.obj_Array_Usuarios = this.obj_Array_Response.data.usuarios
-      this.objUsuarios.nr_registos = this.obj_Array_Response.data.usuarios_aggregate.aggregate.count
 
-      console.log("nr_registos",this.objUsuarios.nr_registos)
+    if (this.b_Width) {
+      this.obj_Array_Acessos_Conteudos = this.obj_Array_Response.data.acessos
+      
+      this.obj_Report.nr_registos = this.obj_Array_Response.data.acessos_aggregate.aggregate.count
+
     } else {
-      this.obj_Array_Usuarios = [...this.obj_Array_Usuarios, ...this.obj_Array_Response.data.usuarios]
+      this.obj_Array_Acessos_Conteudos = [...this.obj_Array_Acessos_Conteudos, ...this.obj_Array_Response.data.acessos]
     }
   }
 
   /** @description Avança uma pagina */
   async Mudar_Pagina(nr_Pagina: number) {
-    this.objUsuarios.nr_pagina = nr_Pagina
-    const responseusuarios = await this.usuarioService.Get_Usuarios(this.objUsuarios)
+    this.obj_Report.nr_pagina = nr_Pagina
+    const responseusuarios = await this.meuestudosService.Get_My_Studies_Pagination(this.obj_Report)
+    console.log("responseusuarios", responseusuarios)
     if (responseusuarios.errors) {
       this.subjectService.subject_Exibindo_Snackbar.next({ message: 'Não foi possível trazer a listagem' })
     } else {
-      this.obj_Array_Usuarios = responseusuarios.data.usuarios
-      if (this.obj_Array_Usuarios == undefined) {
-        this.obj_Array_Usuarios = []
+      this.obj_Array_Acessos_Conteudos = responseusuarios.data.acessos
+      if (this.obj_Array_Acessos_Conteudos == undefined) {
+        this.obj_Array_Acessos_Conteudos = []
       }
     }
   }

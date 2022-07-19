@@ -60,6 +60,7 @@ export class HomeComponent implements OnInit {
     this.nm_User = this.loginService.Name_User_Logged()
     const responsecategoria = await this.categoriaService.Get_Categories_List()
     this.obj_Array_Categoria = responsecategoria.data.categorias
+    this.obj_Array_Categoria.forEach((iten)=>iten.nome = iten.nome.toUpperCase())
   }
 
   @HostListener('window:resize')

@@ -47,6 +47,10 @@
     transition: all 0.4s ease;
 }
 
+.img-rotation-arrow-up{
+    transform: rotateZ(0deg);
+    transition: all 0.4s ease;
+}
 .div-grid-title-add{
     @apply grid grid-cols-2;
     grid-template-areas: 

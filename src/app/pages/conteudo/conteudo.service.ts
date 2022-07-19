@@ -16,8 +16,20 @@ export class ConteudoService {
         return this.conteudoRepository.Get_Conteudos(param)
     }
 
+    Get_Conteudo_Meus_Estudos(param){
+        return this.conteudoRepository.Get_Conteudo_Meus_Estudos(param)
+    }
+
     Get_Conteudos_Filter(param, input){
         return this.conteudoRepository.Get_Conteudos_Filter(param, input)
+    }
+
+    Get_Conteudos_Filter_Report(param, input){
+        return this.conteudoRepository.Get_Conteudos_Filter_Report(param, input)
+    }
+
+    Get_Conteudos_Report_Pagination(param){
+        return this.conteudoRepository.Get_Conteudos_Report_Pagination(param)
     }
 
     Get_Conteudo(param) {

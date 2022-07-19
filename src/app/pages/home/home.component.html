@@ -4,7 +4,7 @@
     <div *ngFor="let categoria of obj_Array_Categoria | filter: Input_Value">
         <div class="card" [routerLink]="['/conteudo', categoria.id]">
             <img class="icon-card pt-9" src="assets/icons/person-study.svg">
-            <p>{{categoria.nome}}</p>
+            <p class="font-medium">{{categoria.nome}}</p>
         </div> 
     </div>
 </div>

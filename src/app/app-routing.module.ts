@@ -11,7 +11,7 @@ import { ConteudoComponent } from './pages/conteudo/conteudo-card/conteudo.compo
 import { EditarUserComponent } from './pages/usuario/usuario-editar/usuario-editar.component';
 import { HomeComponent } from './pages/home/home.component';
 import { LoginComponent } from './pages/login/login.component';
-import { MeusEstudosComponent } from './pages/meus-estudos/meus-estudos.component';
+import { FavoritosComponent } from './pages/favoritos/favoritos.component';
 import { SugestoesListaComponent } from './pages/sugestoes/sugestoes-lista/sugestoes-lista.component';
 import { SugestoesComponent } from './pages/sugestoes/sugestoes-card/sugestoes.component';
 import { UsersComponent } from './pages/usuario/usuarios-lista/usuarios-lista.component';
@@ -20,6 +20,8 @@ import { SendSuggestionComponent } from './components/send-suggestion/send-sugge
 import { AuthGuard } from './guards/auth-guard';
 import { SumarioAdicionarComponent } from './pages/sumario/sumario-adicionar/sumario-adicionar.component';
 import { AnimationNotAllowedComponent } from './components/animation-not-allowed/animation-not-allowed.component';
+import { MeusEstudosComponent } from './pages/meus-estudos/meus-estudos.component';
+import { GeneratorReportComponent } from './pages/generator-report/generator-report.component';
 
 const routes: Routes = [
 
@@ -33,7 +35,15 @@ const routes: Routes = [
     canActivate: [AuthGuard]
   },
   {
+    path: 'favoritos', component: FavoritosComponent,
+    canActivate: [AuthGuard]
+  },
+  {
     path: 'conteudo/:id', component: ConteudoComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'report', component: GeneratorReportComponent,
     canActivate: [AuthGuard]
   },
   {
