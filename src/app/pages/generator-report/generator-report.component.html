@@ -10,6 +10,22 @@
             <img class="behavior-button w-6 h-6 xl:w-8 xl:h-8 2xl:w-7 2xl:h-7" src="assets/icons/refresh.svg" (click)="onClick_Refresh()">
         </div>
     </div>
+    <div style=" margin: auto; width: 50%;">
+        <button class="w-14 h-14 bg-black" (click)="exportexcel()">Export to Excel</button>
+       
+        <table id="excel-table">
+          <tr>
+            <th>Id</th>
+            <th>Categoria</th>
+            <th>Username</th>
+          </tr>
+          <tr *ngFor="let item of obj_Array_Acessos_Conteudos">
+            <td>{{item.cd_conteudo_acesso}}</td>
+            <td>{{item.conteudo.nm_titulo}}</td>
+            <td>{{item.usuario.cd_login}}</td>
+          </tr>
+        </table>
+      </div>
 
     <div class="hidden div-grid-title mt-8 lg:grid grid-cols-5" *ngIf="obj_Array_Acessos_Conteudos?.length != 0">
         <p class="lg:text-center font-semibold text-base">ID</p>

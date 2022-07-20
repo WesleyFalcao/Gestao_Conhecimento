@@ -8,6 +8,7 @@ import { MeusEstudosService } from 'src/app/pages/meus-estudos/meus-estudos.serv
 import { LoginService } from 'src/app/services/login.service';
 import { SubjectService } from 'src/app/services/subject.service';
 import { UsuariosService } from '../usuario/usuarios.service';
+import * as XLSX from 'xlsx';
 
 @Component({
   selector: 'app-generator-report',
@@ -15,6 +16,10 @@ import { UsuariosService } from '../usuario/usuarios.service';
   styleUrls: ['./generator-report.component.scss']
 })
 export class GeneratorReportComponent implements OnInit {
+
+  title = 'angular-app';
+
+  fileName = 'ExcelSheet.xlsx'
 
   /**@description recebe o array de status */
   objArrayStatus: Array<ListModel> = [
@@ -182,7 +187,7 @@ export class GeneratorReportComponent implements OnInit {
     if (this.Input_Value == null || this.Input_Value == "") {
 
       this.obj_Array_Response = await this.meuestudosService.Get_My_Studies_Pagination(this.obj_Report)
-      console.log("this.obj_Array_Response",this.obj_Array_Response )
+      console.log("this.obj_Array_Response", this.obj_Array_Response)
 
     } else {
 
@@ -200,11 +205,12 @@ export class GeneratorReportComponent implements OnInit {
 
     if (this.b_Width) {
       this.obj_Array_Acessos_Conteudos = this.obj_Array_Response.data.acessos
-      
+
       this.obj_Report.nr_registos = this.obj_Array_Response.data.acessos_aggregate.aggregate.count
 
     } else {
       this.obj_Array_Acessos_Conteudos = [...this.obj_Array_Acessos_Conteudos, ...this.obj_Array_Response.data.acessos]
+      console.log("this.obj_Array_Acessos_Conteudos", this.obj_Array_Acessos_Conteudos)
     }
   }
 
@@ -221,5 +227,20 @@ export class GeneratorReportComponent implements OnInit {
         this.obj_Array_Acessos_Conteudos = []
       }
     }
+  }
+
+  exportexcel(): void {
+
+    /* pass here the table id */
+    let element = document.getElementById('excel-table');
+    const ws: XLSX.WorkSheet = XLSX.utils.table_to_sheet(element);
+
+    /* generate workbook and add the worksheet */
+    const wb: XLSX.WorkBook = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(wb, ws, 'Sheet1');
+
+    /* save to file */
+    XLSX.writeFile(wb, this.fileName);
+    
   }
 }
