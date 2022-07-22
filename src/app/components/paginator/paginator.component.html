@@ -1,9 +1,9 @@
 <div class="paginate-buttons">
-    <button type="button" title="Voltar todas as páginas" (click)="Ir_Pagina(1)"><img
-            src="assets/icons/super-arrow-left.svg"></button>
+    <button type="button" title="Voltar todas as páginas" (click)="Ir_Pagina(1)">
+        <img class="mx-auto" src="assets/icons/super-arrow-left.svg"></button>
 
-    <button type="button" title="Voltar uma página" [disabled]="nr_Pagina == 1" (click)="Voltar_Pagina()"><img
-            src="assets/icons/arrow-left.svg"></button>
+    <button type="button" title="Voltar uma página" [disabled]="nr_Pagina == 1" (click)="Voltar_Pagina()">
+        <img class="mx-auto" src="assets/icons/arrow-left.svg"></button>
 
     <div [ngClass]="nr_Pagina == objArrayPaginasExibidas[0] ? 'counter selecionado' : 'counter'"
         (click)="Ir_Pagina(objArrayPaginasExibidas[0] )">
@@ -45,11 +45,11 @@
     </ng-template>
 
     <button type="button" title="Ir para a próxima página" [disabled]="nr_Pagina == nr_Quantidade_Pagina"
-        (click)="Avancar_Pagina()"><img src="assets/icons/arrow-right.svg">
+        (click)="Avancar_Pagina()"><img class="mx-auto" src="assets/icons/arrow-right.svg">
     </button>
 
-    <button type="button" title="Ir para a ultima página" (click)="Ir_Pagina(nr_Quantidade_Pagina)"><img
-        src="assets/icons/super-arrow-right.svg">
+    <button type="button" title="Ir para a ultima página" (click)="Ir_Pagina(nr_Quantidade_Pagina)">
+        <img class="mx-auto" src="assets/icons/super-arrow-right.svg">
     </button>
 
 </div>

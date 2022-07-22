@@ -10,11 +10,7 @@ import { DataService } from "src/app/services/data.service";
 export class HomeService {
 
     constructor(
-        private homeRepository : HomeRepository  
+       
     ) {    
-    }
-
-    Get_Conteudo(param) {
-        return this.homeRepository.Get_Conteudo(param)
     }
 }

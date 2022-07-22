@@ -16,8 +16,20 @@ export class CategoriaService {
         return this.categoriaRepository.Get_Categories_List()
     }
 
+    Get_Categories_And_Icons() {
+        return this.categoriaRepository.Get_Categories_And_Icons()
+    }
+    
+    Get_Category_And_Icon(param){
+        return this.categoriaRepository.Get_Category_And_Icon(param)
+    }
+
     Get_Category(param){
         return this.categoriaRepository.Get_Category(param)
+    }
+
+    Set_Add_Icon(objparam){
+        return this.categoriaRepository.Set_Add_Icon(objparam)
     }
 
     Set_Add_Category(nm_Categoria){
@@ -33,5 +45,9 @@ export class CategoriaService {
             return false
         }
         return this.categoriaRepository.Set_Edit_Category(nm_Categoria, cd_Id_Param)
+    }
+
+    Set_Delete_Icon(param){
+        return this.categoriaRepository.Set_Delete_Icon(param)
     }
 }

@@ -67,6 +67,9 @@ export class GeneratorReportComponent implements OnInit {
   /**@description Array que vai conter os conteúdos acessados pelo usuário */
   obj_Array_Acessos_Conteudos: any = []
 
+  /**@description Array recebe todos os acessos para relatório */
+  obj_Array_All_Access: any = []
+
   obj_Array_Titles: any = ["id do conteúdo", "titulo do conteúdo", "categoria", "data/hora", "usuario/acesso"]
 
   teste
@@ -85,8 +88,8 @@ export class GeneratorReportComponent implements OnInit {
     private ngZone: NgZone,
   ) { }
 
-  ngOnInit(): void {
-
+  ngOnInit() {
+  
   }
 
   ngAfterViewInit() {
@@ -187,7 +190,6 @@ export class GeneratorReportComponent implements OnInit {
     if (this.Input_Value == null || this.Input_Value == "") {
 
       this.obj_Array_Response = await this.meuestudosService.Get_My_Studies_Pagination(this.obj_Report)
-      console.log("this.obj_Array_Response", this.obj_Array_Response)
 
     } else {
 
@@ -229,18 +231,23 @@ export class GeneratorReportComponent implements OnInit {
     }
   }
 
-  exportexcel(): void {
+  async Export_Excel() {
+    this.subjectService.subject_Exibindo_Loading.next(true)
+    const obj_Array_All_Access = await this.meuestudosService.Get_All_Access()
+    this.obj_Array_All_Access = obj_Array_All_Access.data.acessos
 
-    /* pass here the table id */
-    let element = document.getElementById('excel-table');
-    const ws: XLSX.WorkSheet = XLSX.utils.table_to_sheet(element);
-
-    /* generate workbook and add the worksheet */
-    const wb: XLSX.WorkBook = XLSX.utils.book_new();
-    XLSX.utils.book_append_sheet(wb, ws, 'Sheet1');
-
-    /* save to file */
-    XLSX.writeFile(wb, this.fileName);
-    
+    setTimeout(() => {
+      this.subjectService.subject_Exibindo_Loading.next(false)
+      /* pass here the table id */
+      let element = document.getElementById('excel-table');
+      const ws: XLSX.WorkSheet = XLSX.utils.table_to_sheet(element);
+  
+      /* generate workbook and add the worksheet */
+      const wb: XLSX.WorkBook = XLSX.utils.book_new();
+      XLSX.utils.book_append_sheet(wb, ws, 'Sheet1');
+  
+      /* save to file */
+      XLSX.writeFile(wb, this.fileName);
+    }, 5000);
   }
 }

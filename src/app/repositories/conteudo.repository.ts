@@ -123,7 +123,7 @@ export class ConteudoRepository {
   async Set_Add_Conteudo(param){
     this.subjectService.subject_Exibindo_Loading.next(true)
     const query = this.conteudoQuery.Set_Add_Conteudo()
-    const variables = {"nm_titulo": param.nm_Titulo , "ds_conteudo": param.nm_Descricao, "ds_link": param.ds_Link, "cd_categoria": param.cd_Categoria}
+    const variables = {nm_titulo: param.nm_Titulo , ds_conteudo: param.nm_Descricao, ds_link: param.ds_Link, cd_categoria: param.cd_Categoria}
     const response = await this.apiHasuraService._Execute(query, variables, this.httpOptions)
     this.subjectService.subject_Exibindo_Loading.next(false)
     return response

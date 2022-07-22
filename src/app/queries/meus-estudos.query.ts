@@ -92,6 +92,37 @@ export class MeusEstudosQuery {
     `
   }
 
+  Get_All_Access(){
+    return `
+    query {
+      acessos(where: {conteudo: {dt_exclusao: {_is_null: true}}}) {
+        conteudo {
+          cd_categoria
+          cd_conteudo
+          ds_conteudo
+          ds_link
+          nm_titulo
+          dt_exclusao
+          categoria {
+            nm_categoria
+          }
+        }
+        dt_acesso
+        cd_conteudo_acesso
+        cd_usuario
+        usuario {
+          cd_login
+        }
+      }
+      acessos_aggregate {
+        aggregate {
+          count
+        }
+      }
+    }
+    ` 
+  }
+
   Set_Clear_My_Studies() {
     return `
     mutation ($data: date, $cd_usuario: Int) {

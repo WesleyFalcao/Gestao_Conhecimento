@@ -160,6 +160,7 @@ export class ConteudoComponent implements OnInit, OnDestroy {
   }
 
   async Get_Contedos_From_Category() {
+    console.log("this.cd_Id_Param",this.cd_Id_Param)
     const responseconteudo = await this.conteudoService.Get_Conteudo(this.cd_Id_Param)
     this.obj_Array_Conteudos = responseconteudo.data.conteudos
     this.ds_Titulo = this.obj_Array_Conteudos[0].categoria.nome

@@ -2,9 +2,9 @@
 
 <div class="container mb-10 mt-8 pb-10 lg:mt-10 mx-auto cards-itens">
     <div *ngFor="let categoria of obj_Array_Categoria | filter: Input_Value">
-        <div class="card" [routerLink]="['/conteudo', categoria.id]">
-            <img class="icon-card pt-9" src="assets/icons/person-study.svg">
-            <p class="font-medium">{{categoria.nome}}</p>
+        <div class="card" [routerLink]="['/conteudo', categoria.cd_categoria]">
+            <img class="icon-card" src="{{categoria.files.length >= 1? categoria.files[0]?.nm_file :'assets/icons/person-study.svg'}}">
+            <p class="font-medium">{{categoria.nm_categoria}}</p>
         </div> 
     </div>
 </div>

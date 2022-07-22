@@ -17,6 +17,10 @@ export class MeusEstudosService {
         return this.meuestudosRepository.Get_My_Studies_Pagination(param)
     }
 
+    Get_All_Access(){
+        return this.meuestudosRepository.Get_All_Access()
+    }
+
     Get_My_Favorites(){
         return this.meuestudosRepository.Get_My_Favorites()
     }

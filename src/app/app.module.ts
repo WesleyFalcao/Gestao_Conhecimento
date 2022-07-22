@@ -1,4 +1,4 @@
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
@@ -13,6 +13,7 @@ import { PagesModule } from './pages/pages.module';
 import { LoginService } from './services/login.service';
 import { registerLocaleData } from '@angular/common';
 import en from '@angular/common/locales/en';
+import { InterceptorService } from './interceptor/interceptor.module';
 
 registerLocaleData(en);
 
@@ -33,7 +34,13 @@ registerLocaleData(en);
     ReactiveFormsModule,
     FilterModule,
   ],
-  providers: [LoginService],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: InterceptorService,
+      multi: true
+    },
+    LoginService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

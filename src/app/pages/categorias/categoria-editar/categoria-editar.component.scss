@@ -1,37 +1,87 @@
-.container{
+.container {
     max-width: 300px;
     margin: 0 auto;
 
     @media (min-width: 540px) {
         max-width: 400px;
     }
+
     @media (min-width: 768px) {
         max-width: 550px;
     }
+
     @media (min-width: 900px) {
         max-width: 650px;
     }
+
     @media (min-width: 1024px) {
         max-width: 750px;
     }
+
     @media (min-width: 1280px) {
         max-width: 1150px;
     }
+
     @media (min-width: 1536px) {
         max-width: 1250px;
     }
+
     @media (min-width: 1636px) {
         max-width: 1200px;
     }
+
     @media (min-width: 1780px) {
         max-width: 1300px;
     }
 
 
-    .behavior-button{
+    .behavior-button {
         &:active {
             transform: scale(0.92);
             transition-duration: 280ms;
         }
+    }
+
+    .file-input label {
+        display: block;
+        position: relative;
+        width: 200px;
+        height: 50px;
+        border-radius: 25px;
+        background: linear-gradient(40deg, #00995d, #128456);
+        box-shadow: 0 4px 7px rgba(0, 0, 0, 0.4);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #fff;
+        font-weight: bold;
+        cursor: pointer;
+       
+        transition: transform .2s ease-out;
+    }
+
+    .file {
+        opacity: 0;
+        width: 0.1px;
+        height: 0.1px;
+        position: absolute;
+    }
+
+    input:hover+label,
+    input:focus+label {
+        transform: scale(1.02);
+    }
+
+    input:focus+label {
+        outline: 1px solid #000;
+        outline: -webkit-focus-ring-color auto 2px;
+    }
+
+    .file-name {
+        position: absolute;
+        bottom: -35px;
+        left: 10px;
+        font-size: 0.85rem;
+        color: #555;
     }
 }

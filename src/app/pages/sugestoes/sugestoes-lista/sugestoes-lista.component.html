@@ -9,7 +9,7 @@
         <div
             class="flex flex-row gap-6 lg:gap-10 my-auto justify-end relative right-1 xl:mr-4 cursor-pointer {{obj_Array_Sugestoes_Arquivadas?.length != 0?'':'hidden'}}">
             <app-button-filter class="hidden" (b_Show_Modal)="Show_Modal($event)"></app-button-filter>
-            <img class="behavior-button w-6 h-6 xl:w-8 xl:h-8 2xl:w-7 2xl:h-7" src="assets/icons/refresh.svg"
+            <img title="Recarregar página" class="behavior-button w-6 h-6 xl:w-8 xl:h-8 2xl:w-7 2xl:h-7" src="assets/icons/refresh.svg"
                 (click)="onClick_Refresh()">
         </div>
     </div>

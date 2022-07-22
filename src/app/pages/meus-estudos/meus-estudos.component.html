@@ -10,8 +10,8 @@
         </div>
         <div class="flex flex-row relative gap-8 md:gap-8 mt-10 lg:gap-10 mr-16 justify-self-end">
             <app-button-filter class="cursor-pointer hidden" (b_Show_Modal)="Show_Modal($event)"></app-button-filter>
-            <img class="behavior-button cursor-pointer w-4 h-5 md:w-4 md:h-6" src="assets/icons/X.svg" (click)="onClick_Clear_Study()">
-            <img class="behavior-button cursor-pointer w-6 h-6 md:w-7 md:h-7" src="assets/icons/refresh.svg" (click)="onClick_Refresh()">
+            <img title="Limpar histórico" class="behavior-button cursor-pointer w-4 h-5 md:w-4 md:h-6" src="assets/icons/X.svg" (click)="onClick_Clear_Study()">
+            <img title="Recarregar página" class="behavior-button cursor-pointer w-6 h-6 md:w-7 md:h-7" src="assets/icons/refresh.svg" (click)="onClick_Refresh()">
         </div>
     </div>
     <div class="grid grid-cols-1 lg:grid-cols-2 relative top-6 gap-y-6 md:gap-y-10 w-full px-12 md:px-16 pb-10 lg:gap-x-10 lg:top-6">

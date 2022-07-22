@@ -13,7 +13,7 @@
                         src="assets/icons/list-okay.svg" (click)="b_Show_Popover_Feitos = !b_Show_Popover_Feitos">
                 </div>
                 <div>
-                    <img class="behavior-button w-5 h-5 xl:w-7 xl:h-7 2xl:w-6 2xl:h-6"
+                    <img title="Adicionar sugestões" class="behavior-button w-5 h-5 xl:w-7 xl:h-7 2xl:w-6 2xl:h-6"
                         src="assets/icons/more-options-user.svg" routerLink="/sugestao-adicionar">
                     <div *ngIf="b_User_Admin"
                         class="mt-20 div-aling-popover_sugestoes z-20 -ml-4 {{b_Show_Popover_Feitos? 'absolute':'hidden'}}">
@@ -35,7 +35,7 @@
                     (b_Show_Modal)="Show_Modal($event)">
                 </app-button-filter>
 
-                <img class="hidden md:flex behavior-button w-6 h-6 xl:w-8 xl:h-8 2xl:w-7 2xl:h-7"
+                <img title="Recarregar página" class="hidden md:flex behavior-button w-6 h-6 xl:w-8 xl:h-8 2xl:w-7 2xl:h-7"
                     src="assets/icons/refresh.svg" (click)="onClick_Refresh()">
             </div>
         </div>

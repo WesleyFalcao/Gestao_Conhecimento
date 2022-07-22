@@ -58,9 +58,7 @@ export class HomeComponent implements OnInit {
   async ngOnInit() {
     this.onResize()
     this.nm_User = this.loginService.Name_User_Logged()
-    const responsecategoria = await this.categoriaService.Get_Categories_List()
-    this.obj_Array_Categoria = responsecategoria.data.categorias
-    this.obj_Array_Categoria.forEach((iten)=>iten.nome = iten.nome.toUpperCase())
+    this.Load_Categories_And_Icons()
   }
 
   @HostListener('window:resize')
@@ -79,5 +77,12 @@ export class HomeComponent implements OnInit {
     if (this.Input_Value != null) {
       this.route.navigate(['/conteudo-lista'], {queryParams: {nm_searcch: this.Input_Value}})
     }
+  }
+
+  async Load_Categories_And_Icons(){
+    const responsecategoria = await this.categoriaService.Get_Categories_And_Icons()
+    this.obj_Array_Categoria = responsecategoria.data.categorias
+    console.log(this.obj_Array_Categoria)
+    this.obj_Array_Categoria.forEach((iten)=> iten.nm_categoria = iten.nm_categoria.toUpperCase())
   }
 }

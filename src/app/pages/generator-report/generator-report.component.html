@@ -6,26 +6,32 @@
             <uni-title [ds_Titulo]="ds_Titulo"></uni-title>
         </div>
         <div class="flex flex-row gap-6 lg:gap-10 my-auto justify-end relative right-1 xl:mr-4 cursor-pointer">
-            <app-button-filter class="" (b_Show_Modal)="Show_Modal($event)"></app-button-filter>
-            <img class="behavior-button w-6 h-6 xl:w-8 xl:h-8 2xl:w-7 2xl:h-7" src="assets/icons/refresh.svg" (click)="onClick_Refresh()">
+            <img title="Gerar relatório" class="behavior-button w-6 h-6 xl:w-8 xl:h-8 2xl:w-7 2xl:h-6" src="assets/icons/excel-file.svg" (click)="Export_Excel()">
+            <!-- <app-button-filter class="" (b_Show_Modal)="Show_Modal($event)"></app-button-filter> -->
+            <img title="Recarregar página" class="behavior-button w-6 h-6 xl:w-8 xl:h-8 2xl:w-7 2xl:h-7" src="assets/icons/refresh.svg" (click)="onClick_Refresh()">
         </div>
     </div>
     <div style=" margin: auto; width: 50%;">
-        <button class="w-14 h-14 bg-black" (click)="exportexcel()">Export to Excel</button>
        
-        <table id="excel-table">
+        <table hidden="hidden" id="excel-table">
+           
           <tr>
-            <th>Id</th>
-            <th>Categoria</th>
-            <th>Username</th>
+              <th>Id</th>
+              <th>Categoria</th>
+              <th>Título</th>
+              <th>Usuário</th>
+              <th>Data e hora de acesso</th>
+              <th>Total de acessos: {{obj_Report.nr_registos}}</th>
           </tr>
-          <tr *ngFor="let item of obj_Array_Acessos_Conteudos">
+          <tr *ngFor="let item of obj_Array_All_Access">
             <td>{{item.cd_conteudo_acesso}}</td>
+            <td>{{item.conteudo.categoria.nm_categoria}}</td>
             <td>{{item.conteudo.nm_titulo}}</td>
+            <td>{{item.dt_acesso | formatDate: 'full'}}</td>
             <td>{{item.usuario.cd_login}}</td>
-          </tr>
+          </tr>,
         </table>
-      </div>
+    </div>
 
     <div class="hidden div-grid-title mt-8 lg:grid grid-cols-5" *ngIf="obj_Array_Acessos_Conteudos?.length != 0">
         <p class="lg:text-center font-semibold text-base">ID</p>
@@ -62,7 +68,7 @@
                     </div>
                     <div class="flex flex-row gap-x-3">
                         <p class="ml-5 font-semibold">Data:</p>
-                        <p class="my-auto w-8/12 truncate">{{item.dt_acesso}}
+                        <p class="my-auto w-8/12 truncate">{{item.dt_acesso | formatDate: 'full'}}
                         </p>
                     </div>
                     <div class="flex flex-row gap-x-3">

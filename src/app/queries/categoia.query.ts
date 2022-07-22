@@ -48,6 +48,48 @@ export class CategoriaQuery {
     `
   }
 
+  Get_Categories_And_Icons(){
+    return `
+    {
+      categorias(order_by: {nr_ordem: asc}) {
+        nm_categoria
+        cd_categoria
+        nr_ordem
+        files {
+          nm_file
+          cd_categoria
+        }
+      }
+    }
+    `
+  }
+  
+  Get_Category_And_Icon(){
+    return `
+    query ($cd_categoria: Int){
+      categorias(where: {cd_categoria: {_eq: $cd_categoria}}) {
+        nm_categoria
+        cd_categoria
+        nr_ordem
+        files {
+          nm_file
+          cd_categoria
+        }
+      }
+    }
+    `
+  }
+
+  Set_Add_Icon() {
+    return `
+    mutation ($nm_file: String, $cd_categoria: Int) {
+      insert_files(objects: {nm_file: $nm_file, cd_categoria: $cd_categoria}) {
+        affected_rows
+      }
+    }           
+    `
+  }
+
   Set_Add_Category(){
     return `
     mutation ($nm_categoria: String) {
@@ -71,8 +113,16 @@ export class CategoriaQuery {
         }
       }
     }
-    
     `
   }
 
+  Set_Delete_Icon(){
+    return `
+    mutation ($cd_categoria: Int) {
+      delete_files(where: {cd_categoria: {_eq: $cd_categoria}}) {
+        affected_rows
+      }
+    }
+    `
+  }
 }

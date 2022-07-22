@@ -10,14 +10,4 @@ export class HomeQuery {
   ) {
   }
 
-  Get_Conteudo() {
-    return `
-      {
-        categorias(order_by: {nm_categoria: asc}) {
-          cd_categoria
-          nm_categoria
-        }
-      }     
-    `
-  }
 }

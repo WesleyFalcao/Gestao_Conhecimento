@@ -1,5 +1,5 @@
 import { Location } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { ListModel } from 'src/app/models/arraylist/array-list';
 import { SubjectService } from 'src/app/services/subject.service';
 import { CategoriaService } from '../../categorias/categoria.service';
@@ -31,21 +31,26 @@ export class ConteudoAdicionarComponent implements OnInit {
   b_Not_Search: boolean = true
 
   /**@description Objeto que recebe o conteudo dos inputs */
-  obj_Add_Content: any = {nm_Titulo: null, nm_Descricao: null, ds_Link: null, cd_Categoria: null, nome: ""}
+  obj_Add_Content: any = { nm_Titulo: null, nm_Descricao: null, ds_Link: null, cd_Categoria: null, nome: "" }
+
+  /**@description Objeto que recebe o parametro para armazer os icones */
+  obj_Param: any = { nm_iconBase64: "", cd_categoria: null }
 
   /**@description Título da páginas */
   ds_Titulo: string = "Adicionar conteúdo"
 
   nm_Label_Selection_Input: string = "Categoria"
 
+  @ViewChild('input', {static: false})input: ElementRef
+
   constructor(
     private location: Location,
     private conteudoService: ConteudoService,
     private categoriaService: CategoriaService,
     private subjectService: SubjectService
-    ) { }
+  ) { }
 
-  Back(){
+  Back() {
     this.location.back();
   }
 
@@ -59,38 +64,27 @@ export class ConteudoAdicionarComponent implements OnInit {
     this.b_Alert_Modal = false
   }
 
-  Value_Select(event){
+  Value_Select(event) {
+    console.log("conteudo_select", event)
     this.obj_Add_Content.cd_Categoria = event.id
+    this.obj_Param.cd_categoria = event.id
   }
 
-  async Add_Content(){
+  async Add_Content() {
     const responsecontent = await this.conteudoService.Set_Add_Conteudo(this.obj_Add_Content)
-    if(responsecontent == false){
+    if (responsecontent == false) {
       this.b_Alert_Modal = true
-      this.ds_Alert_Descricao = "Todos os campos devem ser preenchidos!"  
-      
-    }else{
+      this.ds_Alert_Descricao = "Todos os campos devem ser preenchidos!"
+
+    } else {
       this.Send_Sugestion_Animacao = true
       setTimeout(() => {
         this.Send_Sugestion_Animacao = !this.Send_Sugestion_Animacao
-      }, 3000);  
+      }, 3000);
     }
 
-    if(responsecontent.errors){
+    if (responsecontent.errors) {
       this.subjectService.subject_Exibindo_Snackbar.next({ message: 'Não foi possível adicionar' })
     }
-  }
-
-  Get_Icon(event){
-    console.log(event)
-    if(event.target.files && event.target.files[0]){
-      this.obj_Icon_Select = event.target.files[0]
-      console.log("obj_Icon_Select",this.obj_Icon_Select)
-    }
-  }
-
-  Upload_Icon(){
-    const formData = new FormData()
-    formData.append('image', this.obj_Icon_Select, this.obj_Icon_Select.name)
   }
 }

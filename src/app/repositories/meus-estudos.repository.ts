@@ -45,6 +45,14 @@ export class MeusEstudosRepository {
     this.subjectService.subject_Exibindo_Loading.next(false)
     return response
   }
+  
+  async Get_All_Access(){
+    this.subjectService.subject_Exibindo_Loading.next(true)
+    const query = this.meusEstudosQuery.Get_All_Access()
+    const response = await this.apiHasuraService._Execute(query, this.httpOptions)
+    this.subjectService.subject_Exibindo_Loading.next(false)
+    return response
+  }
 
   async Set_My_Study(estudo){
     this.subjectService.subject_Exibindo_Loading.next(true)
