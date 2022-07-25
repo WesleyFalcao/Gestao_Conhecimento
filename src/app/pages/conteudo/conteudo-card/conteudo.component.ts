@@ -140,7 +140,6 @@ export class ConteudoComponent implements OnInit, OnDestroy {
 
   async Get_My_Favorites() {
     const responsefavorites = await this.myfavorites.Get_My_Favorites()
-    console.log("responsemystudies",responsefavorites)
     if (responsefavorites.errors) {
       this.subject_service.subject_Exibindo_Snackbar.next({ message: 'Não foi possível trazer os favoritos' })
     }
@@ -160,7 +159,6 @@ export class ConteudoComponent implements OnInit, OnDestroy {
   }
 
   async Get_Contedos_From_Category() {
-    console.log("this.cd_Id_Param",this.cd_Id_Param)
     const responseconteudo = await this.conteudoService.Get_Conteudo(this.cd_Id_Param)
     this.obj_Array_Conteudos = responseconteudo.data.conteudos
     this.ds_Titulo = this.obj_Array_Conteudos[0].categoria.nome

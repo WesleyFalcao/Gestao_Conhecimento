@@ -114,7 +114,6 @@ export class FavoritosComponent implements OnInit {
 
   async Get_My_Favorites() {
     const responsemystudies = await this.myfavorites.Get_My_Favorites()
-    console.log(responsemystudies)
     responsemystudies.data.favoritos.forEach((item)=> item.sn_favorito = item.sn_favorito = true)
     if (responsemystudies.errors){
       this.subject_service.subject_Exibindo_Snackbar.next({ message: 'Não foi possível trazer a listagem' })

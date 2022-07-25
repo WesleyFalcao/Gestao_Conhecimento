@@ -162,7 +162,6 @@ export class UsersComponent implements OnInit {
 
     if (this.Input_Value == null) {
       this.obj_Array_Response = await this.usuarioService.Get_Usuarios(this.objUsuarios)
-      console.log("Response User", this.obj_Array_Response)
 
     } else {
       this.obj_Array_Response = await this.usuarioService.Get_Usuarios_Filter(this.objUsuarios, this.Input_Value)
@@ -179,7 +178,6 @@ export class UsersComponent implements OnInit {
       this.obj_Array_Usuarios = this.obj_Array_Response.data.usuarios
       this.objUsuarios.nr_registos = this.obj_Array_Response.data.usuarios_aggregate.aggregate.count
 
-      console.log("nr_registos",this.objUsuarios.nr_registos)
     } else {
       this.obj_Array_Usuarios = [...this.obj_Array_Usuarios, ...this.obj_Array_Response.data.usuarios]
     }

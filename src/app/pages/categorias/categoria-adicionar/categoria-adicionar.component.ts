@@ -89,7 +89,6 @@ export class CategoriaAdicionarComponent implements OnInit {
   async Send_Category() {
 
     const responsesetcategory = await this.categoriaService.Set_Add_Category(this.nm_Categoria)
-    console.log("responsesetcategory",responsesetcategory)
     if (responsesetcategory == false) {
       this.b_Alert_Modal = true
       this.ds_Alert_Descricao = "O campo tem que ser preenchido!"

@@ -27,6 +27,7 @@ import { ModalComponent } from './modal/modal.component';
 import { PaginatorComponent } from './paginator/paginator.component';
 import { NzPopoverModule } from 'ng-zorro-antd/popover';
 import { AnimationNotAllowedComponent } from './animation-not-allowed/animation-not-allowed.component';
+import { ButtonScrollTopComponent } from './button-scroll-top/button-scroll-top.component';
 export function playerFactory() {
   return player;
 }
@@ -53,7 +54,8 @@ export function playerFactory() {
     SendSuggestionComponent,
     Input2Component,
     ModalComponent,
-    AnimationNotAllowedComponent,  
+    AnimationNotAllowedComponent,
+    ButtonScrollTopComponent,  
   ],
   imports: [
     CommonModule,
@@ -65,6 +67,7 @@ export function playerFactory() {
     LottieModule.forRoot({ player: playerFactory })
   ],
   exports: [
+    ButtonScrollTopComponent,
     PaginatorComponent,
     ButtonComponent,
     CheckboxComponent,

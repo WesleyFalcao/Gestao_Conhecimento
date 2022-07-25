@@ -125,7 +125,6 @@ export class MeusEstudosComponent implements OnInit {
     this.obj_Array_Conteudos = []
 
     const responsemystudies = await this.meuestudosService.Get_My_Studies()
-    console.log("responsemystudies",responsemystudies)
     if (responsemystudies.errors) {
 
       this.subject_service.subject_Exibindo_Snackbar.next({ message: 'Não foi possível trazer a listagem' })
@@ -192,7 +191,6 @@ export class MeusEstudosComponent implements OnInit {
     }else{
       this.onClick_Refresh()
     }
-    console.log("responsesetexclusao",responsesetexclusao)
   }
 
   Closed_Alert_Modal() {

@@ -40,7 +40,8 @@ registerLocaleData(en);
       useClass: InterceptorService,
       multi: true
     },
-    LoginService],
+    LoginService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

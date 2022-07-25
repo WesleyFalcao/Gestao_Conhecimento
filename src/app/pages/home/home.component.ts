@@ -82,7 +82,6 @@ export class HomeComponent implements OnInit {
   async Load_Categories_And_Icons(){
     const responsecategoria = await this.categoriaService.Get_Categories_And_Icons()
     this.obj_Array_Categoria = responsecategoria.data.categorias
-    console.log(this.obj_Array_Categoria)
     this.obj_Array_Categoria.forEach((iten)=> iten.nm_categoria = iten.nm_categoria.toUpperCase())
   }
 }

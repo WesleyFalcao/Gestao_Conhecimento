@@ -33,8 +33,6 @@ export class ConteudoAdicionarComponent implements OnInit {
   /**@description Objeto que recebe o conteudo dos inputs */
   obj_Add_Content: any = { nm_Titulo: null, nm_Descricao: null, ds_Link: null, cd_Categoria: null, nome: "" }
 
-  /**@description Objeto que recebe o parametro para armazer os icones */
-  obj_Param: any = { nm_iconBase64: "", cd_categoria: null }
 
   /**@description Título da páginas */
   ds_Titulo: string = "Adicionar conteúdo"
@@ -65,9 +63,7 @@ export class ConteudoAdicionarComponent implements OnInit {
   }
 
   Value_Select(event) {
-    console.log("conteudo_select", event)
-    this.obj_Add_Content.cd_Categoria = event.id
-    this.obj_Param.cd_categoria = event.id
+    this.obj_Add_Content.cd_Categoria = event?.id
   }
 
   async Add_Content() {

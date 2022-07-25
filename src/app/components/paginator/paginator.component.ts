@@ -30,7 +30,6 @@ export class PaginatorComponent implements OnInit, OnChanges {
 
     constructor() { }
 
-
     ngOnInit(): void {
         this.nr_Quantidade_Pagina = Math.ceil(this.nr_Registros / this.nr_Por_Pagina)
         this.objArrayPaginas = Array.from({ length: Math.ceil(this.nr_Registros / this.nr_Por_Pagina) }, (_, i) => i + 1)

@@ -37,7 +37,6 @@ export class InterceptorService implements HttpInterceptor {
                 (event: HttpEvent<any>) => {
                     if (event instanceof HttpResponse) {
                         const errors = event.body.errors
-
                         if (errors) {
                             this.subjectService.subject_Exibindo_Loading.next(false)
 
@@ -52,7 +51,7 @@ export class InterceptorService implements HttpInterceptor {
                             }
 
                             //NAO AUTENTICADO OU TOKEN ESTA EXPIRADO
-                            if (errorCode == 401) {
+                            if (errors[0].extensions.code == "invalid-jwt") {
                                 console.log("sessão expirada")
                                 // Limpa dados da sessão
                                 this.dataService.Limpar_Session();
@@ -63,7 +62,6 @@ export class InterceptorService implements HttpInterceptor {
                                 this.route.navigate(["/"]).then(() => {
                                     setTimeout(() => this.subjectService.subject_Exibindo_Bar.next(false))
                                 })
-
                             }
                             //BAD REQUEST - ALGUM ERRO DE PARAMETRO
                             else if (errorCode == 400) {
@@ -77,10 +75,10 @@ export class InterceptorService implements HttpInterceptor {
                                 );
                             }
                             //OUTROS ERROS NÃO MAPEADOS
-                            // else {
-                            //     Redireciona
-                            //     this.route.navigate(["/"]);
-                            // }
+                            else {
+                                //Redireciona
+                                this.route.navigate(["/"]);
+                            }
 
                             throw "Erro na Requisição"
                         }

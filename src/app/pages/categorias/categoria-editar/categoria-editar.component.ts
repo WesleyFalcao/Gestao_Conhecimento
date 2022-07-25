@@ -120,7 +120,7 @@ export class CategoriaEditarComponent implements OnInit, OnDestroy {
   async onClick_Delete_Icon() {
     if (this.nm_Contain_Icon != "") {
       this.b_Alert_Modal = true
-      this.ds_Alert_Descricao = "Tem certeza que deseja salvar sem nenhum ícone selecionado?"
+      this.ds_Alert_Descricao = "Tem certeza que deseja remover o ícone?"
 
     } else {
       this.obj_Param.nm_iconBase64 = ""
@@ -184,7 +184,7 @@ export class CategoriaEditarComponent implements OnInit, OnDestroy {
   async onClick_Salve() {
     if (this.obj_Param.nm_iconBase64 == "") {
       this.b_Alert_Modal = true
-      this.ds_Alert_Descricao = "Tem certeza que deseja salvar sem nenhum ícone selecionado?"
+      this.ds_Alert_Descricao = "Tem certeza que deseja remover o ícone?"
     } else {
       this.Set_Salve_All()
     }

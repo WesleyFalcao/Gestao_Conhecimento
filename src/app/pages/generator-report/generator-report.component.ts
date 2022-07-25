@@ -212,7 +212,6 @@ export class GeneratorReportComponent implements OnInit {
 
     } else {
       this.obj_Array_Acessos_Conteudos = [...this.obj_Array_Acessos_Conteudos, ...this.obj_Array_Response.data.acessos]
-      console.log("this.obj_Array_Acessos_Conteudos", this.obj_Array_Acessos_Conteudos)
     }
   }
 
@@ -220,7 +219,6 @@ export class GeneratorReportComponent implements OnInit {
   async Mudar_Pagina(nr_Pagina: number) {
     this.obj_Report.nr_pagina = nr_Pagina
     const responseusuarios = await this.meuestudosService.Get_My_Studies_Pagination(this.obj_Report)
-    console.log("responseusuarios", responseusuarios)
     if (responseusuarios.errors) {
       this.subjectService.subject_Exibindo_Snackbar.next({ message: 'Não foi possível trazer a listagem' })
     } else {
