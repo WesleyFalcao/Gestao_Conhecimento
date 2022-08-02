@@ -112,6 +112,7 @@ export class MeusEstudosQuery {
         cd_usuario
         usuario {
           cd_login
+          nm_usuario
         }
       }
       acessos_aggregate {

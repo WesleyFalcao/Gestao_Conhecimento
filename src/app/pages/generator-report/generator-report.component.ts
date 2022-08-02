@@ -72,15 +72,11 @@ export class GeneratorReportComponent implements OnInit {
 
   obj_Array_Titles: any = ["id do conteúdo", "titulo do conteúdo", "categoria", "data/hora", "usuario/acesso"]
 
-  teste
-
   @ViewChild('content', { static: false }) element: ElementRef
 
   @ViewChild(CdkVirtualScrollViewport) scroller: CdkVirtualScrollViewport
 
   constructor(
-    private usuarioService: UsuariosService,
-    private loginService: LoginService,
     private subjectService: SubjectService,
     private meuestudosService: MeusEstudosService,
     private subject_service: SubjectService,
@@ -125,18 +121,6 @@ export class GeneratorReportComponent implements OnInit {
       this.obj_Report.page_lenght = 30
     }
   }
-
-  // on_Generate_Report() {
-
-  //   this.Get_info_Conteudos()
-
-  //   let pdf = new jsPDF('p', 'pt', 'a4');
-  //   pdf.html(this.element.nativeElement, {
-  //     callback: (pdf) => {
-  //       pdf.save("relatorio-acessos-gestao-conhecimento.pdf")
-  //     }
-  //   })
-  // }
 
   onFilter_Search(iten) {
     this.Input_Value = iten
@@ -233,6 +217,7 @@ export class GeneratorReportComponent implements OnInit {
     this.subjectService.subject_Exibindo_Loading.next(true)
     const obj_Array_All_Access = await this.meuestudosService.Get_All_Access()
     this.obj_Array_All_Access = obj_Array_All_Access.data.acessos
+    console.log(obj_Array_All_Access)
 
     setTimeout(() => {
       this.subjectService.subject_Exibindo_Loading.next(false)

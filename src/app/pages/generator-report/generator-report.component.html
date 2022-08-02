@@ -20,6 +20,7 @@
               <th>Categoria</th>
               <th>Título</th>
               <th>Usuário</th>
+              <th>Nome do usuário</th>
               <th>Data e hora de acesso</th>
               <th>Total de acessos: {{obj_Report.nr_registos}}</th>
           </tr>
@@ -27,8 +28,9 @@
             <td>{{item.cd_conteudo_acesso}}</td>
             <td>{{item.conteudo.categoria.nm_categoria}}</td>
             <td>{{item.conteudo.nm_titulo}}</td>
-            <td>{{item.dt_acesso | formatDate: 'full'}}</td>
             <td>{{item.usuario.cd_login}}</td>
+            <td>{{item.usuario.nm_usuario}}</td>
+            <td>{{item.dt_acesso | formatDate:'full'}}</td>
           </tr>,
         </table>
     </div>

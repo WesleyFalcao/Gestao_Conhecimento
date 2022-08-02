@@ -136,6 +136,7 @@ export class CategoriaEditarComponent implements OnInit, OnDestroy {
       this.b_Alert_Modal = true
       this.ds_Alert_Descricao = "O campo tem que ser preenchido!"
     }
+    
     if (responseedit.errors) {
       this.subjectService.subject_Exibindo_Snackbar.next({ message: 'Não foi possível adicionar' })
 

@@ -61,7 +61,7 @@ export class InterceptorService implements HttpInterceptor {
                                 // Redireciona
                                 this.route.navigate(["/"]).then(() => {
                                     setTimeout(() => this.subjectService.subject_Exibindo_Bar.next(false))
-                                })
+                                }).then(()=>{})
                             }
                             //BAD REQUEST - ALGUM ERRO DE PARAMETRO
                             else if (errorCode == 400) {
